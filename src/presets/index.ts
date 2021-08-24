@@ -11,7 +11,7 @@ import vueuseHead from './vueuse-head'
 import nuxtCompositionApi from './nuxt-composition-api'
 
 export type PresetName =
-  | '@nuxt/composition-api'
+  | '@nuxtjs/composition-api'
   | '@vue/composition-api'
   | '@vueuse/core'
   | '@vueuse/head'
@@ -23,7 +23,7 @@ export type PresetName =
   | 'vue'
 
 export const presets: Record<PresetName, ImportsMap | (() => ImportsMap)> = {
-  '@nuxt/composition-api': nuxtCompositionApi,
+  '@nuxtjs/composition-api': nuxtCompositionApi,
   '@vue/composition-api': vueCompositionApi,
   '@vueuse/core': vueuseCore,
   '@vueuse/head': vueuseHead,
