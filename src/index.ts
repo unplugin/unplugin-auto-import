@@ -9,7 +9,7 @@ export default createUnplugin<Options>((options) => {
   const resolved = resolveOptions(options)
 
   if (!Object.keys(resolved.imports).length)
-    console.warn('[auto-imports] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
+    console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
 
   if (resolved.dts)
     fs.writeFile(resolved.dts, generateDeclration(resolved.imports), 'utf-8')

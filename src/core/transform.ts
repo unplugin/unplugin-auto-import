@@ -23,7 +23,9 @@ export function transform(code: string, id: string, { matchRE, imports }: Transf
 
   // group by module name
   Array.from(matched).forEach((name) => {
-    const moduleName = imports[name].module
+    const moduleName = imports[name]?.module
+    if (!moduleName)
+      return
     if (!modules[moduleName])
       modules[moduleName] = []
     modules[moduleName].push(imports[name])
