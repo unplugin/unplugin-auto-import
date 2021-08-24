@@ -45,7 +45,7 @@ export function Counter() {
 ## Install
 
 ```bash
-npm i unplugin-auto-import
+npm i unplugin-auto-import -D
 ```
 
 <details>
