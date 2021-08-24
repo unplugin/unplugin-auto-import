@@ -28,7 +28,8 @@ export function flattenImportsMap(map: Options['imports']): ImportsFlatMap {
     if (typeof definition === 'string') {
       if (!presets[definition])
         throw new Error(`[global-import] preset ${definition} not found`)
-      definition = presets[definition]
+      const preset = presets[definition]
+      definition = typeof preset === 'function' ? preset() : preset
     }
 
     for (const mod of Object.keys(definition)) {

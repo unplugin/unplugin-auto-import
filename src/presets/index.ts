@@ -6,6 +6,8 @@ import vueDemi from './vue-demi'
 import vueI18n from './vue-i18n'
 import vueRouter from './vue-router'
 import vue2 from './vue2'
+import vueuseCore from './vueuse-core'
+import vueuseHead from './vueuse-head'
 
 export type PresetName =
   | 'vue'
@@ -15,8 +17,10 @@ export type PresetName =
   | 'vue-i18n'
   | 'react'
   | 'preact'
+  | '@vueuse/head'
+  | '@vueuse/core'
 
-export const presets: Record<PresetName, ImportsMap> = {
+export const presets: Record<PresetName, ImportsMap | (() => ImportsMap)> = {
   vue,
   react,
   preact,
@@ -24,4 +28,6 @@ export const presets: Record<PresetName, ImportsMap> = {
   'vue-demi': vueDemi,
   'vue-router': vueRouter,
   'vue-i18n': vueI18n,
+  '@vueuse/head': vueuseHead,
+  '@vueuse/core': vueuseCore,
 }
