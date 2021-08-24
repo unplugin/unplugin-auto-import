@@ -1,3 +1,4 @@
+import MagicString from 'magic-string'
 import { ImportInfo, TransformOptions } from '../types'
 
 const excludeRegex = [
@@ -41,5 +42,13 @@ export function transform(code: string, id: string, { matchRE, imports }: Transf
     })
     .join('')
 
-  return importStatements + code
+  const s = new MagicString(code)
+  s.prependLeft(0, importStatements)
+
+  return {
+    code: s.toString(),
+    get map() {
+      return s.generateMap()
+    },
+  }
 }
