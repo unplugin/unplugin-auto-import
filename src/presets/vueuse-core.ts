@@ -3,6 +3,7 @@ import { ImportsMap } from '../types'
 let _cache: ImportsMap | undefined
 
 export default (): ImportsMap => {
+  const excluded = ['toRefs']
   if (!_cache) {
     try {
       /* eslint-disable @typescript-eslint/no-var-requires */
@@ -13,7 +14,7 @@ export default (): ImportsMap => {
           .filter((i: any) => ['core', 'shared'].includes(i.package))
           .map((i: any) => i.name as string)
           // only include functions with 4 characters or more
-          .filter((i: string) => i && i.length >= 4),
+          .filter((i: string) => i && i.length >= 4 && !excluded.includes(i)),
       }
     }
     catch (error) {
