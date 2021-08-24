@@ -2,7 +2,7 @@ import { ImportsMap } from '../types'
 import { CommonCompositionAPI } from './vue'
 
 export default <ImportsMap>({
-  '@nuxt/composition-api': [
+  '@nuxtjs/composition-api': [
     ...CommonCompositionAPI,
 
     // nuxt hooks
