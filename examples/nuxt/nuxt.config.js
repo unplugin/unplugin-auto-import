@@ -6,7 +6,7 @@ export default {
     '@nuxtjs/composition-api/module',
     // <script setup> transformer
     'unplugin-vue2-script-setup/nuxt',
-    // auto import
-    ['unplugin-auto-import/nuxt', { imports: ['@vue/composition-api'] }],
+    // api auto import
+    ['unplugin-auto-import/nuxt', { imports: ['@nuxt/composition-api'] }],
   ],
 }

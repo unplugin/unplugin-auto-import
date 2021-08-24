@@ -5,29 +5,32 @@ import vue from './vue'
 import vueDemi from './vue-demi'
 import vueI18n from './vue-i18n'
 import vueRouter from './vue-router'
-import vue2 from './vue2'
+import vueCompositionApi from './vue-composition-api'
 import vueuseCore from './vueuse-core'
 import vueuseHead from './vueuse-head'
+import nuxtCompositionApi from './nuxt-composition-api'
 
 export type PresetName =
-  | 'vue'
+  | '@nuxt/composition-api'
   | '@vue/composition-api'
-  | 'vue-demi'
-  | 'vue-router'
-  | 'vue-i18n'
-  | 'react'
-  | 'preact'
-  | '@vueuse/head'
   | '@vueuse/core'
+  | '@vueuse/head'
+  | 'preact'
+  | 'react'
+  | 'vue-demi'
+  | 'vue-i18n'
+  | 'vue-router'
+  | 'vue'
 
 export const presets: Record<PresetName, ImportsMap | (() => ImportsMap)> = {
-  vue,
-  react,
-  preact,
-  '@vue/composition-api': vue2,
-  'vue-demi': vueDemi,
-  'vue-router': vueRouter,
-  'vue-i18n': vueI18n,
-  '@vueuse/head': vueuseHead,
+  '@nuxt/composition-api': nuxtCompositionApi,
+  '@vue/composition-api': vueCompositionApi,
   '@vueuse/core': vueuseCore,
+  '@vueuse/head': vueuseHead,
+  'vue-demi': vueDemi,
+  'vue-i18n': vueI18n,
+  'vue-router': vueRouter,
+  preact,
+  react,
+  vue,
 }
