@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "vite --open"
+  },
+  "dependencies": {
+    "vue": "3.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.4.0",
+    "@vue/compiler-sfc": "^3.2.4",
+    "vite": "^2.5.0",
+    "vite-plugin-inspect": "^0.2.2"
+  }
+}

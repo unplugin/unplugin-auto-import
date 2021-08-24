@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`transform fixtures custom.js 1`] = `
+"import { default as customDefault, customNamed } from 'custom';const a = customDefault(customNamed())
+"
+`;
+
+exports[`transform fixtures react.jsx 1`] = `
+"import { useState } from 'react';export function Component() {
+  const [count, setCount] = useState()
+
+  return <div>{ count }</div>
+}
+"
+`;
+
+exports[`transform fixtures vue.js 1`] = `
+"import { ref } from 'vue';const a = ref(0)
+"
+`;

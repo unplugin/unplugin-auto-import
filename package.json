@@ -1,0 +1,73 @@
+{
+  "name": "unplugin-auto-import",
+  "version": "0.0.0",
+  "description": "Register global imports on demand for Vite and Webpack",
+  "keywords": [
+    "unplugin",
+    "vite-plugin",
+    "webpack-plugin",
+    "rollup-plugin",
+    "auto-import",
+    "transform"
+  ],
+  "homepage": "https://github.com/antfu/unplugin-auto-import#readme",
+  "bugs": {
+    "url": "https://github.com/antfu/unplugin-auto-import/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antfu/unplugin-auto-import.git"
+  },
+  "funding": "https://github.com/sponsors/antfu",
+  "license": "MIT",
+  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsup 'src/*.ts' --format cjs,esm --dts && esno scripts/postbuild.ts",
+    "dev": "tsup 'src/*.ts' --watch src",
+    "lint": "eslint \"{src,test}/**/*.ts\"",
+    "lint:fix": "nr lint -- --fix",
+    "play": "npm -C playground run dev",
+    "prepublishOnly": "nr build",
+    "release": "bumpp --commit --push --tag && pnpm publish",
+    "start": "esno src/index.ts",
+    "test": "jest",
+    "test:update": "jest -u"
+  },
+  "dependencies": {
+    "@antfu/utils": "^0.2.4",
+    "@rollup/pluginutils": "^4.1.1",
+    "unplugin": "^0.0.8"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.7.0",
+    "@antfu/ni": "^0.7.0",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.1",
+    "bumpp": "^6.0.6",
+    "eslint": "^7.32.0",
+    "eslint-plugin-jest": "^24.4.0",
+    "esno": "^0.9.1",
+    "fast-glob": "^3.2.7",
+    "jest": "^27.0.6",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.56.3",
+    "ts-jest": "^27.0.5",
+    "tsup": "^4.14.0",
+    "typescript": "^4.3.5",
+    "vite": "^2.5.0",
+    "webpack": "^5.51.1"
+  }
+}
