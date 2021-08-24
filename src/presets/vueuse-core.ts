@@ -3,7 +3,8 @@ import { ImportsMap } from '../types'
 let _cache: ImportsMap | undefined
 
 export default (): ImportsMap => {
-  const excluded = ['toRefs']
+  const excluded = ['toRefs', 'utils']
+
   if (!_cache) {
     try {
       /* eslint-disable @typescript-eslint/no-var-requires */
