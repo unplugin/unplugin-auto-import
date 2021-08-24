@@ -53,7 +53,8 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "*.d.ts"
   ],
   "scripts": {
     "build": "rimraf dist && tsup 'src/*.ts' --format cjs,esm --dts && esno scripts/postbuild.ts",
