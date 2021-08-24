@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/unplugin-auto-import?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-auto-import)
 
-Register global imports on demand for Vite, Rollup, and Webpack. With TypeScript supports. Powered by [unplugin](https://github.com/unjs/unplugin).
+Auto import APIs on-demand for Vite, Webpack and Rollup. With TypeScript supports. Powered by [unplugin](https://github.com/unjs/unplugin).
 
 ```html
 <script setup>
