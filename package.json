@@ -4,9 +4,9 @@
   "description": "Register global imports on demand for Vite and Webpack",
   "keywords": [
     "unplugin",
-    "vite-plugin",
-    "webpack-plugin",
-    "rollup-plugin",
+    "vite",
+    "webpack",
+    "rollup",
     "auto-import",
     "transform"
   ],
@@ -26,7 +26,28 @@
     ".": {
       "require": "./dist/index.js",
       "import": "./dist/index.mjs"
-    }
+    },
+    "./vite": {
+      "require": "./dist/vite.js",
+      "import": "./dist/vite.mjs"
+    },
+    "./webpack": {
+      "require": "./dist/webpack.js",
+      "import": "./dist/webpack.mjs"
+    },
+    "./rollup": {
+      "require": "./dist/rollup.js",
+      "import": "./dist/rollup.mjs"
+    },
+    "./nuxt": {
+      "require": "./dist/nuxt.js",
+      "import": "./dist/nuxt.mjs"
+    },
+    "./types": {
+      "require": "./dist/types.js",
+      "import": "./dist/types.mjs"
+    },
+    "./*": "./*"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
