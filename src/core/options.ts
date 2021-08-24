@@ -27,7 +27,7 @@ export function flattenImportsMap(map: Options['imports']): ImportsFlatMap {
   toArray(map).forEach((definition) => {
     if (typeof definition === 'string') {
       if (!presets[definition])
-        throw new Error(`[global-import] preset ${definition} not found`)
+        throw new Error(`[auto-import] preset ${definition} not found`)
       const preset = presets[definition]
       definition = typeof preset === 'function' ? preset() : preset
     }
@@ -46,7 +46,7 @@ export function flattenImportsMap(map: Options['imports']): ImportsFlatMap {
         }
 
         if (flat[meta.name])
-          throw new Error(`[global-import] identifier ${meta.name} already defined with ${flat[meta.name].module}`)
+          throw new Error(`[auto-import] identifier ${meta.name} already defined with ${flat[meta.name].module}`)
 
         flat[meta.name] = meta
       }
