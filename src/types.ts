@@ -29,7 +29,7 @@ export interface Options {
    * Filepath to generate corresponding .d.ts file.
    * Set `false` to disable.
    *
-   * @default './global-imports.d.ts'
+   * @default './auto-imports.d.ts'
    */
   dts?: string | false
   /**

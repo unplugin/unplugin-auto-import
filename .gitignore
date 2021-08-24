@@ -79,4 +79,4 @@ dist
 
 # IDE
 .idea
-global-imports.d.ts
+auto-imports.d.ts

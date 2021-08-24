@@ -10,7 +10,7 @@ export function resolveOptions(options: Options = {}): ResolvedOptions {
     ...options,
     dts: options.dts === false
       ? false
-      : resolve(options.dts || 'global-imports.d.ts'),
+      : resolve(options.dts || 'auto-imports.d.ts'),
     imports,
     matchRE: new RegExp(`\\b(${Object.keys(imports).join('|')})\\b`, 'g'),
     idFilter: createFilter(
