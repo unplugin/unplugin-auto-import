@@ -4,6 +4,44 @@
 
 Register global imports on demand for Vite, Rollup, and Webpack. With TypeScript supports. Powered by [unplugin](https://github.com/unjs/unplugin).
 
+```html
+<script setup>
+const count = ref(0)
+const doubled = computed(() => count.value * 2)
+</script> 
+```
+
+to
+
+```html
+<script setup>
+import { ref, computed } from 'vue'
+const count = ref(0)
+const doubled = computed(() => count.value * 2)
+</script> 
+```
+
+---
+
+```tsx
+export function Counter() {
+  const [count, setCount] = useState(0)
+  return <div>{ count }</div>
+}
+```
+
+to
+
+```tsx
+import { useState } from 'react'
+export function Counter() {
+  const [count, setCount] = useState(0)
+  return <div>{ count }</div>
+}
+```
+
+...and so on.
+
 ## Install
 
 ```bash
@@ -126,6 +164,10 @@ AutoImport({
 ```
 
 Refer to the [type definitions](./src/types.ts) for more options.
+
+## Presets
+
+See [src/presets](./src/presets).
 
 ## FAQ
 

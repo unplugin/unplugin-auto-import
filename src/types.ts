@@ -1,5 +1,6 @@
 import { Arrayable } from '@antfu/utils'
 import { FilterPattern } from '@rollup/pluginutils'
+import { PresetName } from './presets'
 
 export type ImportNameAlias = [string, string]
 export type ImportInfo = {
@@ -16,14 +17,6 @@ export type ImportsMap = Record<string, (string | ImportNameAlias)[]>
  * name, meta
  */
 export type ImportsFlatMap = Record<string, ImportInfo>
-
-export type PresetName =
-  | 'vue'
-  | '@vue/composition-api'
-  | 'vue-demi'
-  | 'vue-router'
-  | 'vue-i18n'
-  | 'react'
 
 export interface Options {
   /**
@@ -61,3 +54,5 @@ export interface TransformOptions {
 export interface ResolvedOptions extends Omit<Options, 'imports'>, TransformOptions {
   idFilter: (id: string) => boolean
 }
+
+export { PresetName }
