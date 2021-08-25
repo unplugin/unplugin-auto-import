@@ -33,6 +33,12 @@ export interface Options {
    */
   dts?: string | false
   /**
+   * Allow overriding imports sources from multiple presets.
+   *
+   * @default false
+   */
+  presetOverriding?: boolean
+  /**
    * Rules to include transforming target.
    *
    * @default [/\.[jt]sx?$/, /\.vue\??/]

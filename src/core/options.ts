@@ -5,7 +5,7 @@ import { presets } from '../presets'
 import { ImportInfo, ImportsFlatMap, Options, ResolvedOptions } from '../types'
 
 export function resolveOptions(options: Options = {}): ResolvedOptions {
-  const imports = flattenImportsMap(options.imports)
+  const imports = flattenImportsMap(options.imports, options.presetOverriding)
   const resolved: ResolvedOptions = {
     ...options,
     dts: options.dts === false
@@ -22,7 +22,7 @@ export function resolveOptions(options: Options = {}): ResolvedOptions {
   return resolved
 }
 
-export function flattenImportsMap(map: Options['imports']): ImportsFlatMap {
+export function flattenImportsMap(map: Options['imports'], overriding = false): ImportsFlatMap {
   const flat: ImportsFlatMap = {}
   toArray(map).forEach((definition) => {
     if (typeof definition === 'string') {
@@ -45,7 +45,7 @@ export function flattenImportsMap(map: Options['imports']): ImportsFlatMap {
           meta.name = id
         }
 
-        if (flat[meta.name])
+        if (flat[meta.name] && !overriding)
           throw new Error(`[auto-import] identifier ${meta.name} already defined with ${flat[meta.name].module}`)
 
         flat[meta.name] = meta
