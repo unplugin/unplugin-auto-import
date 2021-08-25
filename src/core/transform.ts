@@ -20,6 +20,10 @@ export function transform(code: string, id: string, { matchRE, imports }: Transf
       .forEach(i => matched.delete(i.trim()))
   }
 
+  // nothing matched, skip
+  if (!matched.size)
+    return null
+
   const modules: Record<string, ImportInfo[]> = {}
 
   // group by module name

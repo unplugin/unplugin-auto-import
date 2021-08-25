@@ -28,7 +28,7 @@ describe('transform', () => {
     for (const file of files) {
       it(file, async() => {
         const fixture = await fs.readFile(resolve(root, file), 'utf-8')
-        expect(transform(fixture, file, options).code).toMatchSnapshot()
+        expect(transform(fixture, file, options)?.code ?? fixture).toMatchSnapshot()
       })
     }
   })
