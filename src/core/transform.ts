@@ -3,7 +3,7 @@ import { ImportInfo, TransformOptions } from '../types'
 
 const excludeRegex = [
   // imported from other module
-  /\bimport\s*\{([\s\S]*?)\}\s*from\b/g,
+  /\bimport\s*([\w_$]*?),?\s*\{([\s\S]*?)\}\s*from\b/g,
   // defined as function
   /\bfunction\s*([\s\S]+?)\s*\(/g,
   // defined as local variable
@@ -16,7 +16,7 @@ export function transform(code: string, id: string, { matchRE, imports }: Transf
   // remove those already defined
   for (const regex of excludeRegex) {
     Array.from(code.matchAll(regex))
-      .flatMap(i => i[1]?.split(',') || [])
+      .flatMap(i => [...(i[1]?.split(',') || []), ...(i[2]?.split(',') || [])])
       .forEach(i => matched.delete(i.trim()))
   }
 

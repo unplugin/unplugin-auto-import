@@ -5,8 +5,24 @@ exports[`transform fixtures custom.js 1`] = `
 "
 `;
 
+exports[`transform fixtures non-target.js 1`] = `
+"useNonTarget()
+"
+`;
+
 exports[`transform fixtures react.jsx 1`] = `
 "import { useState } from 'react';export function Component() {
+  const [count, setCount] = useState()
+
+  return <div>{ count }</div>
+}
+"
+`;
+
+exports[`transform fixtures react-existing.jsx 1`] = `
+"import React, { useState } from 'react';
+
+export function Component() {
   const [count, setCount] = useState()
 
   return <div>{ count }</div>
