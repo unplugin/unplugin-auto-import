@@ -50,5 +50,7 @@ export default <ImportsMap>({
     'onDeactivated',
     'onServerPrefetch',
     'onErrorCaptured',
+    'onRenderTracked',
+    'onRenderTriggered',
   ],
 })
