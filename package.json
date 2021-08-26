@@ -69,16 +69,16 @@
     "test:update": "jest -u"
   },
   "dependencies": {
-    "@antfu/utils": "^0.2.4",
+    "@antfu/utils": "^0.3.0",
     "@rollup/pluginutils": "^4.1.1",
     "magic-string": "^0.25.7",
-    "unplugin": "^0.0.8"
+    "unplugin": "^0.2.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.7.0",
     "@antfu/ni": "^0.7.0",
     "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.1",
+    "@types/node": "^16.7.2",
     "bumpp": "^6.0.6",
     "eslint": "^7.32.0",
     "eslint-plugin-jest": "^24.4.0",
@@ -90,7 +90,7 @@
     "ts-jest": "^27.0.5",
     "tsup": "^4.14.0",
     "typescript": "^4.3.5",
-    "vite": "^2.5.0",
+    "vite": "^2.5.1",
     "webpack": "^5.51.1"
   }
 }

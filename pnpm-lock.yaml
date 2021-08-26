@@ -6,10 +6,10 @@ importers:
     specifiers:
       '@antfu/eslint-config': ^0.7.0
       '@antfu/ni': ^0.7.0
-      '@antfu/utils': ^0.2.4
+      '@antfu/utils': ^0.3.0
       '@rollup/pluginutils': ^4.1.1
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       bumpp: ^6.0.6
       eslint: ^7.32.0
       eslint-plugin-jest: ^24.4.0
@@ -22,19 +22,19 @@ importers:
       ts-jest: ^27.0.5
       tsup: ^4.14.0
       typescript: ^4.3.5
-      unplugin: ^0.0.8
-      vite: ^2.5.0
+      unplugin: ^0.2.0
+      vite: ^2.5.1
       webpack: ^5.51.1
     dependencies:
-      '@antfu/utils': 0.2.4
+      '@antfu/utils': 0.3.0
       '@rollup/pluginutils': 4.1.1
       magic-string: 0.25.7
-      unplugin: 0.0.8_362c3429a3f67cc77545194e98d7a345
+      unplugin: 0.2.0_e62438ea8886099f4263a0833d1d8f1a
     devDependencies:
       '@antfu/eslint-config': 0.7.0_eslint@7.32.0+typescript@4.3.5
       '@antfu/ni': 0.7.0
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       bumpp: 6.0.6
       eslint: 7.32.0
       eslint-plugin-jest: 24.4.0_eslint@7.32.0+typescript@4.3.5
@@ -46,7 +46,7 @@ importers:
       ts-jest: 27.0.5_92306e36c1a4cf876b1cd4839a977b9c
       tsup: 4.14.0_typescript@4.3.5
       typescript: 4.3.5
-      vite: 2.5.0
+      vite: 2.5.1
       webpack: 5.51.1
 
   examples/nuxt:
@@ -171,8 +171,8 @@ packages:
     hasBin: true
     dev: true
 
-  /@antfu/utils/0.2.4:
-    resolution: {integrity: sha512-2bZNkVfL9IZESmvE26UKi8SzyvSoaIsGXDcnbHFMtmGMqUiB1fXpAJ1ijGf+tSqKRQ5yagck2U1Qk0p+705/kw==}
+  /@antfu/utils/0.3.0:
+    resolution: {integrity: sha512-UU8TLr/EoXdg7OjMp0h9oDoIAVr+Z/oW9cpOxQQyrsz6Qzd2ms/1CdWx8fl2OQdFpxGmq5Vc4TwfLHId6nAZjA==}
     dependencies:
       '@types/throttle-debounce': 2.1.0
     dev: false
@@ -2573,6 +2573,10 @@ packages:
 
   /@types/node/16.7.1:
     resolution: {integrity: sha512-ncRdc45SoYJ2H4eWU9ReDfp3vtFqDYhjOsKlFFUDEn8V1Bgr2RjYal8YT5byfadWIRluhPFU6JiDOl0H6Sl87A==}
+
+  /@types/node/16.7.2:
+    resolution: {integrity: sha512-TbG4TOx9hng8FKxaVrCisdaxKxqEwJ3zwHoCWXZ0Jw6mnvTInpaB99/2Cy4+XxpXtjNv9/TgfGSvZFyfV/t8Fw==}
+    dev: true
 
   /@types/normalize-package-data/2.4.0:
     resolution: {integrity: sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==}
@@ -11723,12 +11727,12 @@ packages:
       webpack-virtual-modules: 0.4.3
     dev: true
 
-  /unplugin/0.0.8_362c3429a3f67cc77545194e98d7a345:
-    resolution: {integrity: sha512-eN+JfXcV8Dq9FmnXiU8PHTsBjhyUazlztLh8L2eMLHnh4Gq1oXGkfcKdEQa8FBho5Be6IW2CsDFXwJISK1MiyQ==}
+  /unplugin/0.2.0_e62438ea8886099f4263a0833d1d8f1a:
+    resolution: {integrity: sha512-QTzlrQoZK2KJmvfGKNqZTy8E0xO7kjJE6ORTC6CeJKtB2h9VPwCtlznWj3ChfY/DNBk27o3tD+EuLx7pkvKjfQ==}
     peerDependencies:
       rollup: ^2.50.0
       vite: ^2.3.0
-      webpack: ^5.0.0
+      webpack: ^4.0.0
     peerDependenciesMeta:
       rollup:
         optional: true
@@ -11738,7 +11742,7 @@ packages:
         optional: true
     dependencies:
       rollup: 2.56.3
-      vite: 2.5.0
+      vite: 2.5.1
       webpack: 5.51.1
       webpack-virtual-modules: 0.4.3
     dev: false
@@ -11892,6 +11896,19 @@ packages:
 
   /vite/2.5.0:
     resolution: {integrity: sha512-Dn4B+g54PJsMG5WCc4QeFy1ygMXRdTtFrUPegqfk4+vzVQcbF/DqqmI/1bxezArzbujBJg/67QeT5wz8edfJVQ==}
+    engines: {node: '>=12.2.0'}
+    hasBin: true
+    dependencies:
+      esbuild: 0.12.22
+      postcss: 8.3.6
+      resolve: 1.20.0
+      rollup: 2.56.3
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: true
+
+  /vite/2.5.1:
+    resolution: {integrity: sha512-FwmLbbz8MB1pBs9dKoRDgpiqoijif8hSK1+NNUYc12/cnf+pM2UFhhQ1rcpXgbMhm/5c2USZdVAf0FSkSxaFDA==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     dependencies:
