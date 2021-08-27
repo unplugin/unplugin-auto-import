@@ -72,7 +72,7 @@
     "@antfu/utils": "^0.3.0",
     "@rollup/pluginutils": "^4.1.1",
     "magic-string": "^0.25.7",
-    "unplugin": "^0.2.0"
+    "unplugin": "^0.2.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.7.0",
@@ -89,7 +89,7 @@
     "rollup": "^2.56.3",
     "ts-jest": "^27.0.5",
     "tsup": "^4.14.0",
-    "typescript": "^4.3.5",
+    "typescript": "^4.4.2",
     "vite": "^2.5.1",
     "webpack": "^5.51.1"
   }
