@@ -50,11 +50,24 @@ export interface Options {
    * @default [/node_modules/, /\.git/]
    */
   exclude?: FilterPattern
+  /**
+   * Generate source map.
+   * 
+   * @default false
+   */
+  sourceMap?: boolean
 }
 
 export interface TransformOptions {
   imports: ImportsFlatMap
   matchRE: RegExp
+
+  /**
+   * Generate source map.
+   * 
+   * @default false
+   */
+  sourceMap?: boolean
 }
 
 export interface ResolvedOptions extends Omit<Options, 'imports'>, TransformOptions {

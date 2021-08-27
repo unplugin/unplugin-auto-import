@@ -7,6 +7,7 @@ import { ImportInfo, ImportsFlatMap, Options, ResolvedOptions } from '../types'
 export function resolveOptions(options: Options = {}): ResolvedOptions {
   const imports = flattenImportsMap(options.imports, options.presetOverriding)
   const resolved: ResolvedOptions = {
+    sourceMap: false,
     ...options,
     dts: options.dts === false
       ? false

@@ -10,7 +10,7 @@ const excludeRegex = [
   /\b(?:const|let|var)\s*([\w\d_$]+?)\b/g,
 ]
 
-export function transform(code: string, id: string, { matchRE, imports }: TransformOptions) {
+export function transform(code: string, id: string, { matchRE, imports, sourceMap }: TransformOptions) {
   const matched = new Set(Array.from(code.matchAll(matchRE)).map(i => i[1]))
 
   // remove those already defined
@@ -51,8 +51,6 @@ export function transform(code: string, id: string, { matchRE, imports }: Transf
 
   return {
     code: s.toString(),
-    get map() {
-      return s.generateMap()
-    },
+    map: sourceMap ? s.generateMap() : null
   }
 }
