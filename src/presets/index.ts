@@ -1,4 +1,4 @@
-import { ImportsMap } from '../types'
+/* eslint-disable object-shorthand */
 import nuxtCompositionApi from './nuxt-composition-api'
 import preact from './preact'
 import react from './react'
@@ -18,39 +18,23 @@ import vueCompositionApi from './vue-composition-api'
 import vueuseCore from './vueuse-core'
 import vueuseHead from './vueuse-head'
 
-export type PresetName =
-  | '@nuxtjs/composition-api'
-  | '@vue/composition-api'
-  | '@vueuse/core'
-  | '@vueuse/head'
-  | 'preact'
-  | 'react'
-  | 'svelte/animate'
-  | 'svelte/easing'
-  | 'svelte/motion'
-  | 'svelte/store'
-  | 'svelte/transition'
-  | 'svelte'
-  | 'vue-demi'
-  | 'vue-i18n'
-  | 'vue-router'
-  | 'vue'
-
-export const presets: Record<PresetName, ImportsMap | (() => ImportsMap)> = {
+export const presets = {
   '@nuxtjs/composition-api': nuxtCompositionApi,
   '@vue/composition-api': vueCompositionApi,
   '@vueuse/core': vueuseCore,
   '@vueuse/head': vueuseHead,
-  preact,
-  react,
+  'preact': preact,
+  'react': react,
+  'svelte': svelte,
   'svelte/animate': svelteAnimate,
   'svelte/easing': svelteEasing,
   'svelte/motion': svelteMotion,
   'svelte/store': svelteStore,
   'svelte/transition': svelteTransition,
-  'svelte': svelte,
   'vue-demi': vueDemi,
   'vue-i18n': vueI18n,
   'vue-router': vueRouter,
-  vue,
+  'vue': vue,
 }
+
+export type PresetName = keyof typeof presets
