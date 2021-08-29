@@ -60,9 +60,9 @@ export default <ImportsMap>({
     'getAllContexts',
     'createEventDispatcher',
   ],
-  'svelte/store': SvelteStoreAPI,
-  'svelte/motion': SvelteMotionAPI,
-  'svelte/transition': SvelteTransitionAPI,
   'svelte/animate': SvelteAnimateAPI,
   'svelte/easing': SvelteEasingAPI,
+  'svelte/motion': SvelteMotionAPI,
+  'svelte/store': SvelteStoreAPI,
+  'svelte/transition': SvelteTransitionAPI,
 })
