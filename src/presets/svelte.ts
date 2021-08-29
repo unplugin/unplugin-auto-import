@@ -52,12 +52,14 @@ export default <ImportsMap>({
     'beforeUpdate',
     'afterUpdate',
     'onDestroy',
-    // component
+    // tick
     'tick',
+    // context
     'setContext',
     'getContext',
     'hasContext',
     'getAllContexts',
+    // event dispatcher
     'createEventDispatcher',
   ],
   'svelte/animate': SvelteAnimateAPI,
