@@ -1,7 +1,7 @@
 import MagicString from 'magic-string'
 import { ImportInfo, TransformOptions } from '../types'
 
-const excludeRegex = [
+const excludeRE = [
   // imported from other module
   /\bimport\s*([\w_$]*?),?\s*\{([\s\S]*?)\}\s*from\b/g,
   // defined as function
@@ -10,12 +10,26 @@ const excludeRegex = [
   /\b(?:const|let|var)\s*([\w\d_$]+?)\b/g,
 ]
 
+const multilineCommentsRE = /\/\*(.|[\r\n])*?\*\//gm
+const singlelineCommentsRE = /\/\/.*/g
+
+function stripeComments(code: string) {
+  return code
+    .replace(multilineCommentsRE, '')
+    .replace(singlelineCommentsRE, '')
+}
+
 export function transform(code: string, id: string, { matchRE, imports, sourceMap }: TransformOptions) {
-  const matched = new Set(Array.from(code.matchAll(matchRE)).map(i => i[1]))
+  const noComments = stripeComments(code)
+  const matched = new Set(Array.from(noComments.matchAll(matchRE)).map(i => i[1]))
+
+  // nothing matched, skip
+  if (!matched.size)
+    return null
 
   // remove those already defined
-  for (const regex of excludeRegex) {
-    Array.from(code.matchAll(regex))
+  for (const regex of excludeRE) {
+    Array.from(noComments.matchAll(regex))
       .flatMap(i => [...(i[1]?.split(',') || []), ...(i[2]?.split(',') || [])])
       .forEach(i => matched.delete(i.trim()))
   }
@@ -51,6 +65,6 @@ export function transform(code: string, id: string, { matchRE, imports, sourceMa
 
   return {
     code: s.toString(),
-    map: sourceMap ? s.generateMap() : null
+    map: sourceMap ? s.generateMap() : null,
   }
 }
