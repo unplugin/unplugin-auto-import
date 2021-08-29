@@ -15,6 +15,7 @@ importers:
       eslint-plugin-jest: ^24.4.0
       esno: ^0.9.1
       fast-glob: ^3.2.7
+      has-pkg: ^0.0.1
       jest: ^27.0.6
       magic-string: ^0.25.7
       rimraf: ^3.0.2
@@ -28,6 +29,7 @@ importers:
     dependencies:
       '@antfu/utils': 0.3.0
       '@rollup/pluginutils': 4.1.1
+      has-pkg: 0.0.1
       magic-string: 0.25.7
       unplugin: 0.2.1_e62438ea8886099f4263a0833d1d8f1a
     devDependencies:
@@ -6455,6 +6457,10 @@ packages:
   /has-flag/4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
+
+  /has-pkg/0.0.1:
+    resolution: {integrity: sha512-UuzsNxcEOdEwRsz4HtaceT7jg71L2gopEq8OMOGKtPLYhHhF4RJZtkcZ4Xn0jmAmBSNhm0xPhrywgZkLu4aMYQ==}
+    dev: false
 
   /has-symbols/1.0.2:
     resolution: {integrity: sha512-chXa79rL/UC2KlX17jo3vRGz0azaWEx5tGqZg5pO3NUyEJVB17dMruQlzCCOfUvElghKcm5194+BCRvi2Rv/Gw==}

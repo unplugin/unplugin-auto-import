@@ -27,11 +27,12 @@ export interface Options {
   imports?: Arrayable<ImportsMap | PresetName>
   /**
    * Filepath to generate corresponding .d.ts file.
+   * Default enabled when `typescript` is installed locally.
    * Set `false` to disable.
    *
    * @default './auto-imports.d.ts'
    */
-  dts?: string | false
+  dts?: string | boolean
   /**
    * Allow overriding imports sources from multiple presets.
    *
@@ -52,7 +53,7 @@ export interface Options {
   exclude?: FilterPattern
   /**
    * Generate source map.
-   * 
+   *
    * @default false
    */
   sourceMap?: boolean
@@ -64,7 +65,7 @@ export interface TransformOptions {
 
   /**
    * Generate source map.
-   * 
+   *
    * @default false
    */
   sourceMap?: boolean

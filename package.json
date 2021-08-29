@@ -71,6 +71,7 @@
   "dependencies": {
     "@antfu/utils": "^0.3.0",
     "@rollup/pluginutils": "^4.1.1",
+    "has-pkg": "^0.0.1",
     "magic-string": "^0.25.7",
     "unplugin": "^0.2.1"
   },

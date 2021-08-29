@@ -1,17 +1,22 @@
 import { resolve } from 'path'
 import { toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
+import hasPkg from 'has-pkg'
 import { presets } from '../presets'
 import { ImportInfo, ImportsFlatMap, Options, ResolvedOptions } from '../types'
 
 export function resolveOptions(options: Options = {}): ResolvedOptions {
   const imports = flattenImportsMap(options.imports, options.presetOverriding)
+
+  const { dts = hasPkg('typescript') } = options
   const resolved: ResolvedOptions = {
     sourceMap: false,
     ...options,
-    dts: options.dts === false
+    dts: dts === false
       ? false
-      : resolve(options.dts || 'auto-imports.d.ts'),
+      : dts === true
+        ? resolve('auto-imports.d.ts')
+        : resolve(dts),
     imports,
     matchRE: new RegExp(`\\b(${Object.keys(imports).join('|')})\\b`, 'g'),
     idFilter: createFilter(
