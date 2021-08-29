@@ -1,6 +1,12 @@
 import { ImportsMap } from '../types'
 import preact from './preact'
 import react from './react'
+import svelte from './svelte'
+import svelteAnimate from './svelte-animate'
+import svelteEasing from './svelte-easing'
+import svelteMotion from './svelte-motion'
+import svelteStore from './svelte-store'
+import svelteTransition from './svelte-transition'
 import vue from './vue'
 import vueDemi from './vue-demi'
 import vueI18n from './vue-i18n'
@@ -17,6 +23,12 @@ export type PresetName =
   | '@vueuse/head'
   | 'preact'
   | 'react'
+  | 'svelte'
+  | 'svelte/animate'
+  | 'svelte/easing'
+  | 'svelte/motion'
+  | 'svelte/store'
+  | 'svelte/transition'
   | 'vue-demi'
   | 'vue-i18n'
   | 'vue-router'
@@ -32,5 +44,11 @@ export const presets: Record<PresetName, ImportsMap | (() => ImportsMap)> = {
   'vue-router': vueRouter,
   preact,
   react,
+  svelte,
+  'svelte/animate': svelteAnimate,
+  'svelte/easing': svelteEasing,
+  'svelte/motion': svelteMotion,
+  'svelte/store': svelteStore,
+  'svelte/transition': svelteTransition,
   vue,
 }
