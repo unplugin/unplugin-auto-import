@@ -41,6 +41,28 @@ export function Component() {
 "
 `;
 
+exports[`transform fixtures svelte.svelte 1`] = `
+"import { writable } from 'svelte/store';import { tweened } from 'svelte/motion';import { cubicOut, quintOut } from 'svelte/easing';import { onMount } from 'svelte';import { flip } from 'svelte/animate';import { fade } from 'svelte/transition';const list = writable([1, 2, 3])
+const size = tweened(1, {
+  duration: 300,
+  easing: cubicOut
+});
+onMount(() => {})
+
+{#each $list as n (n)}
+<div animate:flip=\\"{{delay: 250, duration: 250, easing: quintOut}}\\">
+  {n}
+</div>
+{/each}
+
+{#if condition}
+  <div transition:fade=\\"{{amount: 10}}\\">
+    fades in and out
+  </div>
+{/if}
+"
+`;
+
 exports[`transform fixtures vue.js 1`] = `
 "import { ref } from 'vue';const a = ref(0)
 "
