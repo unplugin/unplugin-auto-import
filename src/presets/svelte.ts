@@ -39,11 +39,9 @@ export const SvelteEasingAPI = [
   'quint',
   'sine',
 ].reduce((acc, e) => {
-  acc.push(`${e}In`)
-  acc.push(`${e}Out`)
-  acc.push(`${e}InOut`)
+  acc.push(`${e}In`, `${e}Out`, `${e}InOut`)
   return acc
-}, [] as Array<string>)
+}, ['linear'])
 
 export default <ImportsMap>({
   'svelte': [
