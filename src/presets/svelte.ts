@@ -1,33 +1,14 @@
 import { ImportsMap } from '../types'
 
-export const SvelteStoreAPI = [
-  'writable',
-  'readable',
-  'derived',
-  'get',
-]
-
-export const SvelteMotionAPI = [
-  'tweened',
-  'spring',
-]
-
-export const SvelteTransitionAPI = [
-  'fade',
-  'blur',
-  'blur',
-  'fly',
-  'slide',
-  'scale',
-  'draw',
-  'crossfade',
-]
-
-export const SvelteAnimateAPI = [
+const SvelteAnimateAPI = [
   'flip',
 ]
 
-export const SvelteEasingAPI = [
+export const svelteAnimate = <ImportsMap>({
+  'svelte/animate': SvelteAnimateAPI,
+})
+
+const SvelteEasingAPI = [
   'back',
   'bounce',
   'circ',
@@ -42,6 +23,45 @@ export const SvelteEasingAPI = [
   acc.push(`${e}In`, `${e}Out`, `${e}InOut`)
   return acc
 }, ['linear'])
+
+export const svelteEasing = <ImportsMap>({
+  'svelte/easing': SvelteEasingAPI,
+})
+
+const SvelteStoreAPI = [
+  'writable',
+  'readable',
+  'derived',
+  'get',
+]
+
+export const svelteStore = <ImportsMap>({
+  'svelte/store': SvelteStoreAPI,
+})
+
+const SvelteMotionAPI = [
+  'tweened',
+  'spring',
+]
+
+export const svelteMotion = <ImportsMap>({
+  'svelte/motion': SvelteMotionAPI,
+})
+
+const SvelteTransitionAPI = [
+  'fade',
+  'blur',
+  'blur',
+  'fly',
+  'slide',
+  'scale',
+  'draw',
+  'crossfade',
+]
+
+export const svelteTransition = <ImportsMap>({
+  'svelte/transition': SvelteTransitionAPI,
+})
 
 export default <ImportsMap>({
   'svelte': [

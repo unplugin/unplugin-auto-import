@@ -1,12 +1,14 @@
 import { ImportsMap } from '../types'
+import nuxtCompositionApi from './nuxt-composition-api'
 import preact from './preact'
 import react from './react'
-import svelte from './svelte'
-import svelteAnimate from './svelte-animate'
-import svelteEasing from './svelte-easing'
-import svelteMotion from './svelte-motion'
-import svelteStore from './svelte-store'
-import svelteTransition from './svelte-transition'
+import svelte, {
+  svelteAnimate,
+  svelteEasing,
+  svelteMotion,
+  svelteStore,
+  svelteTransition,
+} from './svelte'
 import vue from './vue'
 import vueDemi from './vue-demi'
 import vueI18n from './vue-i18n'
@@ -14,7 +16,6 @@ import vueRouter from './vue-router'
 import vueCompositionApi from './vue-composition-api'
 import vueuseCore from './vueuse-core'
 import vueuseHead from './vueuse-head'
-import nuxtCompositionApi from './nuxt-composition-api'
 
 export type PresetName =
   | '@nuxtjs/composition-api'
@@ -27,8 +28,8 @@ export type PresetName =
   | 'svelte/easing'
   | 'svelte/motion'
   | 'svelte/store'
-  | 'svelte'
   | 'svelte/transition'
+  | 'svelte'
   | 'vue-demi'
   | 'vue-i18n'
   | 'vue-router'
