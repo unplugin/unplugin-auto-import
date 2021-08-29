@@ -1,70 +1,60 @@
 import { ImportsMap } from '../types'
 
-const SvelteAnimateAPI = [
-  'flip',
-]
-
 export const svelteAnimate = <ImportsMap>({
-  'svelte/animate': SvelteAnimateAPI,
+  'svelte/animate': [
+    'flip',
+  ],
 })
-
-const SvelteEasingAPI = [
-  'back',
-  'bounce',
-  'circ',
-  'cubic',
-  'elastic',
-  'expo',
-  'quad',
-  'quart',
-  'quint',
-  'sine',
-].reduce((acc, e) => {
-  acc.push(`${e}In`, `${e}Out`, `${e}InOut`)
-  return acc
-}, ['linear'])
 
 export const svelteEasing = <ImportsMap>({
-  'svelte/easing': SvelteEasingAPI,
+  'svelte/easing': [
+    'back',
+    'bounce',
+    'circ',
+    'cubic',
+    'elastic',
+    'expo',
+    'quad',
+    'quart',
+    'quint',
+    'sine',
+  ].reduce((acc, e) => {
+    acc.push(`${e}In`, `${e}Out`, `${e}InOut`)
+    return acc
+  }, ['linear']),
 })
-
-const SvelteStoreAPI = [
-  'writable',
-  'readable',
-  'derived',
-  'get',
-]
 
 export const svelteStore = <ImportsMap>({
-  'svelte/store': SvelteStoreAPI,
+  'svelte/store': [
+    'writable',
+    'readable',
+    'derived',
+    'get',
+  ],
 })
-
-const SvelteMotionAPI = [
-  'tweened',
-  'spring',
-]
 
 export const svelteMotion = <ImportsMap>({
-  'svelte/motion': SvelteMotionAPI,
+  'svelte/motion': [
+    'tweened',
+    'spring',
+  ],
 })
-
-const SvelteTransitionAPI = [
-  'fade',
-  'blur',
-  'blur',
-  'fly',
-  'slide',
-  'scale',
-  'draw',
-  'crossfade',
-]
 
 export const svelteTransition = <ImportsMap>({
-  'svelte/transition': SvelteTransitionAPI,
+  'svelte/transition': [
+    'fade',
+    'blur',
+    'blur',
+    'fly',
+    'slide',
+    'scale',
+    'draw',
+    'crossfade',
+  ],
 })
 
-export default <ImportsMap>({
-  'svelte': [
+export const svelte = <ImportsMap>({
+  svelte: [
     // lifecycle
     'onMount',
     'beforeUpdate',
@@ -80,9 +70,4 @@ export default <ImportsMap>({
     // event dispatcher
     'createEventDispatcher',
   ],
-  'svelte/animate': SvelteAnimateAPI,
-  'svelte/easing': SvelteEasingAPI,
-  'svelte/motion': SvelteMotionAPI,
-  'svelte/store': SvelteStoreAPI,
-  'svelte/transition': SvelteTransitionAPI,
 })

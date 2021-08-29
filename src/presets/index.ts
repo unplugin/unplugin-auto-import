@@ -2,7 +2,8 @@ import { ImportsMap } from '../types'
 import nuxtCompositionApi from './nuxt-composition-api'
 import preact from './preact'
 import react from './react'
-import svelte, {
+import {
+  svelte,
   svelteAnimate,
   svelteEasing,
   svelteMotion,
@@ -47,7 +48,7 @@ export const presets: Record<PresetName, ImportsMap | (() => ImportsMap)> = {
   'svelte/motion': svelteMotion,
   'svelte/store': svelteStore,
   'svelte/transition': svelteTransition,
-  svelte,
+  'svelte': svelte,
   'vue-demi': vueDemi,
   'vue-i18n': vueI18n,
   'vue-router': vueRouter,
