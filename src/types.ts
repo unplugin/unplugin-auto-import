@@ -71,8 +71,9 @@ export interface TransformOptions {
   sourceMap?: boolean
 }
 
-export interface ResolvedOptions extends Omit<Options, 'imports'>, TransformOptions {
+export interface ResolvedOptions extends Omit<Options, 'imports' | 'dts'>, TransformOptions {
   idFilter: (id: string) => boolean
+  dts: string | false
 }
 
 export { PresetName }
