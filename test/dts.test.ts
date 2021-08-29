@@ -6,6 +6,12 @@ it('dts', () => {
     imports: [
       'vue-demi',
       'react',
+      'svelte',
+      'svelte/animate',
+      'svelte/easing',
+      'svelte/motion',
+      'svelte/store',
+      'svelte/transition',
       {
         custom: [
           'customNamed',

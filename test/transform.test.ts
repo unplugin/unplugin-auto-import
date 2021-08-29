@@ -9,6 +9,12 @@ describe('transform', () => {
     imports: [
       'vue',
       'react',
+      'svelte',
+      'svelte/animate',
+      'svelte/easing',
+      'svelte/motion',
+      'svelte/store',
+      'svelte/transition',
       {
         custom: [
           'customNamed',

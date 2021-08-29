@@ -44,7 +44,6 @@ export const svelteTransition = <ImportsMap>({
   'svelte/transition': [
     'fade',
     'blur',
-    'blur',
     'fly',
     'slide',
     'scale',
