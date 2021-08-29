@@ -23,11 +23,11 @@ export type PresetName =
   | '@vueuse/head'
   | 'preact'
   | 'react'
-  | 'svelte'
   | 'svelte/animate'
   | 'svelte/easing'
   | 'svelte/motion'
   | 'svelte/store'
+  | 'svelte'
   | 'svelte/transition'
   | 'vue-demi'
   | 'vue-i18n'
@@ -39,16 +39,16 @@ export const presets: Record<PresetName, ImportsMap | (() => ImportsMap)> = {
   '@vue/composition-api': vueCompositionApi,
   '@vueuse/core': vueuseCore,
   '@vueuse/head': vueuseHead,
-  'vue-demi': vueDemi,
-  'vue-i18n': vueI18n,
-  'vue-router': vueRouter,
   preact,
   react,
-  svelte,
   'svelte/animate': svelteAnimate,
   'svelte/easing': svelteEasing,
   'svelte/motion': svelteMotion,
   'svelte/store': svelteStore,
   'svelte/transition': svelteTransition,
+  svelte,
+  'vue-demi': vueDemi,
+  'vue-i18n': vueI18n,
+  'vue-router': vueRouter,
   vue,
 }
