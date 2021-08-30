@@ -20,7 +20,7 @@ export function resolveOptions(options: Options = {}): ResolvedOptions {
     imports,
     matchRE: new RegExp(`\\b(${Object.keys(imports).join('|')})\\b`, 'g'),
     idFilter: createFilter(
-      options.include || [/\.[jt]sx?$/, /\.vue\??/],
+      options.include || [/\.[jt]sx?$/, /\.vue\??/, /\.svelte$/],
       options.exclude || [/node_modules/, /\.git/],
     ),
   }
