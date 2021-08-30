@@ -75,6 +75,14 @@
     "magic-string": "^0.25.7",
     "unplugin": "^0.2.1"
   },
+  "peerDependencies": {
+    "@vueuse/core": "^6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vueuse/core": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^0.7.0",
     "@antfu/ni": "^0.7.0",
