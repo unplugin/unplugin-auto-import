@@ -12,7 +12,6 @@ export default defineConfig({
         'svelte/store',
         'svelte/transition',
       ],
-      include: [/\.svelte/],
     }),
   ],
 })
