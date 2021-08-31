@@ -126,6 +126,9 @@ importers:
       unplugin-auto-import: workspace:*
       vite: ^2.5.1
       vitepress: ^0.16.1
+      vue: '3.2'
+    dependencies:
+      vue: 3.2.4
     devDependencies:
       esbuild-register: 2.6.0
       typescript: 4.4.2
