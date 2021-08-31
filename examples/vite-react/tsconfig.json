@@ -15,5 +15,5 @@
     "noEmit": true,
     "jsx": "react"
   },
-  "include": ["./src", "auto-imports.d.ts"]
+  "include": ["./src"]
 }

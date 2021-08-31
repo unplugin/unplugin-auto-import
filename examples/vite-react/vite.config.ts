@@ -8,6 +8,7 @@ export default defineConfig({
     reactRefresh(),
     AutoImport({
       imports: 'react',
+      dts: './src/auto-imports.d.ts',
     }),
   ],
 })
