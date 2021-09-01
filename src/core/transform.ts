@@ -1,5 +1,5 @@
 import MagicString from 'magic-string'
-import { ImportInfo, TransformOptions } from '../types'
+import { ImportInfo, TransformOptions, ComponentResolver } from '../types'
 
 const excludeRE = [
   // imported from other module
@@ -19,9 +19,32 @@ function stripeComments(code: string) {
     .replace(singlelineCommentsRE, '')
 }
 
-export function transform(code: string, id: string, { matchRE, imports, sourceMap }: TransformOptions) {
+export function transform(code: string, id: string, { matchRE, imports, sourceMap, resolvers }: TransformOptions) {
   const noComments = stripeComments(code)
   const matched = new Set(Array.from(noComments.matchAll(matchRE)).map(i => i[1]))
+
+  // extends matched results with resolvers. If found some match add the import info to the imports object
+  if (resolvers.length > 0) {
+    const matches = noComments.matchAll(/\b(\w+)\b/g)
+    const firstNonNullResult = (array: Array<ComponentResolver>, name: string) => {
+      for (let i = 0; i < array.length; i++) {
+        const res = array[i](name)
+        if (res) return res
+      }
+    }
+    let match = matches.next()
+    while (!match.done) {
+      const token = match.value[1]
+      const resolved = firstNonNullResult(resolvers, token)
+      if (resolved) {
+        const componentName = token
+        const importInfo = typeof resolved === 'string' ? { from: 'default', name: componentName, module: resolved } : resolved
+        imports[componentName] = importInfo
+        matched.add(componentName)
+      }
+      match = matches.next()
+    }
+  }
 
   // nothing matched, skip
   if (!matched.size)

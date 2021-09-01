@@ -3,7 +3,7 @@ import { toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
 import hasPkg from 'has-pkg'
 import { presets } from '../presets'
-import { ImportInfo, ImportsFlatMap, Options, ResolvedOptions } from '../types'
+import { ImportInfo, ImportsFlatMap, Options, ResolvedOptions, ComponentResolver } from '../types'
 
 export function resolveOptions(options: Options = {}): ResolvedOptions {
   const imports = flattenImportsMap(options.imports, options.presetOverriding)
@@ -18,6 +18,7 @@ export function resolveOptions(options: Options = {}): ResolvedOptions {
         ? resolve('auto-imports.d.ts')
         : resolve(dts),
     imports,
+    resolvers: options.resolvers ? ([] as Array<ComponentResolver>).concat(options.resolvers) : [],
     matchRE: new RegExp(`\\b(${Object.keys(imports).join('|')})\\b`, 'g'),
     idFilter: createFilter(
       options.include || [/\.[jt]sx?$/, /\.vue\??/, /\.svelte$/],

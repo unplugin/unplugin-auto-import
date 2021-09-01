@@ -21,7 +21,11 @@ export default createUnplugin<Options>((options) => {
       return resolved.idFilter(id)
     },
     transform(code, id) {
-      return transform(code, id, resolved)
+      const res = transform(code, id, resolved)
+      // TODO: avoid rewrite the declaration for every file
+      if (resolved.dts)
+        fs.writeFile(resolved.dts, generateDeclration(resolved.imports), 'utf-8')
+      return res
     },
   }
 })

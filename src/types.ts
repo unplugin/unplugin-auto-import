@@ -10,6 +10,11 @@ export type ImportInfo = {
 }
 
 /**
+ * Given a component name returns the import path or an importInfo object
+ */
+export type ComponentResolver = (name: string) => string | ImportInfo | null | undefined | void
+
+/**
  * module, name, alias
  */
 export type ImportsMap = Record<string, (string | ImportNameAlias)[]>
@@ -25,6 +30,14 @@ export interface Options {
    * @default []
    */
   imports?: Arrayable<ImportsMap | PresetName>
+
+  /**
+   * Pass a custom function to resolve the component importing path from the component name.
+   *
+   * The component names are always in PascalCase
+   */
+  resolvers?: ComponentResolver | ComponentResolver[]
+
   /**
    * Filepath to generate corresponding .d.ts file.
    * Default enabled when `typescript` is installed locally.
@@ -61,6 +74,7 @@ export interface Options {
 
 export interface TransformOptions {
   imports: ImportsFlatMap
+  resolvers: ComponentResolver[]
   matchRE: RegExp
 
   /**
@@ -71,7 +85,7 @@ export interface TransformOptions {
   sourceMap?: boolean
 }
 
-export interface ResolvedOptions extends Omit<Options, 'imports' | 'dts'>, TransformOptions {
+export interface ResolvedOptions extends Omit<Options, 'imports' | 'resolvers' | 'dts'>, TransformOptions {
   idFilter: (id: string) => boolean
   dts: string | false
 }
