@@ -5,12 +5,12 @@ const excludeRE = [
   // imported from other module
   /\bimport\s*([\w_$]*?),?\s*\{([\s\S]*?)\}\s*from\b/g,
   // defined as function
-  /\bfunction\s*([\s\S]+?)\s*\(/g,
+  /\bfunction\s*([\w_$]+)\s*\(/g,
   // defined as local variable
-  /\b(?:const|let|var)\s*([\w\d_$]+?)\b/g,
+  /\b(?:const|let|var)\s*([\s\S]+)[=\n;]/g,
 ]
 
-const matchRE = /\b(\w+)\b/g
+const matchRE = /[^.\w_$]([\w_$]+)\b/g
 const importAsRE = /^.*\sas\s+/
 const multilineCommentsRE = /\/\*(.|[\r\n])*?\*\//gm
 const singlelineCommentsRE = /\/\/.*/g
@@ -54,7 +54,7 @@ export function transform(
 
   // group by module name
   Array.from(identifiers).forEach((name) => {
-    let info: ImportInfo = resolvedImports[name] || imports[name]
+    let info = getOwn(resolvedImports, name) || getOwn(imports, name)
 
     if (!info && resolvers?.length) {
       const resolved = firstNonNullResult(resolvers, name)
@@ -73,7 +73,7 @@ export function transform(
       }
     }
 
-    if (!info)
+    if (!info || !info.module)
       return
 
     if (!modules[info.module])
@@ -109,4 +109,10 @@ function firstNonNullResult(array: Resolver[], name: string) {
     if (res)
       return res
   }
+}
+
+const hasOwnProperty = Object.prototype.hasOwnProperty
+
+function getOwn<T, K extends keyof T>(object: T, key: K) {
+  return hasOwnProperty.call(object, key) ? object[key] : undefined
 }

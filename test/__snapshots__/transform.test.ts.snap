@@ -21,6 +21,18 @@ exports[`transform fixtures non-target.js 1`] = `
 "
 `;
 
+exports[`transform fixtures props.ts 1`] = `
+"const a = z.ref(0)
+"
+`;
+
+exports[`transform fixtures prototype.ts 1`] = `
+"const a = Object.keys(b)
+const c = a.toString()
+
+"
+`;
+
 exports[`transform fixtures react.jsx 1`] = `
 "import { useState } from 'react';export function Component() {
   const [count, setCount] = useState()
