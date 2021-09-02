@@ -16,6 +16,18 @@ exports[`transform fixtures custom.js 1`] = `
 "
 `;
 
+exports[`transform fixtures existing.jsx 1`] = `
+"import { watch } from 'vue';import ref from 'ref'
+import { computed } from 'computed'
+
+const a = ref(0)
+const b = computed(0)
+
+watch(a)
+ignored(b)
+"
+`;
+
 exports[`transform fixtures non-target.js 1`] = `
 "useNonTarget()
 "

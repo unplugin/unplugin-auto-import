@@ -20,7 +20,13 @@ describe('transform', () => {
           'customNamed',
           ['default', 'customDefault'],
         ],
+        ignored: [
+          'ignored',
+        ],
       },
+    ],
+    ignore: [
+      'ignored',
     ],
     resolvers: [
       (name) => {
