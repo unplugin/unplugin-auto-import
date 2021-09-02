@@ -6,13 +6,13 @@ const size = tweened(1, {
 onMount(() => {})
 
 {#each $list as n (n)}
-<div animate:flip="{{delay: 250, duration: 250, easing: quintOut}}">
+<div animate:flip={{delay: 250, duration: 250, easing: quintOut}}>
   {n}
 </div>
 {/each}
 
 {#if condition}
-  <div transition:fade="{{amount: 10}}">
+  <div transition:fade={{amount: 10}}>
     fades in and out
   </div>
 {/if}

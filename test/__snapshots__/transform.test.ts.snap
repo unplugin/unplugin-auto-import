@@ -72,6 +72,16 @@ const c = customNamedResolved2(1)
 "
 `;
 
+exports[`transform fixtures strings.ts 1`] = `
+"console.log(\\"ref(0)\\")
+console.log(\`ref(\${a})\`)
+console.log('ref(\\\\'z\\\\')')
+console.log(\`
+ref('z')
+\`)
+"
+`;
+
 exports[`transform fixtures svelte.svelte 1`] = `
 "import { writable } from 'svelte/store';import { tweened } from 'svelte/motion';import { cubicOut, quintOut } from 'svelte/easing';import { onMount } from 'svelte';import { flip } from 'svelte/animate';import { fade } from 'svelte/transition';const list = writable([1, 2, 3])
 const size = tweened(1, {
@@ -81,13 +91,13 @@ const size = tweened(1, {
 onMount(() => {})
 
 {#each $list as n (n)}
-<div animate:flip=\\"{{delay: 250, duration: 250, easing: quintOut}}\\">
+<div animate:flip={{delay: 250, duration: 250, easing: quintOut}}>
   {n}
 </div>
 {/each}
 
 {#if condition}
-  <div transition:fade=\\"{{amount: 10}}\\">
+  <div transition:fade={{amount: 10}}>
     fades in and out
   </div>
 {/if}

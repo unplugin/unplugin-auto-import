@@ -14,11 +14,13 @@ const matchRE = /[^.\w_$]([\w_$]+)\b/g
 const importAsRE = /^.*\sas\s+/
 const multilineCommentsRE = /\/\*(.|[\r\n])*?\*\//gm
 const singlelineCommentsRE = /\/\/.*/g
+const quotesRE = /(["'`])((?:\\\1|(?!\1)|.|\n|\r)*?)\1/gm
 
-function stripeComments(code: string) {
+function stripeCommentsAndStrings(code: string) {
   return code
     .replace(multilineCommentsRE, '')
     .replace(singlelineCommentsRE, '')
+    .replace(quotesRE, '')
 }
 
 export function transform(
@@ -32,13 +34,14 @@ export function transform(
     ignore = [],
   }: TransformOptions,
 ) {
-  const noComments = stripeComments(code)
-  const identifiers = new Set(Array.from(noComments.matchAll(matchRE)).map(i => i[1]))
+  const striped = stripeCommentsAndStrings(code)
+  const identifiers = new Set(Array.from(striped.matchAll(matchRE)).map(i => i[1]))
 
   ignore.forEach((i) => {
     if (typeof i === 'string') {
       identifiers.delete(i)
     }
+    // regex
     else {
       identifiers.forEach((id) => {
         if (id.match(i))
@@ -53,7 +56,7 @@ export function transform(
 
   // remove those already defined
   for (const regex of excludeRE) {
-    Array.from(noComments.matchAll(regex))
+    Array.from(striped.matchAll(regex))
       .flatMap(i => [...(i[1]?.split(',') || []), ...(i[2]?.split(',') || [])])
       .map(i => i.replace(importAsRE, '').trim())
       .forEach(i => identifiers.delete(i))

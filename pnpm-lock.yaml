@@ -114,6 +114,7 @@ importers:
       typescript: ^4.4.2
       unplugin-auto-import: workspace:*
       vite: ^2.5.1
+      vite-plugin-inspect: ^0.2.2
     devDependencies:
       '@sveltejs/vite-plugin-svelte': 1.0.0-next.19_svelte@3.42.4+vite@2.5.1
       '@tsconfig/svelte': 2.0.1
@@ -124,6 +125,7 @@ importers:
       typescript: 4.4.2
       unplugin-auto-import: link:../..
       vite: 2.5.1
+      vite-plugin-inspect: 0.2.2_vite@2.5.1
 
   playground:
     specifiers:
@@ -12275,6 +12277,19 @@ packages:
       sirv: 1.0.14
       ufo: 0.7.9
       vite: 2.5.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /vite-plugin-inspect/0.2.2_vite@2.5.1:
+    resolution: {integrity: sha512-CKDRwpRlm+MKHLl63DN74l9mNVbEQE2r8bs77NfAtXdyL4Tn48StaQwskSGoYcF3/69CM7SL23RcY97U8qiPng==}
+    peerDependencies:
+      vite: ^2.0.0
+    dependencies:
+      debug: 4.3.2
+      sirv: 1.0.14
+      ufo: 0.7.9
+      vite: 2.5.1
     transitivePeerDependencies:
       - supports-color
     dev: true
