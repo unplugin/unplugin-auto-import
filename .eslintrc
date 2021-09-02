@@ -4,5 +4,7 @@
   },
   "extends": ["@antfu"],
   "plugins": ["jest"],
-  "rules": {}
+  "rules": {
+    "react/jsx-no-undef": "off"
+  }
 }

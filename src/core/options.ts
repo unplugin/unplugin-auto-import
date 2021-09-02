@@ -11,6 +11,8 @@ export function resolveOptions(options: Options = {}): ResolvedOptions {
   const { dts = hasPkg('typescript') } = options
   const resolved: ResolvedOptions = {
     sourceMap: false,
+    resolvedImports: {},
+    presetOverriding: false,
     ...options,
     dts: dts === false
       ? false
@@ -18,7 +20,7 @@ export function resolveOptions(options: Options = {}): ResolvedOptions {
         ? resolve('auto-imports.d.ts')
         : resolve(dts),
     imports,
-    matchRE: new RegExp(`\\b(${Object.keys(imports).join('|')})\\b`, 'g'),
+    resolvers: toArray(options.resolvers),
     idFilter: createFilter(
       options.include || [/\.[jt]sx?$/, /\.vue\??/, /\.svelte$/],
       options.exclude || [/node_modules/, /\.git/],

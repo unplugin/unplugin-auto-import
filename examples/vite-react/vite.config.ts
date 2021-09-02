@@ -1,14 +1,25 @@
 import { defineConfig } from 'vite'
-import reactRefresh from '@vitejs/plugin-react-refresh'
+import React from '@vitejs/plugin-react-refresh'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import AutoImport from '../../src/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    reactRefresh(),
+    React(),
+    Icons({
+      compiler: 'jsx',
+      jsx: 'react',
+    }),
     AutoImport({
       imports: 'react',
       dts: './src/auto-imports.d.ts',
+      resolvers: [
+        IconsResolver({
+          componentPrefix: 'Icon',
+        }),
+      ],
     }),
   ],
 })

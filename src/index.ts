@@ -1,18 +1,23 @@
 import { promises as fs } from 'fs'
 import { createUnplugin } from 'unplugin'
+import { throttle } from '@antfu/utils'
 import { Options } from './types'
 import { resolveOptions } from './core/options'
 import { transform } from './core/transform'
-import { generateDeclration } from './core/dts'
+import { generateDeclration as _generateDeclaration } from './core/dts'
 
 export default createUnplugin<Options>((options) => {
   const resolved = resolveOptions(options)
 
-  if (!Object.keys(resolved.imports).length)
+  if (!Object.keys(resolved.imports).length && !resolved.resolvers.length)
     console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
 
-  if (resolved.dts)
-    fs.writeFile(resolved.dts, generateDeclration(resolved.imports), 'utf-8')
+  const generateDeclaration = throttle(500, false, () => {
+    if (!resolved.dts) return
+    fs.writeFile(resolved.dts, _generateDeclaration(resolved.imports, resolved.resolvedImports), 'utf-8')
+  })
+
+  generateDeclaration()
 
   return {
     name: 'unplugin-auto-import',
@@ -21,7 +26,9 @@ export default createUnplugin<Options>((options) => {
       return resolved.idFilter(id)
     },
     transform(code, id) {
-      return transform(code, id, resolved)
+      const res = transform(code, id, resolved)
+      if (res) generateDeclaration()
+      return res
     },
   }
 })

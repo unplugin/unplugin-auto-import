@@ -6,6 +6,7 @@ function App() {
 
   return (
     <div className="App">
+      <IconLogosReact style={{ fontSize: '3em' }}/>
       <header className="App-header">
         <p>
           <button type="button" onClick={() => setCount(count => count + 1)}>
