@@ -13,6 +13,7 @@ export function resolveOptions(options: Options = {}): ResolvedOptions {
     sourceMap: false,
     resolvedImports: {},
     presetOverriding: false,
+    ignore: [],
     ...options,
     dts: dts === false
       ? false

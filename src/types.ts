@@ -32,6 +32,11 @@ export interface Options {
   imports?: Arrayable<ImportsMap | PresetName>
 
   /**
+   * Identifiers to be ignored
+   */
+  ignore?: (string | RegExp)[]
+
+  /**
    * Pass a custom function to resolve the component importing path from the component name.
    *
    * The component names are always in PascalCase
@@ -46,24 +51,28 @@ export interface Options {
    * @default './auto-imports.d.ts'
    */
   dts?: string | boolean
+
   /**
    * Allow overriding imports sources from multiple presets.
    *
    * @default false
    */
   presetOverriding?: boolean
+
   /**
    * Rules to include transforming target.
    *
    * @default [/\.[jt]sx?$/, /\.vue\??/]
    */
   include?: FilterPattern
+
   /**
    * Rules to exclude transforming target.
    *
    * @default [/node_modules/, /\.git/]
    */
   exclude?: FilterPattern
+
   /**
    * Generate source map.
    *
@@ -74,6 +83,11 @@ export interface Options {
 
 export interface TransformOptions {
   imports: ImportsFlatMap
+
+  /**
+   * Identifiers to be ignored
+   */
+  ignore?: (string | RegExp)[]
 
   /**
    * Custom resolvers

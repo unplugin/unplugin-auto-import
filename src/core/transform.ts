@@ -29,10 +29,23 @@ export function transform(
     sourceMap,
     resolvers,
     resolvedImports = {},
+    ignore = [],
   }: TransformOptions,
 ) {
   const noComments = stripeComments(code)
   const identifiers = new Set(Array.from(noComments.matchAll(matchRE)).map(i => i[1]))
+
+  ignore.forEach((i) => {
+    if (typeof i === 'string') {
+      identifiers.delete(i)
+    }
+    else {
+      identifiers.forEach((id) => {
+        if (id.match(i))
+          identifiers.delete(id)
+      })
+    }
+  })
 
   // nothing matched, skip
   if (!identifiers.size)
