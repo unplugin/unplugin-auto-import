@@ -2,16 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/unplugin-auto-import?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-auto-import)
 
-Auto import APIs on-demand for Vite, Webpack and Rollup. With TypeScript supports. Powered by [unplugin](https://github.com/unjs/unplugin).
-
-```html
-<script setup>
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
-</script> 
-```
-
-to
+Auto import APIs on-demand for Vite, Webpack and Rollup. With TypeScript support. Powered by [unplugin](https://github.com/unjs/unplugin).
 
 ```html
 <script setup>
@@ -21,9 +12,19 @@ const doubled = computed(() => count.value * 2)
 </script> 
 ```
 
+to
+
+```html
+<script setup>
+const count = ref(0)
+const doubled = computed(() => count.value * 2)
+</script> 
+```
+
 ---
 
 ```tsx
+import { useState } from 'react'
 export function Counter() {
   const [count, setCount] = useState(0)
   return <div>{ count }</div>
@@ -33,7 +34,6 @@ export function Counter() {
 to
 
 ```tsx
-import { useState } from 'react'
 export function Counter() {
   const [count, setCount] = useState(0)
   return <div>{ count }</div>
