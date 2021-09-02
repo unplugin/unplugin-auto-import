@@ -41,6 +41,13 @@ export function Component() {
 "
 `;
 
+exports[`transform fixtures resolver.ts 1`] = `
+"import { default as customResolved1 } from 'custom/resolved/1';import { default as customResolved2, _customNamedResolved2 as customNamedResolved2 } from 'custom/resolved/2';const a = customResolved1(1)
+const b = customResolved2(1)
+const c = customNamedResolved2(1)
+"
+`;
+
 exports[`transform fixtures svelte.svelte 1`] = `
 "import { writable } from 'svelte/store';import { tweened } from 'svelte/motion';import { cubicOut, quintOut } from 'svelte/easing';import { onMount } from 'svelte';import { flip } from 'svelte/animate';import { fade } from 'svelte/transition';const list = writable([1, 2, 3])
 const size = tweened(1, {

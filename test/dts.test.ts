@@ -21,5 +21,5 @@ it('dts', () => {
     ],
   })
 
-  expect(generateDeclration(options.imports)).toMatchSnapshot()
+  expect(generateDeclration(options.imports, {})).toMatchSnapshot()
 })

@@ -10,9 +10,9 @@ export type ImportInfo = {
 }
 
 /**
- * Given a component name returns the import path or an importInfo object
+ * Given a identifier name, returns the import path or an importInfo object
  */
-export type ComponentResolver = (name: string) => string | ImportInfo | null | undefined | void
+export type Resolver = (name: string) => string | ImportInfo | null | undefined | void
 
 /**
  * module, name, alias
@@ -36,7 +36,7 @@ export interface Options {
    *
    * The component names are always in PascalCase
    */
-  resolvers?: ComponentResolver | ComponentResolver[]
+  resolvers?: Resolver | Resolver[]
 
   /**
    * Filepath to generate corresponding .d.ts file.
@@ -74,8 +74,11 @@ export interface Options {
 
 export interface TransformOptions {
   imports: ImportsFlatMap
-  resolvers: ComponentResolver[]
-  matchRE: RegExp
+
+  /**
+   * Custom resolvers
+   */
+  resolvers?: Resolver[]
 
   /**
    * Generate source map.
@@ -83,9 +86,14 @@ export interface TransformOptions {
    * @default false
    */
   sourceMap?: boolean
+
+  /**
+   * Hold the value for dynamic resolved imports, will be mutated during transforming
+   */
+  resolvedImports?: ImportsFlatMap
 }
 
-export interface ResolvedOptions extends Omit<Options, 'imports' | 'resolvers' | 'dts'>, TransformOptions {
+export interface ResolvedOptions extends Omit<Required<Options>, 'imports' | 'resolvers' | 'dts' | 'include' | 'exclude'>, Required<TransformOptions> {
   idFilter: (id: string) => boolean
   dts: string | false
 }

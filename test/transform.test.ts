@@ -22,6 +22,22 @@ describe('transform', () => {
         ],
       },
     ],
+    resolvers: [
+      (name) => {
+        return name.startsWith('customResolved')
+          ? `custom/resolved/${name.slice('customResolved'.length)}`
+          : null
+      },
+      (name) => {
+        return name.startsWith('customNamedResolved')
+          ? {
+            module: `custom/resolved/${name.slice('customNamedResolved'.length)}`,
+            name,
+            from: `_${name}`,
+          }
+          : null
+      },
+    ],
   })
 
   describe('fixtures', () => {

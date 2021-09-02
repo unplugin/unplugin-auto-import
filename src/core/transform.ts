@@ -1,5 +1,5 @@
 import MagicString from 'magic-string'
-import { ImportInfo, TransformOptions, ComponentResolver } from '../types'
+import { ImportInfo, TransformOptions, Resolver } from '../types'
 
 const excludeRE = [
   // imported from other module
@@ -10,6 +10,7 @@ const excludeRE = [
   /\b(?:const|let|var)\s*([\w\d_$]+?)\b/g,
 ]
 
+const matchRE = /\b(\w+)\b/g
 const multilineCommentsRE = /\/\*(.|[\r\n])*?\*\//gm
 const singlelineCommentsRE = /\/\/.*/g
 
@@ -19,59 +20,67 @@ function stripeComments(code: string) {
     .replace(singlelineCommentsRE, '')
 }
 
-export function transform(code: string, id: string, { matchRE, imports, sourceMap, resolvers }: TransformOptions) {
+export function transform(
+  code: string,
+  id: string,
+  {
+    imports,
+    sourceMap,
+    resolvers,
+    resolvedImports = {},
+  }: TransformOptions,
+) {
   const noComments = stripeComments(code)
-  const matched = new Set(Array.from(noComments.matchAll(matchRE)).map(i => i[1]))
-
-  // extends matched results with resolvers. If found some match add the import info to the imports object
-  if (resolvers.length > 0) {
-    const matches = noComments.matchAll(/\b(\w+)\b/g)
-    const firstNonNullResult = (array: Array<ComponentResolver>, name: string) => {
-      for (let i = 0; i < array.length; i++) {
-        const res = array[i](name)
-        if (res) return res
-      }
-    }
-    let match = matches.next()
-    while (!match.done) {
-      const token = match.value[1]
-      const resolved = firstNonNullResult(resolvers, token)
-      if (resolved) {
-        const componentName = token
-        const importInfo = typeof resolved === 'string' ? { from: 'default', name: componentName, module: resolved } : resolved
-        imports[componentName] = importInfo
-        matched.add(componentName)
-      }
-      match = matches.next()
-    }
-  }
+  const identifiers = new Set(Array.from(noComments.matchAll(matchRE)).map(i => i[1]))
 
   // nothing matched, skip
-  if (!matched.size)
+  if (!identifiers.size)
     return null
 
   // remove those already defined
   for (const regex of excludeRE) {
     Array.from(noComments.matchAll(regex))
       .flatMap(i => [...(i[1]?.split(',') || []), ...(i[2]?.split(',') || [])])
-      .forEach(i => matched.delete(i.trim()))
+      .forEach(i => identifiers.delete(i.trim()))
   }
 
   // nothing matched, skip
-  if (!matched.size)
+  if (!identifiers.size)
     return null
 
   const modules: Record<string, ImportInfo[]> = {}
 
   // group by module name
-  Array.from(matched).forEach((name) => {
-    const moduleName = imports[name]?.module
-    if (!moduleName)
+  Array.from(identifiers).forEach((name) => {
+    let info: ImportInfo = resolvedImports[name] || imports[name]
+
+    if (!info && resolvers?.length) {
+      const resolved = firstNonNullResult(resolvers, name)
+      if (resolved) {
+        if (typeof resolved === 'string') {
+          info = {
+            module: resolved,
+            name,
+            from: 'default',
+          }
+        }
+        else {
+          info = resolved
+        }
+        resolvedImports[name] = info
+      }
+    }
+
+    if (!info)
       return
-    if (!modules[moduleName])
-      modules[moduleName] = []
-    modules[moduleName].push(imports[name])
+
+    if (!modules[info.module])
+      modules[info.module] = []
+    modules[info.module].push(info)
   })
+
+  if (!Object.keys(modules).length)
+    return
 
   // stringify import
   const importStatements = Object.entries(modules)
@@ -89,5 +98,13 @@ export function transform(code: string, id: string, { matchRE, imports, sourceMa
   return {
     code: s.toString(),
     map: sourceMap ? s.generateMap() : null,
+  }
+}
+
+function firstNonNullResult(array: Resolver[], name: string) {
+  for (let i = 0; i < array.length; i++) {
+    const res = array[i](name)
+    if (res)
+      return res
   }
 }
