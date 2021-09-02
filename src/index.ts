@@ -27,7 +27,8 @@ export default createUnplugin<Options>((options) => {
     },
     transform(code, id) {
       const res = transform(code, id, resolved)
-      if (res) generateDeclaration()
+      if (res && resolved.resolvers.length)
+        generateDeclaration()
       return res
     },
   }

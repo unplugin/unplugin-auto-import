@@ -160,6 +160,12 @@ AutoImport({
       ]
     }
   ],
+
+  // custom resolvers
+  // see https://github.com/antfu/unplugin-auto-import/pull/23/
+  resolvers: [
+    /* ... */
+  ]
 })
 ```
 
