@@ -11,6 +11,7 @@ const excludeRE = [
 ]
 
 const matchRE = /\b(\w+)\b/g
+const importAsRE = /^.*\sas\s+/
 const multilineCommentsRE = /\/\*(.|[\r\n])*?\*\//gm
 const singlelineCommentsRE = /\/\/.*/g
 
@@ -41,7 +42,8 @@ export function transform(
   for (const regex of excludeRE) {
     Array.from(noComments.matchAll(regex))
       .flatMap(i => [...(i[1]?.split(',') || []), ...(i[2]?.split(',') || [])])
-      .forEach(i => identifiers.delete(i.trim()))
+      .map(i => i.replace(importAsRE, '').trim())
+      .forEach(i => identifiers.delete(i))
   }
 
   // nothing matched, skip

@@ -50,7 +50,10 @@ describe('transform', () => {
     for (const file of files) {
       it(file, async() => {
         const fixture = await fs.readFile(resolve(root, file), 'utf-8')
-        expect(transform(fixture, file, options)?.code ?? fixture).toMatchSnapshot()
+        const pass1 = transform(fixture, file, options)?.code ?? fixture
+        expect(pass1).toMatchSnapshot()
+        const pass2 = transform(pass1, file, options)?.code ?? pass1
+        expect(pass2).toBe(pass1)
       })
     }
   })

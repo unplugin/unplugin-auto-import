@@ -10,6 +10,7 @@ import {
   svelteStore,
   svelteTransition,
 } from './svelte'
+import vitepress from './vitepress'
 import vue from './vue'
 import vueDemi from './vue-demi'
 import vueI18n from './vue-i18n'
@@ -31,6 +32,7 @@ export const presets = {
   'svelte/motion': svelteMotion,
   'svelte/store': svelteStore,
   'svelte/transition': svelteTransition,
+  'vitepress': vitepress,
   'vue-demi': vueDemi,
   'vue-i18n': vueI18n,
   'vue-router': vueRouter,
