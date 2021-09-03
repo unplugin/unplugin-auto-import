@@ -10,7 +10,7 @@ const excludeRE = [
   /\b(?:const|let|var)\s*([\s\S]+)[=\n;]/g,
 ]
 
-const matchRE = /[^.\w_$]([\w_$]+)\b/g
+const matchRE = /(?<![\w_$]\.)([\w_$]+)\b/g
 const importAsRE = /^.*\sas\s+/
 const multilineCommentsRE = /\/\*(.|[\r\n])*?\*\//gm
 const singlelineCommentsRE = /\/\/.*/g

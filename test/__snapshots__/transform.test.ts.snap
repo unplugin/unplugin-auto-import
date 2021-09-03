@@ -34,7 +34,10 @@ exports[`transform fixtures non-target.js 1`] = `
 `;
 
 exports[`transform fixtures props.ts 1`] = `
-"const a = z.ref(0)
+"import { toRefs } from 'vue';const a = z.ref(0)
+console.log({
+  ...toRefs(a)
+})
 "
 `;
 
