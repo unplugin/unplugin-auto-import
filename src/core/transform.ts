@@ -5,9 +5,9 @@ const excludeRE = [
   // imported from other module
   /\bimport\s*([\w_$]*?),?\s*(?:\{([\s\S]*?)\})?\s*from\b/g,
   // defined as function
-  /\bfunction\s*([\w_$]+)\s*\(/g,
+  /\bfunction\s*([\w_$]+?)\s*\(/g,
   // defined as local variable
-  /\b(?:const|let|var)\s*([\s\S]+)[=\n;]/g,
+  /\b(?:const|let|var)\s+?([\s\S]+?)[=\n;]/g,
 ]
 
 const matchRE = /(?<![\w_$]\.)([\w_$]+)\b/g
