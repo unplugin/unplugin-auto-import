@@ -27,6 +27,19 @@
       "require": "./dist/index.js",
       "import": "./dist/index.mjs"
     },
+    "./*": "./*",
+    "./nuxt": {
+      "require": "./dist/nuxt.js",
+      "import": "./dist/nuxt.mjs"
+    },
+    "./rollup": {
+      "require": "./dist/rollup.js",
+      "import": "./dist/rollup.mjs"
+    },
+    "./types": {
+      "require": "./dist/types.js",
+      "import": "./dist/types.mjs"
+    },
     "./vite": {
       "require": "./dist/vite.js",
       "import": "./dist/vite.mjs"
@@ -34,20 +47,7 @@
     "./webpack": {
       "require": "./dist/webpack.js",
       "import": "./dist/webpack.mjs"
-    },
-    "./rollup": {
-      "require": "./dist/rollup.js",
-      "import": "./dist/rollup.mjs"
-    },
-    "./nuxt": {
-      "require": "./dist/nuxt.js",
-      "import": "./dist/nuxt.mjs"
-    },
-    "./types": {
-      "require": "./dist/types.js",
-      "import": "./dist/types.mjs"
-    },
-    "./*": "./*"
+    }
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -75,14 +75,6 @@
     "magic-string": "^0.25.7",
     "unplugin": "^0.2.7"
   },
-  "peerDependencies": {
-    "@vueuse/core": "^6.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@vueuse/core": {
-      "optional": true
-    }
-  },
   "devDependencies": {
     "@antfu/eslint-config": "^0.7.0",
     "@antfu/ni": "^0.7.0",
@@ -101,5 +93,16 @@
     "typescript": "^4.4.2",
     "vite": "^2.5.3",
     "webpack": "^5.51.1"
+  },
+  "peerDependencies": {
+    "@vueuse/core": "^6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vueuse/core": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=14"
   }
 }
