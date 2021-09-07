@@ -13,14 +13,18 @@ const excludeRE = [
 const matchRE = /(?<![\w_$]\.)([\w_$]+)\b/g
 const importAsRE = /^.*\sas\s+/
 const multilineCommentsRE = /\/\*(.|[\r\n])*?\*\//gm
-const singlelineCommentsRE = /\/\/.*/g
-const quotesRE = /(["'`])((?:\\\1|(?!\1)|.|\n|\r)*?)\1/gm
+const singlelineCommentsRE = /\/\/\s.*/g
+const quotesRE = [
+  /(["'])((?:\\\1|(?!\1)|.|\r)*?)\1/gm,
+  /([`])((?:\\\1|(?!\1)|.|\n|\r)*?)\1/gm,
+]
 
 function stripeCommentsAndStrings(code: string) {
   return code
     .replace(multilineCommentsRE, '')
     .replace(singlelineCommentsRE, '')
-    .replace(quotesRE, '')
+    .replace(quotesRE[0], '')
+    .replace(quotesRE[1], '')
 }
 
 export function transform(

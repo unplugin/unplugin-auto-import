@@ -23,7 +23,7 @@ export function resolveOptions(options: Options = {}): ResolvedOptions {
     imports,
     resolvers: toArray(options.resolvers),
     idFilter: createFilter(
-      options.include || [/\.[jt]sx?$/, /\.vue\??/, /\.svelte$/],
+      options.include || [/\.[jt]sx?$/, /\.vue$/, /\.vue\?vue/, /\.svelte$/],
       options.exclude || [/node_modules/, /\.git/],
     ),
   }
