@@ -1,3 +1,4 @@
+import resolve from 'resolve'
 import { ImportsMap } from '../types'
 
 let _cache: ImportsMap | undefined
@@ -7,8 +8,8 @@ export default (): ImportsMap => {
 
   if (!_cache) {
     try {
-      /* eslint-disable @typescript-eslint/no-var-requires */
-      const path = require.resolve('@vueuse/core/indexes.json', { paths: [process.cwd(), __dirname] })
+      const path = resolve.sync('@vueuse/core/indexes.json', { paths: [process.cwd(), __dirname] })
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const indexesJson = require(path)
       _cache = {
         '@vueuse/core': indexesJson

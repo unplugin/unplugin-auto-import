@@ -10,6 +10,7 @@ importers:
       '@rollup/pluginutils': ^4.1.1
       '@types/jest': ^27.0.1
       '@types/node': ^16.7.10
+      '@types/resolve': ^1.20.1
       bumpp: ^6.0.6
       eslint: ^7.32.0
       eslint-plugin-jest: ^24.4.0
@@ -18,6 +19,7 @@ importers:
       has-pkg: ^0.0.1
       jest: ^27.1.0
       magic-string: ^0.25.7
+      resolve: ^1.20.0
       rimraf: ^3.0.2
       rollup: ^2.56.3
       ts-jest: ^27.0.5
@@ -31,12 +33,14 @@ importers:
       '@rollup/pluginutils': 4.1.1
       has-pkg: 0.0.1
       magic-string: 0.25.7
+      resolve: 1.20.0
       unplugin: 0.2.7_b694278cf93d564a6d59a81740f55d0c
     devDependencies:
       '@antfu/eslint-config': 0.7.0_eslint@7.32.0+typescript@4.4.2
       '@antfu/ni': 0.7.0
       '@types/jest': 27.0.1
       '@types/node': 16.7.10
+      '@types/resolve': 1.20.1
       bumpp: 6.0.6
       eslint: 7.32.0
       eslint-plugin-jest: 24.4.0_eslint@7.32.0+typescript@4.4.2
@@ -2734,6 +2738,10 @@ packages:
 
   /@types/relateurl/0.2.29:
     resolution: {integrity: sha512-QSvevZ+IRww2ldtfv1QskYsqVVVwCKQf1XbwtcyyoRvLIQzfyPhj/C+3+PKzSDRdiyejaiLgnq//XTkleorpLg==}
+    dev: true
+
+  /@types/resolve/1.20.1:
+    resolution: {integrity: sha512-Ku5+GPFa12S3W26Uwtw+xyrtIpaZsGYHH6zxNbZlstmlvMYSZRzOwzwsXbxlVUbHyUucctSyuFtu6bNxwYomIw==}
     dev: true
 
   /@types/sass-loader/8.0.1:
