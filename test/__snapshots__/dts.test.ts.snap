@@ -29,6 +29,7 @@ declare global {
   const watch: typeof import('vue-demi')['watch']
   const watchEffect: typeof import('vue-demi')['watchEffect']
   const defineComponent: typeof import('vue-demi')['defineComponent']
+  const defineAsyncComponent: typeof import('vue-demi')['defineAsyncComponent']
   const getCurrentInstance: typeof import('vue-demi')['getCurrentInstance']
   const h: typeof import('vue-demi')['h']
   const inject: typeof import('vue-demi')['inject']
