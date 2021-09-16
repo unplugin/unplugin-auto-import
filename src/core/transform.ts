@@ -119,7 +119,9 @@ export function transform(
 
   return {
     code: s.toString(),
-    map: sourceMap ? s.generateMap() : null,
+    map: sourceMap
+      ? s.generateMap({ source: id, includeContent: true })
+      : null,
   }
 }
 
