@@ -31,6 +31,7 @@ export const CommonCompositionAPI = [
 
   // component
   'defineComponent',
+  'defineAsyncComponent',
   'getCurrentInstance',
   'h',
   'inject',
@@ -46,7 +47,6 @@ export default <ImportsMap>({
 
     // vue3 only
     'triggerRef',
-    'defineAsyncComponent',
     'onDeactivated',
     'onServerPrefetch',
     'onErrorCaptured',
