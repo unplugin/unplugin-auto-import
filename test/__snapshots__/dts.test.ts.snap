@@ -22,6 +22,7 @@ declare global {
   const shallowReactive: typeof import('vue-demi')['shallowReactive']
   const shallowReadonly: typeof import('vue-demi')['shallowReadonly']
   const shallowRef: typeof import('vue-demi')['shallowRef']
+  const triggerRef: typeof import('vue-demi')['triggerRef']
   const toRaw: typeof import('vue-demi')['toRaw']
   const toRef: typeof import('vue-demi')['toRef']
   const toRefs: typeof import('vue-demi')['toRefs']
