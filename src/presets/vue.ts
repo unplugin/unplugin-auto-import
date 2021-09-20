@@ -22,6 +22,7 @@ export const CommonCompositionAPI = [
   'shallowReactive',
   'shallowReadonly',
   'shallowRef',
+  'triggerRef',
   'toRaw',
   'toRef',
   'toRefs',
@@ -46,7 +47,6 @@ export default <ImportsMap>({
     ...CommonCompositionAPI,
 
     // vue3 only
-    'triggerRef',
     'onDeactivated',
     'onServerPrefetch',
     'onErrorCaptured',
