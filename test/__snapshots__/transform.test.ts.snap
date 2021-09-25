@@ -23,6 +23,11 @@ exports[`transform fixtures custom.js 1`] = `
 "
 `;
 
+exports[`transform fixtures dollar.js 1`] = `
+"import { $ } from 'vue-dollar';$('hi')
+"
+`;
+
 exports[`transform fixtures existing.jsx 1`] = `
 "import { watch } from 'vue';import ref from 'ref'
 import { computed } from 'computed'

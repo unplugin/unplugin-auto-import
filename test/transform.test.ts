@@ -16,12 +16,15 @@ describe('transform', () => {
       'svelte/store',
       'svelte/transition',
       {
-        custom: [
+        'custom': [
           'customNamed',
           ['default', 'customDefault'],
         ],
-        ignored: [
+        'ignored': [
           'ignored',
+        ],
+        'vue-dollar': [
+          '$',
         ],
       },
     ],
