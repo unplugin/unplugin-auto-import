@@ -40,6 +40,12 @@ ignored(b)
 "
 `;
 
+exports[`transform fixtures glob.ts 1`] = `
+"import { ref } from 'vue';const modules = import.meta.glob(\\"/src/nested/*.vue\\");
+const msg = ref(\\"Global Imports\\");
+"
+`;
+
 exports[`transform fixtures non-target.js 1`] = `
 "useNonTarget()
 "
