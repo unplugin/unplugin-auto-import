@@ -4,8 +4,6 @@ export default {
     ['@nuxt/typescript-build', { typeCheck: false }],
     // @vue/composition-api support
     '@nuxtjs/composition-api/module',
-    // <script setup> transformer
-    'unplugin-vue2-script-setup/nuxt',
     // api auto import
     ['unplugin-auto-import/nuxt', { imports: ['@nuxtjs/composition-api'] }],
   ],
