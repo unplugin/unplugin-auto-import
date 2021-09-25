@@ -4,24 +4,26 @@
 
 Auto import APIs on-demand for Vite, Webpack and Rollup. With TypeScript support. Powered by [unplugin](https://github.com/unjs/unplugin).
 
-```html
-<script setup>
+---
+
+without
+
+```ts
 import { ref, computed } from 'vue'
 const count = ref(0)
 const doubled = computed(() => count.value * 2)
-</script> 
 ```
 
-to
+with
 
-```html
-<script setup>
+```ts
 const count = ref(0)
 const doubled = computed(() => count.value * 2)
-</script> 
 ```
 
 ---
+
+without
 
 ```tsx
 import { useState } from 'react'
@@ -31,7 +33,7 @@ export function Counter() {
 }
 ```
 
-to
+with
 
 ```tsx
 export function Counter() {
@@ -39,8 +41,6 @@ export function Counter() {
   return <div>{ count }</div>
 }
 ```
-
-...and so on.
 
 ## Install
 
