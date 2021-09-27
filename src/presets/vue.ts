@@ -40,6 +40,7 @@ export const CommonCompositionAPI = [
   'provide',
   'useCssModule',
   'createApp',
+  'PropType',
 ]
 
 export default <ImportsMap>({
