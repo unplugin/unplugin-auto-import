@@ -1,14 +1,17 @@
 import { resolve } from 'path'
 import { toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
-import hasPkg from 'has-pkg'
+import { isPackageExists } from 'local-pkg'
 import { presets } from '../presets'
 import { ImportInfo, ImportsFlatMap, Options, ResolvedOptions } from '../types'
 
 export function resolveOptions(options: Options = {}): ResolvedOptions {
   const imports = flattenImportsMap(options.imports, options.presetOverriding)
 
-  const { dts = hasPkg('typescript') } = options
+  const {
+    dts = isPackageExists('typescript'),
+  } = options
+
   const resolved: ResolvedOptions = {
     sourceMap: false,
     resolvedImports: {},
