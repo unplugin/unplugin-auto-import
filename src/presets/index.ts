@@ -18,12 +18,16 @@ import vueRouter from './vue-router'
 import vueCompositionApi from './vue-composition-api'
 import vueuseCore from './vueuse-core'
 import vueuseHead from './vueuse-head'
+import headlessuiVue from './headlessui-vue'
+import headlessuiReact from './headlessui-react'
 
 export const presets = {
   '@nuxtjs/composition-api': nuxtCompositionApi,
   '@vue/composition-api': vueCompositionApi,
   '@vueuse/core': vueuseCore,
   '@vueuse/head': vueuseHead,
+  '@headlessui/vue':headlessuiVue,
+  '@headlessui/react':headlessuiReact,
   'preact': preact,
   'react': react,
   'svelte': svelte,
