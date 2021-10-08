@@ -52,5 +52,7 @@ export default <ImportsMap>({
     'onErrorCaptured',
     'onRenderTracked',
     'onRenderTriggered',
+    'useAttrs',
+    'useSlots',
   ],
 })
