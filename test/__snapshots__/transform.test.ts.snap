@@ -133,6 +133,8 @@ onMount(() => {})
 `;
 
 exports[`transform fixtures vue.js 1`] = `
-"import { ref } from 'vue';const a = ref(0)
+"import { useQuasar, useMeta } from 'quasar';import { ref } from 'vue';const q = useQuasar()
+const meta = useMeta()
+const a = ref(0)
 "
 `;

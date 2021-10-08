@@ -1,6 +1,7 @@
 /* eslint-disable object-shorthand */
 import nuxtCompositionApi from './nuxt-composition-api'
 import preact from './preact'
+import quasar from './quasar'
 import react from './react'
 import {
   svelte,
@@ -25,6 +26,7 @@ export const presets = {
   '@vueuse/core': vueuseCore,
   '@vueuse/head': vueuseHead,
   'preact': preact,
+  'quasar': quasar,
   'react': react,
   'svelte': svelte,
   'svelte/animate': svelteAnimate,
