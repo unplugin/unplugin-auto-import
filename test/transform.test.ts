@@ -8,6 +8,7 @@ describe('transform', () => {
   const options = resolveOptions({
     imports: [
       'vue',
+      'pinia',
       'quasar',
       'react',
       'svelte',

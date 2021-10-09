@@ -1,5 +1,6 @@
 /* eslint-disable object-shorthand */
 import nuxtCompositionApi from './nuxt-composition-api'
+import pinia from './pinia'
 import preact from './preact'
 import quasar from './quasar'
 import react from './react'
@@ -20,12 +21,14 @@ import vueRouter from './vue-router'
 import vueCompositionApi from './vue-composition-api'
 import vueuseCore from './vueuse-core'
 import vueuseHead from './vueuse-head'
+import vuex from './vuex'
 
 export const presets = {
   '@nuxtjs/composition-api': nuxtCompositionApi,
   '@vue/composition-api': vueCompositionApi,
   '@vueuse/core': vueuseCore,
   '@vueuse/head': vueuseHead,
+  'pinia': pinia,
   'preact': preact,
   'quasar': quasar,
   'react': react,
@@ -41,6 +44,7 @@ export const presets = {
   'vue-i18n': vueI18n,
   'vue-router': vueRouter,
   'vue': vue,
+  'vuex': vuex,
 }
 
 export type PresetName = keyof typeof presets
