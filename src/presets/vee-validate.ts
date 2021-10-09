@@ -2,6 +2,7 @@ import { ImportsMap } from '../types'
 
 export default <ImportsMap>({
   'vee-validate': [
+    // https://vee-validate.logaretm.com/v4/guide/composition-api/api-review
     // https://github.com/logaretm/vee-validate/blob/main/packages/vee-validate/src/index.ts
     'validate',
     'defineRule',
