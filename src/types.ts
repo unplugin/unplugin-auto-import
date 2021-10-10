@@ -8,9 +8,9 @@ import { TypePresetName } from './global-types'
  */
 export type ImportNameAlias = [string, string]
 /**
- * parameter types => name => alias?
+ * parameter types => name
  */
-export type ImportNameTypeAlias = [boolean | string, string] | [boolean | string, string, string]
+export type ImportNameTypeAlias = [string, boolean | string]
 /**
  * Mapping for ImportNameAlias and ImportNameTypeAlias
  */
@@ -35,7 +35,7 @@ export type Resolver = (name: string) => string | ImportInfo | null | undefined 
  */
 export type ImportsMap = Record<string, (string | ImportNameAlias)[]>
 /**
- * module, type parameters, name, alias
+ * module, name, type parameters
  */
 export type ImportsTypeMap = Record<string, (string | ImportNameTypeAlias)[]>
 /**
