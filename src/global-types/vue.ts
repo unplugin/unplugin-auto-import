@@ -1,6 +1,6 @@
-import { ImportsTypeMap, ImportNameAlias, ImportNameTypeAlias } from '../types'
+import { ImportsTypeMap, ImportNameTypeAlias } from '../types'
 
-export const CommonCompositionTypes: (string | ImportNameAlias | ImportNameTypeAlias)[] = [
+export const CommonCompositionTypes: (string | ImportNameTypeAlias)[] = [
   ['Ref', true],
   ['ComputedRef', true],
   ['WritableComputedRef', true],
