@@ -5,6 +5,9 @@ import { Options } from './types'
 import { resolveOptions } from './core/options'
 import { transform } from './core/transform'
 import { generateDeclration as _generateDeclaration } from './core/dts'
+import { pickTypes } from './global-types/pickTypes'
+
+export { pickTypes }
 
 export default createUnplugin<Options>((options) => {
   const resolved = resolveOptions(options)

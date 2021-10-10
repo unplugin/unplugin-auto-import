@@ -1,5 +1,7 @@
 import { Options } from './types'
-import unplugin from '.'
+import unplugin, { pickTypes } from '.'
+
+export { pickTypes }
 
 export default function(this: any, options: Options) {
   options.exclude = options.exclude || [/node_modules/, /\.git/, /\.nuxt/]
