@@ -71,14 +71,8 @@ export function flattenImportsMap(usePreset: boolean, options: Options = {}): Im
             meta.from = id[0]
           }
           else {
-            if (id.length > 2) {
-              meta.name = id[2]
-              meta.from = id[1]
-            }
-            else {
-              meta.name = id[1]
-            }
-            meta.parameters = id[0]
+            meta.parameters = id[1]
+            meta.name = id[0]
           }
         }
         else {

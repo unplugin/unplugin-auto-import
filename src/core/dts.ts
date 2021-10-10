@@ -18,12 +18,12 @@ export function generateDeclration(
       .forEach(([name, info]) => {
         if (!importTypes.has(info.module))
           importTypes.set(info.module, [])
-        importTypes.get(info.module)!.push(`  ${info.from || name} as __${info.from || name}`)
+        importTypes.get(info.module)!.push(`  ${info.name || name} as __${info.name || name}`)
         const parameters = info?.parameters ? (typeof info.parameters === 'string' ? info.parameters : 'T') : false
         declarations.push(
           parameters
-            ? `  type ${info.from || name}<${parameters}> = __${info.from || name}<${parameters}>`
-            : `  type ${info.from || name} = __${info.from || name}`,
+            ? `  type ${info.name || name}<${parameters}> = __${info.name || name}<${parameters}>`
+            : `  type ${info.name || name} = __${info.name || name}`,
         )
       })
   }
