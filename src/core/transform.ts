@@ -1,5 +1,5 @@
 import MagicString from 'magic-string'
-import { ImportInfo, TransformOptions, Resolver } from '../types'
+import { ImportInfo, TransformOptions, Resolver, ImportsFlatMap } from '../types'
 
 const excludeRE = [
   // imported from other module
@@ -27,14 +27,54 @@ function stripeCommentsAndStrings(code: string) {
     .replace(quotesRE[1], '``')
 }
 
+function resolveImports(
+  modules: Record<string, ImportInfo[]>,
+  identifiers: Set<string>,
+  imports: ImportsFlatMap,
+  resolvedImports: ImportsFlatMap,
+  resolvers?: Resolver[],
+) {
+  Array.from(identifiers).forEach((name) => {
+    let info = getOwn(resolvedImports, name) || getOwn(imports, name)
+
+    if (!info && resolvers?.length) {
+      const resolved = firstNonNullResult(resolvers, name)
+      if (resolved) {
+        if (typeof resolved === 'string') {
+          info = {
+            module: resolved,
+            name,
+            from: 'default',
+          }
+        }
+        else {
+          info = resolved
+        }
+        imports[name] = info
+      }
+    }
+
+    if (!info || !info.module)
+      return
+
+    if (!modules[info.module])
+      modules[info.module] = []
+    modules[info.module].push(info)
+  })
+}
+
 export function transform(
   code: string,
   id: string,
   {
     imports,
+    types,
     sourceMap,
     resolvers,
-    resolvedImports = {},
+    resolvedImports = {
+      imports: {},
+      types: {},
+    },
     ignore = [],
   }: TransformOptions,
 ) {
@@ -73,33 +113,36 @@ export function transform(
   const modules: Record<string, ImportInfo[]> = {}
 
   // group by module name
-  Array.from(identifiers).forEach((name) => {
-    let info = getOwn(resolvedImports, name) || getOwn(imports, name)
-
-    if (!info && resolvers?.length) {
-      const resolved = firstNonNullResult(resolvers, name)
-      if (resolved) {
-        if (typeof resolved === 'string') {
-          info = {
-            module: resolved,
-            name,
-            from: 'default',
-          }
-        }
-        else {
-          info = resolved
-        }
-        resolvedImports[name] = info
-      }
-    }
-
-    if (!info || !info.module)
-      return
-
-    if (!modules[info.module])
-      modules[info.module] = []
-    modules[info.module].push(info)
-  })
+  resolveImports(modules, identifiers, imports, resolvedImports.imports, resolvers)
+  // todo@userquin: required on transform? ts lint?
+  resolveImports(modules, identifiers, types, resolvedImports.types, resolvers)
+  // Array.from(identifiers).forEach((name) => {
+  //   let info = getOwn(resolvedImports.imports, name) || getOwn(imports, name)
+  //
+  //   if (!info && resolvers?.length) {
+  //     const resolved = firstNonNullResult(resolvers, name)
+  //     if (resolved) {
+  //       if (typeof resolved === 'string') {
+  //         info = {
+  //           module: resolved,
+  //           name,
+  //           from: 'default',
+  //         }
+  //       }
+  //       else {
+  //         info = resolved
+  //       }
+  //       imports[name] = info
+  //     }
+  //   }
+  //
+  //   if (!info || !info.module)
+  //     return
+  //
+  //   if (!modules[info.module])
+  //     modules[info.module] = []
+  //   modules[info.module].push(info)
+  // })
 
   if (!Object.keys(modules).length)
     return

@@ -14,7 +14,16 @@ export default createUnplugin<Options>((options) => {
 
   const generateDeclaration = throttle(500, false, () => {
     if (!resolved.dts) return
-    fs.writeFile(resolved.dts, _generateDeclaration(resolved.imports, resolved.resolvedImports), 'utf-8')
+    fs.writeFile(
+      resolved.dts,
+      _generateDeclaration(
+        resolved.imports,
+        resolved.types,
+        resolved.resolvedImports.imports,
+        resolved.resolvedImports.types,
+      ),
+      'utf-8',
+    )
   })
 
   generateDeclaration()

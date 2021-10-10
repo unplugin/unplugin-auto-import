@@ -3,10 +3,12 @@ import { toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
 import { isPackageExists } from 'local-pkg'
 import { presets } from '../presets'
-import { ImportInfo, ImportsFlatMap, Options, ResolvedOptions } from '../types'
+import { globalTypes } from '../global-types'
+import { ImportInfo, ImportsFlatMap, ImportsMap, ImportsTypeMap, Options, ResolvedOptions } from '../types'
 
 export function resolveOptions(options: Options = {}): ResolvedOptions {
-  const imports = flattenImportsMap(options.imports, options.presetOverriding)
+  const imports = flattenImportsMap(true, options)
+  const types = flattenImportsMap(false, options)
 
   const {
     dts = isPackageExists('typescript'),
@@ -14,7 +16,10 @@ export function resolveOptions(options: Options = {}): ResolvedOptions {
 
   const resolved: ResolvedOptions = {
     sourceMap: false,
-    resolvedImports: {},
+    resolvedImports: {
+      imports: {},
+      types: {},
+    },
     presetOverriding: false,
     ignore: [],
     ...options,
@@ -24,6 +29,7 @@ export function resolveOptions(options: Options = {}): ResolvedOptions {
         ? resolve('auto-imports.d.ts')
         : resolve(dts),
     imports,
+    types,
     resolvers: toArray(options.resolvers),
     idFilter: createFilter(
       options.include || [/\.[jt]sx?$/, /\.vue$/, /\.vue\?vue/, /\.svelte$/],
@@ -34,30 +40,52 @@ export function resolveOptions(options: Options = {}): ResolvedOptions {
   return resolved
 }
 
-export function flattenImportsMap(map: Options['imports'], overriding = false): ImportsFlatMap {
+export function flattenImportsMap(usePreset: boolean, options: Options = {}): ImportsFlatMap {
   const flat: ImportsFlatMap = {}
-  toArray(map).forEach((definition) => {
+  const {
+    imports = {},
+    types = {},
+    presetOverriding = false,
+  } = options
+  const resolvedPreset: Record<string, ImportsMap | ImportsTypeMap> = usePreset ? presets : globalTypes
+
+  toArray(usePreset ? imports : types).forEach((definition) => {
+    // noinspection SuspiciousTypeOfGuard
     if (typeof definition === 'string') {
-      if (!presets[definition])
+      if (!resolvedPreset[definition])
         throw new Error(`[auto-import] preset ${definition} not found`)
-      const preset = presets[definition]
-      definition = typeof preset === 'function' ? preset() : preset
+      const preset = resolvedPreset[definition]
+      // @ts-ignore
+      definition = typeof preset === 'function' ? resolvedPreset() : preset
     }
 
     for (const mod of Object.keys(definition)) {
+      // @ts-ignore
       for (const id of definition[mod]) {
         const meta = {
           module: mod,
         } as ImportInfo
         if (Array.isArray(id)) {
-          meta.name = id[1]
-          meta.from = id[0]
+          if (usePreset) {
+            meta.name = id[1]
+            meta.from = id[0]
+          }
+          else {
+            if (id.length > 2) {
+              meta.name = id[2]
+              meta.from = id[1]
+            }
+            else {
+              meta.name = id[1]
+            }
+            meta.parameters = id[0]
+          }
         }
         else {
           meta.name = id
         }
 
-        if (flat[meta.name] && !overriding)
+        if (flat[meta.name] && !presetOverriding)
           throw new Error(`[auto-import] identifier ${meta.name} already defined with ${flat[meta.name].module}`)
 
         flat[meta.name] = meta
