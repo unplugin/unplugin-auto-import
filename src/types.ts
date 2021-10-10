@@ -8,7 +8,10 @@ import { TypePresetName } from './global-types'
  */
 export type ImportNameAlias = [string, string]
 /**
- * parameter types => name
+ *  name => type parameters:
+ *  - `false`: no paremetrized type
+ *  - `true`: parametrized type `T`, for example when using `Ref<T>`
+ *  - `custom`: parametrized type custom, for example when using `WatchCallback<V, OV>`, use `O, IV`
  */
 export type ImportNameTypeAlias = [string, boolean | string]
 /**
