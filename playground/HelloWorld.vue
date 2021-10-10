@@ -10,10 +10,14 @@
 </template>
 
 <script setup lang="ts">
-import { double } from './double'
-
 const props = defineProps<{ msg: string }>()
 const emit = defineEmits(['update'])
+
+const double = (value: Ref<number> | number): ComputedRef<number> => {
+  return computed(() => {
+    return unref(value) * 2
+  })
+}
 
 const count = ref(0)
 const doubled = double(count)
