@@ -71,10 +71,8 @@ export function transform(
     types,
     sourceMap,
     resolvers,
-    resolvedImports = {
-      imports: {},
-      types: {},
-    },
+    resolvedImports = {},
+    resolvedTypes = {},
     ignore = [],
   }: TransformOptions,
 ) {
@@ -113,9 +111,9 @@ export function transform(
   const modules: Record<string, ImportInfo[]> = {}
 
   // group by module name
-  resolveImports(modules, identifiers, imports, resolvedImports.imports, resolvers)
+  resolveImports(modules, identifiers, imports, resolvedImports, resolvers)
   // todo@userquin: required on transform? ts lint? or tsc?
-  resolveImports(modules, identifiers, types, resolvedImports.types, resolvers)
+  resolveImports(modules, identifiers, types, resolvedTypes, resolvers)
   // Array.from(identifiers).forEach((name) => {
   //   let info = getOwn(resolvedImports.imports, name) || getOwn(imports, name)
   //

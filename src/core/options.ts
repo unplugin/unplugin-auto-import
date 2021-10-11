@@ -16,10 +16,8 @@ export function resolveOptions(options: Options = {}): ResolvedOptions {
 
   const resolved: ResolvedOptions = {
     sourceMap: false,
-    resolvedImports: {
-      imports: {},
-      types: {},
-    },
+    resolvedImports: {},
+    resolvedTypes: {},
     presetOverriding: false,
     ignore: [],
     ...options,

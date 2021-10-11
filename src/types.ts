@@ -136,10 +136,12 @@ export interface TransformOptions {
   /**
    * Hold the value for dynamic resolved imports, will be mutated during transforming
    */
-  resolvedImports?: {
-    imports: ImportsFlatMap
-    types: ImportsFlatMap
-  }
+  resolvedImports?: ImportsFlatMap
+
+  /**
+   * Hold the value for dynamic resolved imports, will be mutated during transforming
+   */
+  resolvedTypes?: ImportsFlatMap
 }
 
 export interface ResolvedOptions extends Omit<Required<Options>, 'imports' | 'types' | 'resolvers' | 'dts' | 'include' | 'exclude'>, Required<TransformOptions> {

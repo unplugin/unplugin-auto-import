@@ -22,8 +22,8 @@ export default createUnplugin<Options>((options) => {
       _generateDeclaration(
         resolved.imports,
         resolved.types,
-        resolved.resolvedImports.imports,
-        resolved.resolvedImports.types,
+        resolved.resolvedImports,
+        resolved.resolvedTypes,
       ),
       'utf-8',
     )
