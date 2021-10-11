@@ -14,6 +14,9 @@ export default defineConfig({
         'svelte/store',
         'svelte/transition',
       ],
+      types: [
+        'svelte/store',
+      ],
       dts: './src/auto-imports.d.ts',
     }),
   ],
