@@ -40,6 +40,33 @@ ignored(b)
 "
 `;
 
+exports[`transform fixtures existing2.jsx 1`] = `
+"const { ref, computed } = Vue
+
+const a = ref(0)
+const b = computed(0)
+"
+`;
+
+exports[`transform fixtures existing3.jsx 1`] = `
+"const [ ref, computed ] = Vue
+
+const a = ref(0)
+const b = computed(0)
+"
+`;
+
+exports[`transform fixtures existing4.jsx 1`] = `
+"const [ 
+  ref,
+  computed
+] = Vue
+
+const a = ref(0)
+const b = computed(0)
+"
+`;
+
 exports[`transform fixtures glob.ts 1`] = `
 "import { ref } from 'vue';const modules = import.meta.glob(\\"/src/nested/*.vue\\");
 const msg = ref(\\"Global Imports\\");

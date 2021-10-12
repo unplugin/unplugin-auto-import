@@ -7,11 +7,12 @@ const excludeRE = [
   // defined as function
   /\bfunction\s*([\w_$]+?)\s*\(/g,
   // defined as local variable
-  /\b(?:const|let|var)\s+?([\s\S]+?)[=\n;]/g,
+  /\b(?:const|let|var)\s+?(\[[\s\S]*?\]|\{[\s\S]*?\}|[\s\S]+?)\s*?[=;\n]/g,
 ]
 
 const matchRE = /(?<![\w_$]\.)([\w_$]+?)[^\w_$]/g
 const importAsRE = /^.*\sas\s+/
+const seperatorRE = /[,[\]{}\n]/g
 const multilineCommentsRE = /\/\*\s(.|[\r\n])*?\*\//gm
 const singlelineCommentsRE = /\/\/\s.*/g
 const quotesRE = [
@@ -61,7 +62,10 @@ export function transform(
   // remove those already defined
   for (const regex of excludeRE) {
     Array.from(striped.matchAll(regex))
-      .flatMap(i => [...(i[1]?.split(',') || []), ...(i[2]?.split(',') || [])])
+      .flatMap(i => [
+        ...(i[1]?.split(seperatorRE) || []),
+        ...(i[2]?.split(seperatorRE) || []),
+      ])
       .map(i => i.replace(importAsRE, '').trim())
       .forEach(i => identifiers.delete(i))
   }
