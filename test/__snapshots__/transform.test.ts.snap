@@ -94,7 +94,7 @@ exports[`transform fixtures recursive.ts 1`] = `
 `;
 
 exports[`transform fixtures resolver.ts 1`] = `
-"import { default as customResolved1 } from 'custom/resolved/1';import { default as customResolved2, _customNamedResolved2 as customNamedResolved2 } from 'custom/resolved/2';const a = customResolved1(1)
+"import { default as customResolved1, default as customResolved1 } from 'custom/resolved/1';import { default as customResolved2, _customNamedResolved2 as customNamedResolved2, default as customResolved2, _customNamedResolved2 as customNamedResolved2 } from 'custom/resolved/2';const a = customResolved1(1)
 const b = customResolved2(1)
 const c = customNamedResolved2(1)
 "
