@@ -187,7 +187,7 @@ See [src/presets](./src/presets).
 
 ### Compare to [`vue-global-api`](https://github.com/antfu/vue-global-api)
 
-You can think this plugin as a successor of `vue-global-api`, which offers much more flexibility and it's no longer bound to Vue exclusively. Now you can use it with any libraries you want (e.g. React).
+You can think of this plugin as a successor to `vue-global-api`, but offering much more flexibility and bindings with libraries other than Vue (e.g. React).
 
 ###### Pros
 
