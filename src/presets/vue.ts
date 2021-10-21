@@ -6,9 +6,16 @@ export const CommonCompositionAPI = [
   'onBeforeMount',
   'onBeforeUnmount',
   'onBeforeUpdate',
+  'onErrorCaptured',
+  'onDeactivated',
   'onMounted',
+  'onServerPrefetch',
   'onUnmounted',
   'onUpdated',
+
+  // setup helpers
+  'useAttrs',
+  'useSlots',
 
   // reactivity,
   'computed',
@@ -40,6 +47,12 @@ export const CommonCompositionAPI = [
   'provide',
   'useCssModule',
   'createApp',
+
+  // effect scope
+  'effectScope',
+  'EffectScope',
+  'getCurrentScope',
+  'onScopeDispose',
 ]
 
 export default <ImportsMap>({
@@ -47,12 +60,7 @@ export default <ImportsMap>({
     ...CommonCompositionAPI,
 
     // vue3 only
-    'onDeactivated',
-    'onServerPrefetch',
-    'onErrorCaptured',
     'onRenderTracked',
     'onRenderTriggered',
-    'useAttrs',
-    'useSlots',
   ],
 })
