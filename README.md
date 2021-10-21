@@ -134,23 +134,26 @@ module.exports = {
 <details>
 <summary>Quasar</summary><br>
 
-> You should add also `unplugin-vue-components` as a `dev dependency`.
+> You should add also `eslint-webpack-plugin` and `unplugin-vue-components` as `dev dependencies`.
 
 ```ts
 // quasar.conf.js
 
+const ESLintPlugin = require('eslint-webpack-plugin')
 const AutoImportPlugin = require('unplugin-auto-import/webpack')
 const VueComponents = require('unplugin-vue-components/webpack')
 
 module.exports = {
   build: {
     chainWebpack (chain) {
-      chain
-        .plugin('eslint-webpack-plugin')
-        .use(ESLintPlugin, [{ extensions: ['js', 'vue'] }])
-      chain.plugin('unplugin-vue-components').use(VueComponents({}))
+      chain.plugin('eslint-webpack-plugin').use(
+        ESLintPlugin, [{ extensions: ['js', 'vue'] }]
+      )
+      chain.plugin('unplugin-vue-components').use(
+        VueComponents({ /* options */  })
+      )
       chain.plugin('unplugin-auto-import').use(
-        AutoImportPlugin({/* options */})
+        AutoImportPlugin({ /* options */ })
       )
     }
   }
