@@ -131,7 +131,52 @@ module.exports = {
 
 <br></details>
 
+<details>
+<summary>Quasar</summary><br>
 
+> You should add also `unplugin-vue-components` as a `dev dependency`.
+
+```ts
+// quasar.conf.js
+
+const AutoImportPlugin = require('unplugin-auto-import/webpack')
+const VueComponents = require('unplugin-vue-components/webpack')
+
+module.exports = {
+  build: {
+    chainWebpack (chain) {
+      chain
+        .plugin('eslint-webpack-plugin')
+        .use(ESLintPlugin, [{ extensions: ['js', 'vue'] }])
+      chain.plugin('unplugin-vue-components').use(VueComponents({}))
+      chain.plugin('unplugin-auto-import').use(
+        AutoImportPlugin({
+          // targets to transform
+          include: [
+            /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+            /\.vue$/,
+            /\.vue\?vue/, // .vue
+            /\.md$/, // .md
+          ],
+          // global imports to register
+          imports: [
+            // presets
+            'vue',
+            'vue-router',
+          ],
+          // custom resolvers
+          // see https://github.com/antfu/unplugin-auto-import/pull/23/
+          resolvers: [
+            /* ... */
+          ],
+        })
+      )
+    }
+  }
+}
+```
+
+<br></details>
 
 ## Configuration
 
