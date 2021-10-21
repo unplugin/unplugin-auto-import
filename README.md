@@ -134,20 +134,13 @@ module.exports = {
 <details>
 <summary>Quasar</summary><br>
 
-> You should add also `unplugin-vue-components` as a `dev dependency`.
-
 ```ts
 // quasar.conf.js
-
 const AutoImportPlugin = require('unplugin-auto-import/webpack')
-const VueComponents = require('unplugin-vue-components/webpack')
 
 module.exports = {
   build: {
     chainWebpack (chain) {
-      chain.plugin('unplugin-vue-components').use(
-        VueComponents({ /* options */  })
-      )
       chain.plugin('unplugin-auto-import').use(
         AutoImportPlugin({ /* options */ })
       )
