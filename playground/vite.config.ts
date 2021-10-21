@@ -1,13 +1,7 @@
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Inspect from 'vite-plugin-inspect'
-import AutoImport, { pickTypes } from '../src/vite'
-
-const types = pickTypes([
-  {
-    vue: ['Ref', 'ComputedRef'],
-  },
-])
+import AutoImport from '../src/vite'
 
 export default defineConfig({
   plugins: [
@@ -15,7 +9,7 @@ export default defineConfig({
     Inspect(),
     AutoImport({
       imports: 'vue',
-      types,
+      types: 'vue',
     }),
   ],
 })
