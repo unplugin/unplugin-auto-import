@@ -131,7 +131,25 @@ module.exports = {
 
 <br></details>
 
+<details>
+<summary>Quasar</summary><br>
 
+```ts
+// quasar.conf.js
+const AutoImportPlugin = require('unplugin-auto-import/webpack')
+
+module.exports = {
+  build: {
+    chainWebpack (chain) {
+      chain.plugin('unplugin-auto-import').use(
+        AutoImportPlugin({ /* options */ })
+      )
+    }
+  }
+}
+```
+
+<br></details>
 
 ## Configuration
 
