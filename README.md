@@ -150,25 +150,7 @@ module.exports = {
         .use(ESLintPlugin, [{ extensions: ['js', 'vue'] }])
       chain.plugin('unplugin-vue-components').use(VueComponents({}))
       chain.plugin('unplugin-auto-import').use(
-        AutoImportPlugin({
-          // targets to transform
-          include: [
-            /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
-            /\.vue$/, /\.vue\?vue/, // .vue
-            /\.md$/, // .md
-          ],
-          // global imports to register
-          imports: [
-            // presets
-            'vue',
-            'vue-router',
-          ],
-          // custom resolvers
-          // see https://github.com/antfu/unplugin-auto-import/pull/23/
-          resolvers: [
-            /* ... */
-          ],
-        })
+        AutoImportPlugin({/* options */})
       )
     }
   }
