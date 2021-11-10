@@ -2,7 +2,7 @@ import { Options } from './types'
 import unplugin from '.'
 
 export default function(this: any, options: Options) {
-  options.exclude = options.exclude || [/node_modules/, /\.git/, /\.nuxt/]
+  options.exclude = options.exclude || [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/]
 
   // install webpack plugin
   this.extendBuild((config: any) => {
