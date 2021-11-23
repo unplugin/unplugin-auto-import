@@ -1,3 +1,5 @@
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
 import resolve from 'resolve'
 import { ImportsMap } from '../types'
 
@@ -8,7 +10,10 @@ export default (): ImportsMap => {
 
   if (!_cache) {
     try {
-      const path = resolve.sync('@vueuse/core/indexes.json', { paths: [process.cwd(), __dirname] })
+      const _dirname = typeof __dirname !== 'undefined'
+        ? __dirname
+        : dirname(fileURLToPath(import.meta.url))
+      const path = resolve.sync('@vueuse/core/indexes.json', { paths: [process.cwd(), _dirname] })
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const indexesJson = require(path)
       _cache = {
