@@ -97,7 +97,7 @@
     "webpack": "^5.54.0"
   },
   "peerDependencies": {
-    "@vueuse/core": "^6.0.0"
+    "@vueuse/core": "*"
   },
   "peerDependenciesMeta": {
     "@vueuse/core": {
