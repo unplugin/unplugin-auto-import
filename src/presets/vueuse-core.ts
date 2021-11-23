@@ -12,7 +12,10 @@ export default (): ImportsMap => {
     try {
       const _dirname = typeof __dirname !== 'undefined'
         ? __dirname
-        : dirname(fileURLToPath(import.meta.url))
+        : dirname(fileURLToPath(
+          // @ts-ignore
+          import.meta.url,
+        ))
       const path = resolve.sync('@vueuse/core/indexes.json', { paths: [process.cwd(), _dirname] })
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const indexesJson = require(path)

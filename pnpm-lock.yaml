@@ -133,10 +133,12 @@ importers:
     specifiers:
       '@vitejs/plugin-vue': ^1.9.2
       '@vue/compiler-sfc': ^3.2.18
+      '@vueuse/core': ^6.7.6
       vite: ^2.5.10
       vite-plugin-inspect: ^0.3.6
       vue: 3.2.18
     dependencies:
+      '@vueuse/core': 6.9.2_vue@3.2.18
       vue: 3.2.18
     devDependencies:
       '@vitejs/plugin-vue': 1.9.2_vite@2.5.10
@@ -3421,6 +3423,37 @@ packages:
   /@vue/shared/3.2.4:
     resolution: {integrity: sha512-j2j1MRmjalVKr3YBTxl/BClSIc8UQ8NnPpLYclxerK65JIowI4O7n8O8lElveEtEoHxy1d7BelPUDI0Q4bumqg==}
     dev: true
+
+  /@vueuse/core/6.9.2_vue@3.2.18:
+    resolution: {integrity: sha512-FRwl4ccSFuHZBHLGgS9TMv/+Dd6XFaL4o9nph2qtgQIV+z29RBFokw08XjHfykiENRzB01MjYHJ7iRUnsIFQXg==}
+    peerDependencies:
+      '@vue/composition-api': ^1.1.0
+      vue: ^2.6.0 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      vue:
+        optional: true
+    dependencies:
+      '@vueuse/shared': 6.9.2_vue@3.2.18
+      vue: 3.2.18
+      vue-demi: 0.12.1_vue@3.2.18
+    dev: false
+
+  /@vueuse/shared/6.9.2_vue@3.2.18:
+    resolution: {integrity: sha512-lAiMh6XROs0kSKVd0Yb/6GKoQMxC1fYrFDi6opvQWISPtcqRNluRrQxLUZ3WTI78ovtoKRLktjhkFAtydcfFDg==}
+    peerDependencies:
+      '@vue/composition-api': ^1.1.0
+      vue: ^2.6.0 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      vue:
+        optional: true
+    dependencies:
+      vue: 3.2.18
+      vue-demi: 0.12.1_vue@3.2.18
+    dev: false
 
   /@webassemblyjs/ast/1.11.1:
     resolution: {integrity: sha512-ukBh14qFLjxTQNTXocdyksN5QdM28S1CxHt2rdskFyL+xFV7VremuBLVbmCePj+URalXBENx/9Lm7lnhihtCSw==}
@@ -12476,6 +12509,21 @@ packages:
 
   /vue-client-only/2.1.0:
     resolution: {integrity: sha512-vKl1skEKn8EK9f8P2ZzhRnuaRHLHrlt1sbRmazlvsx6EiC3A8oWF8YCBrMJzoN+W3OnElwIGbVjsx6/xelY1AA==}
+    dev: false
+
+  /vue-demi/0.12.1_vue@3.2.18:
+    resolution: {integrity: sha512-QL3ny+wX8c6Xm1/EZylbgzdoDolye+VpCXRhI2hug9dJTP3OUJ3lmiKN3CsVV3mOJKwFi0nsstbgob0vG7aoIw==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.2.18
     dev: false
 
   /vue-eslint-parser/7.11.0_eslint@7.32.0:

@@ -4,6 +4,7 @@
     "dev": "vite --open"
   },
   "dependencies": {
+    "@vueuse/core": "^6.7.6",
     "vue": "3.2.18"
   },
   "devDependencies": {

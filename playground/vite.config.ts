@@ -8,7 +8,7 @@ export default defineConfig({
     Vue(),
     Inspect(),
     AutoImport({
-      imports: 'vue',
+      imports: ['vue', '@vueuse/core'],
     }),
   ],
 })
