@@ -1,6 +1,5 @@
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
-import resolve from 'resolve'
+import { readFileSync } from 'fs'
+import { resolveModule } from 'local-pkg'
 import { ImportsMap } from '../types'
 
 let _cache: ImportsMap | undefined
@@ -10,15 +9,8 @@ export default (): ImportsMap => {
 
   if (!_cache) {
     try {
-      const _dirname = typeof __dirname !== 'undefined'
-        ? __dirname
-        : dirname(fileURLToPath(
-          // @ts-ignore
-          import.meta.url,
-        ))
-      const path = resolve.sync('@vueuse/core/indexes.json', { paths: [process.cwd(), _dirname] })
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const indexesJson = require(path)
+      const path = resolveModule('@vueuse/core/indexes.json')
+      const indexesJson = JSON.parse(readFileSync(path!, 'utf-8'))
       _cache = {
         '@vueuse/core': indexesJson
           .functions
