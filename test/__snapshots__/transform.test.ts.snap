@@ -159,6 +159,11 @@ onMount(() => {})
 "
 `;
 
+exports[`transform fixtures template-literal.ts 1`] = `
+"import { ref } from 'vue';const z = \`bar-\${ref()}\`
+"
+`;
+
 exports[`transform fixtures vue.js 1`] = `
 "import { useQuasar, useMeta } from 'quasar';import { ref } from 'vue';import { defineStore, mapState } from 'pinia';const q = useQuasar()
 const meta = useMeta()
