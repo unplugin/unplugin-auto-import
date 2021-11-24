@@ -28,6 +28,9 @@ describe('transform', () => {
         'vue-dollar': [
           '$',
         ],
+        'three.js': [
+          ['*', 'THREE'],
+        ],
       },
     ],
     ignore: [

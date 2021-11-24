@@ -19,7 +19,7 @@ const b = { class: \\"text-sm opacity-75\\" };
 `;
 
 exports[`transform fixtures custom.js 1`] = `
-"import { default as customDefault, customNamed } from 'custom';const a = customDefault(customNamed())
+"import customDefault, { customNamed } from 'custom';const a = customDefault(customNamed())
 "
 `;
 
@@ -73,6 +73,11 @@ const msg = ref(\\"Global Imports\\");
 "
 `;
 
+exports[`transform fixtures import-all.ts 1`] = `
+"import * as THREE from 'three.js';const scene = new THREE.Scene();
+"
+`;
+
 exports[`transform fixtures non-target.js 1`] = `
 "useNonTarget()
 "
@@ -121,7 +126,7 @@ exports[`transform fixtures recursive.ts 1`] = `
 `;
 
 exports[`transform fixtures resolver.ts 1`] = `
-"import { default as customResolved1 } from 'custom/resolved/1';import { default as customResolved2, _customNamedResolved2 as customNamedResolved2 } from 'custom/resolved/2';const a = customResolved1(1)
+"import customResolved1 from 'custom/resolved/1';import customResolved2, { _customNamedResolved2 as customNamedResolved2 } from 'custom/resolved/2';const a = customResolved1(1)
 const b = customResolved2(1)
 const c = customNamedResolved2(1)
 "

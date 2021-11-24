@@ -3,7 +3,7 @@ import { ImportInfo, TransformOptions, Resolver } from '../types'
 
 const excludeRE = [
   // imported from other module
-  /\bimport\s*([\w_$]*?),?\s*(?:\{([\s\S]*?)\})?\s*from\b/g,
+  /\bimport\s*(.+?)\s*from\b/g,
   // defined as function
   /\bfunction\s*([\w_$]+?)\s*\(/g,
   // defined as local variable
@@ -112,10 +112,23 @@ export function transform(
   // stringify import
   const importStatements = Object.entries(modules)
     .map(([moduleName, names]) => {
-      const imports = names
-        .map(({ name, from }) => from ? `${from} as ${name}` : name)
-        .join(', ')
-      return `import { ${imports} } from '${moduleName}';`
+      const imports: string[] = []
+      const namedImports: string[] = []
+
+      names
+        .forEach(({ name, from }) => {
+          if (from === '*')
+            imports.push(`* as ${name}`)
+          else if (from === 'default')
+            imports.push(name)
+          else
+            namedImports.push(from ? `${from} as ${name}` : name)
+        })
+
+      if (namedImports.length)
+        imports.push(`{ ${namedImports.join(', ')} }`)
+
+      return `import ${imports.join(', ')} from '${moduleName}';`
     })
     .join('')
 
