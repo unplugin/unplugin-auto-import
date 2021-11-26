@@ -67,6 +67,20 @@ const b = computed(0)
 "
 `;
 
+exports[`transform fixtures existing5.jsx 1`] = `
+"import { watch } from 'vue';import {
+  ref,
+  computed,
+  watch as watch3,
+} from 'vue'
+
+const a = ref(0)
+const b = computed(0)
+const c = watch(0)
+const d = watch3(0)
+"
+`;
+
 exports[`transform fixtures glob.ts 1`] = `
 "import { ref } from 'vue';const modules = import.meta.glob(\\"/src/nested/*.vue\\");
 const msg = ref(\\"Global Imports\\");

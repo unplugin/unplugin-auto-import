@@ -3,7 +3,7 @@ import { ImportInfo, TransformOptions, Resolver } from '../types'
 
 const excludeRE = [
   // imported from other module
-  /\bimport\s*(.+?)\s*from\b/g,
+  /\bimport\s*([\s\S]+?)\s*from\b/g,
   // defined as function
   /\bfunction\s*([\w_$]+?)\s*\(/g,
   // defined as local variable
