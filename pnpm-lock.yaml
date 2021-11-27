@@ -20,7 +20,6 @@ importers:
       local-pkg: ^0.4.0
       magic-string: ^0.25.7
       resolve: ^1.20.0
-      rimraf: ^3.0.2
       rollup: ^2.60.1
       ts-jest: ^27.0.7
       tsup: ^5.10.0
@@ -47,7 +46,6 @@ importers:
       esno: 0.12.1_typescript@4.5.2
       fast-glob: 3.2.7
       jest: 27.3.1
-      rimraf: 3.0.2
       rollup: 2.60.1
       ts-jest: 27.0.7_7e2a439bb7b53c38ff0c1a3c5e04c2c5
       tsup: 5.10.0_typescript@4.5.2
