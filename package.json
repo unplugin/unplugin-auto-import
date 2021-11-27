@@ -57,7 +57,7 @@
     "*.d.ts"
   ],
   "scripts": {
-    "build": "rimraf dist && tsup src/*.ts --format cjs,esm --dts --splitting && esno scripts/postbuild.ts",
+    "build": "tsup src/*.ts --format cjs,esm --dts --splitting --clean && esno scripts/postbuild.ts",
     "dev": "tsup 'src/*.ts' --watch src",
     "lint": "eslint \"{src,test}/**/*.ts\"",
     "lint:fix": "nr lint -- --fix",
@@ -88,7 +88,6 @@
     "esno": "^0.12.1",
     "fast-glob": "^3.2.7",
     "jest": "^27.3.1",
-    "rimraf": "^3.0.2",
     "rollup": "^2.60.1",
     "ts-jest": "^27.0.7",
     "tsup": "^5.10.0",
