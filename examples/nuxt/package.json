@@ -16,7 +16,7 @@
     "@nuxt/types": "^2.15.8",
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/composition-api": "^0.30.0",
-    "@vue/runtime-dom": "^3.2.22",
+    "@vue/runtime-dom": "^3.2.23",
     "unplugin-auto-import": "workspace:*",
     "vue-tsc": "^0.29.6"
   }
