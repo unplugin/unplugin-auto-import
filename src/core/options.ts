@@ -46,9 +46,9 @@ export function flattenImportsMap(map: Options['imports'], overriding = false): 
 
     for (const mod of Object.keys(definition)) {
       for (const id of definition[mod]) {
-        const meta = {
+        const meta: ImportInfo = {
           module: mod,
-        } as ImportInfo
+        }
         if (Array.isArray(id)) {
           meta.name = id[1]
           meta.from = id[0]

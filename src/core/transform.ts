@@ -77,6 +77,10 @@ export function transform(
     return null
 
   const modules: Record<string, ImportInfo[]> = {}
+  const addToModules = (info: ImportInfo) => {
+    if (!modules[info.module]) modules[info.module] = [info]
+    else modules[info.module].push(info)
+  }
 
   // group by module name
   Array.from(identifiers).forEach((name) => {
@@ -102,9 +106,20 @@ export function transform(
     if (!info || !info.module)
       return
 
-    if (!modules[info.module])
-      modules[info.module] = []
-    modules[info.module].push(info)
+    addToModules({
+      module: info.module,
+      name: info.name,
+      from: info.from,
+    })
+
+    if (info.sideEffects) {
+      const infos = [info.sideEffects].flat(1).map((info): ImportInfo => {
+        if (typeof info === 'string')
+          return { module: info }
+        return info
+      })
+      infos.forEach(info => addToModules(info))
+    }
   })
 
   if (!Object.keys(modules).length)
@@ -118,18 +133,20 @@ export function transform(
 
       names
         .forEach(({ name, from }) => {
-          if (from === '*')
-            imports.push(`* as ${name}`)
-          else if (from === 'default')
-            imports.push(name)
-          else
-            namedImports.push(from ? `${from} as ${name}` : name)
+          if (name) {
+            if (from === '*')
+              imports.push(`* as ${name}`)
+            else if (from === 'default')
+              imports.push(name)
+            else
+              namedImports.push(from ? `${from} as ${name}` : name)
+          }
         })
 
       if (namedImports.length)
         imports.push(`{ ${namedImports.join(', ')} }`)
 
-      return `import ${imports.join(', ')} from '${moduleName}';`
+      return `import ${imports.length > 0 ? `${imports.join(', ')} from ` : ''}'${moduleName}';`
     })
     .join('')
 
