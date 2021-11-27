@@ -4,7 +4,7 @@ import { throttle } from '@antfu/utils'
 import { Options } from './types'
 import { resolveOptions } from './core/options'
 import { transform } from './core/transform'
-import { generateDeclration as _generateDeclaration } from './core/dts'
+import { generateDeclaration as _generateDeclaration } from './core/dts'
 
 export default createUnplugin<Options>((options) => {
   const resolved = resolveOptions(options)

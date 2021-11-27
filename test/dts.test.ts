@@ -1,4 +1,4 @@
-import { generateDeclration } from '../src/core/dts'
+import { generateDeclaration } from '../src/core/dts'
 import { resolveOptions } from '../src/core/options'
 
 it('dts', () => {
@@ -21,5 +21,5 @@ it('dts', () => {
     ],
   })
 
-  expect(generateDeclration(options.imports, {})).toMatchSnapshot()
+  expect(generateDeclaration(options.imports, {})).toMatchSnapshot()
 })

@@ -1,6 +1,6 @@
 import { ImportsFlatMap } from '../types'
 
-export function generateDeclration(imports: ImportsFlatMap, resolvedImports: ImportsFlatMap = {}) {
+export function generateDeclaration(imports: ImportsFlatMap, resolvedImports: ImportsFlatMap = {}) {
   const body = [
     ...Object.entries(imports),
     ...Object.entries(resolvedImports),
