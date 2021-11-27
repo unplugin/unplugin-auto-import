@@ -5,14 +5,18 @@ import { PresetName } from './presets'
 export type ImportNameAlias = [string, string]
 export type ImportInfo = {
   module: string
-  name: string
+  name?: string
   from?: string
+}
+export type SideEffectsInfo = Arrayable<ImportInfo | string> | undefined
+export interface ResolveResult extends ImportInfo {
+  sideEffects?: SideEffectsInfo
 }
 
 /**
  * Given a identifier name, returns the import path or an importInfo object
  */
-export type Resolver = (name: string) => string | ImportInfo | null | undefined | void
+export type Resolver = (name: string) => string | ResolveResult | null | undefined | void
 
 /**
  * module, name, alias
@@ -21,7 +25,7 @@ export type ImportsMap = Record<string, (string | ImportNameAlias)[]>
 /**
  * name, meta
  */
-export type ImportsFlatMap = Record<string, ImportInfo>
+export type ImportsFlatMap = Record<string, ResolveResult>
 
 export interface Options {
   /**
