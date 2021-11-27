@@ -45,9 +45,8 @@ describe('transform', () => {
       (name) => {
         return name.startsWith('customNamedResolved')
           ? {
-            module: `custom/resolved/${name.slice('customNamedResolved'.length)}`,
-            name,
-            from: `_${name}`,
+            path: `custom/resolved/${name.slice('customNamedResolved'.length)}`,
+            importName: `_${name}`,
           }
           : null
       },
@@ -64,9 +63,9 @@ describe('transform', () => {
     for (const file of files) {
       it(file, async() => {
         const fixture = await fs.readFile(resolve(root, file), 'utf-8')
-        const pass1 = transform(fixture, file, options)?.code ?? fixture
+        const pass1 = (await transform(fixture, file, options))?.code ?? fixture
         expect(pass1).toMatchSnapshot()
-        const pass2 = transform(pass1, file, options)?.code ?? pass1
+        const pass2 = (await transform(pass1, file, options))?.code ?? pass1
         expect(pass2).toBe(pass1)
       })
     }

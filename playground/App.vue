@@ -1,14 +1,21 @@
 <template>
-  <div>
-    <hello-world :msg="msg" />
+  <div v-loading="true">
+    123
+    <ElButton>Hello</ElButton>
   </div>
 </template>
 
-<script setup lang="ts">
-import HelloWorld from './HelloWorld.vue'
+<script lang="ts">
+export default defineComponent({
+  components: {
+    ElButton,
+  },
+  directives: {
+    loading: vLoading,
+  },
+})
+</script>
 
-const msg = ref('Global Imports')
-const title = useTitle()
-console.log(title.value) // print current title
-title.value = 'Hello' // change current title
+<script lang="ts" setup>
+ElMessage.warning('Test')
 </script>

@@ -1,22 +1,24 @@
-import { Arrayable } from '@antfu/utils'
+import { Arrayable, Awaitable } from '@antfu/utils'
 import { FilterPattern } from '@rollup/pluginutils'
 import { PresetName } from './presets'
 
 export type ImportNameAlias = [string, string]
 export type ImportInfo = {
-  module: string
+  path: string
   name?: string
-  from?: string
+  importName?: string
 }
 export type SideEffectsInfo = Arrayable<ImportInfo | string> | undefined
-export interface ResolveResult extends ImportInfo {
+export type ResolvedResult = {
+  path: string
+  importName?: string
   sideEffects?: SideEffectsInfo
 }
 
 /**
  * Given a identifier name, returns the import path or an importInfo object
  */
-export type Resolver = (name: string) => string | ResolveResult | null | undefined | void
+export type Resolver = (name: string) => Awaitable<string | ResolvedResult | null | undefined | void>
 
 /**
  * module, name, alias
@@ -25,7 +27,7 @@ export type ImportsMap = Record<string, (string | ImportNameAlias)[]>
 /**
  * name, meta
  */
-export type ImportsFlatMap = Record<string, ResolveResult>
+export type ImportsFlatMap = Record<string, ResolvedResult>
 
 export interface Options {
   /**

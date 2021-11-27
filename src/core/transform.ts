@@ -30,7 +30,7 @@ function stripeCommentsAndStrings(code: string) {
     .replace(quotesRE[1], '``')
 }
 
-export function transform(
+export async function transform(
   code: string,
   id: string,
   {
@@ -78,22 +78,21 @@ export function transform(
 
   const modules: Record<string, ImportInfo[]> = {}
   const addToModules = (info: ImportInfo) => {
-    if (!modules[info.module]) modules[info.module] = [info]
-    else modules[info.module].push(info)
+    if (!modules[info.path]) modules[info.path] = [info]
+    else modules[info.path].push(info)
   }
 
   // group by module name
-  Array.from(identifiers).forEach((name) => {
+  for (const name of Array.from(identifiers)) {
     let info = getOwn(resolvedImports, name) || getOwn(imports, name)
 
     if (!info && resolvers?.length) {
-      const resolved = firstNonNullResult(resolvers, name)
+      const resolved = await firstNonNullResult(resolvers, name)
       if (resolved) {
         if (typeof resolved === 'string') {
           info = {
-            module: resolved,
-            name,
-            from: 'default',
+            path: resolved,
+            importName: 'default',
           }
         }
         else {
@@ -103,43 +102,43 @@ export function transform(
       }
     }
 
-    if (!info || !info.module)
-      return
+    if (!info || !info.path)
+      continue
 
     addToModules({
-      module: info.module,
-      name: info.name,
-      from: info.from,
+      path: info.path,
+      importName: info.importName,
+      name,
     })
 
     if (info.sideEffects) {
       const infos = [info.sideEffects].flat(1).map((info): ImportInfo => {
         if (typeof info === 'string')
-          return { module: info }
+          return { path: info }
         return info
       })
       infos.forEach(info => addToModules(info))
     }
-  })
+  }
 
   if (!Object.keys(modules).length)
     return
 
   // stringify import
   const importStatements = Object.entries(modules)
-    .map(([moduleName, names]) => {
+    .map(([moduleName, infos]) => {
       const imports: string[] = []
       const namedImports: string[] = []
 
-      names
-        .forEach(({ name, from }) => {
+      infos
+        .forEach(({ name, importName }) => {
           if (name) {
-            if (from === '*')
+            if (importName === '*')
               imports.push(`* as ${name}`)
-            else if (from === 'default')
+            else if (importName === 'default')
               imports.push(name)
             else
-              namedImports.push(from ? `${from} as ${name}` : name)
+              namedImports.push((importName && name !== importName) ? `${importName} as ${name}` : name)
           }
         })
 
