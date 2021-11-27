@@ -26,7 +26,6 @@ importers:
       tsup: ^5.10.0
       typescript: ^4.5.2
       unplugin: ^0.2.21
-      unplugin-vue-components: ^0.17.2
       vite: ^2.6.14
       webpack: ^5.64.4
     dependencies:
@@ -53,7 +52,6 @@ importers:
       ts-jest: 27.0.7_7e2a439bb7b53c38ff0c1a3c5e04c2c5
       tsup: 5.10.0_typescript@4.5.2
       typescript: 4.5.2
-      unplugin-vue-components: 0.17.2_a9a6b8d08ed8716dec583bd3c9665f66
       vite: 2.6.14
       webpack: 5.64.4
 
@@ -12538,36 +12536,6 @@ packages:
       resolve: 1.20.0
       unplugin: 0.2.21_a9a6b8d08ed8716dec583bd3c9665f66
       vue: 3.2.23
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-      - vite
-      - webpack
-    dev: true
-
-  /unplugin-vue-components/0.17.2_a9a6b8d08ed8716dec583bd3c9665f66:
-    resolution: {integrity: sha512-e4ZdOpnzFMQJx3rDLotLyucTap0bUlMy+6BRYyoN6jE1ZyGAgR6jodmpHZAPR3xkC4pkqW5PLlyDfIH/+lzkng==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      '@babel/parser': ^7.15.8
-      '@babel/traverse': ^7.15.4
-      vue: 2 || 3
-    peerDependenciesMeta:
-      '@babel/parser':
-        optional: true
-      '@babel/traverse':
-        optional: true
-    dependencies:
-      '@antfu/utils': 0.3.0
-      '@rollup/pluginutils': 4.1.1
-      chokidar: 3.5.2
-      debug: 4.3.2
-      fast-glob: 3.2.7
-      local-pkg: 0.1.0
-      magic-string: 0.25.7
-      minimatch: 3.0.4
-      resolve: 1.20.0
-      unplugin: 0.2.21_a9a6b8d08ed8716dec583bd3c9665f66
     transitivePeerDependencies:
       - rollup
       - supports-color
