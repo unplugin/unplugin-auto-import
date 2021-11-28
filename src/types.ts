@@ -54,7 +54,7 @@ export interface Options {
    *
    * The component names are always in PascalCase
    */
-  resolvers?: Arrayable<Resolver>
+  resolvers?: Arrayable<Arrayable<Resolver>>
 
   /**
    * Filepath to generate corresponding .d.ts file.

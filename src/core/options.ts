@@ -24,7 +24,7 @@ export function resolveOptions(options: Options = {}): ResolvedOptions {
         ? resolve('auto-imports.d.ts')
         : resolve(dts),
     imports,
-    resolvers: toArray(options.resolvers),
+    resolvers: options.resolvers ? [options.resolvers].flat(2) : [],
     idFilter: createFilter(
       options.include || [/\.[jt]sx?$/, /\.vue$/, /\.vue\?vue/, /\.svelte$/],
       options.exclude || [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/],
