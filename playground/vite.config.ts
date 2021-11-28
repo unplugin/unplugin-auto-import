@@ -10,7 +10,7 @@ export default defineConfig({
     Inspect(),
     AutoImport({
       imports: ['vue', '@vueuse/core'],
-      resolvers: [...ElementPlusResolver()],
+      resolvers: [ElementPlusResolver()],
     }),
   ],
 })
