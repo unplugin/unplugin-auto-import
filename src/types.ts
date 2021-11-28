@@ -15,10 +15,17 @@ export type ResolvedResult = {
   sideEffects?: SideEffectsInfo
 }
 
+export type ResolverFunction = (name: string) => Awaitable<string | ResolvedResult | null | undefined | void>
+
+export type ResolverResultObject = {
+  type: 'component' | 'directive'
+  resolve: ResolverFunction
+}
+
 /**
  * Given a identifier name, returns the import path or an importInfo object
  */
-export type Resolver = (name: string) => Awaitable<string | ResolvedResult | null | undefined | void>
+export type Resolver = ResolverFunction | ResolverResultObject
 
 /**
  * module, name, alias
@@ -47,7 +54,7 @@ export interface Options {
    *
    * The component names are always in PascalCase
    */
-  resolvers?: Resolver | Resolver[]
+  resolvers?: Arrayable<Resolver>
 
   /**
    * Filepath to generate corresponding .d.ts file.

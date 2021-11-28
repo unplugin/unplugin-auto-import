@@ -87,7 +87,7 @@ export async function transform(
     let info = getOwn(resolvedImports, name) || getOwn(imports, name)
 
     if (!info && resolvers?.length) {
-      const resolved = await firstNonNullResult(resolvers, name)
+      const resolved = await firstMatchedResolver(resolvers, name)
       if (resolved) {
         if (typeof resolved === 'string') {
           info = {
@@ -160,11 +160,17 @@ export async function transform(
   }
 }
 
-function firstNonNullResult(array: Resolver[], name: string) {
-  for (let i = 0; i < array.length; i++) {
-    const res = array[i](name)
-    if (res)
-      return res
+async function firstMatchedResolver(resolvers: Resolver[], name: string) {
+  for (const resolver of resolvers) {
+    if (typeof resolver === 'object' && resolver.type === 'directive') {
+      if (name.startsWith('v'))
+        name = name.replace('v', '')
+      else
+        continue
+    }
+    const resolved = await (typeof resolver === 'function' ? resolver(name) : resolver.resolve(name))
+    if (resolved)
+      return resolved
   }
 }
 

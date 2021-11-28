@@ -1,26 +1,10 @@
 import { promises as fs } from 'fs'
 import { createUnplugin } from 'unplugin'
-import { Arrayable, throttle } from '@antfu/utils'
-import { ComponentResolver } from 'unplugin-vue-components/types'
-import { Resolver, Options } from './types'
+import { throttle } from '@antfu/utils'
+import { Options } from './types'
 import { resolveOptions } from './core/options'
 import { transform } from './core/transform'
 import { generateDeclaration as _generateDeclaration } from './core/dts'
-
-export const componentResolver = (resolvers: Arrayable<ComponentResolver>): Resolver => async(name) => {
-  for (const resolver of [resolvers].flat(1)) {
-    if (typeof resolver === 'object' && resolver.type === 'directive') {
-      if (name.startsWith('v'))
-        name = name.replace('v', '')
-      else
-        return
-    }
-    const resolved = await (typeof resolver === 'function' ? resolver(name) : resolver.resolve(name))
-    if (resolved)
-      return resolved
-  }
-  return null
-}
 
 export default createUnplugin<Options>((options) => {
   const resolved = resolveOptions(options)

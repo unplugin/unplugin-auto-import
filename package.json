@@ -69,14 +69,10 @@
     "test:update": "jest -u"
   },
   "peerDependencies": {
-    "@vueuse/core": "*",
-    "unplugin-vue-components": ">=0.17.0"
+    "@vueuse/core": "*"
   },
   "peerDependenciesMeta": {
     "@vueuse/core": {
-      "optional": true
-    },
-    "unplugin-vue-components": {
       "optional": true
     }
   },
