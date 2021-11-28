@@ -17,6 +17,9 @@ it('dts', () => {
           'customNamed',
           ['default', 'customDefault'],
         ],
+        custom2: [
+          ['*', 'custom2'],
+        ],
       },
     ],
   })

@@ -23,6 +23,7 @@ declare global {
   const cubicIn: typeof import('svelte/easing')['cubicIn']
   const cubicInOut: typeof import('svelte/easing')['cubicInOut']
   const cubicOut: typeof import('svelte/easing')['cubicOut']
+  const custom2: typeof import('custom2')
   const customDefault: typeof import('custom')['default']
   const customNamed: typeof import('custom')['customNamed']
   const customRef: typeof import('vue-demi')['customRef']

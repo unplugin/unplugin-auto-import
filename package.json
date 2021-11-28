@@ -14,14 +14,18 @@
   "bugs": {
     "url": "https://github.com/antfu/unplugin-auto-import/issues"
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/antfu/unplugin-auto-import.git"
   },
   "funding": "https://github.com/sponsors/antfu",
-  "license": "MIT",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "sideEffects": false,
+  "files": [
+    "dist",
+    "*.d.ts"
+  ],
   "exports": {
     ".": {
       "require": "./dist/index.js",
@@ -52,10 +56,6 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "*.d.ts"
-  ],
   "scripts": {
     "build": "tsup src/*.ts --format cjs,esm --dts --splitting --clean && esno scripts/postbuild.ts",
     "dev": "tsup 'src/*.ts' --watch src",
@@ -67,6 +67,14 @@
     "start": "esno src/index.ts",
     "test": "jest",
     "test:update": "jest -u"
+  },
+  "peerDependencies": {
+    "@vueuse/core": "*"
+  },
+  "peerDependenciesMeta": {
+    "@vueuse/core": {
+      "optional": true
+    }
   },
   "dependencies": {
     "@antfu/utils": "^0.3.0",
@@ -94,14 +102,6 @@
     "typescript": "^4.5.2",
     "vite": "^2.6.14",
     "webpack": "^5.64.4"
-  },
-  "peerDependencies": {
-    "@vueuse/core": "*"
-  },
-  "peerDependenciesMeta": {
-    "@vueuse/core": {
-      "optional": true
-    }
   },
   "engines": {
     "node": ">=14"

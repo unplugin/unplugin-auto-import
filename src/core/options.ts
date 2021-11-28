@@ -3,7 +3,7 @@ import { toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
 import { isPackageExists } from 'local-pkg'
 import { presets } from '../presets'
-import { ImportInfo, ImportsFlatMap, Options, ResolvedOptions } from '../types'
+import { ImportsFlatMap, Options, ResolvedOptions, ResolvedResult } from '../types'
 
 export function resolveOptions(options: Options = {}): ResolvedOptions {
   const imports = flattenImportsMap(options.imports, options.presetOverriding)
@@ -46,21 +46,23 @@ export function flattenImportsMap(map: Options['imports'], overriding = false): 
 
     for (const mod of Object.keys(definition)) {
       for (const id of definition[mod]) {
-        const meta: ImportInfo = {
-          module: mod,
+        const meta: ResolvedResult = {
+          path: mod,
         }
+        let name: string
         if (Array.isArray(id)) {
-          meta.name = id[1]
-          meta.from = id[0]
+          name = id[1]
+          meta.importName = id[0]
         }
         else {
-          meta.name = id
+          name = id
+          meta.importName = id
         }
 
-        if (flat[meta.name] && !overriding)
-          throw new Error(`[auto-import] identifier ${meta.name} already defined with ${flat[meta.name].module}`)
+        if (flat[name] && !overriding)
+          throw new Error(`[auto-import] identifier ${name} already defined with ${flat[name].path}`)
 
-        flat[meta.name] = meta
+        flat[name] = meta
       }
     }
   })

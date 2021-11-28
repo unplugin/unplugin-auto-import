@@ -25,8 +25,8 @@ export default createUnplugin<Options>((options) => {
     transformInclude(id) {
       return resolved.idFilter(id)
     },
-    transform(code, id) {
-      const res = transform(code, id, resolved)
+    async transform(code, id) {
+      const res = await transform(code, id, resolved)
       if (res && resolved.resolvers.length)
         generateDeclaration()
       return res
