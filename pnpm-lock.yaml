@@ -22,7 +22,7 @@ importers:
       typescript: ^4.5.2
       unplugin: ^0.2.21
       vite: ^2.7.1
-      vitest: ^0.0.44
+      vitest: ^0.0.45
       webpack: ^5.65.0
     dependencies:
       '@antfu/utils': 0.3.0
@@ -44,7 +44,7 @@ importers:
       tsup: 5.10.3_typescript@4.5.2
       typescript: 4.5.2
       vite: 2.7.1
-      vitest: 0.0.44_vite@2.7.1
+      vitest: 0.0.45_vite@2.7.1
       webpack: 5.65.0
 
   examples/nuxt:
@@ -12625,8 +12625,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest/0.0.44_vite@2.7.1:
-    resolution: {integrity: sha512-TDBe65QnACCVqGaLiZ0BKauZQakwjAZrBOqnR3R95l7kHsdru9igZi31bke4ckALLSENbpLEgdlsrkLb6ObkUw==}
+  /vitest/0.0.45_vite@2.7.1:
+    resolution: {integrity: sha512-QBPjN1P6oNqxYwD5CuogH5fNQUNYb07ho6MEBt9eDbk0YOP5+/OLAV+LhSEIANZaZEyvMgZ3Lq+Lm3tCWQhTZQ==}
     engines: {node: '>=16.0.0'}
     hasBin: true
     peerDependencies:
