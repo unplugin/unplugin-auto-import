@@ -1,9 +1,5 @@
 {
-  "env": {
-    "jest": true
-  },
   "extends": ["@antfu"],
-  "plugins": ["jest"],
   "rules": {
     "react/jsx-no-undef": "off"
   }

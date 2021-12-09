@@ -1,10 +1,10 @@
 import { resolve } from 'path'
 import { promises as fs } from 'fs'
 import fg from 'fast-glob'
-import { transform } from '../src/core/transform'
 import { resolveOptions } from '../src/core/options'
+import { transform } from '../src/core/transform'
 
-describe('transform', () => {
+describe('transform', async() => {
   const options = resolveOptions({
     imports: [
       'vue',
@@ -53,21 +53,19 @@ describe('transform', () => {
     ],
   })
 
-  describe('fixtures', () => {
-    const root = resolve(__dirname, 'fixtures')
-    const files = fg.sync('*', {
-      cwd: root,
-      onlyFiles: true,
-    })
-
-    for (const file of files) {
-      it(file, async() => {
-        const fixture = await fs.readFile(resolve(root, file), 'utf-8')
-        const pass1 = (await transform(fixture, file, options))?.code ?? fixture
-        expect(pass1).toMatchSnapshot()
-        const pass2 = (await transform(pass1, file, options))?.code ?? pass1
-        expect(pass2).toBe(pass1)
-      })
-    }
+  const root = resolve(__dirname, 'fixtures')
+  const files = await fg('*', {
+    cwd: root,
+    onlyFiles: true,
   })
+
+  for (const file of files) {
+    it(file, async() => {
+      const fixture = await fs.readFile(resolve(root, file), 'utf-8')
+      const pass1 = (await transform(fixture, file, options))?.code ?? fixture
+      expect(pass1).toMatchSnapshot()
+      const pass2 = (await transform(pass1, file, options))?.code ?? pass1
+      expect(pass2).toBe(pass1)
+    })
+  }
 })

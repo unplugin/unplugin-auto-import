@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`transform fixtures comments.ts 1`] = `
+exports[`transform > comments.ts 1`] = `
 "import { ref, computed } from 'vue';/* import { ref } from 'vue' */
 // import { computed } from 'vue'
 
@@ -18,17 +18,17 @@ const b = { class: \\"text-sm opacity-75\\" };
 "
 `;
 
-exports[`transform fixtures custom.js 1`] = `
+exports[`transform > custom.js 1`] = `
 "import customDefault, { customNamed } from 'custom';const a = customDefault(customNamed())
 "
 `;
 
-exports[`transform fixtures dollar.js 1`] = `
+exports[`transform > dollar.js 1`] = `
 "import { $ } from 'vue-dollar';$('hi')
 "
 `;
 
-exports[`transform fixtures existing.jsx 1`] = `
+exports[`transform > existing.jsx 1`] = `
 "import { watch } from 'vue';import ref from 'ref'
 import { computed } from 'computed'
 
@@ -40,7 +40,7 @@ ignored(b)
 "
 `;
 
-exports[`transform fixtures existing2.jsx 1`] = `
+exports[`transform > existing2.jsx 1`] = `
 "const { ref, computed } = Vue
 
 const a = ref(0)
@@ -48,7 +48,7 @@ const b = computed(0)
 "
 `;
 
-exports[`transform fixtures existing3.jsx 1`] = `
+exports[`transform > existing3.jsx 1`] = `
 "const [ ref, computed ] = Vue
 
 const a = ref(0)
@@ -56,7 +56,7 @@ const b = computed(0)
 "
 `;
 
-exports[`transform fixtures existing4.jsx 1`] = `
+exports[`transform > existing4.jsx 1`] = `
 "const [ 
   ref,
   computed
@@ -67,7 +67,7 @@ const b = computed(0)
 "
 `;
 
-exports[`transform fixtures existing5.jsx 1`] = `
+exports[`transform > existing5.jsx 1`] = `
 "import { watch } from 'vue';import {
   ref,
   computed,
@@ -81,23 +81,23 @@ const d = watch3(0)
 "
 `;
 
-exports[`transform fixtures glob.ts 1`] = `
+exports[`transform > glob.ts 1`] = `
 "import { ref } from 'vue';const modules = import.meta.glob(\\"/src/nested/*.vue\\");
 const msg = ref(\\"Global Imports\\");
 "
 `;
 
-exports[`transform fixtures import-all.ts 1`] = `
+exports[`transform > import-all.ts 1`] = `
 "import * as THREE from 'three.js';const scene = new THREE.Scene();
 "
 `;
 
-exports[`transform fixtures non-target.js 1`] = `
+exports[`transform > non-target.js 1`] = `
 "useNonTarget()
 "
 `;
 
-exports[`transform fixtures props.ts 1`] = `
+exports[`transform > props.ts 1`] = `
 "import { toRefs } from 'vue';const a = z.ref(0)
 console.log({
   ...toRefs(a)
@@ -105,14 +105,14 @@ console.log({
 "
 `;
 
-exports[`transform fixtures prototype.ts 1`] = `
+exports[`transform > prototype.ts 1`] = `
 "const a = Object.keys(b)
 const c = a.toString()
 
 "
 `;
 
-exports[`transform fixtures react.jsx 1`] = `
+exports[`transform > react.jsx 1`] = `
 "import { useState } from 'react';export function Component() {
   const [count, setCount] = useState()
 
@@ -121,7 +121,7 @@ exports[`transform fixtures react.jsx 1`] = `
 "
 `;
 
-exports[`transform fixtures react-existing.jsx 1`] = `
+exports[`transform > react-existing.jsx 1`] = `
 "import React, { useState } from 'react';
 
 export function Component() {
@@ -132,21 +132,21 @@ export function Component() {
 "
 `;
 
-exports[`transform fixtures recursive.ts 1`] = `
+exports[`transform > recursive.ts 1`] = `
 "export const ref = (obj: any) => {
   return ref(1)
 }
 "
 `;
 
-exports[`transform fixtures resolver.ts 1`] = `
+exports[`transform > resolver.ts 1`] = `
 "import customResolved1 from 'custom/resolved/1';import customResolved2, { _customNamedResolved2 as customNamedResolved2 } from 'custom/resolved/2';const a = customResolved1(1)
 const b = customResolved2(1)
 const c = customNamedResolved2(1)
 "
 `;
 
-exports[`transform fixtures strings.ts 1`] = `
+exports[`transform > strings.ts 1`] = `
 "console.log(\\"ref(0)\\")
 console.log(\`ref(\${a})\`)
 console.log('ref(\\\\'z\\\\')')
@@ -156,7 +156,7 @@ ref('z')
 "
 `;
 
-exports[`transform fixtures svelte.svelte 1`] = `
+exports[`transform > svelte.svelte 1`] = `
 "import { writable } from 'svelte/store';import { tweened } from 'svelte/motion';import { cubicOut, quintOut } from 'svelte/easing';import { onMount } from 'svelte';import { flip } from 'svelte/animate';import { fade } from 'svelte/transition';const list = writable([1, 2, 3])
 const size = tweened(1, {
   duration: 300,
@@ -178,12 +178,12 @@ onMount(() => {})
 "
 `;
 
-exports[`transform fixtures template-literal.ts 1`] = `
+exports[`transform > template-literal.ts 1`] = `
 "import { ref } from 'vue';const z = \`bar-\${ref()}\`
 "
 `;
 
-exports[`transform fixtures template-ref.vue 1`] = `
+exports[`transform > template-ref.vue 1`] = `
 "import { ref } from 'vue';<template>
   <div ref=\\"divRef\\">test</div>
 </template>
@@ -194,7 +194,7 @@ const divRef = ref(null)
 "
 `;
 
-exports[`transform fixtures vue.js 1`] = `
+exports[`transform > vue.js 1`] = `
 "import { useQuasar, useMeta } from 'quasar';import { ref } from 'vue';import { defineStore, mapState } from 'pinia';const q = useQuasar()
 const meta = useMeta()
 const a = ref(0)
