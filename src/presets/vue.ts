@@ -62,5 +62,6 @@ export default <ImportsMap>({
     // vue3 only
     'onRenderTracked',
     'onRenderTriggered',
+    'resolveComponent',
   ],
 })
