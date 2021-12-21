@@ -11,11 +11,9 @@ export default <ImportsMap>({
     'chai',
     'expect',
     'assert',
-    // sinon
-    'sinon',
-    'spy',
-    'mock',
-    'stub',
+    // utils
+    'vitest',
+    'vi',
     // hooks
     'beforeAll',
     'afterAll',
