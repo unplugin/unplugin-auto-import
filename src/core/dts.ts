@@ -1,4 +1,4 @@
-import { ImportsFlatMap } from '../types'
+import type { ImportsFlatMap } from '../types'
 
 export function generateDeclaration(imports: ImportsFlatMap, resolvedImports: ImportsFlatMap = {}) {
   const body = [

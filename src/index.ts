@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs'
 import { createUnplugin } from 'unplugin'
 import { throttle } from '@antfu/utils'
-import { Options } from './types'
+import type { Options } from './types'
 import { resolveOptions } from './core/options'
 import { transform } from './core/transform'
 import { generateDeclaration as _generateDeclaration } from './core/dts'

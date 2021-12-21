@@ -1,5 +1,5 @@
-import { Arrayable, Awaitable } from '@antfu/utils'
-import { FilterPattern } from '@rollup/pluginutils'
+import type { Arrayable, Awaitable } from '@antfu/utils'
+import type { FilterPattern } from '@rollup/pluginutils'
 import { PresetName } from './presets'
 
 export type ImportNameAlias = [string, string]

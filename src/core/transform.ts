@@ -1,5 +1,5 @@
 import MagicString from 'magic-string'
-import { ImportInfo, TransformOptions, Resolver } from '../types'
+import type { ImportInfo, Resolver, TransformOptions } from '../types'
 
 const excludeRE = [
   // imported from other module

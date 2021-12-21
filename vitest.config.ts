@@ -10,4 +10,7 @@ export default defineConfig({
       dts: true,
     }),
   ],
+  test: {
+    include: ['test/**/*.test.ts'],
+  },
 })

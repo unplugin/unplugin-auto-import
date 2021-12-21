@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs'
 import { resolveModule } from 'local-pkg'
-import { ImportsMap } from '../types'
+import type { ImportsMap } from '../types'
 
 let _cache: ImportsMap | undefined
 

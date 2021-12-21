@@ -3,7 +3,7 @@ import { toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
 import { isPackageExists } from 'local-pkg'
 import { presets } from '../presets'
-import { ImportsFlatMap, Options, ResolvedOptions, ResolvedResult } from '../types'
+import type { ImportsFlatMap, Options, ResolvedOptions, ResolvedResult } from '../types'
 
 export function resolveOptions(options: Options = {}): ResolvedOptions {
   const imports = flattenImportsMap(options.imports, options.presetOverriding)

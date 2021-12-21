@@ -1,4 +1,4 @@
-import { ImportsMap } from '../types'
+import type { ImportsMap } from '../types'
 
 export default <ImportsMap>({
   'vee-validate': [

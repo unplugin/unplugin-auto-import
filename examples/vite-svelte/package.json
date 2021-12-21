@@ -8,15 +8,15 @@
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.31",
-    "@tsconfig/svelte": "^2.0.1",
-    "svelte": "^3.44.2",
-    "svelte-check": "^2.2.10",
-    "svelte-preprocess": "^4.9.8",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.32",
+    "@tsconfig/svelte": "^3.0.0",
+    "svelte": "^3.44.3",
+    "svelte-check": "^2.2.11",
+    "svelte-preprocess": "^4.10.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.5.2",
+    "typescript": "^4.5.4",
     "unplugin-auto-import": "workspace:*",
-    "vite": "^2.7.1",
+    "vite": "^2.7.4",
     "vite-plugin-inspect": "^0.3.11"
   }
 }
