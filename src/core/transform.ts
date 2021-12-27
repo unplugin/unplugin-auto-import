@@ -15,7 +15,7 @@ const importAsRE = /^.*\sas\s+/
 const seperatorRE = /[,[\]{}\n]/g
 const multilineCommentsRE = /\/\*\s(.|[\r\n])*?\*\//gm
 const singlelineCommentsRE = /\/\/\s.*/g
-const templateLiteralRE = /\$\{(.*)\}/g
+const templateLiteralRE = /\$\{(.*?)\}/g
 const quotesRE = [
   /(["'])((?:\\\1|(?!\1)|.|\r)*?)\1/gm,
   /([`])((?:\\\1|(?!\1)|.|\n|\r)*?)\1/gm,
