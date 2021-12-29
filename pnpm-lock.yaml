@@ -20,7 +20,7 @@ importers:
       rollup: ^2.61.1
       tsup: ^5.11.7
       typescript: ^4.5.4
-      unplugin: ^0.2.21
+      unplugin: ^0.3.0
       vite: ^2.7.4
       vitest: ^0.0.105
       webpack: ^5.65.0
@@ -30,7 +30,7 @@ importers:
       local-pkg: 0.4.0
       magic-string: 0.25.7
       resolve: 1.20.0
-      unplugin: 0.2.21_1a23a557f2dbcd4e59a4bb6731a6f6f9
+      unplugin: 0.3.0_1a23a557f2dbcd4e59a4bb6731a6f6f9
     devDependencies:
       '@antfu/eslint-config': 0.14.0_eslint@8.5.0+typescript@4.5.4
       '@antfu/ni': 0.12.0
@@ -11345,6 +11345,30 @@ packages:
       vite: 2.7.4
       webpack: 5.65.0
       webpack-virtual-modules: 0.4.3
+    dev: true
+
+  /unplugin/0.3.0_1a23a557f2dbcd4e59a4bb6731a6f6f9:
+    resolution: {integrity: sha512-9yLlOo+XC4NdIRgpkDSHOAHkQDq2x4mbuVNO/eKVa3C8WTn5wWGfzEFfRJFL8euqnX3Gf7hEur0AhXxy+WSwkg==}
+    peerDependencies:
+      esbuild: '>=0.13'
+      rollup: ^2.50.0
+      vite: ^2.3.0
+      webpack: 4 || 5
+    peerDependenciesMeta:
+      esbuild:
+        optional: true
+      rollup:
+        optional: true
+      vite:
+        optional: true
+      webpack:
+        optional: true
+    dependencies:
+      rollup: 2.61.1
+      vite: 2.7.4
+      webpack: 5.65.0
+      webpack-virtual-modules: 0.4.3
+    dev: false
 
   /unquote/1.1.1:
     resolution: {integrity: sha1-j97XMk7G6IoP+LkF58CYzcCG1UQ=}

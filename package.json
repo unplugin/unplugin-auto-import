@@ -51,6 +51,10 @@
     "./webpack": {
       "require": "./dist/webpack.js",
       "import": "./dist/webpack.mjs"
+    },
+    "./esbuild": {
+      "require": "./dist/esbuild.js",
+      "import": "./dist/esbuild.mjs"
     }
   },
   "main": "dist/index.js",
@@ -81,7 +85,7 @@
     "local-pkg": "^0.4.0",
     "magic-string": "^0.25.7",
     "resolve": "^1.20.0",
-    "unplugin": "^0.2.21"
+    "unplugin": "^0.3.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.14.0",
