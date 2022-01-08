@@ -171,6 +171,35 @@ build({
 
 <br></details>
 
+
+<details>
+<summary>eslint</summary><br>
+
+- imports  - AutoImport `imports` Configuration.
+
+- propValue - eslint globals `propValue`, default `true`. 
+
+  - [options] : `true | false | 'readonly' | 'readable' | 'writable' | 'writeable'`
+
+> Note: eslint globals Docs - https://eslint.org/docs/user-guide/configuring/language-options#specifying-globals
+
+**Usage**
+
+```ts
+// .eslintrc.js
+const AutoImportESLintGlobals = require('unplugin-auto-import/eslint');
+
+module.exports = { 
+  /* ... */
+  globals: {
+    ...AutoImportESLintGlobals(/* imports */, /* propValue */),
+  },
+}
+
+```
+
+<br></details>
+
 ## Configuration
 
 ```ts

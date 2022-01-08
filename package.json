@@ -55,6 +55,10 @@
     "./esbuild": {
       "require": "./dist/esbuild.js",
       "import": "./dist/esbuild.mjs"
+    },
+    "./eslint": {
+      "require": "./dist/eslint.js",
+      "import": "./dist/eslint.mjs"
     }
   },
   "main": "dist/index.js",
