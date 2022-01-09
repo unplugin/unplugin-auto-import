@@ -5,7 +5,7 @@ import { isPackageExists } from 'local-pkg'
 import { presets } from '../presets'
 import type { ImportsFlatMap, Options, ResolvedOptions, ResolvedResult } from '../types'
 
-export function resolveOptions(options: Options = {}): ResolvedOptions {
+export function resolveOptions(options: Options = {}, root = process.cwd()): ResolvedOptions {
   const imports = flattenImportsMap(options.imports, options.presetOverriding)
 
   const {
@@ -21,8 +21,8 @@ export function resolveOptions(options: Options = {}): ResolvedOptions {
     dts: dts === false
       ? false
       : dts === true
-        ? resolve('auto-imports.d.ts')
-        : resolve(dts),
+        ? resolve(root, 'auto-imports.d.ts')
+        : resolve(root, dts),
     imports,
     resolvers: options.resolvers ? [options.resolvers].flat(2) : [],
     idFilter: createFilter(
