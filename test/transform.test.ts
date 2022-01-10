@@ -17,6 +17,7 @@ describe('transform', async() => {
       'svelte/motion',
       'svelte/store',
       'svelte/transition',
+      'vitest',
       {
         'custom': [
           'customNamed',
