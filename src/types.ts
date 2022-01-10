@@ -3,13 +3,13 @@ import type { FilterPattern } from '@rollup/pluginutils'
 import { PresetName } from './presets'
 
 export type ImportNameAlias = [string, string]
-export type ImportInfo = {
+export interface ImportInfo {
   path: string
   name?: string
   importName?: string
 }
 export type SideEffectsInfo = Arrayable<ImportInfo | string> | undefined
-export type ResolvedResult = {
+export interface ResolvedResult {
   path: string
   importName?: string
   sideEffects?: SideEffectsInfo
@@ -17,7 +17,7 @@ export type ResolvedResult = {
 
 export type ResolverFunction = (name: string) => Awaitable<string | ResolvedResult | null | undefined | void>
 
-export type ResolverResultObject = {
+export interface ResolverResultObject {
   type: 'component' | 'directive'
   resolve: ResolverFunction
 }
