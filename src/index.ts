@@ -30,8 +30,8 @@ export default createUnplugin<Options>((options) => {
       return res
     },
     vite: {
-      configResolved({ root: viteRoot }) {
-        resolved = resolveOptions(options, viteRoot)
+      configResolved(config: any) {
+        resolved = resolveOptions(options, config.root)
         generateDeclaration()
       },
     },
