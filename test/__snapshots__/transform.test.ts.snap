@@ -19,7 +19,8 @@ const b = { class: \\"text-sm opacity-75\\" };
 `;
 
 exports[`transform > custom.js 1`] = `
-"import customDefault, { customNamed } from 'custom';const a = customDefault(customNamed())
+"import { default as customDefault, customNamed, default as customDefaultAlias } from 'custom';const a = customDefault(customNamed())
+const a = customDefaultAlias()
 "
 `;
 
@@ -145,7 +146,7 @@ exports[`transform > recursive.ts 1`] = `
 `;
 
 exports[`transform > resolver.ts 1`] = `
-"import customResolved1 from 'custom/resolved/1';import customResolved2, { _customNamedResolved2 as customNamedResolved2 } from 'custom/resolved/2';const a = customResolved1(1)
+"import { default as customResolved1 } from 'custom/resolved/1';import { default as customResolved2, _customNamedResolved2 as customNamedResolved2 } from 'custom/resolved/2';const a = customResolved1(1)
 const b = customResolved2(1)
 const c = customNamedResolved2(1)
 "

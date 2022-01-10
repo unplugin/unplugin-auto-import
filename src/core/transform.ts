@@ -135,8 +135,6 @@ export async function transform(
           if (name) {
             if (importName === '*')
               imports.push(`* as ${name}`)
-            else if (importName === 'default')
-              imports.push(name)
             else
               namedImports.push((importName && name !== importName) ? `${importName} as ${name}` : name)
           }

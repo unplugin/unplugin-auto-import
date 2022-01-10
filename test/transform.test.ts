@@ -22,6 +22,7 @@ describe('transform', async() => {
         'custom': [
           'customNamed',
           ['default', 'customDefault'],
+          ['default', 'customDefaultAlias'],
         ],
         'ignored': [
           'ignored',
