@@ -7,7 +7,7 @@ import { transform } from './core/transform'
 import { generateDeclaration as _generateDeclaration } from './core/dts'
 
 export default createUnplugin<Options>((options) => {
-  const resolved = resolveOptions(options)
+  let resolved = resolveOptions(options)
 
   if (!Object.keys(resolved.imports).length && !resolved.resolvers.length)
     console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
@@ -16,8 +16,6 @@ export default createUnplugin<Options>((options) => {
     if (!resolved.dts) return
     fs.writeFile(resolved.dts, _generateDeclaration(resolved.imports, resolved.resolvedImports), 'utf-8')
   })
-
-  generateDeclaration()
 
   return {
     name: 'unplugin-auto-import',
@@ -30,6 +28,12 @@ export default createUnplugin<Options>((options) => {
       if (res && resolved.resolvers.length)
         generateDeclaration()
       return res
+    },
+    vite: {
+      configResolved({ root: viteRoot }) {
+        resolved = resolveOptions(options, viteRoot)
+        generateDeclaration()
+      },
     },
   }
 })
