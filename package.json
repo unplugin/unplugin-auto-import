@@ -80,27 +80,27 @@
     }
   },
   "dependencies": {
-    "@antfu/utils": "^0.3.0",
+    "@antfu/utils": "^0.4.0",
     "@rollup/pluginutils": "^4.1.2",
-    "local-pkg": "^0.4.0",
+    "local-pkg": "^0.4.1",
     "magic-string": "^0.25.7",
-    "resolve": "^1.20.0",
+    "resolve": "^1.21.0",
     "unplugin": "^0.3.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.14.0",
+    "@antfu/eslint-config": "^0.15.0",
     "@antfu/ni": "^0.12.0",
-    "@types/node": "^17.0.2",
+    "@types/node": "^17.0.8",
     "@types/resolve": "^1.20.1",
     "bumpp": "^7.1.1",
-    "eslint": "^8.5.0",
+    "eslint": "^8.6.0",
     "esno": "^0.13.0",
-    "fast-glob": "^3.2.7",
-    "rollup": "^2.61.1",
-    "tsup": "^5.11.7",
+    "fast-glob": "^3.2.10",
+    "rollup": "^2.63.0",
+    "tsup": "^5.11.11",
     "typescript": "^4.5.4",
-    "vite": "^2.7.4",
-    "vitest": "^0.0.105",
+    "vite": "^2.7.10",
+    "vitest": "^0.0.140",
     "webpack": "^5.65.0"
   },
   "engines": {
