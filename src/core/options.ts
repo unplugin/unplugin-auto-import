@@ -13,7 +13,7 @@ export function resolveOptions(options: Options = {}, root = process.cwd()): Res
   } = options
 
   const eslintrc: ESLintrc = options.eslintrc || {}
-  eslintrc.enabled = eslintrc.enabled === undefined ? isPackageExists('eslint') : eslintrc.enabled
+  eslintrc.enabled = eslintrc.enabled === undefined ? false : eslintrc.enabled
   eslintrc.filepath = eslintrc.filepath || './.eslintrc-auto-import.json'
   eslintrc.globalsPropValue = eslintrc.globalsPropValue === undefined ? true : eslintrc.globalsPropValue
 
