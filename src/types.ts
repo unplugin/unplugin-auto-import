@@ -36,6 +36,14 @@ export type ImportsMap = Record<string, (string | ImportNameAlias)[]>
  */
 export type ImportsFlatMap = Record<string, ResolvedResult>
 
+export type ESLintGlobalsPropValue = boolean | 'readonly' | 'readable' | 'writable' | 'writeable'
+
+export interface ESLintrc {
+  enabled?: boolean // Default enabled when `eslint` is installed locally.
+  filepath?: string // Default `./.eslintrc-auto-import.json`
+  globalsPropValue?: ESLintGlobalsPropValue // Default `true`
+}
+
 export interface Options {
   /**
    * Preset names or custom imports map
@@ -92,6 +100,11 @@ export interface Options {
    * @default false
    */
   sourceMap?: boolean
+
+  /**
+   * Generate corresponding .eslintrc-auto-import.json file.
+   */
+  eslintrc?: ESLintrc
 }
 
 export interface TransformOptions {
@@ -120,9 +133,10 @@ export interface TransformOptions {
   resolvedImports?: ImportsFlatMap
 }
 
-export interface ResolvedOptions extends Omit<Required<Options>, 'imports' | 'resolvers' | 'dts' | 'include' | 'exclude'>, Required<TransformOptions> {
+export interface ResolvedOptions extends Omit<Required<Options>, 'imports' | 'resolvers' | 'dts' | 'include' | 'exclude' | 'eslintrc'>, Required<TransformOptions> {
   idFilter: (id: string) => boolean
   dts: string | false
+  eslintrc: ESLintrc
 }
 
 export { PresetName }
