@@ -210,10 +210,10 @@ AutoImport({
   // Generate corresponding .eslintrc-auto-import.json file.
   // eslint globals Docs - https://eslint.org/docs/user-guide/configuring/language-options#specifying-globals
   eslintrc: {
-    enabled: false // Default enabled when `eslint` is installed locally.
-    filepath: './.eslintrc-auto-import.json' // Default `./.eslintrc-auto-import.json`
+    enabled: false, // Default enabled when `eslint` is installed locally.
+    filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
     globalsPropValue: true // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
-  }
+  },
 
   // custom resolvers
   // see https://github.com/antfu/unplugin-auto-import/pull/23/
