@@ -1,3 +1,5 @@
+import type { Options } from './types'
 import unplugin from '.'
 
-export default unplugin.rollup
+// TODO: some upstream lib failed generate invalid dts, remove the any in the future
+export default unplugin.rollup as (options?: Options) => any
