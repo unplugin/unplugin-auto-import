@@ -207,6 +207,14 @@ AutoImport({
     }
   ],
 
+  // Generate corresponding .eslintrc-auto-import.json file.
+  // eslint globals Docs - https://eslint.org/docs/user-guide/configuring/language-options#specifying-globals
+  eslintrc: {
+    enabled: false, // Default `false`
+    filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
+    globalsPropValue: true // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+  },
+
   // custom resolvers
   // see https://github.com/antfu/unplugin-auto-import/pull/23/
   resolvers: [
@@ -220,6 +228,29 @@ Refer to the [type definitions](./src/types.ts) for more options.
 ## Presets
 
 See [src/presets](./src/presets).
+
+## ESLint - eslint(no-undef)
+
+Configure `options.eslintrc`, and modify your eslint configuration file.
+
+Example:
+
+```ts
+// .eslintrc.js
+
+module.exports = { 
+  /* ... */
+  extends: [
+    // ...
+    './.eslintrc-auto-import.json',
+  ],
+}
+
+```
+
+ESLint Docs: [Extending Configuration Files](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files)
+
+> Note: `.eslintrc-auto-import.json` is generated automatically, If the configuration file changes do not take effect in time, please check the configuration file, restart eslint server or the editor
 
 ## FAQ
 

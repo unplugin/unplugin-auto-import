@@ -4,7 +4,8 @@ import { throttle } from '@antfu/utils'
 import type { Options } from './types'
 import { resolveOptions } from './core/options'
 import { transform } from './core/transform'
-import { generateDeclaration as _generateDeclaration } from './core/dts'
+import { generateDeclaration } from './core/dts'
+import { generateESLintConfigs } from './core/eslintrc'
 
 export default createUnplugin<Options>((options) => {
   let resolved = resolveOptions(options)
@@ -12,9 +13,13 @@ export default createUnplugin<Options>((options) => {
   if (!Object.keys(resolved.imports).length && !resolved.resolvers.length)
     console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
 
-  const generateDeclaration = throttle(500, false, () => {
-    if (!resolved.dts) return
-    fs.writeFile(resolved.dts, _generateDeclaration(resolved.imports, resolved.resolvedImports), 'utf-8')
+  const generateConfigFiles = throttle(500, false, () => {
+    if (resolved.dts)
+      fs.writeFile(resolved.dts, generateDeclaration(resolved.imports, resolved.resolvedImports), 'utf-8')
+
+    const { eslintrc } = resolved
+    if (eslintrc.enabled && eslintrc.filepath)
+      fs.writeFile(eslintrc.filepath, generateESLintConfigs(resolved.imports, resolved.resolvedImports, eslintrc), 'utf-8')
   })
 
   return {
@@ -26,13 +31,14 @@ export default createUnplugin<Options>((options) => {
     async transform(code, id) {
       const res = await transform(code, id, resolved)
       if (res && resolved.resolvers.length)
-        generateDeclaration()
+        generateConfigFiles()
+
       return res
     },
     vite: {
       configResolved(config: any) {
         resolved = resolveOptions(options, config.root)
-        generateDeclaration()
+        generateConfigFiles()
       },
     },
   }

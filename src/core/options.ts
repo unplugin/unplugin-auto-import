@@ -3,7 +3,7 @@ import { toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
 import { isPackageExists } from 'local-pkg'
 import { presets } from '../presets'
-import type { ImportsFlatMap, Options, ResolvedOptions, ResolvedResult } from '../types'
+import type { ESLintrc, ImportsFlatMap, Options, ResolvedOptions, ResolvedResult } from '../types'
 
 export function resolveOptions(options: Options = {}, root = process.cwd()): ResolvedOptions {
   const imports = flattenImportsMap(options.imports, options.presetOverriding)
@@ -11,6 +11,11 @@ export function resolveOptions(options: Options = {}, root = process.cwd()): Res
   const {
     dts = isPackageExists('typescript'),
   } = options
+
+  const eslintrc: ESLintrc = options.eslintrc || {}
+  eslintrc.enabled = eslintrc.enabled === undefined ? false : eslintrc.enabled
+  eslintrc.filepath = eslintrc.filepath || './.eslintrc-auto-import.json'
+  eslintrc.globalsPropValue = eslintrc.globalsPropValue === undefined ? true : eslintrc.globalsPropValue
 
   const resolved: ResolvedOptions = {
     sourceMap: false,
@@ -29,6 +34,7 @@ export function resolveOptions(options: Options = {}, root = process.cwd()): Res
       options.include || [/\.[jt]sx?$/, /\.vue$/, /\.vue\?vue/, /\.svelte$/],
       options.exclude || [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/],
     ),
+    eslintrc,
   }
 
   return resolved
