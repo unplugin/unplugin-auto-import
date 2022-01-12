@@ -39,9 +39,20 @@ export type ImportsFlatMap = Record<string, ResolvedResult>
 export type ESLintGlobalsPropValue = boolean | 'readonly' | 'readable' | 'writable' | 'writeable'
 
 export interface ESLintrc {
-  enabled?: boolean // Default enabled when `eslint` is installed locally.
-  filepath?: string // Default `./.eslintrc-auto-import.json`
-  globalsPropValue?: ESLintGlobalsPropValue // Default `true`
+  /**
+   * @default false
+   */
+  enabled?: boolean
+  /**
+   * Filepath to save the generated eslint config
+   *
+   * @default './.eslintrc-auto-import.json'
+   */
+  filepath?: string
+  /**
+   * @default true
+   */
+  globalsPropValue?: ESLintGlobalsPropValue
 }
 
 export interface Options {
