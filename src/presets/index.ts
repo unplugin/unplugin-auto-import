@@ -4,6 +4,8 @@ import pinia from './pinia'
 import preact from './preact'
 import quasar from './quasar'
 import react from './react'
+import reactRouter from './react-router'
+import reactRouterDom from './react-router-dom'
 import {
   svelte,
   svelteAnimate,
@@ -33,6 +35,8 @@ export const presets = {
   'preact': preact,
   'quasar': quasar,
   'react': react,
+  'react-router': reactRouter,
+  'react-router-dom': reactRouterDom,
   'svelte': svelte,
   'svelte/animate': svelteAnimate,
   'svelte/easing': svelteEasing,
