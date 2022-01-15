@@ -1,5 +1,8 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
+import MainLayout from './layouts/MainLayout'
+import PageA from './views/PageA'
+import PageB from './views/PageB'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,6 +17,12 @@ function App() {
           </button>
         </p>
       </header>
+      <Routes>
+        <Route path="/" element={<MainLayout />} >
+          <Route path="/list" element={<PageA />} />
+          <Route path="/detail/:id" element={<PageB />} />
+        </Route>
+      </Routes>
     </div>
   )
 }
