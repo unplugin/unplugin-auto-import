@@ -30,7 +30,7 @@ export default createUnplugin<Options>((options) => {
     },
     async transform(code, id) {
       const res = await transform(code, id, resolved)
-      if (res && resolved.resolvers.length)
+      if (res)
         generateConfigFiles()
 
       return res
