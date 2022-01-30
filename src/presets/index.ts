@@ -25,6 +25,7 @@ import vueuseCore from './vueuse-core'
 import vueuseHead from './vueuse-head'
 import vuex from './vuex'
 import vitest from './vitest'
+import uniApp from './uni-app'
 
 export const presets = {
   '@nuxtjs/composition-api': nuxtCompositionApi,
@@ -51,6 +52,7 @@ export const presets = {
   'vue': vue,
   'vuex': vuex,
   'vitest': vitest,
+  'uni-app': uniApp,
 }
 
 export type PresetName = keyof typeof presets
