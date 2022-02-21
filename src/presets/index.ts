@@ -26,6 +26,8 @@ import vueuseHead from './vueuse-head'
 import vuex from './vuex'
 import vitest from './vitest'
 import uniApp from './uni-app'
+import solid from './solid'
+import solidAppRouter from './solid-app-router'
 
 export const presets = {
   '@nuxtjs/composition-api': nuxtCompositionApi,
@@ -53,6 +55,8 @@ export const presets = {
   'vuex': vuex,
   'vitest': vitest,
   'uni-app': uniApp,
+  'solid-js': solid,
+  'solid-app-router': solidAppRouter,
 }
 
 export type PresetName = keyof typeof presets
