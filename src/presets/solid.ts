@@ -54,13 +54,13 @@ export const solidWeb = <ImportsMap>({
     'renderToString',
     'renderToStringAsync',
     'renderToStream',
-    'isServer', 
+    'isServer',
     'Portal',
-  ]
+  ],
 })
 
 export default <ImportsMap>({
   ...solid,
   ...solidStore,
-  ...solidWeb
+  ...solidWeb,
 })
