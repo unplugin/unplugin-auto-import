@@ -10,6 +10,7 @@ importers:
       '@rollup/pluginutils': ^4.1.2
       '@types/node': ^17.0.18
       '@types/resolve': ^1.20.1
+      '@vueuse/metadata': ^8.0.0
       bumpp: ^7.1.1
       eslint: ^8.9.0
       esno: ^0.14.1
@@ -36,6 +37,7 @@ importers:
       '@antfu/ni': 0.13.0
       '@types/node': 17.0.18
       '@types/resolve': 1.20.1
+      '@vueuse/metadata': 8.0.0
       bumpp: 7.1.1
       eslint: 8.9.0
       esno: 0.14.1
@@ -3539,6 +3541,10 @@ packages:
       '@vueuse/shared': 7.6.2_vue@3.2.31
       vue: 3.2.31
       vue-demi: 0.12.1_vue@3.2.31
+
+  /@vueuse/metadata/8.0.0:
+    resolution: {integrity: sha512-23R9pqgfJnfmUnGCOtaDkwaNYEAO7N6whvaAFAs5D5xHXgqAj+z/tLhwQzSJw/ZzJGUb8W5L+VgP9S7SL35riw==}
+    dev: true
 
   /@vueuse/shared/7.6.2_vue@3.2.31:
     resolution: {integrity: sha512-ThDld4Mx501tahRuHV6qJGkwCr17GknZrOzlD02Na9qJcH7Pq0quNTLx5cNDou7b1CKNvE3BXi2w/hz9KuPNTQ==}

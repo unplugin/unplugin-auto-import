@@ -1,5 +1,6 @@
 import { readFileSync } from 'fs'
 import { resolveModule } from 'local-pkg'
+import type { PackageIndexes } from '@vueuse/metadata'
 import type { ImportsMap } from '../types'
 
 let _cache: ImportsMap | undefined
@@ -8,7 +9,7 @@ export default (): ImportsMap => {
   const excluded = ['toRefs', 'utils']
 
   if (!_cache) {
-    let indexesJson: any | undefined
+    let indexesJson: PackageIndexes | undefined
     try {
       const corePath = resolveModule('@vueuse/core') || process.cwd()
       const path = resolveModule('@vueuse/core/indexes.json')
@@ -24,9 +25,9 @@ export default (): ImportsMap => {
       _cache = {
         '@vueuse/core': indexesJson
           .functions
-          .filter((i: any) => ['core', 'shared'].includes(i.package))
-          .map((i: any) => i.name as string)
-        // only include functions with 4 characters or more
+          .filter(i => ['core', 'shared'].includes(i.package))
+          .flatMap(i => [i.name, ...i.alias || []])
+          // only include functions with 4 characters or more
           .filter((i: string) => i && i.length >= 4 && !excluded.includes(i)),
       }
     }
