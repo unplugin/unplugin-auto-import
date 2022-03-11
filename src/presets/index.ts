@@ -22,6 +22,7 @@ import vueI18n from './vue-i18n'
 import vueRouter from './vue-router'
 import vueCompositionApi from './vue-composition-api'
 import vueuseCore from './vueuse-core'
+import vueMacros from './vue-marcos'
 import vueuseHead from './vueuse-head'
 import vuex from './vuex'
 import vitest from './vitest'
@@ -52,6 +53,7 @@ export const presets = {
   'vue-i18n': vueI18n,
   'vue-router': vueRouter,
   'vue': vue,
+  'vue/macros': vueMacros,
   'vuex': vuex,
   'vitest': vitest,
   'uni-app': uniApp,
