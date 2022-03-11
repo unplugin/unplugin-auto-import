@@ -15,17 +15,15 @@
     "url": "https://github.com/antfu/unplugin-auto-import/issues"
   },
   "license": "MIT",
+  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/antfu/unplugin-auto-import.git"
   },
   "funding": "https://github.com/sponsors/antfu",
-  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
-  "sideEffects": false,
-  "files": [
-    "dist",
-    "*.d.ts"
-  ],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/index.js",
@@ -57,6 +55,11 @@
       "import": "./dist/esbuild.mjs"
     }
   },
+  "files": [
+    "dist",
+    "*.d.ts"
+  ],
+  "sideEffects": false,
   "typesVersions": {
     "*": {
       "*": [
@@ -64,14 +67,11 @@
       ]
     }
   },
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsup src/*.ts --format cjs,esm --dts --splitting --clean && esno scripts/postbuild.ts",
     "dev": "tsup src/*.ts --watch src",
-    "lint": "eslint \"{src,test}/**/*.ts\"",
-    "lint:fix": "nr lint -- --fix",
+    "lint": "eslint .",
+    "lint:fix": "nr lint --fix",
     "play": "npm -C playground run dev",
     "prepublishOnly": "nr build",
     "release": "bumpp --commit --push --tag && pnpm publish",
@@ -88,28 +88,28 @@
   },
   "dependencies": {
     "@antfu/utils": "^0.5.0",
-    "@rollup/pluginutils": "^4.1.2",
+    "@rollup/pluginutils": "^4.2.0",
     "local-pkg": "^0.4.1",
-    "magic-string": "^0.25.7",
+    "magic-string": "^0.26.1",
     "resolve": "^1.22.0",
-    "unplugin": "^0.3.2"
+    "unplugin": "^0.4.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.16.1",
-    "@antfu/ni": "^0.13.0",
-    "@types/node": "^17.0.18",
+    "@antfu/eslint-config": "^0.18.8",
+    "@antfu/ni": "^0.13.2",
+    "@types/node": "^17.0.21",
     "@types/resolve": "^1.20.1",
     "@vueuse/metadata": "^8.0.0",
     "bumpp": "^7.1.1",
-    "eslint": "^8.9.0",
+    "eslint": "^8.10.0",
     "esno": "^0.14.1",
     "fast-glob": "^3.2.11",
-    "rollup": "^2.67.2",
-    "tsup": "^5.11.13",
-    "typescript": "^4.5.5",
-    "vite": "^2.8.3",
-    "vitest": "^0.3.6",
-    "webpack": "^5.69.0"
+    "rollup": "^2.70.0",
+    "tsup": "^5.12.1",
+    "typescript": "^4.6.2",
+    "vite": "^2.8.6",
+    "vitest": "^0.6.0",
+    "webpack": "^5.70.0"
   },
   "engines": {
     "node": ">=14"

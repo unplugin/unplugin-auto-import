@@ -9,7 +9,7 @@ Auto import APIs on-demand for Vite, Webpack, Rollup and esbuild. With TypeScrip
 without
 
 ```ts
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 const count = ref(0)
 const doubled = computed(() => count.value * 2)
 ```
@@ -92,8 +92,8 @@ export default {
 module.exports = {
   /* ... */
   plugins: [
-    require('unplugin-auto-import/webpack')({ /* options */ })
-  ]
+    require('unplugin-auto-import/webpack')({ /* options */ }),
+  ],
 }
 ```
 
@@ -140,12 +140,12 @@ const AutoImportPlugin = require('unplugin-auto-import/webpack')
 
 module.exports = {
   build: {
-    chainWebpack (chain) {
+    chainWebpack(chain) {
       chain.plugin('unplugin-auto-import').use(
-        AutoImportPlugin({ /* options */ })
+        AutoImportPlugin({ /* options */ }),
       )
-    }
-  }
+    },
+  },
 }
 ```
 
@@ -179,7 +179,7 @@ AutoImport({
   include: [
     /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
     /\.vue$/, /\.vue\?vue/, // .vue
-    /\.md$/, // .md  
+    /\.md$/, // .md
   ],
 
   // global imports to register
@@ -193,18 +193,18 @@ AutoImport({
         // named imports
         'useMouse', // import { useMouse } from '@vueuse/core',
         // alias
-        ['useFetch', 'useMyFetch'] // import { useFetch as useMyFetch } from '@vueuse/core',
+        ['useFetch', 'useMyFetch'], // import { useFetch as useMyFetch } from '@vueuse/core',
       ],
       'axios': [
         // default imports
-        ['default', 'axios'] // import { default as axios } from 'axios',
+        ['default', 'axios'], // import { default as axios } from 'axios',
       ],
       '[package-name]': [
         '[import-names]',
         // alias
-        ['[from]', '[alias]']
-      ]
-    }
+        ['[from]', '[alias]'],
+      ],
+    },
   ],
 
   // Generate corresponding .eslintrc-auto-import.json file.
@@ -212,14 +212,14 @@ AutoImport({
   eslintrc: {
     enabled: false, // Default `false`
     filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
-    globalsPropValue: true // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+    globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
   },
 
   // custom resolvers
   // see https://github.com/antfu/unplugin-auto-import/pull/23/
   resolvers: [
     /* ... */
-  ]
+  ],
 })
 ```
 
@@ -238,14 +238,13 @@ Example:
 ```ts
 // .eslintrc.js
 
-module.exports = { 
+module.exports = {
   /* ... */
   extends: [
     // ...
     './.eslintrc-auto-import.json',
   ],
 }
-
 ```
 
 ESLint Docs: [Extending Configuration Files](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files)

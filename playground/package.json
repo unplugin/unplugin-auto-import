@@ -4,15 +4,15 @@
     "dev": "vite --open"
   },
   "dependencies": {
-    "@vueuse/core": "^7.6.2",
+    "@vueuse/core": "^8.0.0",
     "vue": "3.2.31"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.2.0",
+    "@vitejs/plugin-vue": "^2.2.4",
     "@vue/compiler-sfc": "^3.2.31",
-    "element-plus": "^2.0.2",
-    "unplugin-vue-components": "^0.17.18",
-    "vite": "^2.8.3",
-    "vite-plugin-inspect": "^0.3.14"
+    "element-plus": "^2.0.5",
+    "unplugin-vue-components": "^0.17.21",
+    "vite": "^2.8.6",
+    "vite-plugin-inspect": "^0.4.3"
   }
 }

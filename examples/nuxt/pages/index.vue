@@ -8,6 +8,7 @@
 import HelloWorld from '../components/HelloWorld.vue'
 
 function onUpdate(e: any) {
+  // eslint-disable-next-line no-console
   console.log(e)
 }
 </script>

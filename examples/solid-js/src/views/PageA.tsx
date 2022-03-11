@@ -7,12 +7,12 @@ const PageA: Component = () => {
       </main>
       <ul>
         <For each={[13, 14, 15]}>
-          {(item) => (
+          {item => (
             <li>
               <nav>
                 <NavLink
-                  href={`/detail/${new Date().getTime()}?q=${new Date().getTime() %
-                    item}`}
+                  href={`/detail/${new Date().getTime()}?q=${new Date().getTime()
+                    % item}`}
                 >
                   Detail-{item}
                 </NavLink>
@@ -22,7 +22,7 @@ const PageA: Component = () => {
         </For>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default PageA;
+export default PageA

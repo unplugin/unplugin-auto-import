@@ -31,6 +31,6 @@ watch(count, value => emit('update', value))
 
 <script lang="ts">
 export default {
-  name: 'App'
+  name: 'App',
 }
 </script>

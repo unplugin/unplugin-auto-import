@@ -1,7 +1,7 @@
 const PageB: Component = () => {
-  const location = useLocation();
-  const { id } = useParams();
-  const [query] = useSearchParams();
+  const location = useLocation()
+  const { id } = useParams()
+  const [query] = useSearchParams()
 
   return (
     <div>
@@ -16,7 +16,7 @@ const PageB: Component = () => {
         <NavLink href="/">Home</NavLink>
       </nav>
     </div>
-  );
-};
+  )
+}
 
-export default PageB;
+export default PageB

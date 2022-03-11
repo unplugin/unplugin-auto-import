@@ -1,7 +1,7 @@
-import { JSX } from "solid-js/jsx-runtime";
+import type { JSX } from 'solid-js/jsx-runtime'
 
 interface MainLayoutProps {
-  children: JSX.Element;
+  children: JSX.Element
 }
 
 const MainLayout: Component = (props: MainLayoutProps) => {
@@ -14,7 +14,7 @@ const MainLayout: Component = (props: MainLayoutProps) => {
       {props.children}
       <h1>Main Layout Footer</h1>
     </div>
-  );
-};
+  )
+}
 
-export default MainLayout;
+export default MainLayout

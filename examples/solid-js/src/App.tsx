@@ -1,17 +1,17 @@
 // eslint-disable-next-line no-use-before-define
-import MainLayout from "./layouts/MainLayout";
-import PageA from "./views/PageA";
-import PageB from "./views/PageB";
+import MainLayout from './layouts/MainLayout'
+import PageA from './views/PageA'
+import PageB from './views/PageB'
 
 function App() {
-  const [count, setCount] = createSignal(0);
+  const [count, setCount] = createSignal(0)
 
   return (
-    <div className="App" style={{ "text-align": "center" }}>
-      <IconLogosSolidjs style={{ width: "5rem", height: "auto" }} />
+    <div className="App" style={{ 'text-align': 'center' }}>
+      <IconLogosSolidjs style={{ width: '5rem', height: 'auto' }} />
       <header className="App-header">
         <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
+          <button type="button" onClick={() => setCount(count => count + 1)}>
             count is: {count}
           </button>
         </p>
@@ -25,7 +25,7 @@ function App() {
         </Routes>
       </MainLayout>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

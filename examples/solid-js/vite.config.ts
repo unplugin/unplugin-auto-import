@@ -9,7 +9,6 @@ export default defineConfig({
     solidPlugin(),
     Icons({
       compiler: 'solid',
-      
     }),
     AutoImport({
       imports: ['solid-js', 'solid-app-router'],
@@ -25,4 +24,4 @@ export default defineConfig({
     target: 'esnext',
     polyfillDynamicImport: false,
   },
-});
+})

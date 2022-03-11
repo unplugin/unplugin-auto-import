@@ -1,7 +1,7 @@
 /* @refresh reload */
-import { render } from "solid-js/web";
+import { render } from 'solid-js/web'
 
-import App from "./App";
+import App from './App'
 
 render(
   () => (
@@ -9,5 +9,5 @@ render(
       <App />
     </Router>
   ),
-  document.getElementById("root") as HTMLElement
-);
+  document.getElementById('root') as HTMLElement,
+)
