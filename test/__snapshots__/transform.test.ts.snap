@@ -209,10 +209,16 @@ const piniaMapSate = mapState()
 "
 `;
 
+exports[`transform-vue-macro > existing.ts 1`] = `
+"import { $ } from 'vue/macros';const not1 = /($)/.test('a'); const exist1 = $(obj); const not1 = /($)/.test('a')
+"
+`;
+
 exports[`transform-vue-macro > notexisting.ts 1`] = `
 "const str = '/($)/'; const test1 = /($)/.test('a')
 const test2 = /[;$]/
 const test3 = /($)/gim.test('a')
 const test4 = /[$]/gim
+const test5 = /[\\\\/$]/gim
 "
 `;

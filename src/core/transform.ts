@@ -11,7 +11,7 @@ const excludeRE = [
 ]
 
 const matchRE = /(?<![\w_$/)]\.)([\w_$]+?)[^\w_${]/g
-const regexRE = /\/.*?\/[gimsuy]*/g
+const regexRE = /\/.*?(?<!\\)\/[gimsuy]*/g
 const importAsRE = /^.*\sas\s+/
 const seperatorRE = /[,[\]{}\n]/g
 const multilineCommentsRE = /\/\*\s(.|[\r\n])*?\*\//gm
