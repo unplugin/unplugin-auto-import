@@ -11,6 +11,7 @@ const excludeRE = [
 ]
 
 const matchRE = /(?<![\w_$/)]\.)([\w_$]+?)[^\w_${]/g
+const regexRE = /\/.*?\/[gimsuy]*/g
 const importAsRE = /^.*\sas\s+/
 const seperatorRE = /[,[\]{}\n]/g
 const multilineCommentsRE = /\/\*\s(.|[\r\n])*?\*\//gm
@@ -28,6 +29,7 @@ function stripeCommentsAndStrings(code: string) {
     .replace(templateLiteralRE, '` + $1 + `')
     .replace(quotesRE[0], '""')
     .replace(quotesRE[1], '``')
+    .replace(regexRE, 'new RegExp("")')
 }
 
 export async function transform(

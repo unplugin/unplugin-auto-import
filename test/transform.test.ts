@@ -71,3 +71,27 @@ describe('transform', async() => {
     })
   }
 })
+
+describe('transform-vue-macro', async() => {
+  const options = resolveOptions({
+    imports: [
+      'vue/macros',
+    ],
+  })
+
+  const root = resolve(__dirname, 'fixtures-vue-macro')
+  const files = await fg('*', {
+    cwd: root,
+    onlyFiles: true,
+  })
+
+  for (const file of files) {
+    it(file, async() => {
+      const fixture = await fs.readFile(resolve(root, file), 'utf-8')
+      const pass1 = (await transform(fixture, file, options))?.code ?? fixture
+      expect(pass1).toMatchSnapshot()
+      const pass2 = (await transform(pass1, file, options))?.code ?? pass1
+      expect(pass2).toBe(pass1)
+    })
+  }
+})
