@@ -3,14 +3,17 @@ import React from 'react'
 import MainLayout from './layouts/MainLayout'
 import PageA from './views/PageA'
 import PageB from './views/PageB'
+import './i18n'
 
 function App() {
   const [count, setCount] = useState(0)
+  const { t } = useTranslation()
 
   return (
     <div className="App">
       <IconLogosReact style={{ fontSize: '3em' }}/>
       <header className="App-header">
+        <h1>{t('welcome')}</h1>
         <p>
           <button type="button" onClick={() => setCount(count => count + 1)}>
             count is: {count}

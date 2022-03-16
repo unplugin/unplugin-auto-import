@@ -13,7 +13,7 @@ export default defineConfig({
       jsx: 'react',
     }),
     AutoImport({
-      imports: ['react', 'react-router-dom'],
+      imports: ['react', 'react-router-dom', 'react-i18next'],
       dts: './src/auto-imports.d.ts',
       resolvers: [
         IconsResolver({

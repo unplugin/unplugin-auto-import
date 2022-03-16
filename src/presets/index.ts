@@ -6,6 +6,7 @@ import quasar from './quasar'
 import react from './react'
 import reactRouter from './react-router'
 import reactRouterDom from './react-router-dom'
+import reactI18next from './react-i18next'
 import {
   svelte,
   svelteAnimate,
@@ -41,6 +42,7 @@ export const presets = {
   'react': react,
   'react-router': reactRouter,
   'react-router-dom': reactRouterDom,
+  'react-i18next': reactI18next,
   'svelte': svelte,
   'svelte/animate': svelteAnimate,
   'svelte/easing': svelteEasing,
