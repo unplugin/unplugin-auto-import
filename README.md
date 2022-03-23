@@ -220,6 +220,11 @@ AutoImport({
   resolvers: [
     /* ... */
   ],
+  
+  // Filepath to generate corresponding .d.ts file.
+  // Defaults to './auto-imports.d.ts' when `typescript` is installed locally.
+  // Set `false` to disable.
+  dts: './auto-imports.d.ts'
 })
 ```
 
@@ -250,6 +255,13 @@ module.exports = {
 ESLint Docs: [Extending Configuration Files](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files)
 
 > Note: `.eslintrc-auto-import.json` is generated automatically, If the configuration file changes do not take effect in time, please check the configuration file, restart eslint server or the editor
+
+## TypeScript
+
+In order to properly hint types for auto-imported APIs, make sure:
+
+- to configure `options.dts` so that `auto-imports.d.ts` file is automatically generated
+- to include `auto-imports.d.ts` in `tsconfig.json`
 
 ## FAQ
 
