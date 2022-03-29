@@ -1,6 +1,6 @@
 {
   "name": "unplugin-auto-import",
-  "version": "0.6.6",
+  "version": "0.6.7",
   "description": "Register global imports on demand for Vite and Webpack",
   "keywords": [
     "unplugin",
