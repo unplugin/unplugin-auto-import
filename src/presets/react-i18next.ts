@@ -1,5 +1,5 @@
-import type { ImportsMap } from "../types"
+import type { ImportsMap } from '../types'
 
 export default <ImportsMap>{
-  "react-i18next": ["useTranslation"],
+  'react-i18next': ['useTranslation'],
 }

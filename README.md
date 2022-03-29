@@ -220,11 +220,11 @@ AutoImport({
   resolvers: [
     /* ... */
   ],
-  
+
   // Filepath to generate corresponding .d.ts file.
   // Defaults to './auto-imports.d.ts' when `typescript` is installed locally.
   // Set `false` to disable.
-  dts: './auto-imports.d.ts'
+  dts: './auto-imports.d.ts',
 })
 ```
 
