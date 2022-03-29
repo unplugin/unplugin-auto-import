@@ -9,5 +9,7 @@ export default <ImportsMap>({
     'useRef',
     'useContext',
     'useReducer',
+    'useImperativeHandle',
+    'useDebugValue',
   ],
 })
