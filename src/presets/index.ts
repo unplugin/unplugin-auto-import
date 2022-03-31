@@ -30,6 +30,7 @@ import vitest from './vitest'
 import uniApp from './uni-app'
 import solid from './solid'
 import solidAppRouter from './solid-app-router'
+import { jotai, jotaiUtils } from './jotai'
 
 export const presets = {
   '@nuxtjs/composition-api': nuxtCompositionApi,
@@ -61,6 +62,8 @@ export const presets = {
   'uni-app': uniApp,
   'solid-js': solid,
   'solid-app-router': solidAppRouter,
+  'jotai': jotai,
+  'jotai/utils': jotaiUtils,
 }
 
 export type PresetName = keyof typeof presets
