@@ -63,7 +63,7 @@ export const presets = {
   'solid-js': solid,
   'solid-app-router': solidAppRouter,
   'jotai': jotai,
-  'jotai/utils': jotaiUtils
+  'jotai/utils': jotaiUtils,
 }
 
 export type PresetName = keyof typeof presets
