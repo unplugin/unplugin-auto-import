@@ -15,6 +15,8 @@ export default <ImportsMap>({
     'useLayoutEffect',
     'useTransition',
     'startTransition',
+    'useSyncExternalStore',
+    'useInsertionEffect',
     'useId',
     'lazy',
     'memo',
