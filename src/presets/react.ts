@@ -12,8 +12,6 @@ export default <ImportsMap>({
     'useImperativeHandle',
     'useDebugValue',
     'useDeferredValue',
-    'useLayoutEffect',
-    'useTransition',
-    'useId'
+    'useLayoutEffect'
   ],
 })
