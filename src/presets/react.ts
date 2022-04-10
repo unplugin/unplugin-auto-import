@@ -21,6 +21,6 @@ export default <ImportsMap>({
     'lazy',
     'memo',
     'createRef',
-    'forwardRef'
+    'forwardRef',
   ],
 })
