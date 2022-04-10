@@ -1,6 +1,6 @@
 import type { ImportsMap } from '../types'
 
-export const solid = <ImportsMap>({
+export const solidCore = <ImportsMap>({
   'solid-js': [
     'createSignal',
     'createEffect',
@@ -60,7 +60,7 @@ export const solidWeb = <ImportsMap>({
 })
 
 export default <ImportsMap>({
-  ...solid,
+  ...solidCore,
   ...solidStore,
   ...solidWeb,
 })

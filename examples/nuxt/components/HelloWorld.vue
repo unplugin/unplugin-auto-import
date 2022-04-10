@@ -1,14 +1,3 @@
-<template>
-  <div>
-    <h3>{{ msg }}, {{ name }}</h3>
-    <button @click="inc">
-      Inc
-    </button>
-    <div>{{ count }} x 2 = {{ doubled }}</div>
-    <button @click="dec()" v-html="decText" />
-  </div>
-</template>
-
 <script setup lang="ts">
 const props = withDefaults(defineProps<{ msg: string; name: string | number }>(), { msg: 'Hello' })
 const emit = defineEmits(['update'])
@@ -34,3 +23,14 @@ export default {
   name: 'App',
 }
 </script>
+
+<template>
+  <div>
+    <h3>{{ msg }}, {{ name }}</h3>
+    <button @click="inc">
+      Inc
+    </button>
+    <div>{{ count }} x 2 = {{ doubled }}</div>
+    <button @click="dec()" v-html="decText" />
+  </div>
+</template>

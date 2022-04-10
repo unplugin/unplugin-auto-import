@@ -1,14 +1,3 @@
-<template>
-  <div style="margin-bottom: 10px;">
-    <h3>{{ msg }}</h3>
-    <button @click="inc">
-      Inc
-    </button>
-    <div>{{ count }} x 2 = {{ doubled }}</div>
-    <button @click="dec()" v-html="decText" />
-  </div>
-</template>
-
 <script setup lang="ts">
 const props = defineProps<{ msg: string }>()
 const emit = defineEmits(['update'])
@@ -28,3 +17,14 @@ const decText = '<b>Dec</b>'
 
 watch(count, value => emit('update', value))
 </script>
+
+<template>
+  <div style="margin-bottom: 10px;">
+    <h3>{{ msg }}</h3>
+    <button @click="inc">
+      Inc
+    </button>
+    <div>{{ count }} x 2 = {{ doubled }}</div>
+    <button @click="dec()" v-html="decText" />
+  </div>
+</template>

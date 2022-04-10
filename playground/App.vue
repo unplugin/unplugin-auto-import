@@ -1,11 +1,3 @@
-<template>
-  <HelloWorld msg="hi" />
-  <div v-loading="false">
-    123
-    <ElButton>Hello</ElButton>
-  </div>
-</template>
-
 <script lang="ts" setup>
 import HelloWorld from './HelloWorld.vue'
 ElMessage.warning('Test')
@@ -21,3 +13,11 @@ export default defineComponent({
   },
 })
 </script>
+
+<template>
+  <HelloWorld msg="hi" />
+  <div v-loading="false">
+    123
+    <ElButton>Hello</ElButton>
+  </div>
+</template>

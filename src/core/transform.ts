@@ -80,7 +80,8 @@ export async function transform(
 
   const modules: Record<string, ImportInfo[]> = {}
   const addToModules = (info: ImportInfo) => {
-    if (!modules[info.from]) modules[info.from] = [info]
+    if (!modules[info.from])
+      modules[info.from] = [info]
     else modules[info.from].push(info)
   }
 

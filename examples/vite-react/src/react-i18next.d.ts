@@ -1,4 +1,3 @@
-
 import 'react-i18next'
 import type { defaultNS, resources } from './i18n'
 
