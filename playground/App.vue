@@ -1,9 +1,15 @@
 <template>
-  <div v-loading="true">
+  <HelloWorld msg="hi" />
+  <div v-loading="false">
     123
     <ElButton>Hello</ElButton>
   </div>
 </template>
+
+<script lang="ts" setup>
+import HelloWorld from './HelloWorld.vue'
+ElMessage.warning('Test')
+</script>
 
 <script lang="ts">
 export default defineComponent({
@@ -14,8 +20,4 @@ export default defineComponent({
     loading: vLoading,
   },
 })
-</script>
-
-<script lang="ts" setup>
-ElMessage.warning('Test')
 </script>

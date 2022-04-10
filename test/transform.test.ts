@@ -47,8 +47,8 @@ describe('transform', async() => {
       (name) => {
         return name.startsWith('customNamedResolved')
           ? {
-            path: `custom/resolved/${name.slice('customNamedResolved'.length)}`,
-            importName: `_${name}`,
+            from: `custom/resolved/${name.slice('customNamedResolved'.length)}`,
+            name: `_${name}`,
           }
           : null
       },

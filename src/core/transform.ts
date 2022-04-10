@@ -1,5 +1,5 @@
 import MagicString from 'magic-string'
-import type { ImportInfo, Resolver, TransformOptions } from '../types'
+import type { ImportInfo, ImportInfoLegacy, ResolvedResult, Resolver, TransformOptions } from '../types'
 
 const excludeRE = [
   // imported from other module
@@ -80,8 +80,8 @@ export async function transform(
 
   const modules: Record<string, ImportInfo[]> = {}
   const addToModules = (info: ImportInfo) => {
-    if (!modules[info.path]) modules[info.path] = [info]
-    else modules[info.path].push(info)
+    if (!modules[info.from]) modules[info.from] = [info]
+    else modules[info.from].push(info)
   }
 
   // group by module name
@@ -93,8 +93,8 @@ export async function transform(
       if (resolved) {
         if (typeof resolved === 'string') {
           info = {
-            path: resolved,
-            importName: 'default',
+            from: resolved,
+            name: 'default',
           }
         }
         else {
@@ -104,19 +104,19 @@ export async function transform(
       }
     }
 
-    if (!info || !info.path)
+    if (!info || !info.from)
       continue
 
     addToModules({
-      path: info.path,
-      importName: info.importName,
-      name,
+      from: info.from,
+      name: info.name,
+      as: name,
     })
 
     if (info.sideEffects) {
       const infos = [info.sideEffects].flat(1).map((info): ImportInfo => {
         if (typeof info === 'string')
-          return { path: info }
+          return { from: info }
         return info
       })
       infos.forEach(info => addToModules(info))
@@ -133,12 +133,12 @@ export async function transform(
       const namedImports: string[] = []
 
       infos
-        .forEach(({ name, importName }) => {
-          if (name) {
-            if (importName === '*')
-              imports.push(`* as ${name}`)
+        .forEach(({ as, name }) => {
+          if (as) {
+            if (name === '*')
+              imports.push(`* as ${as}`)
             else
-              namedImports.push((importName && name !== importName) ? `${importName} as ${name}` : name)
+              namedImports.push((name && as !== name) ? `${name} as ${as}` : as)
           }
         })
 
@@ -170,7 +170,7 @@ async function firstMatchedResolver(resolvers: Resolver[], name: string) {
     }
     const resolved = await (typeof resolver === 'function' ? resolver(name) : resolver.resolve(name))
     if (resolved)
-      return resolved
+      return normalizeImportInfo(resolved)
   }
 }
 
@@ -178,4 +178,18 @@ const hasOwnProperty = Object.prototype.hasOwnProperty
 
 function getOwn<T, K extends keyof T>(object: T, key: K) {
   return hasOwnProperty.call(object, key) ? object[key] : undefined
+}
+
+function normalizeImportInfo(info: ImportInfo | ResolvedResult | ImportInfoLegacy | string): ResolvedResult | string {
+  if (typeof info === 'string')
+    return info
+  if ('path' in info) {
+    return {
+      from: info.path,
+      as: info.name,
+      name: info.importName,
+      sideEffects: info.sideEffects,
+    }
+  }
+  return info
 }

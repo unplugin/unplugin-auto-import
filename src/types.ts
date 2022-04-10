@@ -2,16 +2,32 @@ import type { Arrayable, Awaitable } from '@antfu/utils'
 import type { FilterPattern } from '@rollup/pluginutils'
 import { PresetName } from './presets'
 
-export type ImportNameAlias = [string, string]
-export interface ImportInfo {
-  path: string
+export interface ImportInfoLegacy {
+  /**
+   * @deprecated renamed to `as`
+   */
   name?: string
+  /**
+   * @deprecated renamed to `name`
+   */
   importName?: string
-}
-export type SideEffectsInfo = Arrayable<ImportInfo | string> | undefined
-export interface ResolvedResult {
+  /**
+   * @deprecated renamed to `from`
+   */
   path: string
-  importName?: string
+
+  sideEffects?: SideEffectsInfo
+}
+
+export interface ImportInfo {
+  as?: string
+  name?: string
+  from: string
+}
+
+export type ImportNameAlias = [string, string]
+export type SideEffectsInfo = Arrayable<ImportInfo | string> | undefined
+export interface ResolvedResult extends ImportInfo {
   sideEffects?: SideEffectsInfo
 }
 

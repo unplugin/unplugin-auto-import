@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-bottom: 10px;">
     <h3>{{ msg }}</h3>
     <button @click="inc">
       Inc

@@ -53,20 +53,20 @@ export function flattenImportsMap(map: Options['imports'], overriding = false): 
     for (const mod of Object.keys(definition)) {
       for (const id of definition[mod]) {
         const meta: ResolvedResult = {
-          path: mod,
+          from: mod,
         }
         let name: string
         if (Array.isArray(id)) {
           name = id[1]
-          meta.importName = id[0]
+          meta.name = id[0]
         }
         else {
           name = id
-          meta.importName = id
+          meta.name = id
         }
 
         if (flat[name] && !overriding)
-          throw new Error(`[auto-import] identifier ${name} already defined with ${flat[name].path}`)
+          throw new Error(`[auto-import] identifier ${name} already defined with ${flat[name].from}`)
 
         flat[name] = meta
       }
