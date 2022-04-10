@@ -11,5 +11,16 @@ export default <ImportsMap>({
     'useReducer',
     'useImperativeHandle',
     'useDebugValue',
+    'useDeferredValue',
+    'useLayoutEffect',
+    'useTransition',
+    'startTransition',
+    'useSyncExternalStore',
+    'useInsertionEffect',
+    'useId',
+    'lazy',
+    'memo',
+    'createRef',
+    'forwardRef'
   ],
 })
