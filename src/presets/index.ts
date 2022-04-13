@@ -1,4 +1,6 @@
 /* eslint-disable object-shorthand */
+import mobx from './mobx'
+import mobxReactLite from './mobx-react-lite'
 import nuxtCompositionApi from './nuxt-composition-api'
 import pinia from './pinia'
 import preact from './preact'
@@ -37,6 +39,8 @@ export const presets = {
   '@vue/composition-api': vueCompositionApi,
   '@vueuse/core': vueuseCore,
   '@vueuse/head': vueuseHead,
+  'mobx': mobx,
+  'mobx-react-lite': mobxReactLite,
   'pinia': pinia,
   'preact': preact,
   'quasar': quasar,
