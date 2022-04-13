@@ -5,13 +5,13 @@
   },
   "dependencies": {
     "@vueuse/core": "^8.2.5",
-    "vue": "3.2.31"
+    "vue": "3.2.32"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.1",
-    "@vue/compiler-sfc": "^3.2.31",
-    "element-plus": "^2.1.8",
-    "unplugin-vue-components": "^0.19.0",
+    "@vue/compiler-sfc": "^3.2.32",
+    "element-plus": "^2.1.9",
+    "unplugin-vue-components": "^0.19.2",
     "vite": "^2.9.1",
     "vite-plugin-inspect": "^0.4.3"
   }

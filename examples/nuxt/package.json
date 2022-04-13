@@ -10,14 +10,14 @@
   "dependencies": {
     "core-js": "^3.21.1",
     "nuxt": "^2.15.8",
-    "vue": "^3.2.31"
+    "vue": "^3.2.32"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.8",
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/composition-api": "^0.32.0",
-    "@vue/runtime-dom": "^3.2.31",
+    "@vue/runtime-dom": "^3.2.32",
     "unplugin-auto-import": "workspace:*",
-    "vue-tsc": "^0.34.1"
+    "vue-tsc": "^0.34.6"
   }
 }
