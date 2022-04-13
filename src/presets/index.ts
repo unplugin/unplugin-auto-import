@@ -1,4 +1,5 @@
 /* eslint-disable object-shorthand */
+import ahooks from './ahooks'
 import mobx from './mobx'
 import mobxReactLite from './mobx-react-lite'
 import nuxtCompositionApi from './nuxt-composition-api'
@@ -35,6 +36,7 @@ import solidAppRouter from './solid-app-router'
 import { jotai, jotaiUtils } from './jotai'
 
 export const presets = {
+  'ahooks': ahooks,
   '@nuxtjs/composition-api': nuxtCompositionApi,
   '@vue/composition-api': vueCompositionApi,
   '@vueuse/core': vueuseCore,
