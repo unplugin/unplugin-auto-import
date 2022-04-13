@@ -1,10 +1,10 @@
 import type { ImportsMap } from '../types'
-import { Mobx } from './mobx'
+import { mobx } from './mobx'
 
 export default <ImportsMap>({
   'mobx-react-lite': [
     // https://pinia.esm.dev/api/modules/pinia.html#functions
-    ...Mobx,
+    ...mobx,
     'observer',
     'Observer',
     'useLocalObservable',
