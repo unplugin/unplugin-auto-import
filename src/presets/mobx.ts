@@ -25,6 +25,6 @@ export const mobx = [
 export default <ImportsMap>({
   mobx: [
     // https://mobx.js.org/api.html
-    ...Mobx,
+    ...mobx,
   ],
 })
