@@ -1,6 +1,6 @@
 import type { ImportsMap } from '../types'
 
-export const Mobx = [
+export const mobx = [
   // https://mobx.js.org/api.html
   'makeObservable',
   'makeAutoObservable',
