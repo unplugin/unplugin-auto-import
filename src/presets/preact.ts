@@ -1,7 +1,7 @@
 import type { ImportsMap } from '../types'
 
 export default <ImportsMap>({
-  preact: [
+  'preact/hooks': [
     'useState',
     'useCallback',
     'useMemo',
