@@ -9,9 +9,7 @@ export default (): ImportsMap => {
   if (!_cache) {
     let indexesJson: PackageIndexes | undefined
     try {
-      const corePath = resolveModule('ahooks') || process.cwd()
       const path = resolveModule('ahooks/metadata.json')
-          || resolveModule('ahooks/metadata.json', { paths: [corePath] })
       indexesJson = JSON.parse(readFileSync(path!, 'utf-8'))
     }
     catch (error) {
