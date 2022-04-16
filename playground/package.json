@@ -13,6 +13,7 @@
     "element-plus": "^2.1.9",
     "unplugin-vue-components": "^0.19.2",
     "vite": "^2.9.1",
-    "vite-plugin-inspect": "^0.4.3"
+    "vite-plugin-inspect": "^0.4.3",
+    "dayjs": "^1.11.1"
   }
 }

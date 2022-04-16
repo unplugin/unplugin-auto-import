@@ -136,7 +136,9 @@ export async function transform(
       infos
         .forEach(({ as, name }) => {
           if (as) {
-            if (name === '*')
+            if (!name)
+              imports.push(as)
+            else if (name === '*')
               imports.push(`* as ${as}`)
             else
               namedImports.push((name && as !== name) ? `${name} as ${as}` : as)

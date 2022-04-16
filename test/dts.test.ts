@@ -20,6 +20,9 @@ it('dts', () => {
         custom2: [
           ['*', 'custom2'],
         ],
+        dayjs: [
+          ['', 'dayjs'],
+        ],
       },
       'vue/macros',
     ],

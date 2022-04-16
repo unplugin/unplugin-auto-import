@@ -9,7 +9,11 @@ export default defineConfig({
     Vue(),
     Inspect(),
     AutoImport({
-      imports: ['vue', '@vueuse/core'],
+      imports: ['vue', '@vueuse/core',
+        {
+          dayjs: [['default', 'dayjs']],
+        },
+      ],
       resolvers: [ElementPlusResolver()],
     }),
   ],

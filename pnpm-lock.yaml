@@ -153,6 +153,7 @@ importers:
       '@vitejs/plugin-vue': ^2.3.1
       '@vue/compiler-sfc': ^3.2.32
       '@vueuse/core': ^8.2.5
+      dayjs: ^1.11.1
       element-plus: ^2.1.9
       unplugin-vue-components: ^0.19.2
       vite: ^2.9.1
@@ -164,6 +165,7 @@ importers:
     devDependencies:
       '@vitejs/plugin-vue': 2.3.1_vite@2.9.1+vue@3.2.32
       '@vue/compiler-sfc': 3.2.32
+      dayjs: 1.11.1
       element-plus: 2.1.9_vue@3.2.32
       unplugin-vue-components: 0.19.2_823b9a3a6daf458f9c7fb0c54b6c5e7b
       vite: 2.9.1
@@ -5354,6 +5356,11 @@ packages:
 
   /dayjs/1.11.0:
     resolution: {integrity: sha512-JLC809s6Y948/FuCZPm5IX8rRhQwOiyMb2TfVVQEixG7P8Lm/gt5S7yoQZmC8x1UehI9Pb7sksEt4xx14m+7Ug==}
+    dev: false
+
+  /dayjs/1.11.1:
+    resolution: {integrity: sha512-ER7EjqVAMkRRsxNCC5YqJ9d9VQYuWdGt7aiH2qA5R5wt8ZmWaP2dLUSIK6y/kVzLMlmh1Tvu5xUf4M/wdGJ5KA==}
+    dev: true
 
   /de-indent/1.0.2:
     resolution: {integrity: sha1-sgOOhG3DO6pXlhKNCAS0VbjB4h0=}
@@ -5653,7 +5660,7 @@ packages:
       '@types/lodash-es': 4.17.6
       '@vueuse/core': 8.2.5_vue@3.2.32
       async-validator: 4.0.7
-      dayjs: 1.11.0
+      dayjs: 1.11.1
       escape-html: 1.0.3
       lodash: 4.17.21
       lodash-es: 4.17.21

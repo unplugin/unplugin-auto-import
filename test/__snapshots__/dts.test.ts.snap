@@ -35,6 +35,7 @@ declare global {
   const customDefault: typeof import('custom')['default']
   const customNamed: typeof import('custom')['customNamed']
   const customRef: typeof import('vue-demi')['customRef']
+  const dayjs: typeof import('dayjs')
   const defineAsyncComponent: typeof import('vue-demi')['defineAsyncComponent']
   const defineComponent: typeof import('vue-demi')['defineComponent']
   const derived: typeof import('svelte/store')['derived']

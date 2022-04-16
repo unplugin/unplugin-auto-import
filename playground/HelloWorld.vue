@@ -2,6 +2,7 @@
 const props = defineProps<{ msg: string }>()
 const emit = defineEmits(['update'])
 
+const today = ref(dayjs().format('YYYY-MM-DD'))
 const count = ref(0)
 const doubled = computed(() => count.value * 2)
 
@@ -20,7 +21,7 @@ watch(count, value => emit('update', value))
 
 <template>
   <div style="margin-bottom: 10px;">
-    <h3>{{ msg }}</h3>
+    <h3>{{ msg }} - {{ today }}</h3>
     <button @click="inc">
       Inc
     </button>
