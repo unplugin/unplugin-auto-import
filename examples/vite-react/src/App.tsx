@@ -6,6 +6,7 @@ import PageB from './views/PageB'
 import './i18n'
 
 function App() {
+  useTitle('Page Title')
   const [count, setCount] = useState(0)
   const { t } = useTranslation()
 
