@@ -11,7 +11,7 @@ export default defineConfig({
     AutoImport({
       imports: ['vue', '@vueuse/core',
         {
-          dayjs: [['default', 'dayjs']],
+          dayjs: [['', 'dayjs']],
         },
       ],
       resolvers: [ElementPlusResolver()],
