@@ -136,7 +136,7 @@ export async function transform(
       infos
         .forEach(({ as, name }) => {
           if (as) {
-            if (!name)
+            if (name === 'default')
               imports.push(as)
             else if (name === '*')
               imports.push(`* as ${as}`)

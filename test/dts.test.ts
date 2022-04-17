@@ -21,7 +21,7 @@ it('dts', () => {
           ['*', 'custom2'],
         ],
         dayjs: [
-          ['', 'dayjs'],
+          ['default', 'dayjs'],
         ],
       },
       'vue/macros',
