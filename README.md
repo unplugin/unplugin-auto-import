@@ -102,16 +102,7 @@ module.exports = {
 <details>
 <summary>Nuxt</summary><br>
 
-```ts
-// nuxt.config.js
-export default {
-  buildModules: [
-    ['unplugin-auto-import/nuxt', { /* options */ }],
-  ],
-}
-```
-
-> This module works for both Nuxt 2 and [Nuxt Vite](https://github.com/nuxt/vite)
+> You **don't need** this plugin for Nuxt, it's already builtin.
 
 <br></details>
 
@@ -207,6 +198,28 @@ AutoImport({
     },
   ],
 
+  // Auto import for all module exports under directories
+  dirs: [
+    // './hooks',
+    // './composables'
+    // ...
+  ],
+
+  // Filepath to generate corresponding .d.ts file.
+  // Defaults to './auto-imports.d.ts' when `typescript` is installed locally.
+  // Set `false` to disable.
+  dts: './auto-imports.d.ts',
+
+  // Auto import inside Vue template
+  // see https://github.com/unjs/unimport/pull/15
+  vueTemplate: false,
+
+  // Custom resolvers, compatible with `unplugin-vue-components`
+  // see https://github.com/antfu/unplugin-auto-import/pull/23/
+  resolvers: [
+    /* ... */
+  ],
+
   // Generate corresponding .eslintrc-auto-import.json file.
   // eslint globals Docs - https://eslint.org/docs/user-guide/configuring/language-options#specifying-globals
   eslintrc: {
@@ -214,17 +227,6 @@ AutoImport({
     filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
     globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
   },
-
-  // custom resolvers
-  // see https://github.com/antfu/unplugin-auto-import/pull/23/
-  resolvers: [
-    /* ... */
-  ],
-
-  // Filepath to generate corresponding .d.ts file.
-  // Defaults to './auto-imports.d.ts' when `typescript` is installed locally.
-  // Set `false` to disable.
-  dts: './auto-imports.d.ts',
 })
 ```
 
@@ -264,6 +266,10 @@ In order to properly hint types for auto-imported APIs, make sure:
 - to include `auto-imports.d.ts` in `tsconfig.json`
 
 ## FAQ
+
+### Compare to [`unimport`](https://github.com/unjs/unimport)
+
+From v0.8.0, `unplugin-auto-import` **uses** `unimport` underneath. `unimport` is designed to be a lower level tool (it also powered Nuxt's auto import). You can think `unplugin-auto-import` is a wrapper of it that provides more user-friendly config APIs and capability like resolvers. Development of new features will mostly happend in `unimport` from now.
 
 ### Compare to [`vue-global-api`](https://github.com/antfu/vue-global-api)
 

@@ -1,7 +1,8 @@
 // Vitest Snapshot v1
 
 exports[`transform > comments.ts 1`] = `
-"import { ref, computed } from 'vue';/* import { ref } from 'vue' */
+"import { ref, computed } from 'vue';
+/* import { ref } from 'vue' */
 // import { computed } from 'vue'
 
 const a = {
@@ -19,18 +20,23 @@ const b = { class: \\"text-sm opacity-75\\" };
 `;
 
 exports[`transform > custom.js 1`] = `
-"import { default as customDefault, customNamed, default as customDefaultAlias } from 'custom';const a = customDefault(customNamed())
+"import customDefault from 'custom';
+import customDefaultAlias from 'custom';
+import { customNamed } from 'custom';
+const a = customDefault(customNamed())
 const a = customDefaultAlias()
 "
 `;
 
 exports[`transform > dollar.js 1`] = `
-"import { $ } from 'vue-dollar';$('hi')
+"import { $ } from 'vue-dollar';
+$('hi')
 "
 `;
 
 exports[`transform > existing.jsx 1`] = `
-"import { watch } from 'vue';import ref from 'ref'
+"import { watch } from 'vue';
+import ref from 'ref'
 import { computed } from 'computed'
 
 const a = ref(0)
@@ -69,7 +75,8 @@ const b = computed(0)
 `;
 
 exports[`transform > existing5.jsx 1`] = `
-"import { watch } from 'vue';import {
+"import { watch } from 'vue';
+import {
   ref,
   computed,
   watch as watch3,
@@ -83,18 +90,21 @@ const d = watch3(0)
 `;
 
 exports[`transform > existing6.jsx 1`] = `
-"import { computed } from 'vue';const a = computed(() => /^(https?:\\\\/\\\\/|\\\\/\\\\/)/.test(props.to))
+"import { computed } from 'vue';
+const a = computed(() => /^(https?:\\\\/\\\\/|\\\\/\\\\/)/.test(props.to))
 "
 `;
 
 exports[`transform > glob.ts 1`] = `
-"import { ref } from 'vue';const modules = import.meta.glob(\\"/src/nested/*.vue\\");
+"import { ref } from 'vue';
+const modules = import.meta.glob(\\"/src/nested/*.vue\\");
 const msg = ref(\\"Global Imports\\");
 "
 `;
 
 exports[`transform > import-all.ts 1`] = `
-"import * as THREE from 'three.js';const scene = new THREE.Scene();
+"import * as THREE from 'three.js';
+const scene = new THREE.Scene();
 "
 `;
 
@@ -104,7 +114,8 @@ exports[`transform > non-target.js 1`] = `
 `;
 
 exports[`transform > props.ts 1`] = `
-"import { toRefs } from 'vue';const a = z.ref(0)
+"import { toRefs } from 'vue';
+const a = z.ref(0)
 console.log({
   ...toRefs(a)
 })
@@ -119,7 +130,8 @@ const c = a.toString()
 `;
 
 exports[`transform > react.jsx 1`] = `
-"import { useState } from 'react';export function Component() {
+"import { useState } from 'react';
+export function Component() {
   const [count, setCount] = useState()
 
   return <div>{ count }</div>
@@ -146,9 +158,31 @@ exports[`transform > recursive.ts 1`] = `
 `;
 
 exports[`transform > resolver.ts 1`] = `
-"import { default as customResolved1 } from 'custom/resolved/1';import { default as customResolved2, _customNamedResolved2 as customNamedResolved2 } from 'custom/resolved/2';const a = customResolved1(1)
+"import customResolved1 from 'custom/resolved/1';
+import customResolved2 from 'custom/resolved/2';
+import { _customNamedResolved2 as customNamedResolved2 } from 'custom/resolved/2';
+const a = customResolved1(1)
 const b = customResolved2(1)
 const c = customNamedResolved2(1)
+"
+`;
+
+exports[`transform > resolver-element.ts 1`] = `
+"import { defineComponent } from 'vue';
+import { ElButton, ElMessage, ElLoadingDirective as vLoading } from 'element-plus/es';
+import 'element-plus/es/components/button/style/css';
+import 'element-plus/es/components/message/style/css';
+import 'element-plus/es/components/loading/style/css';
+export default defineComponent({
+  components: {
+    ElButton,
+  },
+  directives: {
+    loading: vLoading,
+  },
+})
+
+ElMessage.warning('Test')
 "
 `;
 
@@ -163,7 +197,11 @@ ref('z')
 `;
 
 exports[`transform > svelte.svelte 1`] = `
-"import { writable } from 'svelte/store';import { tweened } from 'svelte/motion';import { cubicOut, quintOut } from 'svelte/easing';import { onMount } from 'svelte';import { flip } from 'svelte/animate';import { fade } from 'svelte/transition';const list = writable([1, 2, 3])
+"import { writable } from 'svelte/store';
+import { tweened } from 'svelte/motion';
+import { cubicOut } from 'svelte/easing';
+import { onMount } from 'svelte';
+const list = writable([1, 2, 3])
 const size = tweened(1, {
   duration: 300,
   easing: cubicOut
@@ -185,12 +223,14 @@ onMount(() => {})
 `;
 
 exports[`transform > template-literal.ts 1`] = `
-"import { ref } from 'vue';const z = \`bar-\${ref()}\`
+"import { ref } from 'vue';
+const z = \`bar-\${ref()}\`
 "
 `;
 
 exports[`transform > template-ref.vue 1`] = `
-"import { ref } from 'vue';<template>
+"import { ref } from 'vue';
+<template>
   <div ref=\\"divRef\\"></div>
 </template>
 
@@ -201,7 +241,10 @@ const divRef = ref(null)
 `;
 
 exports[`transform > vue.js 1`] = `
-"import { useQuasar, useMeta } from 'quasar';import { ref } from 'vue';import { defineStore, mapState } from 'pinia';const q = useQuasar()
+"import { useQuasar, useMeta } from 'quasar';
+import { ref } from 'vue';
+import { defineStore, mapState } from 'pinia';
+const q = useQuasar()
 const meta = useMeta()
 const a = ref(0)
 const piniaStore = defineStore()
@@ -210,7 +253,8 @@ const piniaMapSate = mapState()
 `;
 
 exports[`transform-vue-macro > existing.ts 1`] = `
-"import { $ } from 'vue/macros';const not1 = /($)/.test('a'); const exist1 = $(obj); const not1 = /($)/.test('a')
+"import { $ } from 'vue/macros';
+const not1 = /($)/.test('a'); const exist1 = $(obj); const not1 = /($)/.test('a')
 "
 `;
 

@@ -1,11 +1,11 @@
 import { resolve } from 'path'
 import { promises as fs } from 'fs'
 import fg from 'fast-glob'
-import { resolveOptions } from '../src/core/options'
-import { transform } from '../src/core/transform'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { createContext } from '../src/core/ctx'
 
 describe('transform', async() => {
-  const options = resolveOptions({
+  const ctx = createContext({
     imports: [
       'vue',
       'pinia',
@@ -52,6 +52,9 @@ describe('transform', async() => {
           }
           : null
       },
+      ElementPlusResolver({
+        importStyle: 'css',
+      }),
     ],
   })
 
@@ -64,16 +67,16 @@ describe('transform', async() => {
   for (const file of files) {
     it(file, async() => {
       const fixture = await fs.readFile(resolve(root, file), 'utf-8')
-      const pass1 = (await transform(fixture, file, options))?.code ?? fixture
+      const pass1 = (await ctx.transform(fixture, file))?.code ?? fixture
       expect(pass1).toMatchSnapshot()
-      const pass2 = (await transform(pass1, file, options))?.code ?? pass1
+      const pass2 = (await ctx.transform(pass1, file))?.code ?? pass1
       expect(pass2).toBe(pass1)
     })
   }
 })
 
 describe('transform-vue-macro', async() => {
-  const options = resolveOptions({
+  const ctx = createContext({
     imports: [
       'vue/macros',
     ],
@@ -88,9 +91,9 @@ describe('transform-vue-macro', async() => {
   for (const file of files) {
     it(file, async() => {
       const fixture = await fs.readFile(resolve(root, file), 'utf-8')
-      const pass1 = (await transform(fixture, file, options))?.code ?? fixture
+      const pass1 = (await ctx.transform(fixture, file))?.code ?? fixture
       expect(pass1).toMatchSnapshot()
-      const pass2 = (await transform(pass1, file, options))?.code ?? pass1
+      const pass2 = (await ctx.transform(pass1, file))?.code ?? pass1
       expect(pass2).toBe(pass1)
     })
   }

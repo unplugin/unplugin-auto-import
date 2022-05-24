@@ -1,8 +1,9 @@
 import type { Arrayable, Awaitable } from '@antfu/utils'
 import type { FilterPattern } from '@rollup/pluginutils'
+import type { Import } from 'unimport'
 import { PresetName } from './presets'
 
-export interface ImportInfoLegacy {
+export interface ImportLegacy {
   /**
    * @deprecated renamed to `as`
    */
@@ -19,19 +20,21 @@ export interface ImportInfoLegacy {
   sideEffects?: SideEffectsInfo
 }
 
-export interface ImportInfo {
+export interface ImportExtended extends Import {
+  sideEffects?: SideEffectsInfo
+  __source?: 'dir' | 'resolver'
+}
+
+export type ImportNameAlias = [string, string]
+export type SideEffectsInfo = Arrayable<ResolverResult | string> | undefined
+
+export interface ResolverResult {
   as?: string
   name?: string
   from: string
 }
 
-export type ImportNameAlias = [string, string]
-export type SideEffectsInfo = Arrayable<ImportInfo | string> | undefined
-export interface ResolvedResult extends ImportInfo {
-  sideEffects?: SideEffectsInfo
-}
-
-export type ResolverFunction = (name: string) => Awaitable<string | ResolvedResult | null | undefined | void>
+export type ResolverFunction = (name: string) => Awaitable<string | ResolverResult | ImportExtended | null | undefined | void>
 
 export interface ResolverResultObject {
   type: 'component' | 'directive'
@@ -39,7 +42,7 @@ export interface ResolverResultObject {
 }
 
 /**
- * Given a identifier name, returns the import path or an importInfo object
+ * Given a identifier name, returns the import path or an import object
  */
 export type Resolver = ResolverFunction | ResolverResultObject
 
@@ -47,10 +50,6 @@ export type Resolver = ResolverFunction | ResolverResultObject
  * module, name, alias
  */
 export type ImportsMap = Record<string, (string | ImportNameAlias)[]>
-/**
- * name, meta
- */
-export type ImportsFlatMap = Record<string, ResolvedResult>
 
 export type ESLintGlobalsPropValue = boolean | 'readonly' | 'readable' | 'writable' | 'writeable'
 
@@ -85,6 +84,11 @@ export interface Options {
   ignore?: (string | RegExp)[]
 
   /**
+   * Path for directories to be auto imported
+   */
+  dirs?: string[]
+
+  /**
    * Pass a custom function to resolve the component importing path from the component name.
    *
    * The component names are always in PascalCase
@@ -99,6 +103,14 @@ export interface Options {
    * @default './auto-imports.d.ts'
    */
   dts?: string | boolean
+
+  /**
+   * Auto import inside Vue templates
+   *
+   * @see https://github.com/unjs/unimport/pull/15
+   * @default false
+   */
+  vueTemplate?: boolean
 
   /**
    * Allow overriding imports sources from multiple presets.
@@ -132,38 +144,6 @@ export interface Options {
    * Generate corresponding .eslintrc-auto-import.json file.
    */
   eslintrc?: ESLintrc
-}
-
-export interface TransformOptions {
-  imports: ImportsFlatMap
-
-  /**
-   * Identifiers to be ignored
-   */
-  ignore?: (string | RegExp)[]
-
-  /**
-   * Custom resolvers
-   */
-  resolvers?: Resolver[]
-
-  /**
-   * Generate source map.
-   *
-   * @default false
-   */
-  sourceMap?: boolean
-
-  /**
-   * Hold the value for dynamic resolved imports, will be mutated during transforming
-   */
-  resolvedImports?: ImportsFlatMap
-}
-
-export interface ResolvedOptions extends Omit<Required<Options>, 'imports' | 'resolvers' | 'dts' | 'include' | 'exclude' | 'eslintrc'>, Required<TransformOptions> {
-  idFilter: (id: string) => boolean
-  dts: string | false
-  eslintrc: ESLintrc
 }
 
 export { PresetName }
