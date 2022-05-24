@@ -18,6 +18,7 @@ export default defineComponent({
 <template>
   <HelloWorld msg="hi" />
   <pre>{{ foo }}</pre>
+  <pre>{{ FOOBAR }}</pre>
   <div v-loading="false">
     <ElButton>Hello</ElButton>
   </div>

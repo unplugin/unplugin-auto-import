@@ -84,6 +84,11 @@ export interface Options {
   ignore?: (string | RegExp)[]
 
   /**
+   * Path for directories to be auto imported
+   */
+  dirs?: string[]
+
+  /**
    * Pass a custom function to resolve the component importing path from the component name.
    *
    * The component names are always in PascalCase
@@ -98,6 +103,14 @@ export interface Options {
    * @default './auto-imports.d.ts'
    */
   dts?: string | boolean
+
+  /**
+   * Auto import inside Vue templates
+   *
+   * @see https://github.com/unjs/unimport/pull/15
+   * @default false
+   */
+  vueTemplate?: boolean
 
   /**
    * Allow overriding imports sources from multiple presets.
@@ -131,11 +144,6 @@ export interface Options {
    * Generate corresponding .eslintrc-auto-import.json file.
    */
   eslintrc?: ESLintrc
-
-  /**
-   * Path for directories to be auto imported
-   */
-  dirs?: string[]
 }
 
 export { PresetName }

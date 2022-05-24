@@ -210,6 +210,10 @@ AutoImport({
   // Set `false` to disable.
   dts: './auto-imports.d.ts',
 
+  // Auto import inside Vue template
+  // see https://github.com/unjs/unimport/pull/15
+  vueTemplate: false,
+
   // Custom resolvers, compatible with `unplugin-vue-components`
   // see https://github.com/antfu/unplugin-auto-import/pull/23/
   resolvers: [
