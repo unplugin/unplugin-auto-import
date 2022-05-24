@@ -63,7 +63,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     const dir = dirname(file)
     return unimport.generateTypeDecarations({
       resolvePath: (i) => {
-        if (i.from.startsWith('.') || i.from.startsWith('/')) {
+        if (i.from.startsWith('.') || i.from.startsWith('/')) || i.from.includes(':/')) {
           const related = slash(relative(dir, i.from).replace(/\.ts$/, ''))
           return !related.startsWith('.')
             ? `./${related}`
