@@ -1,4 +1,4 @@
-import { dirname, posix, relative, resolve } from 'path'
+import { dirname, relative, resolve } from 'path'
 import { promises as fs } from 'fs'
 import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
