@@ -7,7 +7,7 @@ import type { Import } from 'unimport'
 import { createUnimport, scanDirExports } from 'unimport'
 import MagicString from 'magic-string'
 import { presets } from '../presets'
-import type { ESLintrc, Options } from '../types'
+import type { ESLintrc, ImportExtended, Options } from '../types'
 import { generateESLintConfigs } from './eslintrc'
 import { resolversAddon } from './resolvers'
 
@@ -66,7 +66,12 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   async function scanDirs() {
     if (dirs?.length) {
       await unimport.modifyDynamicImports(async(imports) => {
-        imports.push(...await scanDirExports(dirs))
+        const exports = await scanDirExports(dirs) as ImportExtended[]
+        exports.forEach(i => i.__source = 'dir')
+        return [
+          ...imports.filter((i: ImportExtended) => i.__source !== 'dir'),
+          ...exports,
+        ] as Import[]
       })
     }
     generateConfigFiles()
@@ -92,6 +97,8 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
 
   return {
+    root,
+    dirs,
     unimport,
     filter,
     scanDirs,

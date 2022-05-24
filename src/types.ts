@@ -22,6 +22,7 @@ export interface ImportLegacy {
 
 export interface ImportExtended extends Import {
   sideEffects?: SideEffectsInfo
+  __source?: 'dir' | 'resolver'
 }
 
 export type ImportNameAlias = [string, string]

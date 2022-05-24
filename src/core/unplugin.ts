@@ -17,9 +17,15 @@ export default createUnplugin<Options>((options) => {
       await ctx.scanDirs()
     },
     vite: {
-      async configResolved(config: any) {
-        ctx = createContext(options, config.root)
-        await ctx.scanDirs()
+      async handleHotUpdate({ file }) {
+        if (ctx.dirs?.some(dir => file.startsWith(dir)))
+          await ctx.scanDirs()
+      },
+      async configResolved(config) {
+        if (ctx.root !== config.root) {
+          ctx = createContext(options, config.root)
+          await ctx.scanDirs()
+        }
       },
     },
   }
