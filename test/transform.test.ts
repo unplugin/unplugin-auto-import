@@ -4,7 +4,7 @@ import fg from 'fast-glob'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createContext } from '../src/core/ctx'
 
-describe('transform', async() => {
+describe('transform', async () => {
   const ctx = createContext({
     imports: [
       'vue',
@@ -47,9 +47,9 @@ describe('transform', async() => {
       (name) => {
         return name.startsWith('customNamedResolved')
           ? {
-            from: `custom/resolved/${name.slice('customNamedResolved'.length)}`,
-            name: `_${name}`,
-          }
+              from: `custom/resolved/${name.slice('customNamedResolved'.length)}`,
+              name: `_${name}`,
+            }
           : null
       },
       ElementPlusResolver({
@@ -65,7 +65,7 @@ describe('transform', async() => {
   })
 
   for (const file of files) {
-    it(file, async() => {
+    it(file, async () => {
       const fixture = await fs.readFile(resolve(root, file), 'utf-8')
       const pass1 = (await ctx.transform(fixture, file))?.code ?? fixture
       expect(pass1).toMatchSnapshot()
@@ -75,7 +75,7 @@ describe('transform', async() => {
   }
 })
 
-describe('transform-vue-macro', async() => {
+describe('transform-vue-macro', async () => {
   const ctx = createContext({
     imports: [
       'vue/macros',
@@ -89,7 +89,7 @@ describe('transform-vue-macro', async() => {
   })
 
   for (const file of files) {
-    it(file, async() => {
+    it(file, async () => {
       const fixture = await fs.readFile(resolve(root, file), 'utf-8')
       const pass1 = (await ctx.transform(fixture, file))?.code ?? fixture
       expect(pass1).toMatchSnapshot()

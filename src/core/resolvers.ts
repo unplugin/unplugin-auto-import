@@ -47,7 +47,7 @@ export function resolversAddon(resolvers: Resolver[]): Addon {
         return
       const dynamic: ImportExtended[] = []
       const sideEffects: ImportExtended[] = []
-      await Promise.all([...names].map(async(name) => {
+      await Promise.all([...names].map(async (name) => {
         if (matched.find(i => i.as === name))
           return
         const resolved = await firstMatchedResolver(resolvers, name)

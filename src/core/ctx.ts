@@ -67,7 +67,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
   async function scanDirs() {
     if (dirs?.length) {
-      await unimport.modifyDynamicImports(async(imports) => {
+      await unimport.modifyDynamicImports(async (imports) => {
         const exports = await scanDirExports(dirs) as ImportExtended[]
         exports.forEach(i => i.__source = 'dir')
         return [
