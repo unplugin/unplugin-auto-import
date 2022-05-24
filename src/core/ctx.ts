@@ -1,4 +1,4 @@
-import { dirname, relative, resolve } from 'path'
+import { dirname, isAbsolute, relative, resolve } from 'path'
 import { promises as fs } from 'fs'
 import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
@@ -63,7 +63,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     const dir = dirname(file)
     return unimport.generateTypeDecarations({
       resolvePath: (i) => {
-        if (i.from.startsWith('.') || i.from.startsWith('/')) {
+        if (i.from.startsWith('.') || isAbsolute(i.from)) {
           const related = slash(relative(dir, i.from).replace(/\.ts$/, ''))
           return !related.startsWith('.')
             ? `./${related}`
