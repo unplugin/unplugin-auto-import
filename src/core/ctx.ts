@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+import { dirname, relative, resolve } from 'path'
 import { promises as fs } from 'fs'
 import { throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
@@ -58,9 +58,24 @@ export function createContext(options: Options = {}, root = process.cwd()) {
       ? resolve(root, 'auto-imports.d.ts')
       : resolve(root, preferDTS)
 
-  const generateConfigFiles = throttle(500, false, () => {
+  function generateDTS(file: string) {
+    const dir = dirname(file)
+    return unimport.generateTypeDecarations({
+      resolvePath: (i) => {
+        if (i.from.startsWith('.') || i.from.startsWith('/')) {
+          const related = relative(dir, i.from).replace(/\.ts$/, '')
+          return !related.startsWith('.')
+            ? `./${related}`
+            : related
+        }
+        return i.from
+      },
+    })
+  }
+
+  const writeConfigFiles = throttle(500, false, () => {
     if (dts)
-      fs.writeFile(dts, unimport.generateTypeDecarations(), 'utf-8')
+      fs.writeFile(dts, generateDTS(dts), 'utf-8')
     if (eslintrc.enabled && eslintrc.filepath)
       fs.writeFile(eslintrc.filepath, generateESLintConfigs(unimport.getImports(), eslintrc), 'utf-8')
   })
@@ -76,7 +91,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
         ] as Import[]
       })
     }
-    generateConfigFiles()
+    writeConfigFiles()
   }
 
   async function transform(code: string, id: string) {
@@ -87,7 +102,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     if (!s.hasChanged())
       return
 
-    generateConfigFiles()
+    writeConfigFiles()
 
     return {
       code: s.toString(),
@@ -103,10 +118,9 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     dirs,
     filter,
     scanDirs,
-    generateConfigFiles,
+    generateConfigFiles: writeConfigFiles,
     transform,
-    // for testing
-    unimport: unimport as any,
+    generateDTS,
   }
 }
 

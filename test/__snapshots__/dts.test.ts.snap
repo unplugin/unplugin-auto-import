@@ -50,6 +50,7 @@ declare global {
   const fade: typeof import('svelte/transition')['fade']
   const flip: typeof import('svelte/animate')['flip']
   const fly: typeof import('svelte/transition')['fly']
+  const foo: typeof import('./foo')['foo']
   const forwardRef: typeof import('react')['forwardRef']
   const get: typeof import('svelte/store')['get']
   const getAllContexts: typeof import('svelte')['getAllContexts']
