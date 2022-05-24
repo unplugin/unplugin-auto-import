@@ -1,9 +1,15 @@
+import { toArray } from '@antfu/utils'
 import type { Addon, Import } from 'unimport'
-import type { ImportExtended, ImportLegacy, Resolver } from '../types'
+import type { ImportExtended, ImportLegacy, Resolver, ResolverResult } from '../types'
 
-export function normalizeImport(info: Import | ImportExtended | ImportLegacy | string): ImportExtended | string {
-  if (typeof info === 'string')
-    return info
+export function normalizeImport(info: Import | ResolverResult | ImportExtended | ImportLegacy | string, name: string): ImportExtended {
+  if (typeof info === 'string') {
+    return {
+      name: 'default',
+      as: name,
+      from: info,
+    }
+  }
   if ('path' in info) {
     return {
       from: info.path,
@@ -12,20 +18,25 @@ export function normalizeImport(info: Import | ImportExtended | ImportLegacy | s
       sideEffects: info.sideEffects,
     }
   }
-  return info
+  return {
+    name,
+    as: name,
+    ...info,
+  }
 }
 
-export async function firstMatchedResolver(resolvers: Resolver[], name: string) {
+export async function firstMatchedResolver(resolvers: Resolver[], fullname: string) {
+  let name = fullname
   for (const resolver of resolvers) {
     if (typeof resolver === 'object' && resolver.type === 'directive') {
       if (name.startsWith('v'))
-        name = name.replace('v', '')
+        name = name.slice(1)
       else
         continue
     }
     const resolved = await (typeof resolver === 'function' ? resolver(name) : resolver.resolve(name))
     if (resolved)
-      return normalizeImport(resolved)
+      return normalizeImport(resolved, fullname)
   }
 }
 
@@ -34,26 +45,23 @@ export function resolversAddon(resolvers: Resolver[]): Addon {
     async matchImports(names, matched) {
       if (!resolvers.length)
         return
+      const dynamic: ImportExtended[] = []
+      const sideEffects: ImportExtended[] = []
       await Promise.all([...names].map(async(name) => {
         if (matched.find(i => i.as === name))
           return
         const resolved = await firstMatchedResolver(resolvers, name)
-        if (resolved) {
-          if (typeof resolved === 'string') {
-            matched.push({
-              as: name,
-              from: resolved,
-              name: 'default',
-            })
-          }
-          else {
-            matched.push({
-              as: name,
-              ...normalizeImport(resolved) as any,
-            })
-          }
-        }
+        if (resolved)
+          dynamic.push(resolved)
+
+        if (resolved?.sideEffects)
+          sideEffects.push(...toArray(resolved?.sideEffects).map(i => normalizeImport(i, '')))
       }))
+
+      if (dynamic.length || sideEffects.length) {
+        this.dynamicImports.push(...dynamic)
+        return [...matched, ...dynamic, ...sideEffects]
+      }
     },
   }
 }

@@ -25,9 +25,15 @@ export interface ImportExtended extends Import {
 }
 
 export type ImportNameAlias = [string, string]
-export type SideEffectsInfo = Arrayable<Import | string> | undefined
+export type SideEffectsInfo = Arrayable<ResolverResult | string> | undefined
 
-export type ResolverFunction = (name: string) => Awaitable<string | ImportExtended | null | undefined | void>
+export interface ResolverResult {
+  as?: string
+  name?: string
+  from: string
+}
+
+export type ResolverFunction = (name: string) => Awaitable<string | ResolverResult | ImportExtended | null | undefined | void>
 
 export interface ResolverResultObject {
   type: 'component' | 'directive'

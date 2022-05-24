@@ -167,6 +167,25 @@ const c = customNamedResolved2(1)
 "
 `;
 
+exports[`transform > resolver-element.ts 1`] = `
+"import { defineComponent } from 'vue';
+import { ElButton, ElMessage, ElLoadingDirective as vLoading } from 'element-plus/es';
+import 'element-plus/es/components/button/style/css';
+import 'element-plus/es/components/message/style/css';
+import 'element-plus/es/components/loading/style/css';
+export default defineComponent({
+  components: {
+    ElButton,
+  },
+  directives: {
+    loading: vLoading,
+  },
+})
+
+ElMessage.warning('Test')
+"
+`;
+
 exports[`transform > strings.ts 1`] = `
 "console.log(\\"ref(0)\\")
 console.log(\`ref(\${a})\`)
@@ -180,6 +199,7 @@ ref('z')
 exports[`transform > svelte.svelte 1`] = `
 "import { writable } from 'svelte/store';
 import { tweened } from 'svelte/motion';
+import { cubicOut } from 'svelte/easing';
 import { onMount } from 'svelte';
 const list = writable([1, 2, 3])
 const size = tweened(1, {

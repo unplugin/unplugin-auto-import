@@ -1,6 +1,7 @@
 import { resolve } from 'path'
 import { promises as fs } from 'fs'
 import fg from 'fast-glob'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createContext } from '../src/core/ctx'
 
 describe('transform', async() => {
@@ -51,6 +52,9 @@ describe('transform', async() => {
           }
           : null
       },
+      ElementPlusResolver({
+        importStyle: 'css',
+      }),
     ],
   })
 

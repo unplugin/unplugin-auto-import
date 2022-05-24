@@ -24,6 +24,8 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     dts: preferDTS = isPackageExists('typescript'),
   } = options
 
+  const dirs = options.dirs?.map(dir => resolve(root, dir))
+
   const eslintrc: ESLintrc = options.eslintrc || {}
   eslintrc.enabled = eslintrc.enabled === undefined ? false : eslintrc.enabled
   eslintrc.filepath = eslintrc.filepath || './.eslintrc-auto-import.json'
@@ -62,10 +64,9 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   })
 
   async function scanDirs() {
-    if (options.dirs?.length) {
-      unimport.clearDynamicImports()
+    if (dirs?.length) {
       await unimport.modifyDynamicImports(async(imports) => {
-        imports.push(...await scanDirExports(options.dirs!))
+        imports.push(...await scanDirExports(dirs))
       })
     }
     generateConfigFiles()
@@ -87,18 +88,12 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     }
   }
 
+  if (!imports.length && !resolvers.length)
+    console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
+
   return {
     unimport,
-    sourceMap: false,
-    resolvedImports: {},
-    presetOverriding: false,
-    ignore: [],
-    dirs: [],
-    ...options,
-    dts,
-    resolvers,
-    idFilter: filter,
-    eslintrc,
+    filter,
     scanDirs,
     generateConfigFiles,
     transform,

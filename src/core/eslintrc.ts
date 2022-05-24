@@ -12,7 +12,8 @@ export function generateESLintConfigs(
   const eslintConfigs: ESLintConfigs = { globals: {} }
 
   imports
-    .map(i => i.as || i.name)
+    .map(i => i.as ?? i.name)
+    .filter(Boolean)
     .sort()
     .forEach((name) => {
       eslintConfigs.globals[name] = eslintrc.globalsPropValue || true
