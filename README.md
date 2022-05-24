@@ -102,16 +102,7 @@ module.exports = {
 <details>
 <summary>Nuxt</summary><br>
 
-```ts
-// nuxt.config.js
-export default {
-  buildModules: [
-    ['unplugin-auto-import/nuxt', { /* options */ }],
-  ],
-}
-```
-
-> This module works for both Nuxt 2 and [Nuxt Vite](https://github.com/nuxt/vite)
+> You **don't need** this plugin for Nuxt, it's already builtin.
 
 <br></details>
 
@@ -207,6 +198,24 @@ AutoImport({
     },
   ],
 
+  // Auto import for all module exports under directories
+  dirs: [
+    // './hooks',
+    // './composables'
+    // ...
+  ],
+
+  // Filepath to generate corresponding .d.ts file.
+  // Defaults to './auto-imports.d.ts' when `typescript` is installed locally.
+  // Set `false` to disable.
+  dts: './auto-imports.d.ts',
+
+  // Custom resolvers, compatible with `unplugin-vue-components`
+  // see https://github.com/antfu/unplugin-auto-import/pull/23/
+  resolvers: [
+    /* ... */
+  ],
+
   // Generate corresponding .eslintrc-auto-import.json file.
   // eslint globals Docs - https://eslint.org/docs/user-guide/configuring/language-options#specifying-globals
   eslintrc: {
@@ -214,17 +223,6 @@ AutoImport({
     filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
     globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
   },
-
-  // custom resolvers
-  // see https://github.com/antfu/unplugin-auto-import/pull/23/
-  resolvers: [
-    /* ... */
-  ],
-
-  // Filepath to generate corresponding .d.ts file.
-  // Defaults to './auto-imports.d.ts' when `typescript` is installed locally.
-  // Set `false` to disable.
-  dts: './auto-imports.d.ts',
 })
 ```
 
