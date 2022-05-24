@@ -59,11 +59,11 @@ export function createContext(options: Options = {}, root = process.cwd()) {
       : resolve(root, preferDTS)
 
   function generateDTS(file: string) {
-    const dir = slash(dirname(file))
+    const dir = dirname(file)
     return unimport.generateTypeDecarations({
       resolvePath: (i) => {
         if (i.from.startsWith('.') || i.from.startsWith('/')) {
-          const related = slash(relative(dir, slash(i.from)).replace(/\.ts$/, ''))
+          const related = slash(relative(dir, i.from).replace(/\.ts$/, ''))
           return !related.startsWith('.')
             ? `./${related}`
             : related
