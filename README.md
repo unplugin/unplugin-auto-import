@@ -283,10 +283,8 @@ AutoImport({
 })
 ```
 
-</td>
-</tr>
-<tr>
-<td width="400px">
+</td></tr></table>
+<table><tr><td width="400px">
 
 2. Update your `eslintrc`:
 [Extending Configuration Files](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files)
