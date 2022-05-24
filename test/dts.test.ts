@@ -1,8 +1,7 @@
-import { generateDeclaration } from '../src/core/dts'
-import { resolveOptions } from '../src/core/options'
+import { createContext } from '../src/core/ctx'
 
 it('dts', () => {
-  const options = resolveOptions({
+  const ctx = createContext({
     imports: [
       'vue-demi',
       'react',
@@ -25,5 +24,5 @@ it('dts', () => {
     ],
   })
 
-  expect(generateDeclaration(options.imports, {})).toMatchSnapshot()
+  expect(ctx.unimport.generateTypeDecarations()).toMatchSnapshot()
 })

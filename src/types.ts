@@ -1,8 +1,9 @@
 import type { Arrayable, Awaitable } from '@antfu/utils'
 import type { FilterPattern } from '@rollup/pluginutils'
+import type { Import } from 'unimport'
 import { PresetName } from './presets'
 
-export interface ImportInfoLegacy {
+export interface ImportLegacy {
   /**
    * @deprecated renamed to `as`
    */
@@ -19,19 +20,14 @@ export interface ImportInfoLegacy {
   sideEffects?: SideEffectsInfo
 }
 
-export interface ImportInfo {
-  as?: string
-  name?: string
-  from: string
-}
-
-export type ImportNameAlias = [string, string]
-export type SideEffectsInfo = Arrayable<ImportInfo | string> | undefined
-export interface ResolvedResult extends ImportInfo {
+export interface ImportExtended extends Import {
   sideEffects?: SideEffectsInfo
 }
 
-export type ResolverFunction = (name: string) => Awaitable<string | ResolvedResult | null | undefined | void>
+export type ImportNameAlias = [string, string]
+export type SideEffectsInfo = Arrayable<Import | string> | undefined
+
+export type ResolverFunction = (name: string) => Awaitable<string | ImportExtended | null | undefined | void>
 
 export interface ResolverResultObject {
   type: 'component' | 'directive'
@@ -39,7 +35,7 @@ export interface ResolverResultObject {
 }
 
 /**
- * Given a identifier name, returns the import path or an importInfo object
+ * Given a identifier name, returns the import path or an import object
  */
 export type Resolver = ResolverFunction | ResolverResultObject
 
@@ -47,10 +43,6 @@ export type Resolver = ResolverFunction | ResolverResultObject
  * module, name, alias
  */
 export type ImportsMap = Record<string, (string | ImportNameAlias)[]>
-/**
- * name, meta
- */
-export type ImportsFlatMap = Record<string, ResolvedResult>
 
 export type ESLintGlobalsPropValue = boolean | 'readonly' | 'readable' | 'writable' | 'writeable'
 
@@ -132,38 +124,11 @@ export interface Options {
    * Generate corresponding .eslintrc-auto-import.json file.
    */
   eslintrc?: ESLintrc
-}
-
-export interface TransformOptions {
-  imports: ImportsFlatMap
 
   /**
-   * Identifiers to be ignored
+   * Path for directories to be auto imported
    */
-  ignore?: (string | RegExp)[]
-
-  /**
-   * Custom resolvers
-   */
-  resolvers?: Resolver[]
-
-  /**
-   * Generate source map.
-   *
-   * @default false
-   */
-  sourceMap?: boolean
-
-  /**
-   * Hold the value for dynamic resolved imports, will be mutated during transforming
-   */
-  resolvedImports?: ImportsFlatMap
-}
-
-export interface ResolvedOptions extends Omit<Required<Options>, 'imports' | 'resolvers' | 'dts' | 'include' | 'exclude' | 'eslintrc'>, Required<TransformOptions> {
-  idFilter: (id: string) => boolean
-  dts: string | false
-  eslintrc: ESLintrc
+  dirs?: string[]
 }
 
 export { PresetName }
