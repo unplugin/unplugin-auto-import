@@ -236,34 +236,76 @@ Refer to the [type definitions](./src/types.ts) for more options.
 
 See [src/presets](./src/presets).
 
-## ESLint - eslint(no-undef)
+## TypeScript
 
-Configure `options.eslintrc`, and modify your eslint configuration file.
+In order to properly hint types for auto-imported APIs
 
-Example:
+<table>
+<tr>
+<td width="400px" valign="top">
+
+1. Enable `options.dts` so that `auto-imports.d.ts` file is automatically generated
+2. Make sure `auto-imports.d.ts` is not excluded in `tsconfig.json`
+
+</td>
+<td width="600px"><br>
+
+```ts
+AutoImport({
+  dts: true // or a custom path
+})
+```
+
+</td>
+</tr>
+</table>
+
+## ESLint
+
+> 💡 When using TypeScript, we recommend to **disable** `no-undef` rule directly as TypeScript already check for them and you don't need to worry about this.
+
+If you have encountered ESLint error of `no-undef`:
+
+<table>
+<tr>
+<td width="400px">
+
+1. Enable `eslintrc.enabled`
+
+</td>
+<td width="600px"><br>
+
+```ts
+AutoImport({
+  eslintrc: {
+    enabled: true, // <-- this
+  },
+})
+```
+
+</td>
+</tr>
+<tr>
+<td width="400px">
+
+2. Update your `eslintrc`:
+[Extending Configuration Files](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files)
+
+</td>
+<td width="600px"><br>
 
 ```ts
 // .eslintrc.js
-
 module.exports = {
-  /* ... */
   extends: [
-    // ...
     './.eslintrc-auto-import.json',
   ],
 }
 ```
 
-ESLint Docs: [Extending Configuration Files](https://eslint.org/docs/user-guide/configuring/configuration-files#extending-configuration-files)
-
-> Note: `.eslintrc-auto-import.json` is generated automatically, If the configuration file changes do not take effect in time, please check the configuration file, restart eslint server or the editor
-
-## TypeScript
-
-In order to properly hint types for auto-imported APIs, make sure:
-
-- to configure `options.dts` so that `auto-imports.d.ts` file is automatically generated
-- to include `auto-imports.d.ts` in `tsconfig.json`
+</td>
+</tr>
+</table>
 
 ## FAQ
 
