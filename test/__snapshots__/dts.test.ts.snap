@@ -133,5 +133,6 @@ declare global {
   const watch: typeof import('vue-demi')['watch']
   const watchEffect: typeof import('vue-demi')['watchEffect']
   const writable: typeof import('svelte/store')['writable']
-}"
+}
+"
 `;
