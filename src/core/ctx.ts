@@ -63,7 +63,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     return unimport.generateTypeDecarations({
       resolvePath: (i) => {
         if (i.from.startsWith('.') || i.from.startsWith('/')) {
-          const related = posix.relative(dir, slash(i.from)).replace(/\.ts$/, '')
+          const related = slash(relative(dir, slash(i.from)).replace(/\.ts$/, ''))
           return !related.startsWith('.')
             ? `./${related}`
             : related
