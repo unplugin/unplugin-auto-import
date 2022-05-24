@@ -1,6 +1,6 @@
-import { dirname, relative, resolve } from 'path'
+import { dirname, posix, relative, resolve } from 'path'
 import { promises as fs } from 'fs'
-import { throttle, toArray } from '@antfu/utils'
+import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
 import { isPackageExists } from 'local-pkg'
 import type { Import } from 'unimport'
@@ -59,11 +59,11 @@ export function createContext(options: Options = {}, root = process.cwd()) {
       : resolve(root, preferDTS)
 
   function generateDTS(file: string) {
-    const dir = dirname(file)
+    const dir = slash(dirname(file))
     return unimport.generateTypeDecarations({
       resolvePath: (i) => {
         if (i.from.startsWith('.') || i.from.startsWith('/')) {
-          const related = relative(dir, i.from).replace(/\.ts$/, '')
+          const related = posix.relative(dir, slash(i.from)).replace(/\.ts$/, '')
           return !related.startsWith('.')
             ? `./${related}`
             : related
