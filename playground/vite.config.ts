@@ -13,6 +13,9 @@ export default defineConfig({
       resolvers: [
         ElementPlusResolver(),
       ],
+      dirs: [
+        './composables',
+      ],
     }),
   ],
 })
