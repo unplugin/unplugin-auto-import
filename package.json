@@ -97,7 +97,7 @@
     "unplugin": "^0.6.3"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.23.1",
+    "@antfu/eslint-config": "^0.24.0",
     "@antfu/ni": "^0.16.2",
     "@types/node": "^17.0.35",
     "@types/resolve": "^1.20.2",
@@ -108,7 +108,7 @@
     "fast-glob": "^3.2.11",
     "rollup": "^2.74.1",
     "tsup": "^5.12.8",
-    "typescript": "^4.6.4",
+    "typescript": "^4.7.2",
     "vite": "^2.9.9",
     "vitest": "^0.12.9",
     "webpack": "^5.72.1"
