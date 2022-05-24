@@ -105,6 +105,8 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     scanDirs,
     generateConfigFiles,
     transform,
+    // for testing
+    unimport: unimport as any,
   }
 }
 
