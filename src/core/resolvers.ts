@@ -58,10 +58,13 @@ export function resolversAddon(resolvers: Resolver[]): Addon {
           sideEffects.push(...toArray(resolved?.sideEffects).map(i => normalizeImport(i, '')))
       }))
 
-      if (dynamic.length || sideEffects.length) {
+      if (dynamic.length) {
         this.dynamicImports.push(...dynamic)
-        return [...matched, ...dynamic, ...sideEffects]
+        this.invalidate()
       }
+
+      if (dynamic.length || sideEffects.length)
+        return [...matched, ...dynamic, ...sideEffects]
     },
   }
 }
