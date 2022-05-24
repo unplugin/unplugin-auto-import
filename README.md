@@ -267,6 +267,10 @@ In order to properly hint types for auto-imported APIs, make sure:
 
 ## FAQ
 
+### Compare to [`unimport`](https://github.com/unjs/unimport)
+
+From v0.8.0, `unplugin-auto-import` **uses** `unimport` underneath. `unimport` is designed to be a lower level tool (it also powered Nuxt's auto import). You can think `unplugin-auto-import` is a wrapper of it that provides more user-friendly config APIs and capability like resolvers. Development of new features will mostly happend in `unimport` from now.
+
 ### Compare to [`vue-global-api`](https://github.com/antfu/vue-global-api)
 
 You can think of this plugin as a successor to `vue-global-api`, but offering much more flexibility and bindings with libraries other than Vue (e.g. React).

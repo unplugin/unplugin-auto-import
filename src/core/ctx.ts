@@ -101,7 +101,6 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   return {
     root,
     dirs,
-    unimport,
     filter,
     scanDirs,
     generateConfigFiles,
