@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "dev": "vite --open"
+    "dev": "vite --open",
+    "build": "vite build"
   },
   "dependencies": {
     "@vueuse/core": "^8.5.0",

@@ -4,6 +4,7 @@ import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
 import { isPackageExists } from 'local-pkg'
 import type { Import } from 'unimport'
+// @ts-expect-error types
 import { vueTemplateAddon } from 'unimport/addons'
 import { createUnimport, scanDirExports } from 'unimport'
 import MagicString from 'magic-string'
@@ -73,12 +74,32 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     })
   }
 
-  const writeConfigFiles = throttle(500, false, () => {
-    if (dts)
-      fs.writeFile(dts, generateDTS(dts), 'utf-8')
-    if (eslintrc.enabled && eslintrc.filepath)
-      fs.writeFile(eslintrc.filepath, generateESLintConfigs(unimport.getImports(), eslintrc), 'utf-8')
-  })
+  function generateESLint() {
+    return generateESLintConfigs(unimport.getImports(), eslintrc)
+  }
+
+  const writeConfigFilesThrottled = throttle(500, false, writeConfigFiles)
+
+  let lastDTS: string | undefined
+  let lastESLint: string | undefined
+  function writeConfigFiles() {
+    const promises: any[] = []
+    if (dts) {
+      const content = generateDTS(dts)
+      if (content !== lastDTS) {
+        lastDTS = content
+        promises.push(fs.writeFile(dts, generateDTS(dts), 'utf-8'))
+      }
+    }
+    if (eslintrc.enabled && eslintrc.filepath) {
+      const content = generateESLint()
+      if (content !== lastESLint) {
+        lastESLint = content
+        promises.push(fs.writeFile(eslintrc.filepath, content, 'utf-8'))
+      }
+    }
+    return Promise.all(promises)
+  }
 
   async function scanDirs() {
     if (dirs?.length) {
@@ -91,7 +112,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
         ] as Import[]
       })
     }
-    writeConfigFiles()
+    writeConfigFilesThrottled()
   }
 
   async function transform(code: string, id: string) {
@@ -102,7 +123,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     if (!s.hasChanged())
       return
 
-    writeConfigFiles()
+    writeConfigFilesThrottled()
 
     return {
       code: s.toString(),
@@ -118,9 +139,11 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     dirs,
     filter,
     scanDirs,
-    generateConfigFiles: writeConfigFiles,
+    writeConfigFiles,
+    writeConfigFilesThrottled,
     transform,
     generateDTS,
+    generateESLint,
   }
 }
 

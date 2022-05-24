@@ -16,6 +16,9 @@ export default createUnplugin<Options>((options) => {
     async buildStart() {
       await ctx.scanDirs()
     },
+    async buildEnd() {
+      await ctx.writeConfigFiles()
+    },
     vite: {
       async handleHotUpdate({ file }) {
         if (ctx.dirs?.some(dir => file.startsWith(dir)))
