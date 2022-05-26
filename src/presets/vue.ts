@@ -24,6 +24,8 @@ export const CommonCompositionAPI = [
   'isRef',
   'markRaw',
   'reactive',
+  'isReactive',
+  'isProxy',
   'readonly',
   'ref',
   'shallowReactive',
@@ -36,6 +38,8 @@ export const CommonCompositionAPI = [
   'unref',
   'watch',
   'watchEffect',
+  'watchPostEffect',
+  'watchSyncEffect',
 
   // component
   'defineComponent',
