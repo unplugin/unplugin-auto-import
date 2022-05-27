@@ -60,6 +60,8 @@ declare global {
   const h: typeof import('vue-demi')['h']
   const hasContext: typeof import('svelte')['hasContext']
   const inject: typeof import('vue-demi')['inject']
+  const isProxy: typeof import('vue-demi')['isProxy']
+  const isReactive: typeof import('vue-demi')['isReactive']
   const isReadonly: typeof import('vue-demi')['isReadonly']
   const isRef: typeof import('vue-demi')['isRef']
   const lazy: typeof import('react')['lazy']
@@ -132,6 +134,8 @@ declare global {
   const useTransition: typeof import('react')['useTransition']
   const watch: typeof import('vue-demi')['watch']
   const watchEffect: typeof import('vue-demi')['watchEffect']
+  const watchPostEffect: typeof import('vue-demi')['watchPostEffect']
+  const watchSyncEffect: typeof import('vue-demi')['watchSyncEffect']
   const writable: typeof import('svelte/store')['writable']
 }
 "
