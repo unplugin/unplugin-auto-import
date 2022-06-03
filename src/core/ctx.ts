@@ -129,7 +129,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
     return {
       code: s.toString(),
-      map: s.generateMap(),
+      map: s.generateMap({ source: id, includeContent: true }),
     }
   }
 
