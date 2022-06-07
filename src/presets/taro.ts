@@ -1,48 +1,27 @@
 import fs from 'fs'
 import path from 'path'
 import { resolveModule } from 'local-pkg'
-import type { ImportsMap } from '../types'
-
-interface TaroResolverOptions {
-  /**
-   * 是否包含全部API
-   */
-  isFull?: boolean
-  /**
-   * 需要被排除的API
-   */
-  exclude?: string[]
-  /**
-   * 处理存在冲突的API
-   * @example
-   * ```
-   * { nextTick: 'taroNextTick' }
-   * // output: ['nextTick', 'taroNextTick']
-   * ```
-   */
-  conflicts?: Record<string, string>
-}
+import type { ImportNameAlias, ImportsMap } from '../types'
 
 let _cache: ImportsMap | undefined
 
-function generateApis(options: TaroResolverOptions = {}): string[] {
-  const exclude = ['new', ...(options.exclude || [])]
+function generateApis() {
+  const exclude = ['new']
   const conflicts = Object.assign({
     nextTick: 'taroNextTick',
     getCurrentInstance: 'taroGetCurrentInstance',
-  }, (options.conflicts || {}))
-  const isFull = options.isFull || false
+  })
 
   const dir = resolveModule('@tarojs/taro')
   if (!dir) {
     console.error('\n[auto-import] Not found package `@tarojs/taro`, have you installed it?')
     console.error('see more https://github.com/NervJS/taro')
-    return []
+    return
   }
 
   try {
     const typesDir = `${path.dirname(dir) + path.sep}types`
-    let maps: string[] = []
+    let maps: Array<string | ImportNameAlias> = []
 
     const filesList: string[] = readFiles(typesDir)
 
@@ -54,7 +33,6 @@ function generateApis(options: TaroResolverOptions = {}): string[] {
 
       if (
         !content
-        || (!isFull && !file.includes('taro.hooks.d.ts'))
       )
         continue
 
@@ -68,9 +46,12 @@ function generateApis(options: TaroResolverOptions = {}): string[] {
     return Array.from(new Set(maps))
   }
   catch (err: any) {
-    console.error(`Some errors have occurred, please report an issue at https://github.com/antfu/unplugin-auto-import/issues/new?title=${encodeURIComponent('[Taro] Failed generate apis')}&body=${encodeURIComponent(err?.message)}`)
+    console.error(
+      'Some errors have occurred, '
+      + 'please report an issue at https://github.com/antfu/unplugin-auto-import/issues/new?'
+       + `title=${encodeURIComponent('[Taro] Failed generate apis')}&body=${encodeURIComponent(err?.message)}`,
+    )
     console.error(err)
-    return []
   }
 }
 
@@ -90,10 +71,10 @@ function readFiles(dir: string, filesList: string[] = []) {
   return filesList
 }
 
-export default function (options: TaroResolverOptions = {}): ImportsMap {
+export default function (): ImportsMap {
   if (!_cache) {
     _cache = {
-      '@tarojs/taro': generateApis(options),
+      '@tarojs/taro': generateApis() || [],
     }
   }
 
