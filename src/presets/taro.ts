@@ -7,10 +7,10 @@ let _cache: ImportsMap | undefined
 
 function generateApis() {
   const exclude = ['new']
-  const conflicts = Object.assign({
+  const conflicts: Record<string, string> = {
     nextTick: 'taroNextTick',
     getCurrentInstance: 'taroGetCurrentInstance',
-  })
+  }
 
   const dir = resolveModule('@tarojs/taro')
   if (!dir) {
@@ -31,16 +31,14 @@ function generateApis() {
       const content = match[0]
       const reg = /(?<name>\w+)(?=\s?\(.*?\)\:)/g
 
-      if (
-        !content
-      )
+      if (!content)
         continue
 
       const funcs: Array<string | [string, string]> = (content.match(reg) || [])
         .filter(fun => !exclude.includes(fun))
         .map((fun: string) => conflicts[fun] ? [fun, conflicts[fun]] : fun)
 
-      maps = maps.concat(...funcs)
+      maps = maps.concat(funcs)
     }
 
     return Array.from(new Set(maps))
