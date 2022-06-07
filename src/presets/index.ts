@@ -34,6 +34,7 @@ import uniApp from './uni-app'
 import solid from './solid'
 import solidAppRouter from './solid-app-router'
 import { jotai, jotaiUtils } from './jotai'
+import taro from './taro'
 
 export const presets = {
   'ahooks': ahooks,
@@ -70,6 +71,7 @@ export const presets = {
   'solid-app-router': solidAppRouter,
   'jotai': jotai,
   'jotai/utils': jotaiUtils,
+  'taro': taro,
 }
 
 export type PresetName = keyof typeof presets
