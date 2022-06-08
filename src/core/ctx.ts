@@ -90,7 +90,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
       const content = generateDTS(dts)
       if (content !== lastDTS) {
         lastDTS = content
-        promises.push(fs.writeFile(dts, generateDTS(dts), 'utf-8'))
+        promises.push(fs.writeFile(dts, content, 'utf-8'))
       }
     }
     if (eslintrc.enabled && eslintrc.filepath) {
