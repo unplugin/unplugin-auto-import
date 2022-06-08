@@ -3,13 +3,198 @@ import path from 'path'
 import { resolveModule } from 'local-pkg'
 import type { ImportNameAlias, ImportsMap } from '../types'
 
+const reservedKeywords = [
+  'abstract',
+  'arguments',
+  'boolean',
+  'break',
+  'byte',
+  'case',
+  'catch',
+  'char',
+  'class',
+  'const',
+  'continue',
+  'debugger',
+  'default',
+  'delete',
+  'do',
+  'double',
+  'else',
+  'enum',
+  'eval',
+  'export',
+  'extends',
+  'false',
+  'final',
+  'finally',
+  'float',
+  'for',
+  'function',
+  'goto',
+  'if',
+  'implements',
+  'import',
+  'in',
+  'instanceof',
+  'int',
+  'interface',
+  'let',
+  'long',
+  'native',
+  'new',
+  'null',
+  'package',
+  'private',
+  'protected',
+  'public',
+  'return',
+  'short',
+  'static',
+  'super',
+  'switch',
+  'synchronized',
+  'this',
+  'throw',
+  'throws',
+  'transient',
+  'true',
+  'try',
+  'typeof',
+  'var',
+  'void',
+  'volatile',
+  'while',
+  'with',
+  'yield,',
+  'Array',
+  'Date',
+  'eval',
+  'function',
+  'hasOwnProperty',
+  'Infinity',
+  'isFinite',
+  'isNaN',
+  'isPrototypeOf',
+  'length',
+  'Math',
+  'NaN',
+  'name',
+  'Number',
+  'Object',
+  'prototype',
+  'String',
+  'toString',
+  'undefined',
+  'valueOf',
+  'alert',
+  'all',
+  'anchor',
+  'anchors',
+  'area',
+  'assign',
+  'blur',
+  'button',
+  'checkbox',
+  'clearInterval',
+  'clearTimeout',
+  'clientInformation',
+  'close',
+  'closed',
+  'confirm',
+  'constructor',
+  'crypto',
+  'decodeURI',
+  'decodeURIComponent',
+  'defaultStatus',
+  'document',
+  'element',
+  'elements',
+  'embed',
+  'embeds',
+  'encodeURI',
+  'encodeURIComponent',
+  'escape',
+  'event',
+  'fileUpload',
+  'focus',
+  'form',
+  'forms',
+  'frame',
+  'innerHeight',
+  'innerWidth',
+  'layer',
+  'layers',
+  'link',
+  'location',
+  'mimeTypes',
+  'navigate',
+  'navigator',
+  'frames',
+  'frameRate',
+  'hidden',
+  'history',
+  'image',
+  'images',
+  'offscreenBuffering',
+  'open',
+  'opener',
+  'option',
+  'outerHeight',
+  'outerWidth',
+  'packages',
+  'pageXOffset',
+  'pageYOffset',
+  'parent',
+  'parseFloat',
+  'parseInt',
+  'password',
+  'pkcs11',
+  'plugin',
+  'prompt',
+  'propertyIsEnum',
+  'radio',
+  'reset',
+  'screenX',
+  'screenY',
+  'scroll',
+  'secure',
+  'select',
+  'self',
+  'setInterval',
+  'setTimeout',
+  'status',
+  'submit',
+  'taint',
+  'text',
+  'textarea',
+  'top',
+  'unescape',
+  'untaint',
+  'window',
+  'onblur',
+  'onclick',
+  'onerror',
+  'onfocus',
+  'onkeydown',
+  'onkeypress',
+  'onkeyup',
+  'onmouseover',
+  'onload',
+  'onmouseup',
+  'onmousedown',
+  'onsubmit',
+]
+
 let _cache: ImportsMap | undefined
 
 function generateApis() {
-  const exclude = ['new']
+  const exclude = [
+    'fail', 'success', 'complete', 'reject', 'resolve',
+    ...reservedKeywords,
+  ]
   const conflicts: Record<string, string> = {
     nextTick: 'taroNextTick',
-    getCurrentInstance: 'taroGetCurrentInstance',
   }
 
   const dir = resolveModule('@tarojs/taro')
@@ -26,10 +211,13 @@ function generateApis() {
     const filesList: string[] = readFiles(typesDir)
 
     for (const file of filesList) {
+      if (file.includes('taro.extend.d.ts'))
+        continue
+
       const pContent = fs.readFileSync(file, 'utf-8')
       const match = pContent.match(/(interface TaroStatic \{(.|\n)*\})/) || []
       const content = match[0]
-      const reg = /(?<name>\w+)(?=\s?\(.*?\)\:)/g
+      const reg = /(?<=\s{4})(?<name>\w+)(?=(\s?\()|\<)/g
 
       if (!content)
         continue
@@ -41,7 +229,13 @@ function generateApis() {
       maps = maps.concat(funcs)
     }
 
-    return Array.from(new Set(maps))
+    maps = [
+      'getEnv',
+      ['getCurrentInstance', 'taroGetCurrentInstance'],
+      ...Array.from(new Set(maps)),
+    ] as ImportNameAlias[]
+
+    return maps
   }
   catch (err: any) {
     console.error(
@@ -78,3 +272,4 @@ export default function (): ImportsMap {
 
   return _cache || {}
 }
+
