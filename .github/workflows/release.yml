@@ -12,10 +12,11 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - uses: actions/setup-node@v3
         with:
-          node-version: '14'
-          registry-url: https://registry.npmjs.org/
-      - run: npx conventional-github-releaser -p angular
+          node-version: 16.x
+
+      - run: npx changelogithub
         env:
-          CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
