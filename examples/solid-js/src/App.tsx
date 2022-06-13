@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-use-before-define
 import MainLayout from './layouts/MainLayout'
 import PageA from './views/PageA'
 import PageB from './views/PageB'

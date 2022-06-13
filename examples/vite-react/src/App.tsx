@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-use-before-define
 import React from 'react'
 import MainLayout from './layouts/MainLayout'
 import PageA from './views/PageA'

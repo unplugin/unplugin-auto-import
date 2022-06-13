@@ -1,4 +1,3 @@
-/* eslint-disable object-shorthand */
 import ahooks from './ahooks'
 import mobx from './mobx'
 import mobxReactLite from './mobx-react-lite'

@@ -25,33 +25,33 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
     },
     "./*": "./*",
     "./nuxt": {
-      "import": "./dist/nuxt.mjs",
-      "require": "./dist/nuxt.js"
+      "require": "./dist/nuxt.js",
+      "import": "./dist/nuxt.mjs"
     },
     "./rollup": {
-      "import": "./dist/rollup.mjs",
-      "require": "./dist/rollup.js"
+      "require": "./dist/rollup.js",
+      "import": "./dist/rollup.mjs"
     },
     "./types": {
-      "import": "./dist/types.mjs",
-      "require": "./dist/types.js"
+      "require": "./dist/types.js",
+      "import": "./dist/types.mjs"
     },
     "./vite": {
-      "import": "./dist/vite.mjs",
-      "require": "./dist/vite.js"
+      "require": "./dist/vite.js",
+      "import": "./dist/vite.mjs"
     },
     "./webpack": {
-      "import": "./dist/webpack.mjs",
-      "require": "./dist/webpack.js"
+      "require": "./dist/webpack.js",
+      "import": "./dist/webpack.mjs"
     },
     "./esbuild": {
-      "import": "./dist/esbuild.mjs",
-      "require": "./dist/esbuild.js"
+      "require": "./dist/esbuild.js",
+      "import": "./dist/esbuild.mjs"
     }
   },
   "main": "dist/index.js",
