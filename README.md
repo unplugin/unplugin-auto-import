@@ -211,7 +211,7 @@ AutoImport({
   dts: './auto-imports.d.ts',
 
   // Auto import inside Vue template
-  // see https://github.com/unjs/unimport/pull/15
+  // see https://github.com/unjs/unimport/pull/15 and https://github.com/unjs/unimport/pull/72
   vueTemplate: false,
 
   // Custom resolvers, compatible with `unplugin-vue-components`

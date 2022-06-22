@@ -108,6 +108,7 @@ export interface Options {
    * Auto import inside Vue templates
    *
    * @see https://github.com/unjs/unimport/pull/15
+   * @see https://github.com/unjs/unimport/pull/72
    * @default false
    */
   vueTemplate?: boolean

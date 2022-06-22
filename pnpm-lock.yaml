@@ -20,7 +20,7 @@ importers:
       rollup: ^2.75.7
       tsup: ^6.1.2
       typescript: ^4.7.4
-      unimport: ^0.2.9
+      unimport: ^0.3.0
       unplugin: ^0.7.0
       vite: ^2.9.12
       vitest: ^0.15.2
@@ -30,7 +30,7 @@ importers:
       '@rollup/pluginutils': 4.2.1
       local-pkg: 0.4.1
       magic-string: 0.26.2
-      unimport: 0.2.10_bnx2kifegytxvrbi4d7rxlduyu
+      unimport: 0.3.0_bnx2kifegytxvrbi4d7rxlduyu
       unplugin: 0.7.0_bnx2kifegytxvrbi4d7rxlduyu
     devDependencies:
       '@antfu/eslint-config': 0.25.1_b5e7v2qnwxfo6hmiq56u52mz3e
@@ -5408,8 +5408,8 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: true
 
-  /unimport/0.2.10_bnx2kifegytxvrbi4d7rxlduyu:
-    resolution: {integrity: sha512-HoQ0ZDzHJboRYJ4/YxtMAATxiya/s5C2UE6jLFNj1e0D6Qfq6Pw2P40L+ALCkjLwLhR8l2VROE7kba/AaFtdQg==}
+  /unimport/0.3.0_bnx2kifegytxvrbi4d7rxlduyu:
+    resolution: {integrity: sha512-RxvfvKBY+CyBmIuYSuBeosSiudgcVakdhVofy5mO5sJ3purQRc5yjLw0Lir7MKHnqe6XT1++8flgAvpxu1UkqQ==}
     dependencies:
       '@rollup/pluginutils': 4.2.1
       escape-string-regexp: 5.0.0
