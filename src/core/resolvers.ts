@@ -48,8 +48,13 @@ export function resolversAddon(resolvers: Resolver[]): Addon {
       const dynamic: ImportExtended[] = []
       const sideEffects: ImportExtended[] = []
       await Promise.all([...names].map(async (name) => {
-        if (matched.find(i => i.as === name))
+        const matchedImport = matched.find(i => i.as === name)
+        if (matchedImport) {
+          if (Object.hasOwn(matchedImport, 'sideEffects'))
+            sideEffects.push(...toArray((matchedImport as ImportExtended).sideEffects).map(i => normalizeImport(i, '')))
+
           return
+        }
         const resolved = await firstMatchedResolver(resolvers, name)
         if (resolved)
           dynamic.push(resolved)
