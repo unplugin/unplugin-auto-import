@@ -50,7 +50,7 @@ export function resolversAddon(resolvers: Resolver[]): Addon {
       await Promise.all([...names].map(async (name) => {
         const matchedImport = matched.find(i => i.as === name)
         if (matchedImport) {
-          if (Object.hasOwn(matchedImport, 'sideEffects'))
+          if ('sideEffects' in matchedImport)
             sideEffects.push(...toArray((matchedImport as ImportExtended).sideEffects).map(i => normalizeImport(i, '')))
 
           return
