@@ -98,3 +98,19 @@ describe('transform-vue-macro', async () => {
     })
   }
 })
+
+describe('directories-export', async () => {
+  const dirPath = 'test/fixtures/dir-export-with-comma'
+  const fileName = 'auto-imports.d.ts'
+  const filePath = `${dirPath}/${fileName}`
+  const ctx = createContext({
+    dts: filePath,
+    dirs: [dirPath],
+  })
+  await ctx.scanDirs()
+
+  it('trailing comma', async () => {
+    const fixture = await fs.readFile(filePath, 'utf-8')
+    expect(fixture).toMatchSnapshot()
+  })
+})
