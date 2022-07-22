@@ -198,10 +198,12 @@ AutoImport({
     },
   ],
 
-  // Auto import for all module exports under directories
+  // Auto import for module exports under directories
+  // by default it only scan one level of modules under the directory
   dirs: [
     // './hooks',
-    // './composables'
+    // './composables' // only root modules
+    // './composables/**', // all nested modules
     // ...
   ],
 
