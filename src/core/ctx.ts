@@ -26,7 +26,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     dts: preferDTS = isPackageExists('typescript'),
   } = options
 
-  const dirs = options.dirs?.map(dir => resolve(root, dir))
+  const dirs = options.dirs?.map(dir => dir.endsWith('/**') ? resolve(root, dir) : `${resolve(root, dir)}/**`)
 
   const eslintrc: ESLintrc = options.eslintrc || {}
   eslintrc.enabled = eslintrc.enabled === undefined ? false : eslintrc.enabled
