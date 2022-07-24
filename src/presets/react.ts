@@ -22,5 +22,6 @@ export default <ImportsMap>({
     'memo',
     'createRef',
     'forwardRef',
+    'Fragment'
   ],
 })
