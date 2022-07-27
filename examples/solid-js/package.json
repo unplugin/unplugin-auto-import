@@ -10,7 +10,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "solid-app-router": "^0.4.1",
+    "solid-app-router": "^0.4.2",
     "solid-js": "^1.4.8"
   },
   "devDependencies": {

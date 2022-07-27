@@ -103,7 +103,7 @@
     "@rollup/pluginutils": "^4.2.1",
     "local-pkg": "^0.4.2",
     "magic-string": "^0.26.2",
-    "unimport": "^0.6.3",
+    "unimport": "^0.6.4",
     "unplugin": "^0.8.0"
   },
   "devDependencies": {
@@ -116,7 +116,7 @@
     "eslint": "^8.20.0",
     "esno": "^0.16.3",
     "fast-glob": "^3.2.11",
-    "rollup": "^2.77.1",
+    "rollup": "^2.77.2",
     "tsup": "^6.2.0",
     "typescript": "^4.7.4",
     "vite": "^3.0.3",
