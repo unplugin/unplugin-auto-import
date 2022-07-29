@@ -33,12 +33,14 @@ import uniApp from './uni-app'
 import solid from './solid'
 import solidAppRouter from './solid-app-router'
 import { jotai, jotaiUtils } from './jotai'
+import vueuseMath from './vueuse-math'
 
 export const presets = {
   'ahooks': ahooks,
   '@nuxtjs/composition-api': nuxtCompositionApi,
   '@vue/composition-api': vueCompositionApi,
   '@vueuse/core': vueuseCore,
+  '@vueuse/math': vueuseMath,
   '@vueuse/head': vueuseHead,
   'mobx': mobx,
   'mobx-react-lite': mobxReactLite,
