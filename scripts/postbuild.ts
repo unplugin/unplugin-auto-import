@@ -1,14 +1,15 @@
 import { resolve } from 'path'
 import { promises as fs } from 'fs'
 import { basename } from 'path/posix'
+import { fileURLToPath } from 'url'
 import fg from 'fast-glob'
 
 async function run() {
   // fix cjs exports
-  const files = await fg('*.js', {
-    ignore: ['index.js', 'chunk-*'],
+  const files = await fg('*.cjs', {
+    ignore: ['chunk-*'],
     absolute: true,
-    cwd: resolve(__dirname, '../dist'),
+    cwd: resolve(fileURLToPath(import.meta.url), '../../dist'),
   })
   for (const file of files) {
     console.log('[postbuild]', basename(file))
