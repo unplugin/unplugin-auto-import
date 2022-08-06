@@ -1,7 +1,7 @@
 import type { ImportsMap } from '../types'
 
 export default <ImportsMap>({
-  'solid-app-router': [
+  '@solidjs/router': [
     'Link',
     'NavLink',
     'Navigate',
