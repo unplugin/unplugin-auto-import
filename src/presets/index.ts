@@ -31,6 +31,7 @@ import vuex from './vuex'
 import vitest from './vitest'
 import uniApp from './uni-app'
 import solid from './solid'
+import solidRouter from './solid-router'
 import solidAppRouter from './solid-app-router'
 import { jotai, jotaiUtils } from './jotai'
 import vueuseMath from './vueuse-math'
@@ -68,6 +69,7 @@ export const presets = {
   'vitest': vitest,
   'uni-app': uniApp,
   'solid-js': solid,
+  '@solidjs/router': solidRouter,
   'solid-app-router': solidAppRouter,
   'jotai': jotai,
   'jotai/utils': jotaiUtils,
