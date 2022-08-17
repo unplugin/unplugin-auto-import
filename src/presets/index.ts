@@ -35,6 +35,7 @@ import solidRouter from './solid-router'
 import solidAppRouter from './solid-app-router'
 import { jotai, jotaiUtils } from './jotai'
 import vueuseMath from './vueuse-math'
+import recoil from './recoil'
 
 export const presets = {
   'ahooks': ahooks,
@@ -73,6 +74,7 @@ export const presets = {
   'solid-app-router': solidAppRouter,
   'jotai': jotai,
   'jotai/utils': jotaiUtils,
+  'recoil': recoil,
 }
 
 export type PresetName = keyof typeof presets
