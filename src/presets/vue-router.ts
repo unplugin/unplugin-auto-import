@@ -1,8 +1,13 @@
 import type { ImportsMap } from '../types'
 
-export default <ImportsMap>({
-  'vue-router': [
-    'useRouter',
-    'useRoute',
-  ],
-})
+export const CommonRouterAPI = [
+  'useRouter',
+  'useRoute',
+  'useLink',
+  'onBeforeRouteUpdate',
+  'onBeforeRouteLeave',
+]
+
+export default <ImportsMap>{
+  'vue-router': CommonRouterAPI,
+}
