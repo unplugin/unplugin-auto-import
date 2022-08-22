@@ -22,6 +22,7 @@ import vitepress from './vitepress'
 import vue from './vue'
 import vueDemi from './vue-demi'
 import vueI18n from './vue-i18n'
+import vueI18nBridge from './vue-i18n-bridge'
 import vueRouter from './vue-router'
 import vueCompositionApi from './vue-composition-api'
 import vueuseCore from './vueuse-core'
@@ -63,6 +64,7 @@ export const presets = {
   'vitepress': vitepress,
   'vue-demi': vueDemi,
   'vue-i18n': vueI18n,
+  'vue-i18n-bridge': vueI18nBridge,
   'vue-router': vueRouter,
   'vue': vue,
   'vue/macros': vueMacros,
