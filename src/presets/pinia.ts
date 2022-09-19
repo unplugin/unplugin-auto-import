@@ -15,5 +15,8 @@ export default <ImportsMap>({
     'setActivePinia',
     'setMapStoreSuffix',
     'storeToRefs',
+    
+    // vue2
+    'PiniaVuePlugin'
   ],
 })
