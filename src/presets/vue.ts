@@ -67,6 +67,7 @@ export default <ImportsMap>({
     'onRenderTracked',
     'onRenderTriggered',
     'resolveComponent',
+    'resolveDirective',
     'useCssVars',
   ],
 })
