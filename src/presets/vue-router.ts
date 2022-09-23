@@ -6,6 +6,6 @@ export default <ImportsMap>({
     'useRoute',
     'useLink',
     'onBeforeRouteLeave',
-    'onBeforeRouteUpdate'
+    'onBeforeRouteUpdate',
   ],
 })
