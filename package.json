@@ -104,8 +104,8 @@
     "@rollup/pluginutils": "^5.0.1",
     "local-pkg": "^0.4.2",
     "magic-string": "^0.26.2",
-    "unimport": "^0.6.7",
-    "unplugin": "^0.9.3"
+    "unimport": "^0.6.8",
+    "unplugin": "^0.10.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.27.0",
