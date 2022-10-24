@@ -11,11 +11,11 @@
   },
   "dependencies": {
     "solid-app-router": "^0.4.2",
-    "solid-js": "^1.4.8"
+    "solid-js": "^1.6.0"
   },
   "devDependencies": {
-    "typescript": "^4.7.4",
-    "vite": "^3.0.8",
-    "vite-plugin-solid": "^2.3.0"
+    "typescript": "^4.8.4",
+    "vite": "^3.1.8",
+    "vite-plugin-solid": "^2.3.10"
   }
 }
