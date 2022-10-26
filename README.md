@@ -162,6 +162,26 @@ build({
 
 <br></details>
 
+
+<details>
+<summary>Astro</summary><br>
+
+```ts
+// astro.config.mjs
+import AutoImport from 'unplugin-auto-import/astro'
+
+export default defineConfig({
+  integrations: [
+    AutoImport({
+      /* options */
+    })
+  ],
+})
+
+```
+
+<br></details>
+
 ## Configuration
 
 ```ts

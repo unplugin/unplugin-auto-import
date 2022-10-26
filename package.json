@@ -18,6 +18,7 @@
   "keywords": [
     "unplugin",
     "vite",
+    "astro",
     "webpack",
     "rollup",
     "auto-import",
@@ -35,6 +36,11 @@
       "types": "./dist/nuxt.d.ts",
       "require": "./dist/nuxt.cjs",
       "import": "./dist/nuxt.js"
+    },
+    "./astro": {
+      "types": "./dist/astro.d.ts",
+      "require": "./dist/astro.cjs",
+      "import": "./dist/astro.js"
     },
     "./rollup": {
       "types": "./dist/rollup.d.ts",
