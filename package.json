@@ -1,7 +1,7 @@
 {
   "name": "unplugin-auto-import",
   "type": "module",
-  "version": "0.11.2",
+  "version": "0.11.3",
   "packageManager": "pnpm@7.1.1",
   "description": "Register global imports on demand for Vite and Webpack",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
@@ -106,28 +106,28 @@
     }
   },
   "dependencies": {
-    "@antfu/utils": "^0.5.2",
-    "@rollup/pluginutils": "^4.2.1",
+    "@antfu/utils": "^0.6.0",
+    "@rollup/pluginutils": "^5.0.2",
     "local-pkg": "^0.4.2",
-    "magic-string": "^0.26.2",
-    "unimport": "^0.6.7",
-    "unplugin": "^0.9.3"
+    "magic-string": "^0.26.7",
+    "unimport": "^0.6.8",
+    "unplugin": "^0.10.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.26.1",
-    "@antfu/ni": "^0.17.2",
-    "@types/node": "^18.7.6",
+    "@antfu/eslint-config": "^0.27.0",
+    "@antfu/ni": "^0.18.2",
+    "@types/node": "^18.11.4",
     "@types/resolve": "^1.20.2",
-    "@vueuse/metadata": "^9.1.0",
+    "@vueuse/metadata": "^9.3.1",
     "bumpp": "^8.2.1",
-    "eslint": "^8.22.0",
+    "eslint": "^8.26.0",
     "esno": "^0.16.3",
-    "fast-glob": "^3.2.11",
-    "rollup": "^2.78.0",
-    "tsup": "^6.2.2",
-    "typescript": "^4.7.4",
-    "vite": "^3.0.8",
-    "vitest": "^0.22.1",
+    "fast-glob": "^3.2.12",
+    "rollup": "^3.2.3",
+    "tsup": "^6.3.0",
+    "typescript": "^4.8.4",
+    "vite": "^3.1.8",
+    "vitest": "^0.24.3",
     "webpack": "^5.74.0"
   }
 }
