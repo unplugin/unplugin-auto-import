@@ -110,15 +110,15 @@
     "@rollup/pluginutils": "^5.0.2",
     "local-pkg": "^0.4.2",
     "magic-string": "^0.26.7",
-    "unimport": "^0.6.8",
-    "unplugin": "^0.10.1"
+    "unimport": "^0.7.0",
+    "unplugin": "^0.10.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.27.0",
     "@antfu/ni": "^0.18.2",
-    "@types/node": "^18.11.4",
+    "@types/node": "^18.11.5",
     "@types/resolve": "^1.20.2",
-    "@vueuse/metadata": "^9.3.1",
+    "@vueuse/metadata": "^9.4.0",
     "bumpp": "^8.2.1",
     "eslint": "^8.26.0",
     "esno": "^0.16.3",

@@ -1,7 +1,8 @@
 import { join } from 'path'
+import { expect, it } from 'vitest'
 import { createContext } from '../src/core/ctx'
 
-it('dts', () => {
+it('dts', async () => {
   const cwd = process.cwd()
   const ctx = createContext({
     imports: [
@@ -27,5 +28,5 @@ it('dts', () => {
     ],
   })
 
-  expect(ctx.generateDTS(join(cwd, 'index.d.ts'))).toMatchSnapshot()
+  expect(await ctx.generateDTS(join(cwd, 'index.d.ts'))).toMatchSnapshot()
 })

@@ -76,29 +76,35 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     })
   }
 
-  function generateESLint() {
-    return generateESLintConfigs(unimport.getImports(), eslintrc)
+  async function generateESLint() {
+    return generateESLintConfigs(await unimport.getImports(), eslintrc)
   }
 
   const writeConfigFilesThrottled = throttle(500, false, writeConfigFiles)
 
   let lastDTS: string | undefined
   let lastESLint: string | undefined
-  function writeConfigFiles() {
+  async function writeConfigFiles() {
     const promises: any[] = []
     if (dts) {
-      const content = generateDTS(dts)
-      if (content !== lastDTS) {
-        lastDTS = content
-        promises.push(fs.writeFile(dts, content, 'utf-8'))
-      }
+      promises.push(
+        generateDTS(dts).then((content) => {
+          if (content !== lastDTS) {
+            lastDTS = content
+            return fs.writeFile(dts, content, 'utf-8')
+          }
+        }),
+      )
     }
     if (eslintrc.enabled && eslintrc.filepath) {
-      const content = generateESLint()
-      if (content !== lastESLint) {
-        lastESLint = content
-        promises.push(fs.writeFile(eslintrc.filepath, content, 'utf-8'))
-      }
+      promises.push(
+        generateESLint().then((content) => {
+          if (content !== lastESLint) {
+            lastESLint = content
+            return fs.writeFile(eslintrc.filepath!, content, 'utf-8')
+          }
+        }),
+      )
     }
     return Promise.all(promises)
   }

@@ -2,6 +2,7 @@ import { resolve } from 'path'
 import { promises as fs } from 'fs'
 import fg from 'fast-glob'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { describe, expect, it } from 'vitest'
 import { createContext } from '../src/core/ctx'
 
 describe('transform', async () => {
