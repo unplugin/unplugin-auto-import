@@ -114,6 +114,13 @@ export interface Options {
   vueTemplate?: boolean
 
   /**
+   * Auto import React Component
+   *
+   * @default false
+   */
+  reactComponent?: boolean
+
+  /**
    * Allow overriding imports sources from multiple presets.
    *
    * @default false

@@ -81,3 +81,5 @@ dist
 .idea
 auto-imports.d.ts
 .eslintrc-auto-import.json
+
+.vscode

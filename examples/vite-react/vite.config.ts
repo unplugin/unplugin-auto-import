@@ -15,6 +15,8 @@ export default defineConfig({
     AutoImport({
       imports: ['react', 'react-router-dom', 'react-i18next', 'ahooks'],
       dts: './src/auto-imports.d.ts',
+      dirs: ['src/layouts', 'src/views'],
+      reactComponent: true,
       resolvers: [
         IconsResolver({
           componentPrefix: 'Icon',
