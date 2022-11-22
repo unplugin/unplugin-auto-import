@@ -80,7 +80,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     return generateESLintConfigs(await unimport.getImports(), eslintrc)
   }
 
-  const writeConfigFilesThrottled = throttle(500, false, writeConfigFiles)
+  const writeConfigFilesThrottled = throttle(500, writeConfigFiles, { noLeading: false })
 
   let lastDTS: string | undefined
   let lastESLint: string | undefined
