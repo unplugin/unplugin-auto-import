@@ -114,11 +114,11 @@ export interface Options {
   vueTemplate?: boolean
 
   /**
-   * Auto import React Component
+   * Set default export alias by file name
    *
    * @default false
    */
-  reactComponent?: boolean
+  defaultExportByFilename?: boolean
 
   /**
    * Allow overriding imports sources from multiple presets.

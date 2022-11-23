@@ -113,10 +113,10 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     if (dirs?.length) {
       await unimport.modifyDynamicImports(async (imports) => {
         const exports = await scanDirExports(dirs, {
-          filePatterns: getScanDirsFilePatterns(options),
+          filePatterns: ['*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}'],
         }) as ImportExtended[]
         exports.forEach(i => i.__source = 'dir')
-        return modifyReactComponentDefaultExports([
+        return modifyDefaultExportsAlias([
           ...imports.filter((i: ImportExtended) => i.__source !== 'dir'),
           ...exports,
         ], options)
@@ -195,18 +195,11 @@ export function flattenImports(map: Options['imports'], overriding = false): Imp
   return Object.values(flat)
 }
 
-function getScanDirsFilePatterns(options: Options) {
-  if (options.reactComponent)
-    return ['*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}']
-
-  return ['*.{ts,js,mjs,cjs,mts,cts}']
-}
-
-function modifyReactComponentDefaultExports(imports: ImportExtended[], options: Options): Import[] {
-  if (options.reactComponent) {
+function modifyDefaultExportsAlias(imports: ImportExtended[], options: Options): Import[] {
+  if (options.defaultExportByFilename) {
     imports.forEach((i) => {
-      if (/(t|j)sx$/.test(i.from) && i.name === 'default')
-        i.as = i.from.split('/').pop()?.split('.')?.shift()
+      if (i.name === 'default')
+        i.as = i.from.split('/').pop()?.split('.')?.shift() ?? i.as
     })
   }
 
