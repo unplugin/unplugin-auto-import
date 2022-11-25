@@ -1,7 +1,4 @@
 import React from 'react'
-import MainLayout from './layouts/MainLayout'
-import PageA from './views/PageA'
-import PageB from './views/PageB'
 import './i18n'
 
 function App() {

@@ -66,7 +66,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     return unimport.generateTypeDeclarations({
       resolvePath: (i) => {
         if (i.from.startsWith('.') || isAbsolute(i.from)) {
-          const related = slash(relative(dir, i.from).replace(/\.ts$/, ''))
+          const related = slash(relative(dir, i.from).replace(/\.ts(x)?$/, ''))
           return !related.startsWith('.')
             ? `./${related}`
             : related
@@ -112,12 +112,14 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   async function scanDirs() {
     if (dirs?.length) {
       await unimport.modifyDynamicImports(async (imports) => {
-        const exports = await scanDirExports(dirs) as ImportExtended[]
+        const exports = await scanDirExports(dirs, {
+          filePatterns: ['*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}'],
+        }) as ImportExtended[]
         exports.forEach(i => i.__source = 'dir')
-        return [
+        return modifyDefaultExportsAlias([
           ...imports.filter((i: ImportExtended) => i.__source !== 'dir'),
           ...exports,
-        ] as Import[]
+        ], options)
       })
     }
     writeConfigFilesThrottled()
@@ -191,4 +193,15 @@ export function flattenImports(map: Options['imports'], overriding = false): Imp
   })
 
   return Object.values(flat)
+}
+
+function modifyDefaultExportsAlias(imports: ImportExtended[], options: Options): Import[] {
+  if (options.defaultExportByFilename) {
+    imports.forEach((i) => {
+      if (i.name === 'default')
+        i.as = i.from.split('/').pop()?.split('.')?.shift() ?? i.as
+    })
+  }
+
+  return imports as Import[]
 }

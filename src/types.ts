@@ -114,6 +114,13 @@ export interface Options {
   vueTemplate?: boolean
 
   /**
+   * Set default export alias by file name
+   *
+   * @default false
+   */
+  defaultExportByFilename?: boolean
+
+  /**
    * Allow overriding imports sources from multiple presets.
    *
    * @default false
