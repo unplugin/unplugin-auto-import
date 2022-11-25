@@ -1,7 +1,7 @@
 {
   "name": "unplugin-auto-import",
   "type": "module",
-  "version": "0.11.5",
+  "version": "0.12.0",
   "packageManager": "pnpm@7.1.1",
   "description": "Register global imports on demand for Vite and Webpack",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
