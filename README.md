@@ -217,6 +217,9 @@ AutoImport({
       ],
     },
   ],
+  
+  // Enable auto import by filename for default module exports under directories
+  defaultExportByFilename: false,
 
   // Auto import for module exports under directories
   // by default it only scan one level of modules under the directory
