@@ -126,7 +126,16 @@ module.exports = {
 <summary>Quasar</summary><br>
 
 ```ts
-// quasar.conf.js
+// quasar.conf.js [Vite]
+module.exports = {
+  vitePlugins: [
+    ['unplugin-auto-import/vite', { /* options */ }],
+  ],
+}
+```
+
+```ts
+// quasar.conf.js [Webpack]
 const AutoImportPlugin = require('unplugin-auto-import/webpack')
 
 module.exports = {
