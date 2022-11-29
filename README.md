@@ -217,7 +217,6 @@ AutoImport({
       ],
     },
   ],
-  
   // Enable auto import by filename for default module exports under directories
   defaultExportByFilename: false,
 
