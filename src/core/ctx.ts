@@ -100,8 +100,8 @@ export function createContext(options: Options = {}, root = process.cwd()) {
       promises.push(
         generateESLint().then((content) => {
           if (content !== lastESLint) {
-            lastESLint = content
-            return fs.writeFile(eslintrc.filepath!, content, 'utf-8')
+            lastESLint = `${content}\n`
+            return fs.writeFile(eslintrc.filepath!, lastESLint, 'utf-8')
           }
         }),
       )
