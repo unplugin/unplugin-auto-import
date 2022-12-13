@@ -23,6 +23,7 @@ import vue from './vue'
 import vueDemi from './vue-demi'
 import vueI18n from './vue-i18n'
 import vueRouter from './vue-router'
+import unpluginVueRouter from './@vue-router'
 import vueCompositionApi from './vue-composition-api'
 import vueuseCore from './vueuse-core'
 import vueMacros from './vue-macros'
@@ -63,6 +64,7 @@ export const presets = {
   'vitepress': vitepress,
   'vue-demi': vueDemi,
   'vue-i18n': vueI18n,
+  '@vue-router': unpluginVueRouter,
   'vue-router': vueRouter,
   'vue': vue,
   'vue/macros': vueMacros,
