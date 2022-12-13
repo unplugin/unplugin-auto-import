@@ -23,6 +23,7 @@ import vue from './vue'
 import vueDemi from './vue-demi'
 import vueI18n from './vue-i18n'
 import vueRouter from './vue-router'
+import vueRouterComposables from './vue-router-composables'
 import vueCompositionApi from './vue-composition-api'
 import vueuseCore from './vueuse-core'
 import vueMacros from './vue-macros'
@@ -64,6 +65,7 @@ export const presets = {
   'vue-demi': vueDemi,
   'vue-i18n': vueI18n,
   'vue-router': vueRouter,
+  'vue-router/composables': vueRouterComposables,
   'vue': vue,
   'vue/macros': vueMacros,
   'vuex': vuex,
