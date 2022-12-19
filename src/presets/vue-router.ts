@@ -7,5 +7,11 @@ export default <ImportsMap>({
     'useLink',
     'onBeforeRouteLeave',
     'onBeforeRouteUpdate',
+    'createMemoryHistory',
+    'createRouter',
+    'createWebHashHistory',
+    'createWebHistory',
+    'isNavigationFailure',
+    'loadRouteLocation',
   ],
 })
