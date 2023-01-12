@@ -82,6 +82,11 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
   const writeConfigFilesThrottled = throttle(500, writeConfigFiles, { noLeading: false })
 
+  async function writeFile(dts: string, content: string) {
+    await fs.mkdir(dirname(dts), { recursive: true })
+    return await fs.writeFile(dts, content, 'utf-8')
+  }
+
   let lastDTS: string | undefined
   let lastESLint: string | undefined
   async function writeConfigFiles() {
@@ -91,7 +96,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
         generateDTS(dts).then((content) => {
           if (content !== lastDTS) {
             lastDTS = content
-            return fs.writeFile(dts, content, 'utf-8')
+            return writeFile(dts, content)
           }
         }),
       )
@@ -101,7 +106,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
         generateESLint().then((content) => {
           if (content !== lastESLint) {
             lastESLint = content
-            return fs.writeFile(eslintrc.filepath!, content, 'utf-8')
+            return writeFile(eslintrc.filepath!, content)
           }
         }),
       )
