@@ -82,9 +82,9 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
   const writeConfigFilesThrottled = throttle(500, writeConfigFiles, { noLeading: false })
 
-  async function writeFile(dts: string, content: string) {
-    await fs.mkdir(dirname(dts), { recursive: true })
-    return await fs.writeFile(dts, content, 'utf-8')
+  async function writeFile(filePath: string, content: string) {
+    await fs.mkdir(dirname(filePath), { recursive: true })
+    return await fs.writeFile(filePath, content, 'utf-8')
   }
 
   let lastDTS: string | undefined
