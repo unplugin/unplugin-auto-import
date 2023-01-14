@@ -39,6 +39,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   const cache = isCache === false ? false : resolve(root, isCache === true ? 'auto-imports-cache.json' : isCache)
 
   const unimport = createUnimport({
+    cache,
     imports: imports as Import[],
     presets: [],
     addons: [
@@ -153,7 +154,6 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     if (!s.hasChanged())
       return
 
-    await unimport.updateCacheImports(id)
     writeConfigFilesThrottled()
 
     return {
