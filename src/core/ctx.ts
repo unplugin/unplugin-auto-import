@@ -84,18 +84,6 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     return generateESLintConfigs(await unimport.getImports(), eslintrc)
   }
 
-  async function generateCache() {
-    if (!cache)
-      return
-
-    try {
-      await fs.access(cache)
-    }
-    catch {
-      await writeFile(cache, '{}')
-    }
-  }
-
   const writeConfigFilesThrottled = throttle(500, writeConfigFiles, { noLeading: false })
 
   async function writeFile(filePath: string, content = '') {
@@ -175,7 +163,6 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     transform,
     generateDTS,
     generateESLint,
-    generateCache,
   }
 }
 
