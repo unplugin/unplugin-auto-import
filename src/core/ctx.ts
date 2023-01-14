@@ -24,6 +24,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
   const {
     dts: preferDTS = isPackageExists('typescript'),
+    cache: isCache = false,
   } = options
 
   const dirs = options.dirs?.map(dir => resolve(root, dir))
@@ -34,6 +35,8 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   eslintrc.globalsPropValue = eslintrc.globalsPropValue === undefined ? true : eslintrc.globalsPropValue
 
   const resolvers = options.resolvers ? [options.resolvers].flat(2) : []
+
+  const cache = isCache === false ? false : resolve(root, isCache === true ? 'auto-imports-cache.json' : isCache)
 
   const unimport = createUnimport({
     imports: imports as Import[],
@@ -80,9 +83,21 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     return generateESLintConfigs(await unimport.getImports(), eslintrc)
   }
 
+  async function generateCache() {
+    if (!cache)
+      return
+
+    try {
+      await fs.access(cache)
+    }
+    catch {
+      await writeFile(cache, '{}')
+    }
+  }
+
   const writeConfigFilesThrottled = throttle(500, writeConfigFiles, { noLeading: false })
 
-  async function writeFile(filePath: string, content: string) {
+  async function writeFile(filePath: string, content = '') {
     await fs.mkdir(dirname(filePath), { recursive: true })
     return await fs.writeFile(filePath, content, 'utf-8')
   }
@@ -138,6 +153,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     if (!s.hasChanged())
       return
 
+    await unimport.updateCacheImports(id)
     writeConfigFilesThrottled()
 
     return {
@@ -159,6 +175,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     transform,
     generateDTS,
     generateESLint,
+    generateCache,
   }
 }
 

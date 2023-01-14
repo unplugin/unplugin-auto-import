@@ -105,6 +105,12 @@ export interface Options {
   dts?: string | boolean
 
   /**
+   * cache on-demand dts,eslint
+   * @default false
+   */
+  cache?: string | boolean
+
+  /**
    * Auto import inside Vue templates
    *
    * @see https://github.com/unjs/unimport/pull/15
