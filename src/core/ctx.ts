@@ -133,12 +133,26 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     writeConfigFilesThrottled()
   }
 
+  async function getCacheData(cache: string) {
+    const str = (await fs.readFile(cache, 'utf-8')).trim()
+    return JSON.parse(str || '{}') as { [key: string]: Import[] }
+  }
+
   async function generateCache() {
     if (!cache)
       return
 
     try {
-      await fs.access(cache)
+      const cacheData = await getCacheData(cache)
+      await Promise.allSettled(Object.keys(cacheData).map(async (filePath) => {
+        try {
+          await fs.access(posix.resolve(root, filePath))
+        }
+        catch {
+          Reflect.deleteProperty(cacheData, filePath)
+        }
+      }))
+      await writeFile(cache, JSON.stringify(cacheData, null, 2))
     }
     catch {
       await writeFile(cache, '{}')
@@ -153,9 +167,9 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
     isInitialCache = true
     await resolveCachePromise
-    const str = (await fs.readFile(cache, 'utf-8')).trim()
-    const cacheData: { [prop: string]: Import[] } = JSON.parse(str || '{}')
     await unimport.modifyDynamicImports(async (imports) => {
+      const cacheData = await getCacheData(cache)
+
       if (id && importList) {
         const filePath = posix.normalize(id).replace(posix.normalize(root), '')
         importList = importList.filter(i => (i.name ?? i.as) && i.name !== 'default')
