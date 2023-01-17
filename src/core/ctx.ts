@@ -1,4 +1,4 @@
-import { dirname, isAbsolute, relative, resolve } from 'path'
+import { dirname, isAbsolute, relative, resolve, posix } from 'path'
 import { promises as fs } from 'fs'
 import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
@@ -39,7 +39,6 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   const cache = isCache === false ? false : resolve(root, isCache === true ? 'auto-imports-cache.json' : isCache)
 
   const unimport = createUnimport({
-    cache,
     imports: imports as Import[],
     presets: [],
     addons: [
@@ -134,13 +133,49 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     writeConfigFilesThrottled()
   }
 
+  async function generateCache() {
+    if (!cache) return
+
+    try {
+      await fs.access(cache)
+    }
+    catch {
+      await writeFile(cache, '{}')
+    }
+  }
+
+  let isInitialCache = false
+  const resolveCachePromise = generateCache()
+  async function updateCacheImports(id?: string, importList?: Import[]) {
+    if (!cache || (isInitialCache && !id))
+      return
+
+    isInitialCache = true
+    await resolveCachePromise
+    const str = (await fs.readFile(cache, 'utf-8')).trim()
+    const cacheData: { [prop: string]: Import[] } = JSON.parse(str || '{}')
+    await unimport.modifyDynamicImports(async (imports) => {
+      if (id && importList) {
+        const filePath = posix.normalize(id).replace(posix.normalize(root), '')
+        importList = importList.filter(i => (i.name ?? i.as) && i.name !== 'default')
+        importList.length ? (cacheData[filePath] = importList) : Reflect.deleteProperty(cacheData, filePath)
+        await writeFile(cache, JSON.stringify(cacheData, null, 2))
+        return imports.concat(importList)
+      }
+
+      return imports.concat(Object.values(cacheData).reduce((p, n) => p.concat(n), []))
+    })
+  }
+
   async function transform(code: string, id: string) {
     const s = new MagicString(code)
 
-    await unimport.injectImports(s, id)
+    const res = await unimport.injectImports(s, id)
 
     if (!s.hasChanged())
       return
+
+    await updateCacheImports(id, res.imports)
 
     writeConfigFilesThrottled()
 
@@ -158,6 +193,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     dirs,
     filter,
     scanDirs,
+    updateCacheImports,
     writeConfigFiles,
     writeConfigFilesThrottled,
     transform,
