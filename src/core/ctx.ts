@@ -1,4 +1,4 @@
-import { dirname, isAbsolute, relative, resolve, posix } from 'path'
+import { dirname, isAbsolute, posix, relative, resolve } from 'path'
 import { promises as fs } from 'fs'
 import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
@@ -134,7 +134,8 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   }
 
   async function generateCache() {
-    if (!cache) return
+    if (!cache)
+      return
 
     try {
       await fs.access(cache)
