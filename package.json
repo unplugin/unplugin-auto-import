@@ -108,26 +108,26 @@
   "dependencies": {
     "@antfu/utils": "^0.7.2",
     "@rollup/pluginutils": "^5.0.2",
-    "local-pkg": "^0.4.2",
+    "local-pkg": "^0.4.3",
     "magic-string": "^0.27.0",
-    "unimport": "^1.0.2",
+    "unimport": "^2.0.1",
     "unplugin": "^1.0.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.33.1",
-    "@antfu/ni": "^0.18.8",
-    "@types/node": "^18.11.13",
+    "@antfu/eslint-config": "^0.34.1",
+    "@antfu/ni": "^0.19.0",
+    "@types/node": "^18.11.18",
     "@types/resolve": "^1.20.2",
-    "@vueuse/metadata": "^9.6.0",
+    "@vueuse/metadata": "^9.11.1",
     "bumpp": "^8.2.1",
-    "eslint": "^8.29.0",
+    "eslint": "^8.32.0",
     "esno": "^0.16.3",
     "fast-glob": "^3.2.12",
-    "rollup": "^3.7.3",
+    "rollup": "^3.10.1",
     "tsup": "^6.5.0",
     "typescript": "^4.9.4",
-    "vite": "^4.0.0",
-    "vitest": "^0.25.7",
+    "vite": "^4.0.4",
+    "vitest": "^0.28.1",
     "webpack": "^5.75.0"
   }
 }
