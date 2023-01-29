@@ -1,10 +1,11 @@
 // Vitest Snapshot v1
 
 exports[`transform > comments.ts 1`] = `
-"import { ref, computed } from 'vue';
-/* import { ref } from 'vue' */
+"/* import { ref } from 'vue' */
 // import { computed } from 'vue'
 
+
+import { ref, computed } from 'vue';
 const a = {
   rel: \\"noreferrer\\",
   href: \\"https://github.com/antfu/vitesse\\",
@@ -35,10 +36,11 @@ $('hi')
 `;
 
 exports[`transform > existing.jsx 1`] = `
-"import { watch } from 'vue';
-import ref from 'ref'
+"import ref from 'ref'
 import { computed } from 'computed'
 
+
+import { watch } from 'vue';
 const a = ref(0)
 const b = computed(0)
 
@@ -75,13 +77,14 @@ const b = computed(0)
 `;
 
 exports[`transform > existing5.jsx 1`] = `
-"import { watch } from 'vue';
-import {
+"import {
   ref,
   computed,
   watch as watch3,
 } from 'vue'
 
+
+import { watch } from 'vue';
 const a = ref(0)
 const b = computed(0)
 const c = watch(0)

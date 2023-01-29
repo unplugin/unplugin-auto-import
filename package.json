@@ -110,24 +110,24 @@
     "@rollup/pluginutils": "^5.0.2",
     "local-pkg": "^0.4.3",
     "magic-string": "^0.27.0",
-    "unimport": "^2.0.1",
+    "unimport": "^2.1.0",
     "unplugin": "^1.0.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.34.1",
+    "@antfu/eslint-config": "^0.35.0",
     "@antfu/ni": "^0.19.0",
     "@types/node": "^18.11.18",
     "@types/resolve": "^1.20.2",
-    "@vueuse/metadata": "^9.11.1",
+    "@vueuse/metadata": "^9.12.0",
     "bumpp": "^8.2.1",
-    "eslint": "^8.32.0",
+    "eslint": "^8.33.0",
     "esno": "^0.16.3",
     "fast-glob": "^3.2.12",
-    "rollup": "^3.10.1",
+    "rollup": "^3.12.0",
     "tsup": "^6.5.0",
     "typescript": "^4.9.4",
     "vite": "^4.0.4",
-    "vitest": "^0.28.1",
+    "vitest": "^0.28.3",
     "webpack": "^5.75.0"
   }
 }
