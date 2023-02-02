@@ -17,6 +17,7 @@ export default defineConfig({
         './composables',
       ],
       vueTemplate: true,
+      cache: true,
     }),
   ],
 })

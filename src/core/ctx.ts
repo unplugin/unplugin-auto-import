@@ -36,7 +36,9 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
   const resolvers = options.resolvers ? [options.resolvers].flat(2) : []
 
-  const cache = isCache === false ? false : resolve(root, isCache === true ? 'auto-imports-cache.json' : isCache)
+  const cachePath = isCache === false
+    ? false
+    : resolve(root, typeof isCache === 'string' ? 'string' : 'node_modules/.cache/unplugin-auto-import.json')
 
   const unimport = createUnimport({
     imports: imports as Import[],
@@ -139,11 +141,11 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   }
 
   async function generateCache() {
-    if (!cache)
+    if (!cachePath)
       return
 
     try {
-      const cacheData = await getCacheData(cache)
+      const cacheData = await getCacheData(cachePath)
       await Promise.allSettled(Object.keys(cacheData).map(async (filePath) => {
         try {
           await fs.access(posix.resolve(root, filePath))
@@ -152,29 +154,32 @@ export function createContext(options: Options = {}, root = process.cwd()) {
           Reflect.deleteProperty(cacheData, filePath)
         }
       }))
-      await writeFile(cache, JSON.stringify(cacheData, null, 2))
+      await writeFile(cachePath, JSON.stringify(cacheData, null, 2))
     }
     catch {
-      await writeFile(cache, '{}')
+      await writeFile(cachePath, '{}')
     }
   }
 
   let isInitialCache = false
   const resolveCachePromise = generateCache()
   async function updateCacheImports(id?: string, importList?: Import[]) {
-    if (!cache || (isInitialCache && !id))
+    if (!cachePath || (isInitialCache && !id))
       return
 
     isInitialCache = true
     await resolveCachePromise
     await unimport.modifyDynamicImports(async (imports) => {
-      const cacheData = await getCacheData(cache)
+      const cacheData = await getCacheData(cachePath)
 
       if (id && importList) {
-        const filePath = posix.normalize(id).replace(posix.normalize(root), '')
+        const filePath = posix.normalize(relative(root, id))
         importList = importList.filter(i => (i.name ?? i.as) && i.name !== 'default')
-        importList.length ? (cacheData[filePath] = importList) : Reflect.deleteProperty(cacheData, filePath)
-        await writeFile(cache, JSON.stringify(cacheData, null, 2))
+        if (importList.length)
+          cacheData[filePath] = importList
+        else
+          delete cacheData[filePath]
+        await writeFile(cachePath, JSON.stringify(cacheData, null, 2))
         return imports.concat(importList)
       }
 
