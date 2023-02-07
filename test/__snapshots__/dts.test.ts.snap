@@ -138,5 +138,15 @@ declare global {
   const watchSyncEffect: typeof import('vue-demi')['watchSyncEffect']
   const writable: typeof import('svelte/store')['writable']
 }
+// for type re-export
+declare global {
+  export type { Component } from 'vue-demi'
+  export type { ComponentPublicInstance } from 'vue-demi'
+  export type { ComputedRef } from 'vue-demi'
+  export type { InjectionKey } from 'vue-demi'
+  export type { PropType } from 'vue-demi'
+  export type { Ref } from 'vue-demi'
+  export type { VNode } from 'vue-demi'
+}
 "
 `;

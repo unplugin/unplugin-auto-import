@@ -111,7 +111,7 @@
     "@rollup/pluginutils": "^5.0.2",
     "local-pkg": "^0.4.3",
     "magic-string": "^0.27.0",
-    "unimport": "^2.2.0",
+    "unimport": "^2.2.3",
     "unplugin": "^1.0.1"
   },
   "devDependencies": {

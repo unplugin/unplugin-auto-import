@@ -1,8 +1,7 @@
+import { builtinPresets } from 'unimport'
 import ahooks from './ahooks'
 import mobx from './mobx'
 import mobxReactLite from './mobx-react-lite'
-import nuxtCompositionApi from './nuxt-composition-api'
-import pinia from './pinia'
 import preact from './preact'
 import quasar from './quasar'
 import react from './react'
@@ -19,17 +18,11 @@ import {
 } from './svelte'
 import veeValidate from './vee-validate'
 import vitepress from './vitepress'
-import vue from './vue'
-import vueDemi from './vue-demi'
-import vueI18n from './vue-i18n'
 import vueRouter from './vue-router'
 import vueRouterComposables from './vue-router-composables'
-import vueCompositionApi from './vue-composition-api'
 import vueuseCore from './vueuse-core'
-import vueMacros from './vue-macros'
 import vueuseHead from './vueuse-head'
 import vuex from './vuex'
-import vitest from './vitest'
 import uniApp from './uni-app'
 import solid from './solid'
 import solidRouter from './solid-router'
@@ -39,15 +32,13 @@ import vueuseMath from './vueuse-math'
 import recoil from './recoil'
 
 export const presets = {
+  ...builtinPresets,
   'ahooks': ahooks,
-  '@nuxtjs/composition-api': nuxtCompositionApi,
-  '@vue/composition-api': vueCompositionApi,
   '@vueuse/core': vueuseCore,
   '@vueuse/math': vueuseMath,
   '@vueuse/head': vueuseHead,
   'mobx': mobx,
   'mobx-react-lite': mobxReactLite,
-  'pinia': pinia,
   'preact': preact,
   'quasar': quasar,
   'react': react,
@@ -62,14 +53,9 @@ export const presets = {
   'svelte/transition': svelteTransition,
   'vee-validate': veeValidate,
   'vitepress': vitepress,
-  'vue-demi': vueDemi,
-  'vue-i18n': vueI18n,
   'vue-router': vueRouter,
   'vue-router/composables': vueRouterComposables,
-  'vue': vue,
-  'vue/macros': vueMacros,
   'vuex': vuex,
-  'vitest': vitest,
   'uni-app': uniApp,
   'solid-js': solid,
   '@solidjs/router': solidRouter,

@@ -3,10 +3,10 @@ import { promises as fs } from 'fs'
 import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
 import { isPackageExists } from 'local-pkg'
-import type { Import } from 'unimport'
+import type { Import, InlinePreset } from 'unimport'
+import { createUnimport, resolvePreset, scanDirExports } from 'unimport'
 // @ts-expect-error types
 import { vueTemplateAddon } from 'unimport/addons'
-import { createUnimport, scanDirExports } from 'unimport'
 import MagicString from 'magic-string'
 import { presets } from '../presets'
 import type { ESLintrc, ImportExtended, Options } from '../types'
@@ -14,14 +14,6 @@ import { generateESLintConfigs } from './eslintrc'
 import { resolversAddon } from './resolvers'
 
 export function createContext(options: Options = {}, root = process.cwd()) {
-  const imports = flattenImports(options.imports, options.presetOverriding)
-
-  options.ignore?.forEach((name) => {
-    const i = imports.find(i => i.as === name)
-    if (i)
-      i.disabled = true
-  })
-
   const {
     dts: preferDTS = isPackageExists('typescript'),
   } = options
@@ -36,7 +28,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   const resolvers = options.resolvers ? [options.resolvers].flat(2) : []
 
   const unimport = createUnimport({
-    imports: imports as Import[],
+    imports: [],
     presets: [],
     injectAtEnd: true,
     addons: [
@@ -52,6 +44,20 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     ],
   })
 
+  const importsPromise = flattenImports(options.imports, options.presetOverriding)
+  .then((imports) => {
+    if (!imports.length && !resolvers.length)
+      console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
+
+    options.ignore?.forEach((name) => {
+      const i = imports.find(i => i.as === name)
+      if (i)
+        i.disabled = true
+    })
+    
+    return unimport.getInternalContext().replaceImports(imports)
+  })
+
   const filter = createFilter(
     options.include || [/\.[jt]sx?$/, /\.vue$/, /\.vue\?vue/, /\.svelte$/],
     options.exclude || [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/],
@@ -62,7 +68,8 @@ export function createContext(options: Options = {}, root = process.cwd()) {
       ? resolve(root, 'auto-imports.d.ts')
       : resolve(root, preferDTS)
 
-  function generateDTS(file: string) {
+ async function generateDTS(file: string) {
+    await importsPromise
     const dir = dirname(file)
     return unimport.generateTypeDeclarations({
       resolvePath: (i) => {
@@ -132,6 +139,8 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   }
 
   async function transform(code: string, id: string) {
+    await importsPromise
+    
     const s = new MagicString(code)
 
     await unimport.injectImports(s, id)
@@ -147,9 +156,6 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     }
   }
 
-  if (!imports.length && !resolvers.length)
-    console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
-
   return {
     root,
     dirs,
@@ -163,42 +169,45 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   }
 }
 
-export function flattenImports(map: Options['imports'], overriding = false): Import[] {
-  const flat: Record<string, Import> = {}
-  toArray(map).forEach((definition) => {
-    if (typeof definition === 'string') {
-      if (!presets[definition])
-        throw new Error(`[auto-import] preset ${definition} not found`)
-      const preset = presets[definition]
-      definition = typeof preset === 'function' ? preset() : preset
-    }
-
-    for (const mod of Object.keys(definition)) {
-      for (const id of definition[mod]) {
-        const meta = {
-          from: mod,
-        } as Import
-        let name: string
-        if (Array.isArray(id)) {
-          name = id[1]
-          meta.name = id[0]
-          meta.as = id[1]
-        }
-        else {
-          name = id
-          meta.name = id
-          meta.as = id
-        }
-
-        if (flat[name] && !overriding)
-          throw new Error(`[auto-import] identifier ${name} already defined with ${flat[name].from}`)
-
-        flat[name] = meta
+export async function flattenImports(map: Options['imports'], overriding = false): Promise<Import[]> {
+  const promises = await Promise.all(toArray(map)
+    .map(async (definition) => {
+      if (typeof definition === 'string') {
+        if (!presets[definition])
+          throw new Error(`[auto-import] preset ${definition} not found`)
+        const preset = presets[definition]
+        definition = typeof preset === 'function' ? preset() : preset
       }
-    }
-  })
 
-  return Object.values(flat)
+      if ('from' in definition && 'imports' in definition) {
+        return await resolvePreset(definition as InlinePreset)
+      }
+      else {
+        const resolved: Import[] = []
+        for (const mod of Object.keys(definition)) {
+          for (const id of definition[mod]) {
+            const meta = {
+              from: mod,
+            } as Import
+            let name: string
+            if (Array.isArray(id)) {
+              name = id[1]
+              meta.name = id[0]
+              meta.as = id[1]
+            }
+            else {
+              name = id
+              meta.name = id
+              meta.as = id
+            }
+            resolved.push(meta)
+          }
+        }
+        return resolved
+      }
+    }))
+
+  return promises.flat()
 }
 
 function modifyDefaultExportsAlias(imports: ImportExtended[], options: Options): Import[] {
