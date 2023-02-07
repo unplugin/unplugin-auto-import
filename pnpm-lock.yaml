@@ -22,7 +22,7 @@ importers:
       rollup: ^3.14.0
       tsup: ^6.5.0
       typescript: ^4.9.5
-      unimport: ^2.2.3
+      unimport: ^2.2.4
       unplugin: ^1.0.1
       vite: ^4.1.1
       vitest: ^0.28.4
@@ -33,7 +33,7 @@ importers:
       '@rollup/pluginutils': 5.0.2_rollup@3.14.0
       local-pkg: 0.4.3
       magic-string: 0.27.0
-      unimport: 2.2.3_rollup@3.14.0
+      unimport: 2.2.4_rollup@3.14.0
       unplugin: 1.0.1
     devDependencies:
       '@antfu/eslint-config': 0.35.1_4vsywjlpuriuw3tl5oq6zy5a64
@@ -1204,7 +1204,7 @@ packages:
       scule: 1.0.0
       semver: 7.3.8
       unctx: 2.1.1
-      unimport: 2.2.3
+      unimport: 2.2.4
       untyped: 1.2.2
     transitivePeerDependencies:
       - rollup
@@ -1231,7 +1231,7 @@ packages:
       scule: 1.0.0
       semver: 7.3.8
       unctx: 2.1.1
-      unimport: 2.2.3_rollup@3.14.0
+      unimport: 2.2.4_rollup@3.14.0
       untyped: 1.2.2
     transitivePeerDependencies:
       - rollup
@@ -1253,7 +1253,7 @@ packages:
       scule: 1.0.0
       std-env: 3.3.2
       ufo: 1.0.1
-      unimport: 2.2.3
+      unimport: 2.2.4
       untyped: 1.2.2
     transitivePeerDependencies:
       - rollup
@@ -1275,7 +1275,7 @@ packages:
       scule: 1.0.0
       std-env: 3.3.2
       ufo: 1.0.1
-      unimport: 2.2.3_rollup@3.14.0
+      unimport: 2.2.4_rollup@3.14.0
       untyped: 1.2.2
     transitivePeerDependencies:
       - rollup
@@ -7324,8 +7324,8 @@ packages:
       vfile: 5.3.5
     dev: true
 
-  /unimport/2.2.3:
-    resolution: {integrity: sha512-JKuyTmxRCNhrTTX0xJNTBsT+mBMQrexNqQvz1F+QTJYsvCTmJuGWHAv8g33i17/Z60pSjVschkvFBxfvqZVLUQ==}
+  /unimport/2.2.4:
+    resolution: {integrity: sha512-qMgmeEGqqrrmEtm0dqxMG37J6xBtrriqxq9hILvDb+e6l2F0yTnJomLoCCp0eghLR7bYGeBsUU5Y0oyiUYhViw==}
     dependencies:
       '@rollup/pluginutils': 5.0.2
       escape-string-regexp: 5.0.0
@@ -7342,8 +7342,8 @@ packages:
       - rollup
     dev: true
 
-  /unimport/2.2.3_rollup@3.14.0:
-    resolution: {integrity: sha512-JKuyTmxRCNhrTTX0xJNTBsT+mBMQrexNqQvz1F+QTJYsvCTmJuGWHAv8g33i17/Z60pSjVschkvFBxfvqZVLUQ==}
+  /unimport/2.2.4_rollup@3.14.0:
+    resolution: {integrity: sha512-qMgmeEGqqrrmEtm0dqxMG37J6xBtrriqxq9hILvDb+e6l2F0yTnJomLoCCp0eghLR7bYGeBsUU5Y0oyiUYhViw==}
     dependencies:
       '@rollup/pluginutils': 5.0.2_rollup@3.14.0
       escape-string-regexp: 5.0.0
