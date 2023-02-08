@@ -140,13 +140,8 @@ declare global {
 }
 // for type re-export
 declare global {
-  export type { Component } from 'vue-demi'
-  export type { ComponentPublicInstance } from 'vue-demi'
-  export type { ComputedRef } from 'vue-demi'
-  export type { InjectionKey } from 'vue-demi'
-  export type { PropType } from 'vue-demi'
-  export type { Ref } from 'vue-demi'
-  export type { VNode } from 'vue-demi'
+  // @ts-ignore
+  export type { Component,ComponentPublicInstance,ComputedRef,InjectionKey,PropType,Ref,VNode } from 'vue-demi'
 }
 "
 `;

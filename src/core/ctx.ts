@@ -45,18 +45,18 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   })
 
   const importsPromise = flattenImports(options.imports, options.presetOverriding)
-  .then((imports) => {
-    if (!imports.length && !resolvers.length)
-      console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
+    .then((imports) => {
+      if (!imports.length && !resolvers.length)
+        console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
 
-    options.ignore?.forEach((name) => {
-      const i = imports.find(i => i.as === name)
-      if (i)
-        i.disabled = true
+      options.ignore?.forEach((name) => {
+        const i = imports.find(i => i.as === name)
+        if (i)
+          i.disabled = true
+      })
+
+      return unimport.getInternalContext().replaceImports(imports)
     })
-    
-    return unimport.getInternalContext().replaceImports(imports)
-  })
 
   const filter = createFilter(
     options.include || [/\.[jt]sx?$/, /\.vue$/, /\.vue\?vue/, /\.svelte$/],
@@ -68,7 +68,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
       ? resolve(root, 'auto-imports.d.ts')
       : resolve(root, preferDTS)
 
- async function generateDTS(file: string) {
+  async function generateDTS(file: string) {
     await importsPromise
     const dir = dirname(file)
     return unimport.generateTypeDeclarations({
@@ -140,7 +140,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
   async function transform(code: string, id: string) {
     await importsPromise
-    
+
     const s = new MagicString(code)
 
     await unimport.injectImports(s, id)
