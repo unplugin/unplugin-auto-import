@@ -1,6 +1,6 @@
 import type { Arrayable, Awaitable } from '@antfu/utils'
 import type { FilterPattern } from '@rollup/pluginutils'
-import type { Import } from 'unimport'
+import type { Import, InlinePreset } from 'unimport'
 import { PresetName } from './presets'
 
 export interface ImportLegacy {
@@ -76,7 +76,7 @@ export interface Options {
    *
    * @default []
    */
-  imports?: Arrayable<ImportsMap | PresetName>
+  imports?: Arrayable<ImportsMap | PresetName | InlinePreset>
 
   /**
    * Identifiers to be ignored

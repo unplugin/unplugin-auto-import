@@ -1,5 +1,6 @@
 <script setup lang="ts">
 defineProps<{ msg: string }>()
+
 const emit = defineEmits(['update'])
 
 function inc() {
@@ -11,6 +12,7 @@ function dec() {
 }
 
 const decText = '<b>Dec</b>'
+
 watch(count, value => emit('update', value))
 </script>
 
