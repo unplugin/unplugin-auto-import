@@ -1,4 +1,4 @@
-import { dirname, isAbsolute, relative, resolve } from 'path'
+import { dirname, isAbsolute, posix, relative, resolve } from 'path'
 import { promises as fs } from 'fs'
 import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
@@ -16,6 +16,7 @@ import { resolversAddon } from './resolvers'
 export function createContext(options: Options = {}, root = process.cwd()) {
   const {
     dts: preferDTS = isPackageExists('typescript'),
+    cache: isCache = false,
   } = options
 
   const dirs = options.dirs?.map(dir => resolve(root, dir))
@@ -26,6 +27,10 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   eslintrc.globalsPropValue = eslintrc.globalsPropValue === undefined ? true : eslintrc.globalsPropValue
 
   const resolvers = options.resolvers ? [options.resolvers].flat(2) : []
+
+  const cachePath = isCache === false
+    ? false
+    : resolve(root, typeof isCache === 'string' ? 'string' : 'node_modules/.cache/unplugin-auto-import.json')
 
   const unimport = createUnimport({
     imports: [],
@@ -90,7 +95,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
   const writeConfigFilesThrottled = throttle(500, writeConfigFiles, { noLeading: false })
 
-  async function writeFile(filePath: string, content: string) {
+  async function writeFile(filePath: string, content = '') {
     await fs.mkdir(dirname(filePath), { recursive: true })
     return await fs.writeFile(filePath, content, 'utf-8')
   }
@@ -138,15 +143,69 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     writeConfigFilesThrottled()
   }
 
+  async function getCacheData(cache: string) {
+    const str = (await fs.readFile(cache, 'utf-8')).trim()
+    return JSON.parse(str || '{}') as { [key: string]: Import[] }
+  }
+
+  async function generateCache() {
+    if (!cachePath)
+      return
+
+    try {
+      const cacheData = await getCacheData(cachePath)
+      await Promise.allSettled(Object.keys(cacheData).map(async (filePath) => {
+        try {
+          await fs.access(posix.resolve(root, filePath))
+        }
+        catch {
+          Reflect.deleteProperty(cacheData, filePath)
+        }
+      }))
+      await writeFile(cachePath, JSON.stringify(cacheData, null, 2))
+    }
+    catch {
+      await writeFile(cachePath, '{}')
+    }
+  }
+
+  let isInitialCache = false
+  const resolveCachePromise = generateCache()
+  async function updateCacheImports(id?: string, importList?: Import[]) {
+    if (!cachePath || (isInitialCache && !id))
+      return
+
+    isInitialCache = true
+    await resolveCachePromise
+    await unimport.modifyDynamicImports(async (imports) => {
+      const cacheData = await getCacheData(cachePath)
+
+      if (id && importList) {
+        const filePath = posix.normalize(relative(root, id))
+        importList = importList.filter(i => (i.name ?? i.as) && i.name !== 'default')
+        if (importList.length)
+          cacheData[filePath] = importList
+        else
+          delete cacheData[filePath]
+        await writeFile(cachePath, JSON.stringify(cacheData, null, 2))
+        return imports.concat(importList)
+      }
+
+      return imports.concat(Object.values(cacheData).reduce((p, n) => p.concat(n), []))
+    })
+  }
+
   async function transform(code: string, id: string) {
     await importsPromise
 
     const s = new MagicString(code)
 
-    await unimport.injectImports(s, id)
+    const res = await unimport.injectImports(s, id)
 
     if (!s.hasChanged())
       return
+
+    await updateCacheImports(id, res.imports)
 
     writeConfigFilesThrottled()
 
@@ -161,6 +220,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     dirs,
     filter,
     scanDirs,
+    updateCacheImports,
     writeConfigFiles,
     writeConfigFilesThrottled,
     transform,

@@ -14,7 +14,10 @@ export default createUnplugin<Options>((options) => {
       return ctx.transform(code, id)
     },
     async buildStart() {
-      await ctx.scanDirs()
+      await Promise.all([
+        ctx.scanDirs(),
+        ctx.updateCacheImports(),
+      ])
     },
     async buildEnd() {
       await ctx.writeConfigFiles()

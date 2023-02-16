@@ -105,6 +105,16 @@ export interface Options {
   dts?: string | boolean
 
   /**
+   * Cache the result of resolving, across multiple vite builds.
+   *
+   * A custom path is supported.
+   * When set to `true`, the cache will be stored in `node_modules/.cache/unplugin-auto-import.json`.
+   *
+   * @default false
+   */
+  cache?: string | boolean
+
+  /**
    * Auto import inside Vue templates
    *
    * @see https://github.com/unjs/unimport/pull/15
