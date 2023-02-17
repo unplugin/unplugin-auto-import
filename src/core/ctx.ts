@@ -30,7 +30,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
   const cachePath = isCache === false
     ? false
-    : resolve(root, typeof isCache === 'string' ? 'string' : 'node_modules/.cache/unplugin-auto-import.json')
+    : resolve(root, typeof isCache === 'string' ? isCache : 'node_modules/.cache/unplugin-auto-import.json')
 
   const unimport = createUnimport({
     imports: [],
