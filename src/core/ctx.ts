@@ -1,4 +1,4 @@
-import { dirname, isAbsolute, posix, relative, resolve } from 'path'
+import { dirname, isAbsolute, posix, relative, resolve, sep } from 'path'
 import { promises as fs } from 'fs'
 import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
@@ -159,7 +159,8 @@ ${dts}`.trim()}\n`
       const cacheData = await getCacheData(cachePath)
       await Promise.allSettled(Object.keys(cacheData).map(async (filePath) => {
         try {
-          await fs.access(posix.resolve(root, filePath))
+          const normalizeRoot = root.replaceAll(sep, posix.sep)
+          await fs.access(posix.join(normalizeRoot, filePath))
         }
         catch {
           Reflect.deleteProperty(cacheData, filePath)
@@ -184,7 +185,7 @@ ${dts}`.trim()}\n`
       const cacheData = await getCacheData(cachePath)
 
       if (id && importList) {
-        const filePath = posix.normalize(relative(root, id))
+        const filePath = posix.normalize(posix.relative(root, id))
         importList = importList.filter(i => (i.name ?? i.as) && i.name !== 'default')
         if (importList.length)
           cacheData[filePath] = importList
