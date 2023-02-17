@@ -14,7 +14,7 @@ export default defineConfig({
         ElementPlusResolver(),
       ],
       dirs: [
-        './composables',
+        './composables/**',
       ],
       vueTemplate: true,
       cache: true,

@@ -1,3 +1,5 @@
+import minimatch from 'minimatch'
+import { slash } from '@antfu/utils'
 import { createUnplugin } from 'unplugin'
 import type { Options } from '../types'
 import { createContext } from './ctx'
@@ -25,7 +27,7 @@ export default createUnplugin<Options>((options) => {
     },
     vite: {
       async handleHotUpdate({ file }) {
-        if (ctx.dirs?.some(dir => file.startsWith(dir)))
+        if (ctx.dirs?.some(glob => minimatch(slash(file), glob)))
           await ctx.scanDirs()
       },
       async configResolved(config) {
