@@ -224,6 +224,12 @@ AutoImport({
         ['[from]', '[alias]'],
       ],
     },
+    // example type import
+    {
+      from: 'vue-router',
+      imports: ['RouteLocationRaw'],
+      type: true,
+    },
   ],
   // Enable auto import by filename for default module exports under directories
   defaultExportByFilename: false,
