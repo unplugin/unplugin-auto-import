@@ -84,6 +84,13 @@ export interface Options {
   ignore?: (string | RegExp)[]
 
   /**
+   * Inject the imports at the end of other imports
+   *
+   * @default true
+   */
+  injectAtEnd?: boolean
+
+  /**
    * Path for directories to be auto imported
    */
   dirs?: string[]
