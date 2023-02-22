@@ -173,6 +173,9 @@ const c = customNamedResolved2(1)
 exports[`transform > resolver-element.ts 1`] = `
 "import { defineComponent } from 'vue';
 import { ElButton, ElMessage, ElLoadingDirective as vLoading } from 'element-plus/es';
+import 'element-plus/es/components/base/style/css';
+import 'element-plus/es/components/base/style/css';
+import 'element-plus/es/components/base/style/css';
 import 'element-plus/es/components/button/style/css';
 import 'element-plus/es/components/message/style/css';
 import 'element-plus/es/components/loading/style/css';
