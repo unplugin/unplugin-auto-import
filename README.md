@@ -201,6 +201,12 @@ AutoImport({
     /\.md$/, // .md
   ],
 
+  // Rules to exclude transforming target
+  exclude: [
+    /node_modules/,
+    /\.git/
+  ],
+
   // global imports to register
   imports: [
     // presets
@@ -231,8 +237,15 @@ AutoImport({
       type: true,
     },
   ],
+
   // Enable auto import by filename for default module exports under directories
   defaultExportByFilename: false,
+
+  // Allow overriding imports sources from multiple presets.
+  presetOverriding: false,
+
+  // Identifiers to be ignored, support string and RegExp
+  ignore: [],
 
   // Auto import for module exports under directories
   // by default it only scan one level of modules under the directory
@@ -262,6 +275,9 @@ AutoImport({
   resolvers: [
     /* ... */
   ],
+
+  // Generate source map
+  sourceMap: false,
 
   // Generate corresponding .eslintrc-auto-import.json file.
   // eslint globals Docs - https://eslint.org/docs/user-guide/configuring/language-options#specifying-globals
