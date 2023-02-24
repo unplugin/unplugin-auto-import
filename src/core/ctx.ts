@@ -52,7 +52,7 @@ ${dts}`.trim()}\n`
     ],
   })
 
-  const importsPromise = flattenImports(options.imports, options.presetOverriding)
+  const importsPromise = flattenImports(options.imports)
     .then((imports) => {
       if (!imports.length && !resolvers.length)
         console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
@@ -233,7 +233,7 @@ ${dts}`.trim()}\n`
   }
 }
 
-export async function flattenImports(map: Options['imports'], overriding = false): Promise<Import[]> {
+export async function flattenImports(map: Options['imports']): Promise<Import[]> {
   const promises = await Promise.all(toArray(map)
     .map(async (definition) => {
       if (typeof definition === 'string') {
@@ -253,14 +253,11 @@ export async function flattenImports(map: Options['imports'], overriding = false
             const meta = {
               from: mod,
             } as Import
-            let name: string
             if (Array.isArray(id)) {
-              name = id[1]
               meta.name = id[0]
               meta.as = id[1]
             }
             else {
-              name = id
               meta.name = id
               meta.as = id
             }

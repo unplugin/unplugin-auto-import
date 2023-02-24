@@ -131,13 +131,6 @@ export interface Options {
   defaultExportByFilename?: boolean
 
   /**
-   * Allow overriding imports sources from multiple presets.
-   *
-   * @default false
-   */
-  presetOverriding?: boolean
-
-  /**
    * Rules to include transforming target.
    *
    * @default [/\.[jt]sx?$/, /\.vue\??/]
@@ -150,13 +143,6 @@ export interface Options {
    * @default [/node_modules/, /\.git/]
    */
   exclude?: FilterPattern
-
-  /**
-   * Generate source map.
-   *
-   * @default false
-   */
-  sourceMap?: boolean
 
   /**
    * Generate corresponding .eslintrc-auto-import.json file.
