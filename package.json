@@ -111,15 +111,15 @@
     "@rollup/pluginutils": "^5.0.2",
     "local-pkg": "^0.4.3",
     "magic-string": "^0.30.0",
-    "minimatch": "^7.1.0",
-    "unimport": "^3.0.0",
+    "minimatch": "^7.1.1",
+    "unimport": "^3.0.2",
     "unplugin": "^1.1.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.2",
     "@antfu/ni": "^0.20.0",
     "@nuxt/schema": "^3.2.2",
-    "@types/node": "^18.14.0",
+    "@types/node": "^18.14.1",
     "@types/resolve": "^1.20.2",
     "@vueuse/metadata": "^9.13.0",
     "bumpp": "^9.0.0",
