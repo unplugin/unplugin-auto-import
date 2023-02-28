@@ -152,13 +152,6 @@ export interface Options {
   exclude?: FilterPattern
 
   /**
-   * Generate source map.
-   *
-   * @default false
-   */
-  sourceMap?: boolean
-
-  /**
    * Generate corresponding .eslintrc-auto-import.json file.
    */
   eslintrc?: ESLintrc
