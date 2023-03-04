@@ -98,16 +98,19 @@
     "test:run": "vitest run"
   },
   "peerDependencies": {
-    "@vueuse/core": "*"
+    "@vueuse/core": "*",
+    "@nuxt/kit": "^3.2.2"
   },
   "peerDependenciesMeta": {
     "@vueuse/core": {
+      "optional": true
+    },
+    "@nuxt/kit": {
       "optional": true
     }
   },
   "dependencies": {
     "@antfu/utils": "^0.7.2",
-    "@nuxt/kit": "^3.2.2",
     "@rollup/pluginutils": "^5.0.2",
     "local-pkg": "^0.4.3",
     "magic-string": "^0.30.0",
@@ -118,7 +121,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.2",
     "@antfu/ni": "^0.20.0",
-    "@nuxt/schema": "^3.2.2",
+    "@nuxt/kit": "^3.2.2",
     "@types/node": "^18.14.1",
     "@types/resolve": "^1.20.2",
     "@vueuse/metadata": "^9.13.0",
