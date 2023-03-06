@@ -1,7 +1,7 @@
-import { resolve } from 'path'
-import { promises as fs } from 'fs'
-import { basename } from 'path/posix'
-import { fileURLToPath } from 'url'
+import { resolve } from 'node:path'
+import { promises as fs } from 'node:fs'
+import { basename } from 'node:path/posix'
+import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'
 
 async function run() {

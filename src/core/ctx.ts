@@ -1,5 +1,5 @@
-import { dirname, isAbsolute, posix, relative, resolve, sep } from 'path'
-import { promises as fs } from 'fs'
+import { dirname, isAbsolute, posix, relative, resolve, sep } from 'node:path'
+import { promises as fs } from 'node:fs'
 import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
 import { isPackageExists } from 'local-pkg'

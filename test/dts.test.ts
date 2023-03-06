@@ -1,4 +1,4 @@
-import { join } from 'path'
+import { join } from 'node:path'
 import { expect, it } from 'vitest'
 import { createContext } from '../src/core/ctx'
 

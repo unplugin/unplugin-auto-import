@@ -2,7 +2,7 @@
   "name": "unplugin-auto-import",
   "type": "module",
   "version": "0.15.0",
-  "packageManager": "pnpm@7.1.1",
+  "packageManager": "pnpm@7.29.0",
   "description": "Register global imports on demand for Vite and Webpack",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -98,8 +98,8 @@
     "test:run": "vitest run"
   },
   "peerDependencies": {
-    "@vueuse/core": "*",
-    "@nuxt/kit": "^3.2.2"
+    "@nuxt/kit": "^3.2.2",
+    "@vueuse/core": "*"
   },
   "peerDependenciesMeta": {
     "@vueuse/core": {
@@ -114,26 +114,26 @@
     "@rollup/pluginutils": "^5.0.2",
     "local-pkg": "^0.4.3",
     "magic-string": "^0.30.0",
-    "minimatch": "^7.1.1",
+    "minimatch": "^7.4.2",
     "unimport": "^3.0.2",
     "unplugin": "^1.1.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.35.2",
+    "@antfu/eslint-config": "^0.36.0",
     "@antfu/ni": "^0.20.0",
-    "@nuxt/kit": "^3.2.2",
-    "@types/node": "^18.14.1",
+    "@nuxt/kit": "^3.2.3",
+    "@types/node": "^18.14.6",
     "@types/resolve": "^1.20.2",
     "@vueuse/metadata": "^9.13.0",
     "bumpp": "^9.0.0",
-    "eslint": "^8.34.0",
+    "eslint": "^8.35.0",
     "esno": "^0.16.3",
     "fast-glob": "^3.2.12",
-    "rollup": "^3.17.2",
+    "rollup": "^3.18.0",
     "tsup": "^6.6.3",
     "typescript": "^4.9.5",
     "vite": "^4.1.4",
-    "vitest": "^0.28.5",
+    "vitest": "^0.29.2",
     "webpack": "^5.75.0"
   }
 }
