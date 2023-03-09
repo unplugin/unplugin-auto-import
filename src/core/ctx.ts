@@ -97,6 +97,7 @@ ${dts}`.trim()}\n`
   }
 
   const writeConfigFilesThrottled = throttle(500, writeConfigFiles, { noLeading: false })
+  const writeFileThrottled = throttle(500, writeFile, { noLeading: false })
 
   async function writeFile(filePath: string, content = '') {
     await fs.mkdir(dirname(filePath), { recursive: true })
@@ -151,12 +152,13 @@ ${dts}`.trim()}\n`
     return JSON.parse(str || '{}') as { [key: string]: Import[] }
   }
 
-  async function generateCache() {
+  async function generateCache(): Promise<Record<string, Import[]>> {
     if (!cachePath)
-      return
+      return {}
 
+    let cacheData = {}
     try {
-      const cacheData = await getCacheData(cachePath)
+      cacheData = await getCacheData(cachePath)
       await Promise.allSettled(Object.keys(cacheData).map(async (filePath) => {
         try {
           const normalizeRoot = root.replaceAll(sep, posix.sep)
@@ -171,6 +173,8 @@ ${dts}`.trim()}\n`
     catch {
       await writeFile(cachePath, '{}')
     }
+
+    return cacheData
   }
 
   let isInitialCache = false
@@ -180,10 +184,8 @@ ${dts}`.trim()}\n`
       return
 
     isInitialCache = true
-    await resolveCachePromise
+    const cacheData = await resolveCachePromise
     await unimport.modifyDynamicImports(async (imports) => {
-      const cacheData = await getCacheData(cachePath)
-
       if (id && importList) {
         const filePath = posix.normalize(posix.relative(root, id))
         importList = importList.filter(i => (i.name ?? i.as) && i.name !== 'default')
@@ -191,7 +193,7 @@ ${dts}`.trim()}\n`
           cacheData[filePath] = importList
         else
           delete cacheData[filePath]
-        await writeFile(cachePath, JSON.stringify(cacheData, null, 2))
+        writeFileThrottled(cachePath, JSON.stringify(cacheData, null, 2))
         return imports.concat(importList)
       }
 
@@ -206,10 +208,10 @@ ${dts}`.trim()}\n`
 
     const res = await unimport.injectImports(s, id)
 
+    await updateCacheImports(id, res.imports)
+
     if (!s.hasChanged())
       return
-
-    await updateCacheImports(id, res.imports)
 
     writeConfigFilesThrottled()
 
