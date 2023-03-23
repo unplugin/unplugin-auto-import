@@ -31,7 +31,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   const cachePath = isCache === false
     ? false
     : resolve(root, typeof isCache === 'string' ? isCache : 'node_modules/.cache/unplugin-auto-import.json')
-  
+
   // When "options.injectAtEnd" is undefined or true, it's true.
   const injectAtEnd = options.injectAtEnd !== false
 
