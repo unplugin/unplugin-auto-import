@@ -9,7 +9,7 @@ export default defineConfig({
     Vue(),
     Inspect(),
     AutoImport({
-      imports: ['vue', '@vueuse/core'],
+      imports: ['vue', '@vueuse/core', '@vueuse/integrations'],
       resolvers: [
         ElementPlusResolver(),
       ],

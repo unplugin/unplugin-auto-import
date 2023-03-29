@@ -30,6 +30,7 @@ import solidAppRouter from './solid-app-router'
 import { jotai, jotaiUtils } from './jotai'
 import vueuseMath from './vueuse-math'
 import recoil from './recoil'
+import vueuseIntegrations from './vueuse-integrations'
 
 export const presets = {
   ...builtinPresets,
@@ -37,6 +38,7 @@ export const presets = {
   '@vueuse/core': vueuseCore,
   '@vueuse/math': vueuseMath,
   '@vueuse/head': vueuseHead,
+  '@vueuse/integrations': vueuseIntegrations,
   'mobx': mobx,
   'mobx-react-lite': mobxReactLite,
   'preact': preact,
