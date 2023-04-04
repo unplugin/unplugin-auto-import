@@ -197,10 +197,14 @@ ${dts}`.trim()}\n`
         else
           delete cacheData[filePath]
         writeFileThrottled(cachePath, JSON.stringify(cacheData, null, 2))
-        return imports.concat(importList)
+        return imports
       }
 
-      return imports.concat(Object.values(cacheData).reduce((p, n) => p.concat(n), []))
+      const map = await unimport.getImportMap();
+      const cacheImports = Object.values(cacheData)
+        .reduce((p, n) => p.concat(n), [])
+        .filter((i) => !(map.get(i.as ?? i.name)?.from === i.from))
+      return imports.concat(cacheImports)
     })
   }
 
