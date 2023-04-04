@@ -200,10 +200,10 @@ ${dts}`.trim()}\n`
         return imports
       }
 
-      const map = await unimport.getImportMap();
+      const map = await unimport.getImportMap()
       const cacheImports = Object.values(cacheData)
         .reduce((p, n) => p.concat(n), [])
-        .filter((i) => !(map.get(i.as ?? i.name)?.from === i.from))
+        .filter(i => !(map.get(i.as ?? i.name)?.from === i.from))
       return imports.concat(cacheImports)
     })
   }
