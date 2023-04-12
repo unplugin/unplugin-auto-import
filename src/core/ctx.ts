@@ -56,7 +56,7 @@ ${dts}`.trim()}\n`
   })
 
   const importsPromise = flattenImports(options.imports)
-    .then((imports) => {
+    .then(async (imports) => {
       if (!imports.length && !resolvers.length)
         console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
 
@@ -65,7 +65,17 @@ ${dts}`.trim()}\n`
         if (i)
           i.disabled = true
       })
-
+      const catchImport = await getImportsFromDtsFile()
+      if (catchImport.length) {
+        catchImport.forEach((i) => {
+          if (!imports.find(x => x.as === i.as)) {
+            imports.push({
+              ...i,
+              disabled: false,
+            })
+          }
+        })
+      }
       return unimport.getInternalContext().replaceImports(imports)
     })
 
@@ -78,6 +88,25 @@ ${dts}`.trim()}\n`
     : preferDTS === true
       ? resolve(root, 'auto-imports.d.ts')
       : resolve(root, preferDTS)
+
+  async function getImportsFromDtsFile(): Promise<Import[]> {
+    if (!dts)
+      return []
+    try {
+      const dtsContent = await fs.readFile(dts, 'utf-8')
+      const lines = dtsContent.split('\n')
+      const importLines = lines.filter(line => line.includes('const'))
+      const imports = importLines.map((line: string) => {
+        // line format like `const ElMessage: typeof import('element-plus/es')['ElMessage']`
+        const [, as, from, name] = line.match(/const\s+(\w+)\s*:\s*typeof\s+import\('(.+)'\)\['(\w+)'\]/)!
+        return { name, as, from }
+      })
+      return imports
+    }
+    catch (e) {
+      return []
+    }
+  }
 
   async function generateDTS(file: string) {
     await importsPromise
