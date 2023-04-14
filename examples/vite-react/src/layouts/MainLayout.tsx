@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MainLayout = () => {
+function MainLayout() {
   return (
     <div>
       <h1>Main Layout Header</h1>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PageA = () => {
+function PageA() {
   return (
     <div>
       <main>

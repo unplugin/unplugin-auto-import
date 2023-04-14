@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PageB = () => {
+function PageB() {
   const location = useLocation()
   const { id } = useParams()
   const [query] = useSearchParams()

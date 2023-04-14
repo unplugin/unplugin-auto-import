@@ -10,6 +10,7 @@ without
 
 ```ts
 import { computed, ref } from 'vue'
+
 const count = ref(0)
 const doubled = computed(() => count.value * 2)
 ```
@@ -27,6 +28,7 @@ without
 
 ```tsx
 import { useState } from 'react'
+
 export function Counter() {
   const [count, setCount] = useState(0)
   return <div>{ count }</div>

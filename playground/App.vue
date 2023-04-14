@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import HelloWorld from './HelloWorld.vue'
+
 ElMessage.warning('Test')
 const foo = useFoo()
 const bar = useBar()
