@@ -1,4 +1,4 @@
-import minimatch from 'minimatch'
+import { minimatch } from 'minimatch'
 import { slash } from '@antfu/utils'
 import { createUnplugin } from 'unplugin'
 import type { Options } from '../types'

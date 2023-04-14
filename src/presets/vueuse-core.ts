@@ -6,7 +6,7 @@ import type { ImportsMap } from '../types'
 let _cache: ImportsMap | undefined
 
 export default (): ImportsMap => {
-  const excluded = ['toRefs', 'utils']
+  const excluded = ['toRefs', 'utils', 'toRef', 'toValue']
 
   if (!_cache) {
     let indexesJson: PackageIndexes | undefined
