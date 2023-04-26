@@ -250,11 +250,6 @@ AutoImport({
   // Set `false` to disable.
   dts: './auto-imports.d.ts',
 
-  // Cache the result of resolving, across multiple vite builds.
-  // A custom path is supported.
-  // When set to `true`, the cache will be stored in `node_modules/.cache/unplugin-auto-import.json`.
-  cache: false,
-
   // Auto import inside Vue template
   // see https://github.com/unjs/unimport/pull/15 and https://github.com/unjs/unimport/pull/72
   vueTemplate: false,
