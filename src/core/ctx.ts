@@ -57,7 +57,7 @@ ${dts}`.trim()}\n`
 
   const importsPromise = flattenImports(options.imports)
     .then((imports) => {
-      if (!imports.length && !resolvers.length)
+      if (!imports.length && !resolvers.length && !dirs?.length)
         console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
 
       options.ignore?.forEach((name) => {
