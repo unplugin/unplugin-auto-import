@@ -124,8 +124,9 @@ ${dts}`.trim()}\n`
     if (eslintrc.enabled && eslintrc.filepath) {
       promises.push(
         generateESLint().then((content) => {
+          content = `${content}\n`
           if (content !== lastESLint) {
-            lastESLint = `${content}\n`
+            lastESLint = content
             return writeFile(eslintrc.filepath!, content)
           }
         }),
