@@ -17,15 +17,13 @@ export default createUnplugin<Options>((options) => {
     },
     async buildStart() {
       await ctx.scanDirs()
-      await ctx.updateCacheImports()
-      await ctx.writeConfigFiles()
     },
     async buildEnd() {
       await ctx.writeConfigFiles()
     },
     vite: {
       async handleHotUpdate({ file }) {
-        if (ctx.dirs?.some(glob => minimatch(slash(file), glob)))
+        if (ctx.dirs?.some(glob => minimatch(slash(file), slash(glob))))
           await ctx.scanDirs()
       },
       async configResolved(config) {
