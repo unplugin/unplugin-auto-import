@@ -17,8 +17,6 @@ export default createUnplugin<Options>((options) => {
     },
     async buildStart() {
       await ctx.scanDirs()
-      await ctx.updateCacheImports()
-      await ctx.writeConfigFiles()
     },
     async buildEnd() {
       await ctx.writeConfigFiles()

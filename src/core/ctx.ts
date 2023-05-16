@@ -1,5 +1,5 @@
-import { dirname, isAbsolute, posix, relative, resolve, sep } from 'node:path'
-import { promises as fs } from 'node:fs'
+import { dirname, isAbsolute, relative, resolve } from 'node:path'
+import { existsSync, promises as fs } from 'node:fs'
 import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
 import { isPackageExists } from 'local-pkg'
@@ -9,14 +9,13 @@ import { createUnimport, resolvePreset, scanDirExports } from 'unimport'
 import { vueTemplateAddon } from 'unimport/addons'
 import MagicString from 'magic-string'
 import { presets } from '../presets'
-import type { ESLintrc, ImportExtended, Options } from '../types'
+import type { ESLintGlobalsPropValue, ESLintrc, ImportExtended, Options } from '../types'
 import { generateESLintConfigs } from './eslintrc'
 import { resolversAddon } from './resolvers'
 
 export function createContext(options: Options = {}, root = process.cwd()) {
   const {
     dts: preferDTS = isPackageExists('typescript'),
-    cache: isCache = false,
   } = options
 
   const dirs = options.dirs?.map(dir => resolve(root, dir))
@@ -27,10 +26,6 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   eslintrc.globalsPropValue = eslintrc.globalsPropValue === undefined ? true : eslintrc.globalsPropValue
 
   const resolvers = options.resolvers ? [options.resolvers].flat(2) : []
-
-  const cachePath = isCache === false
-    ? false
-    : resolve(root, typeof isCache === 'string' ? isCache : 'node_modules/.cache/unplugin-auto-import.json')
 
   // When "options.injectAtEnd" is undefined or true, it's true.
   const injectAtEnd = options.injectAtEnd !== false
@@ -79,10 +74,27 @@ ${dts}`.trim()}\n`
       ? resolve(root, 'auto-imports.d.ts')
       : resolve(root, preferDTS)
 
+  const multilineCommentsRE = /\/\*.*?\*\//gms
+  const singlelineCommentsRE = /\/\/.*$/gm
+  const dtsReg = /declare\s+global\s*{(.*?)}/s
+  function parseDTS(dts: string) {
+    dts = dts
+      .replace(multilineCommentsRE, '')
+      .replace(singlelineCommentsRE, '')
+
+    const code = dts.match(dtsReg)?.[0]
+    if (!code)
+      return
+
+    return Object.fromEntries(Array.from(code.matchAll(/['"]?(const\s*[^\s'"]+)['"]?\s*:\s*(.+?)[,;\r\n]/g)).map(i => [i[1], i[2]]))
+  }
+
   async function generateDTS(file: string) {
     await importsPromise
     const dir = dirname(file)
-    return unimport.generateTypeDeclarations({
+    const originalContent = existsSync(file) ? await fs.readFile(file, 'utf-8') : ''
+    const originalDTS = parseDTS(originalContent)
+    const currentContent = await unimport.generateTypeDeclarations({
       resolvePath: (i) => {
         if (i.from.startsWith('.') || isAbsolute(i.from)) {
           const related = slash(relative(dir, i.from).replace(/\.ts(x)?$/, ''))
@@ -93,14 +105,29 @@ ${dts}`.trim()}\n`
         return i.from
       },
     })
+    const currentDTS = parseDTS(currentContent)!
+    if (originalDTS) {
+      Object.keys(currentDTS).forEach((key) => {
+        originalDTS[key] = currentDTS[key]
+      })
+      const dtsList = Object.keys(originalDTS).sort().map(k => `  ${k}: ${originalDTS[k]}`)
+      return currentContent.replace(dtsReg, `declare global {\n${dtsList.join('\n')}\n}`)
+    }
+
+    return currentContent
+  }
+
+  async function parseESLint() {
+    const configStr = existsSync(eslintrc.filepath!) ? await fs.readFile(eslintrc.filepath!, 'utf-8') : ''
+    const config = JSON.parse(configStr || '{ "globals": {} }')
+    return config.globals as Record<string, ESLintGlobalsPropValue>
   }
 
   async function generateESLint() {
-    return generateESLintConfigs(await unimport.getImports(), eslintrc)
+    return generateESLintConfigs(await unimport.getImports(), eslintrc, await parseESLint())
   }
 
   const writeConfigFilesThrottled = throttle(500, writeConfigFiles, { noLeading: false })
-  const writeFileThrottled = throttle(500, writeFile, { noLeading: false })
 
   async function writeFile(filePath: string, content = '') {
     await fs.mkdir(dirname(filePath), { recursive: true })
@@ -150,68 +177,12 @@ ${dts}`.trim()}\n`
     writeConfigFilesThrottled()
   }
 
-  async function getCacheData(cache: string) {
-    const str = (await fs.readFile(cache, 'utf-8')).trim()
-    return JSON.parse(str || '{}') as { [key: string]: Import[] }
-  }
-
-  async function generateCache(): Promise<Record<string, Import[]>> {
-    if (!cachePath)
-      return {}
-
-    let cacheData = {}
-    try {
-      cacheData = await getCacheData(cachePath)
-      await Promise.allSettled(Object.keys(cacheData).map(async (filePath) => {
-        try {
-          const normalizeRoot = root.replaceAll(sep, posix.sep)
-          await fs.access(posix.join(normalizeRoot, filePath))
-        }
-        catch {
-          Reflect.deleteProperty(cacheData, filePath)
-        }
-      }))
-      await writeFile(cachePath, JSON.stringify(cacheData, null, 2))
-    }
-    catch {
-      await writeFile(cachePath, '{}')
-    }
-
-    return cacheData
-  }
-
-  let isInitialCache = false
-  const resolveCachePromise = generateCache()
-  async function updateCacheImports(id?: string, importList?: Import[]) {
-    if (!cachePath || (isInitialCache && !id))
-      return
-
-    isInitialCache = true
-    const cacheData = await resolveCachePromise
-    await unimport.modifyDynamicImports(async (imports) => {
-      if (id && importList) {
-        const filePath = posix.normalize(posix.relative(root, id))
-        importList = importList.filter(i => (i.name ?? i.as) && i.name !== 'default')
-        if (importList.length)
-          cacheData[filePath] = importList
-        else
-          delete cacheData[filePath]
-        writeFileThrottled(cachePath, JSON.stringify(cacheData, null, 2))
-        return imports.concat(importList)
-      }
-
-      return imports.concat(Object.values(cacheData).reduce((p, n) => p.concat(n), []))
-    })
-  }
-
   async function transform(code: string, id: string) {
     await importsPromise
 
     const s = new MagicString(code)
 
-    const res = await unimport.injectImports(s, id)
-
-    await updateCacheImports(id, res.imports)
+    await unimport.injectImports(s, id)
 
     if (!s.hasChanged())
       return
@@ -229,7 +200,6 @@ ${dts}`.trim()}\n`
     dirs,
     filter,
     scanDirs,
-    updateCacheImports,
     writeConfigFiles,
     writeConfigFilesThrottled,
     transform,
