@@ -25,7 +25,7 @@ export default createUnplugin<Options>((options) => {
     },
     vite: {
       async handleHotUpdate({ file }) {
-        if (ctx.dirs?.some(glob => minimatch(slash(file), glob)))
+        if (ctx.dirs?.some(glob => minimatch(slash(file), slash(glob))))
           await ctx.scanDirs()
       },
       async configResolved(config) {
