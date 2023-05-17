@@ -16,7 +16,7 @@
     "tslib": "^2.5.0",
     "typescript": "^5.0.4",
     "unplugin-auto-import": "workspace:*",
-    "vite": "^4.3.6",
+    "vite": "^4.3.7",
     "vite-plugin-inspect": "^0.7.26"
   }
 }

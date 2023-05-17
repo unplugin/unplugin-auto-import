@@ -121,18 +121,18 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.6",
     "@antfu/ni": "^0.21.3",
-    "@nuxt/kit": "^3.4.3",
-    "@types/node": "^18.16.10",
+    "@nuxt/kit": "^3.5.0",
+    "@types/node": "^18.16.12",
     "@types/resolve": "^1.20.2",
     "@vueuse/metadata": "^10.1.2",
     "bumpp": "^9.1.0",
     "eslint": "^8.40.0",
     "esno": "^0.16.3",
     "fast-glob": "^3.2.12",
-    "rollup": "^3.21.8",
+    "rollup": "^3.22.0",
     "tsup": "^6.7.0",
     "typescript": "^5.0.4",
-    "vite": "^4.3.6",
+    "vite": "^4.3.7",
     "vitest": "^0.31.0",
     "webpack": "^5.82.1"
   }

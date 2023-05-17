@@ -5,6 +5,7 @@ import { createFilter } from '@rollup/pluginutils'
 import { isPackageExists } from 'local-pkg'
 import type { Import, InlinePreset } from 'unimport'
 import { createUnimport, resolvePreset, scanDirExports } from 'unimport'
+
 // @ts-expect-error types
 import { vueTemplateAddon } from 'unimport/addons'
 import MagicString from 'magic-string'
