@@ -114,6 +114,7 @@ declare global {
   const toRaw: typeof import('vue-demi')['toRaw']
   const toRef: typeof import('vue-demi')['toRef']
   const toRefs: typeof import('vue-demi')['toRefs']
+  const toValue: typeof import('vue-demi')['toValue']
   const triggerRef: typeof import('vue-demi')['triggerRef']
   const tweened: typeof import('svelte/motion')['tweened']
   const unref: typeof import('vue-demi')['unref']
