@@ -352,7 +352,7 @@ module.exports = {
 
 ### Compare to [`unimport`](https://github.com/unjs/unimport)
 
-From v0.8.0, `unplugin-auto-import` **uses** `unimport` underneath. `unimport` is designed to be a lower level tool (it also powered Nuxt's auto import). You can think `unplugin-auto-import` is a wrapper of it that provides more user-friendly config APIs and capability like resolvers. Development of new features will mostly happend in `unimport` from now.
+From v0.8.0, `unplugin-auto-import` **uses** `unimport` underneath. `unimport` is designed to be a lower-level tool (it also powered Nuxt's auto import). You can think `unplugin-auto-import` is a wrapper of it that provides more user-friendly config APIs and capabilities like resolvers. Development of new features will mostly happen in `unimport`` from now.
 
 ### Compare to [`vue-global-api`](https://github.com/antfu/vue-global-api)
 

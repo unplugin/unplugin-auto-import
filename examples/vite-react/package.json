@@ -8,12 +8,12 @@
   },
   "dependencies": {
     "ahooks": "^3.7.7",
-    "i18next": "^22.4.15",
+    "i18next": "^22.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-i18next": "^12.2.2",
-    "react-router": "^6.11.1",
-    "react-router-dom": "^6.11.1"
+    "react-i18next": "^12.3.1",
+    "react-router": "^6.11.2",
+    "react-router-dom": "^6.11.2"
   },
   "devDependencies": {
     "@iconify-json/logos": "*",
@@ -24,6 +24,6 @@
     "typescript": "^5.0.4",
     "unplugin-auto-import": "workspace:*",
     "unplugin-icons": "^0.16.1",
-    "vite": "^4.3.7"
+    "vite": "^4.3.8"
   }
 }
