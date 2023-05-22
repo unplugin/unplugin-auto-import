@@ -14,4 +14,5 @@ it('dts', async () => {
   const dtsContent = await ctx.generateDTS(dts)
   expect(dtsContent).toContain('AAA')
   expect(dtsContent).toContain('BBB')
+  expect(dtsContent).toContain('$$')
 })

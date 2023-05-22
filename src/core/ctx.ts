@@ -112,7 +112,7 @@ ${dts}`.trim()}\n`
         originalDTS[key] = currentDTS[key]
       })
       const dtsList = Object.keys(originalDTS).sort().map(k => `  ${k}: ${originalDTS[k]}`)
-      return currentContent.replace(dtsReg, `declare global {\n${dtsList.join('\n')}\n}`)
+      return currentContent.replace(dtsReg, () => `declare global {\n${dtsList.join('\n')}\n}`)
     }
 
     return currentContent
@@ -166,13 +166,13 @@ ${dts}`.trim()}\n`
   async function scanDirs() {
     if (dirs?.length) {
       await unimport.modifyDynamicImports(async (imports) => {
-        const exports = await scanDirExports(dirs, {
+        const exports_ = await scanDirExports(dirs, {
           filePatterns: ['*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}'],
         }) as ImportExtended[]
-        exports.forEach(i => i.__source = 'dir')
+        exports_.forEach(i => i.__source = 'dir')
         return modifyDefaultExportsAlias([
           ...imports.filter((i: ImportExtended) => i.__source !== 'dir'),
-          ...exports,
+          ...exports_,
         ], options)
       })
     }
