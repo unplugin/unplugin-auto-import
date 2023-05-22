@@ -112,7 +112,7 @@ ${dts}`.trim()}\n`
         originalDTS[key] = currentDTS[key]
       })
       const dtsList = Object.keys(originalDTS).sort().map(k => `  ${k}: ${originalDTS[k]}`)
-      return currentContent.replace(dtsReg, `declare global {\n${dtsList.join('\n')}\n}`)
+      return currentContent.replace(dtsReg, () => `declare global {\n${dtsList.join('\n')}\n}`)
     }
 
     return currentContent
