@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/unplugin-auto-import?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-auto-import)
 
-Auto import APIs on-demand for Vite, Webpack, Rollup and esbuild. With TypeScript support. Powered by [unplugin](https://github.com/unjs/unplugin).
+Auto import APIs on-demand for Vite, Webpack, rspack, Rollup and esbuild. With TypeScript support. Powered by [unplugin](https://github.com/unjs/unplugin).
 
 ---
 
@@ -95,6 +95,21 @@ module.exports = {
   /* ... */
   plugins: [
     require('unplugin-auto-import/webpack')({ /* options */ }),
+  ],
+}
+```
+
+<br></details>
+
+<details>
+<summary>rspack</summary><br>
+
+```ts
+// rspack.config.js
+module.exports = {
+  /* ... */
+  plugins: [
+    require('unplugin-auto-import/rspack')({ /* options */ }),
   ],
 }
 ```
