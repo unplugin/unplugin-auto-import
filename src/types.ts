@@ -145,6 +145,16 @@ export interface Options {
    * Generate corresponding .eslintrc-auto-import.json file.
    */
   eslintrc?: ESLintrc
+
+  /**
+   * https://github.com/antfu/unplugin-auto-import/issues/382
+   * Whether the mapping should be high-resolution.
+   * Hi-res mappings map every single character, meaning (for example) your devtools will always
+   * be able to pinpoint the exact location of function calls and so on.
+   * With lo-res mappings, devtools may only be able to identify the correct
+   * line - but they're quicker to generate and less bulky.
+   */
+  sourcemapHires?: boolean
 }
 
 export { PresetName }

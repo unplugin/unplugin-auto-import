@@ -193,7 +193,7 @@ ${dts}`.trim()}\n`
 
     return {
       code: s.toString(),
-      map: s.generateMap({ source: id, includeContent: true }),
+      map: s.generateMap({ source: id, includeContent: true, hires: options.sourcemapHires }),
     }
   }
 
