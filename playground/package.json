@@ -13,7 +13,7 @@
     "@vue/compiler-sfc": "^3.3.4",
     "element-plus": "^2.3.5",
     "unplugin-vue-components": "^0.24.1",
-    "vite": "^4.3.8",
-    "vite-plugin-inspect": "^0.7.26"
+    "vite": "^4.3.9",
+    "vite-plugin-inspect": "^0.7.28"
   }
 }
