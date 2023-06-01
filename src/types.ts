@@ -51,6 +51,11 @@ export type Resolver = ResolverFunction | ResolverResultObject
  */
 export type ImportsMap = Record<string, (string | ImportNameAlias)[]>
 
+export interface DirsOptions {
+  dir: string
+  exportAllByFileName?: boolean
+}
+
 export type ESLintGlobalsPropValue = boolean | 'readonly' | 'readable' | 'writable' | 'writeable'
 
 export interface ESLintrc {
@@ -93,7 +98,7 @@ export interface Options {
   /**
    * Path for directories to be auto imported
    */
-  dirs?: string[]
+  dirs?: (string | DirsOptions)[]
 
   /**
    * Pass a custom function to resolve the component importing path from the component name.

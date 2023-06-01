@@ -1,16 +1,16 @@
-import { dirname, isAbsolute, relative, resolve } from 'node:path'
+import { basename, dirname, extname, isAbsolute, relative, resolve } from 'node:path'
 import { existsSync, promises as fs } from 'node:fs'
-import { slash, throttle, toArray } from '@antfu/utils'
+import { isString, slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
 import { isPackageExists } from 'local-pkg'
-import type { Import, InlinePreset } from 'unimport'
-import { createUnimport, resolvePreset, scanDirExports } from 'unimport'
+import type { Import, InlinePreset, ScanDirExportsOptions } from 'unimport'
+import { createUnimport, resolvePreset, scanDirExports, scanFilesFromDir } from 'unimport'
 
 // @ts-expect-error types
 import { vueTemplateAddon } from 'unimport/addons'
 import MagicString from 'magic-string'
 import { presets } from '../presets'
-import type { ESLintGlobalsPropValue, ESLintrc, ImportExtended, Options } from '../types'
+import type { DirsOptions, ESLintGlobalsPropValue, ESLintrc, ImportExtended, Options } from '../types'
 import { generateESLintConfigs } from './eslintrc'
 import { resolversAddon } from './resolvers'
 
@@ -19,7 +19,19 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     dts: preferDTS = isPackageExists('typescript'),
   } = options
 
-  const dirs = options.dirs?.map(dir => resolve(root, dir))
+  const dirs: DirsOptions[] | undefined = options.dirs?.map((dir) => {
+    if (isString(dir)) {
+      return {
+        dir: resolve(root, dir),
+      }
+    }
+    else {
+      return {
+        ...dir,
+        dir: resolve(root, dir.dir),
+      }
+    }
+  })
 
   const eslintrc: ESLintrc = options.eslintrc || {}
   eslintrc.enabled = eslintrc.enabled === undefined ? false : eslintrc.enabled
@@ -164,12 +176,32 @@ ${dts}`.trim()}\n`
     return Promise.all(promises)
   }
 
+  async function scanExportAllByFileNameDir(dirs: string[], options: ScanDirExportsOptions): Promise<ImportExtended[]> {
+    const files = await scanFilesFromDir(dirs, options)
+
+    return files.map(i => ({
+      name: '*',
+      as: basename(i, extname(i)),
+      from: i,
+    }))
+  }
+
   async function scanDirs() {
     if (dirs?.length) {
       await unimport.modifyDynamicImports(async (imports) => {
-        const exports_ = await scanDirExports(dirs, {
-          filePatterns: ['*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}'],
-        }) as ImportExtended[]
+        const exportDirs = dirs.filter(i => !i.exportAllByFileName).map(i => i.dir)
+        const exportAllByFileNameDirs = dirs.filter(i => i.exportAllByFileName).map(i => i.dir)
+        const exports_: ImportExtended[] = []
+        if (exportDirs.length) {
+          exports_.push(...await scanDirExports(exportDirs, {
+            filePatterns: ['*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}'],
+          }))
+        }
+        if (exportAllByFileNameDirs.length) {
+          exports_.push(...await scanExportAllByFileNameDir(exportAllByFileNameDirs, {
+            filePatterns: ['*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}'],
+          }))
+        }
         exports_.forEach(i => i.__source = 'dir')
         return modifyDefaultExportsAlias([
           ...imports.filter((i: ImportExtended) => i.__source !== 'dir'),

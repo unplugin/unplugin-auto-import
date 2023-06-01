@@ -2,8 +2,11 @@
 import HelloWorld from './HelloWorld.vue'
 
 ElMessage.warning('Test')
-const foo = useFoo()
-const bar = useBar()
+const composableFoo = useFoo()
+const composableBar = useBar()
+
+const utilsFoo = foo.useFoo()
+const utilsBar = bar.useBar()
 </script>
 
 <script lang="ts">
@@ -19,8 +22,10 @@ export default defineComponent({
 
 <template>
   <HelloWorld msg="hi" />
-  <pre>{{ foo }}</pre>
-  <pre>{{ bar }}</pre>
+  <pre>{{ composableFoo }}</pre>
+  <pre>{{ composableBar }}</pre>
+  <pre>{{ utilsFoo }}</pre>
+  <pre>{{ utilsBar }}</pre>
   <pre>{{ FOOBAR }}</pre>
   <div v-loading="false">
     <ElButton>Hello</ElButton>
