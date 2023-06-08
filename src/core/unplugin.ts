@@ -1,3 +1,4 @@
+import { relative } from 'node:path'
 import { minimatch } from 'minimatch'
 import { slash } from '@antfu/utils'
 import { createUnplugin } from 'unplugin'
@@ -23,7 +24,13 @@ export default createUnplugin<Options>((options) => {
     },
     vite: {
       async handleHotUpdate({ file }) {
-        if (ctx.dirs?.some(glob => minimatch(slash(file), slash(glob))))
+        const isShouldUpdate = ctx.dirs?.some((glob) => {
+          const file_ = slash(file)
+          const glob_ = slash(glob)
+
+          return minimatch(file_, glob_) || relative(file_, glob_) === '..'
+        })
+        if (isShouldUpdate)
           await ctx.scanDirs()
       },
       async configResolved(config) {
