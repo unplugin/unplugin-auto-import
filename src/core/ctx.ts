@@ -19,7 +19,8 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     dts: preferDTS = isPackageExists('typescript'),
   } = options
 
-  const dirs = options.dirs?.map(dir => resolve(root, dir))
+  const filePattern = '*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}'
+  const dirs = options.dirs?.map(dir => resolve(root, dir, !dir.includes('*') ? filePattern : ''))
 
   const eslintrc: ESLintrc = options.eslintrc || {}
   eslintrc.enabled = eslintrc.enabled === undefined ? false : eslintrc.enabled
@@ -168,7 +169,7 @@ ${dts}`.trim()}\n`
     if (dirs?.length) {
       await unimport.modifyDynamicImports(async (imports) => {
         const exports_ = await scanDirExports(dirs, {
-          filePatterns: ['*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}'],
+          filePatterns: [filePattern],
         }) as ImportExtended[]
         exports_.forEach(i => i.__source = 'dir')
         return modifyDefaultExportsAlias([
