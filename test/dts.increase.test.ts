@@ -15,4 +15,6 @@ it('dts', async () => {
   expect(dtsContent).toContain('AAA')
   expect(dtsContent).toContain('BBB')
   expect(dtsContent).toContain('$$')
+  expect(dtsContent).toContain('customFile')
+  expect(dtsContent).toContain('customFile1')
 })
