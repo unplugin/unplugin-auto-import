@@ -2,7 +2,7 @@
   "name": "unplugin-auto-import",
   "type": "module",
   "version": "0.16.4",
-  "packageManager": "pnpm@8.6.0",
+  "packageManager": "pnpm@8.6.3",
   "description": "Register global imports on demand for Vite and Webpack",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -128,18 +128,18 @@
     "@antfu/eslint-config": "^0.39.5",
     "@antfu/ni": "^0.21.4",
     "@nuxt/kit": "^3.5.3",
-    "@types/node": "^18.16.16",
+    "@types/node": "^18.16.18",
     "@types/resolve": "^1.20.2",
-    "@vueuse/metadata": "^10.1.2",
+    "@vueuse/metadata": "^10.2.0",
     "bumpp": "^9.1.1",
-    "eslint": "^8.42.0",
+    "eslint": "^8.43.0",
     "esno": "^0.16.3",
     "fast-glob": "^3.2.12",
     "rollup": "^3.25.1",
-    "tsup": "^6.7.0",
+    "tsup": "^7.0.0",
     "typescript": "^5.1.3",
     "vite": "^4.3.9",
-    "vitest": "^0.32.0",
-    "webpack": "^5.86.0"
+    "vitest": "^0.32.2",
+    "webpack": "^5.88.0"
   }
 }
