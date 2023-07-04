@@ -15,9 +15,12 @@ export default defineConfig({
       ],
       dirs: [
         './composables/**',
+        {
+          dir: './utils/**',
+          exportAllByFileName: true,
+        },
       ],
       vueTemplate: true,
-      cache: true,
     }),
   ],
 })
