@@ -5,7 +5,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@vueuse/core": "^10.2.0",
+    "@vueuse/core": "^10.2.1",
     "vue": "3.3.4"
   },
   "devDependencies": {
@@ -14,6 +14,6 @@
     "element-plus": "^2.3.7",
     "unplugin-vue-components": "^0.25.1",
     "vite": "^4.3.9",
-    "vite-plugin-inspect": "^0.7.28"
+    "vite-plugin-inspect": "^0.7.32"
   }
 }
