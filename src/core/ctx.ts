@@ -1,10 +1,11 @@
-import { dirname, isAbsolute, relative, resolve } from 'node:path'
+import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
 import { existsSync, promises as fs } from 'node:fs'
 import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
 import { isPackageExists } from 'local-pkg'
 import type { Import, InlinePreset } from 'unimport'
-import { createUnimport, resolvePreset, scanDirExports } from 'unimport'
+import { createUnimport, resolvePreset, scanExports } from 'unimport'
+import fg from 'fast-glob'
 
 // @ts-expect-error types
 import { vueTemplateAddon } from 'unimport/addons'
@@ -14,12 +15,30 @@ import type { ESLintGlobalsPropValue, ESLintrc, ImportExtended, Options } from '
 import { generateESLintConfigs } from './eslintrc'
 import { resolversAddon } from './resolvers'
 
+function resolveGlobsExclude(root: string, glob: string) {
+  const excludeReg = /^!/
+  return `${excludeReg.test(glob) ? '!' : ''}${resolve(root, glob.replace(excludeReg, ''))}`
+}
+
+async function scanDirExports(dirs: string[], root: string) {
+  const result = await fg(dirs, {
+    absolute: true,
+    cwd: root,
+    onlyFiles: true,
+    followSymbolicLinks: true,
+  })
+
+  const files = Array.from(new Set(result.flat())).map(slash)
+  return (await Promise.all(files.map(i => scanExports(i)))).flat()
+}
+
 export function createContext(options: Options = {}, root = process.cwd()) {
   const {
     dts: preferDTS = isPackageExists('typescript'),
   } = options
 
-  const dirs = options.dirs?.map(dir => resolve(root, dir))
+  const dirs = options.dirs?.concat(options.dirs.map(dir => join(dir, '*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}')))
+    .map(dir => slash(resolveGlobsExclude(root, dir)))
 
   const eslintrc: ESLintrc = options.eslintrc || {}
   eslintrc.enabled = eslintrc.enabled === undefined ? false : eslintrc.enabled
@@ -167,9 +186,7 @@ ${dts}`.trim()}\n`
   async function scanDirs() {
     if (dirs?.length) {
       await unimport.modifyDynamicImports(async (imports) => {
-        const exports_ = await scanDirExports(dirs, {
-          filePatterns: ['*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}'],
-        }) as ImportExtended[]
+        const exports_ = await scanDirExports(dirs, root) as ImportExtended[]
         exports_.forEach(i => i.__source = 'dir')
         return modifyDefaultExportsAlias([
           ...imports.filter((i: ImportExtended) => i.__source !== 'dir'),
