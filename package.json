@@ -32,7 +32,6 @@
       "require": "./dist/index.cjs",
       "import": "./dist/index.js"
     },
-    "./*": "./*",
     "./nuxt": {
       "types": "./dist/nuxt.d.ts",
       "require": "./dist/nuxt.cjs",
@@ -72,7 +71,8 @@
       "types": "./dist/esbuild.d.ts",
       "require": "./dist/esbuild.cjs",
       "import": "./dist/esbuild.js"
-    }
+    },
+    "./*": "./*"
   },
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -80,7 +80,8 @@
   "typesVersions": {
     "*": {
       "*": [
-        "./dist/*"
+        "./dist/*",
+        "./*"
       ]
     }
   },
