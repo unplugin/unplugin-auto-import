@@ -84,6 +84,11 @@ export interface Options {
   ignore?: (string | RegExp)[]
 
   /**
+   * These identifiers won't be put on the DTS file
+   */
+  ignoreDts?: (string | RegExp)[]
+
+  /**
    * Inject the imports at the end of other imports
    *
    * @default true
