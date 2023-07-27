@@ -9,11 +9,13 @@ it('dts', async () => {
       custom: [
         'shouldBePresent',
         'shouldAlsoBePresent',
-        'shouldBeIgnored'
+        'shouldBeIgnored',
+        'ignoreme_shoudAlsoBeIgnored'
       ]
     }],
     ignoreDts: [
-      'shouldBeIgnored'
+      'shouldBeIgnored',
+      /^ignoreme_/
     ]
   })
 
@@ -22,4 +24,5 @@ it('dts', async () => {
   expect(dtsContent).toContain('shouldBePresent')
   expect(dtsContent).toContain('shouldAlsoBePresent')
   expect(dtsContent).not.toContain('shouldBeIgnored')
+  expect(dtsContent).not.toContain('ignoreme_shoudAlsoBeIgnored')
 })
