@@ -2,7 +2,7 @@ import { join } from 'node:path'
 import { expect, it } from 'vitest'
 import { createContext } from '../src/core/ctx'
 
-it('dts', async () => {
+it('dts ignore', async () => {
   const cwd = process.cwd()
   const ctx = createContext({
     imports: [{
