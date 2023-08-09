@@ -2,8 +2,9 @@ import type { ImportsMap } from '../types'
 
 export default <ImportsMap>({
   '@solidjs/router': [
-    'Link',
-    'NavLink',
+    'Link', // Deprecated
+    'A',
+    'NavLink', // Deprecated
     'Navigate',
     'Outlet',
     'Route',
