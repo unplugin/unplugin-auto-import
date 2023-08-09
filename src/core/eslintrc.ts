@@ -13,7 +13,7 @@ export function generateESLintConfigs(
     .filter(Boolean)
     .sort()
     .forEach((name) => {
-      eslintConfigs.globals[name] = eslintrc.globalsPropValue || true
+      eslintConfigs.globals[name] = eslintrc.globalsPropValue
     })
   const jsonBody = JSON.stringify(eslintConfigs, null, 2)
   return jsonBody
