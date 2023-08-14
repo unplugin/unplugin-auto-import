@@ -39,6 +39,8 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
   const dirs = options.dirs?.concat(options.dirs.map(dir => join(dir, '*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}')))
     .map(dir => slash(resolveGlobsExclude(root, dir)))
+    .map((dir) => dir.replace(/[()]/g, "\\\\$&"))
+    // .map((dir) => fg.convertPathToPattern(dir))
 
   const eslintrc: ESLintrc = options.eslintrc || {}
   eslintrc.enabled = eslintrc.enabled === undefined ? false : eslintrc.enabled
