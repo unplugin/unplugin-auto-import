@@ -14,7 +14,8 @@ const PageA: Component = () => {
                   href={`/detail/${new Date().getTime()}?q=${new Date().getTime()
                     % item}`}
                 >
-                  Detail-{item}
+                  Detail-
+                  {item}
                 </NavLink>
               </nav>
             </li>

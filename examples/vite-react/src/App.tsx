@@ -8,17 +8,19 @@ function App() {
 
   return (
     <div className="App">
-      <IconLogosReact style={{ fontSize: '3em' }}/>
+      <IconLogosReact style={{ fontSize: '3em' }} />
       <header className="App-header">
         <h1>{t('welcome')}</h1>
         <p>
           <button type="button" onClick={() => setCount(count => count + 1)}>
-            count is: {count}
+            count is:
+            {' '}
+            {count}
           </button>
         </p>
       </header>
       <Routes>
-        <Route path="/" element={<MainLayout />} >
+        <Route path="/" element={<MainLayout />}>
           <Route path="/list" element={<PageA />} />
           <Route path="/detail/:id" element={<PageB />} />
         </Route>

@@ -11,7 +11,9 @@ function App() {
       <header className="App-header">
         <p>
           <button type="button" onClick={() => setCount(count => count + 1)}>
-            count is: {count}
+            count is:
+            {' '}
+            {count}
           </button>
         </p>
       </header>

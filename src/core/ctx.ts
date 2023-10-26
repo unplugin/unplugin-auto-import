@@ -1,5 +1,6 @@
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
 import { existsSync, promises as fs } from 'node:fs'
+import process from 'node:process'
 import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
 import { isPackageExists } from 'local-pkg'
@@ -29,7 +30,7 @@ async function scanDirExports(dirs: string[], root: string) {
   })
 
   const files = Array.from(new Set(result.flat())).map(slash)
-  return (await Promise.all(files.map(i => scanExports(i)))).flat()
+  return (await Promise.all(files.map(i => scanExports(i, false)))).flat()
 }
 
 export function createContext(options: Options = {}, root = process.cwd()) {

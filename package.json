@@ -2,7 +2,7 @@
   "name": "unplugin-auto-import",
   "type": "module",
   "version": "0.16.6",
-  "packageManager": "pnpm@8.6.6",
+  "packageManager": "pnpm@8.9.2",
   "description": "Register global imports on demand for Vite and Webpack",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -29,48 +29,48 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./nuxt": {
       "types": "./dist/nuxt.d.ts",
-      "require": "./dist/nuxt.cjs",
-      "import": "./dist/nuxt.js"
+      "import": "./dist/nuxt.js",
+      "require": "./dist/nuxt.cjs"
     },
     "./astro": {
       "types": "./dist/astro.d.ts",
-      "require": "./dist/astro.cjs",
-      "import": "./dist/astro.js"
+      "import": "./dist/astro.js",
+      "require": "./dist/astro.cjs"
     },
     "./rollup": {
       "types": "./dist/rollup.d.ts",
-      "require": "./dist/rollup.cjs",
-      "import": "./dist/rollup.js"
+      "import": "./dist/rollup.js",
+      "require": "./dist/rollup.cjs"
     },
     "./types": {
       "types": "./dist/types.d.ts",
-      "require": "./dist/types.cjs",
-      "import": "./dist/types.js"
+      "import": "./dist/types.js",
+      "require": "./dist/types.cjs"
     },
     "./vite": {
       "types": "./dist/vite.d.ts",
-      "require": "./dist/vite.cjs",
-      "import": "./dist/vite.js"
+      "import": "./dist/vite.js",
+      "require": "./dist/vite.cjs"
     },
     "./webpack": {
       "types": "./dist/webpack.d.ts",
-      "require": "./dist/webpack.cjs",
-      "import": "./dist/webpack.js"
+      "import": "./dist/webpack.js",
+      "require": "./dist/webpack.cjs"
     },
     "./rspack": {
       "types": "./dist/rspack.d.ts",
-      "require": "./dist/rspack.cjs",
-      "import": "./dist/rspack.js"
+      "import": "./dist/rspack.js",
+      "require": "./dist/rspack.cjs"
     },
     "./esbuild": {
       "types": "./dist/esbuild.d.ts",
-      "require": "./dist/esbuild.cjs",
-      "import": "./dist/esbuild.js"
+      "import": "./dist/esbuild.js",
+      "require": "./dist/esbuild.cjs"
     },
     "./*": "./*"
   },
@@ -86,8 +86,8 @@
     }
   },
   "files": [
-    "dist",
-    "*.d.ts"
+    "*.d.ts",
+    "dist"
   ],
   "engines": {
     "node": ">=14"
@@ -117,30 +117,30 @@
     }
   },
   "dependencies": {
-    "@antfu/utils": "^0.7.5",
-    "@rollup/pluginutils": "^5.0.2",
-    "fast-glob": "^3.3.0",
-    "local-pkg": "^0.4.3",
-    "magic-string": "^0.30.1",
-    "minimatch": "^9.0.2",
-    "unimport": "^3.0.14",
-    "unplugin": "^1.3.2"
+    "@antfu/utils": "^0.7.6",
+    "@rollup/pluginutils": "^5.0.5",
+    "fast-glob": "^3.3.1",
+    "local-pkg": "^0.5.0",
+    "magic-string": "^0.30.5",
+    "minimatch": "^9.0.3",
+    "unimport": "^3.4.0",
+    "unplugin": "^1.5.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.39.7",
-    "@antfu/ni": "^0.21.4",
-    "@nuxt/kit": "^3.6.1",
-    "@types/node": "^18.16.19",
-    "@types/resolve": "^1.20.2",
-    "@vueuse/metadata": "^10.2.1",
-    "bumpp": "^9.1.1",
-    "eslint": "^8.44.0",
-    "esno": "^0.16.3",
-    "rollup": "^3.26.1",
-    "tsup": "^7.1.0",
-    "typescript": "^5.1.6",
-    "vite": "^4.3.9",
-    "vitest": "^0.32.4",
-    "webpack": "^5.88.1"
+    "@antfu/eslint-config": "^1.0.0-beta.29",
+    "@antfu/ni": "^0.21.8",
+    "@nuxt/kit": "^3.8.0",
+    "@types/node": "^20.8.9",
+    "@types/resolve": "^1.20.4",
+    "@vueuse/metadata": "^10.5.0",
+    "bumpp": "^9.2.0",
+    "eslint": "^8.52.0",
+    "esno": "^0.17.0",
+    "rollup": "^4.1.4",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0",
+    "vitest": "^0.34.6",
+    "webpack": "^5.89.0"
   }
 }
