@@ -36,7 +36,7 @@ async function scanDirExports(dirs: string[], root: string) {
   const isWindows = os.platform() === 'win32';
 
 export function createContext(options: Options = {}, root = process.cwd()) {
-  root=isWindows?slash(root):root;
+  root = isWindows ? slash(root) : root;
 
   const {
     dts: preferDTS = isPackageExists('typescript'),
