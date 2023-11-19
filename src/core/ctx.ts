@@ -33,7 +33,7 @@ async function scanDirExports(dirs: string[], root: string) {
   const files = Array.from(new Set(result.flat())).map(slash)
   return (await Promise.all(files.map(i => scanExports(i, false)))).flat()
 }
-const isWindows = os.platform() === 'win32';
+  const isWindows = os.platform() === 'win32';
 
 export function createContext(options: Options = {}, root = process.cwd()) {
   root=isWindows?slash(root):root;
