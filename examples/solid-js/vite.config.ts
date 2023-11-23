@@ -15,13 +15,12 @@ export default defineConfig({
       dts: './src/auto-imports.d.ts',
       resolvers: [
         IconsResolver({
-          componentPrefix: 'Icon',
+          prefix: 'Icon',
         }),
       ],
     }),
   ],
   build: {
     target: 'esnext',
-    polyfillDynamicImport: false,
   },
 })
