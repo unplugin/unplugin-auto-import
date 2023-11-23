@@ -11,17 +11,16 @@ export default defineConfig({
       compiler: 'solid',
     }),
     AutoImport({
-      imports: ['solid-js', 'solid-app-router'],
+      imports: ['solid-js', '@solidjs/router'],
       dts: './src/auto-imports.d.ts',
       resolvers: [
         IconsResolver({
-          componentPrefix: 'Icon',
+          prefix: 'Icon',
         }),
       ],
     }),
   ],
   build: {
     target: 'esnext',
-    polyfillDynamicImport: false,
   },
 })

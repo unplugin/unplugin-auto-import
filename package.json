@@ -175,6 +175,7 @@
     "@antfu/eslint-config": "^1.2.1",
     "@antfu/ni": "^0.21.9",
     "@nuxt/kit": "^3.8.1",
+    "@svgr/plugin-jsx": "^8.1.0",
     "@types/node": "^20.9.1",
     "@types/resolve": "^1.20.5",
     "@vueuse/metadata": "^10.6.1",
