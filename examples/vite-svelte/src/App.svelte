@@ -25,5 +25,7 @@
   <br />
 
   <Counter />
+
+  <pre>{ mdiAbacus }</pre>
 </main>
 

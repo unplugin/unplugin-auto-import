@@ -30,6 +30,7 @@ import solidAppRouter from './solid-app-router'
 import { jotai, jotaiUtils } from './jotai'
 import vueuseMath from './vueuse-math'
 import recoil from './recoil'
+import mdiJs from './mdi-js'
 
 export const presets = {
   ...builtinPresets,
@@ -63,6 +64,7 @@ export const presets = {
   'jotai': jotai,
   'jotai/utils': jotaiUtils,
   'recoil': recoil,
+  '@mdi/js': mdiJs,
 }
 
 export type PresetName = keyof typeof presets

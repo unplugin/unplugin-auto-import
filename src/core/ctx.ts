@@ -236,7 +236,7 @@ export async function flattenImports(map: Options['imports']): Promise<Import[]>
         if (!presets[definition])
           throw new Error(`[auto-import] preset ${definition} not found`)
         const preset = presets[definition]
-        definition = typeof preset === 'function' ? preset() : preset
+        definition = typeof preset === 'function' ? await preset() : preset
       }
 
       if ('from' in definition && 'imports' in definition) {

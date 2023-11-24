@@ -13,6 +13,7 @@ export default defineConfig({
         'svelte',
         'svelte/store',
         'svelte/transition',
+        '@mdi/js',
       ],
       dts: './src/auto-imports.d.ts',
     }),

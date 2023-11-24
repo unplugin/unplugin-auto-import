@@ -191,6 +191,9 @@ importers:
 
   examples/vite-svelte:
     devDependencies:
+      '@mdi/js':
+        specifier: ^7.3.67
+        version: 7.3.67
       '@sveltejs/vite-plugin-svelte':
         specifier: ^3.0.0
         version: 3.0.0(svelte@4.2.5)(vite@5.0.0)
@@ -1382,6 +1385,10 @@ packages:
       cross-spawn: 7.0.3
       string-argv: 0.3.1
       type-detect: 4.0.8
+    dev: true
+
+  /@mdi/js@7.3.67:
+    resolution: {integrity: sha512-MnRjknFqpTC6FifhGHjZ0+QYq2bAkZFQqIj8JA2AdPZbBxUvr8QSgB2yPAJ8/ob/XkR41xlg5majDR3c1JP1hw==}
     dev: true
 
   /@nodelib/fs.scandir@2.1.5:
