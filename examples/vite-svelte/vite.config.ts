@@ -14,6 +14,9 @@ export default defineConfig({
         'svelte/store',
         'svelte/transition',
       ],
+      packagePresets: [{
+        package: 'detect-browser-es',
+      }],
       dts: './src/auto-imports.d.ts',
     }),
   ],

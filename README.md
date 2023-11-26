@@ -295,6 +295,22 @@ Refer to the [type definitions](./src/types.ts) for more options.
 
 See [src/presets](./src/presets).
 
+## Package Presets
+
+We only provide presets for the most popular packages, to use any package not included here you can install it as dev dependency and add it to the `packagePresets` array option:
+```ts
+AutoImport({
+  /* other options */
+  packagePresets: [{ package: 'detect-browser-es' } /* other local package names */]
+})
+```
+
+You can check the [Svelte example](./examples/vite-svelte) for a working example registering `detect-browser-es` package preset and auto importing `detect` function in [App.svelte](./examples/vite-svelte/src/App.svelte).
+
+Please refer to the [unimport PackagePresets jsdocs](https://github.com/unjs/unimport/blob/main/src/types.ts) for more information about options like `ignore` or `cache`.
+
+**Note**: ensure local packages used have package exports configured properly, otherwise the corresponding modules exports will not be detected.
+
 ## TypeScript
 
 In order to properly hint types for auto-imported APIs
