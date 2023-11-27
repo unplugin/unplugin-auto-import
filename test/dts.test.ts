@@ -6,7 +6,7 @@ import { createContext } from '../src/core/ctx'
 it('dts', async () => {
   const cwd = process.cwd()
   const ctx = createContext({
-    packagePresets: [{ package: 'magic-string' }],
+    packagePresets: ['magic-string'],
     imports: [
       'vue-demi',
       'react',
