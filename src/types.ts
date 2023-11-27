@@ -79,7 +79,7 @@ export interface Options {
   imports?: Arrayable<ImportsMap | PresetName | InlinePreset>
 
   /**
-   * Package presets names.
+   * Local package presets.
    *
    * Register local installed packages as a preset.
    *
