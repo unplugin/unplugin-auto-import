@@ -301,7 +301,7 @@ We only provide presets for the most popular packages, to use any package not in
 ```ts
 AutoImport({
   /* other options */
-  packagePresets: [{ package: 'detect-browser-es' }/* other local package names */]
+  packagePresets: ['detect-browser-es'/* other local package names */]
 })
 ```
 

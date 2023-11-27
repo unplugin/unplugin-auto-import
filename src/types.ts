@@ -86,7 +86,7 @@ export interface Options {
    * @default []
    * @see https://github.com/unplugin/unplugin-auto-import#package-presets
    */
-  packagePresets?: PackagePreset[]
+  packagePresets?: (PackagePreset | string)[]
 
   /**
    * Identifiers to be ignored
