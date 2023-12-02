@@ -242,30 +242,15 @@ module.exports = {
 <details>
 <summary>esbuild</summary><br>
 
-From version `v0.17.0+` you need to use `default` export:
 ```ts
 // esbuild.config.js
 import { build } from 'esbuild'
+import AutoImport from 'unplugin-auto-import/esbuild'
 
 build({
   /* ... */
   plugins: [
-    require('unplugin-auto-import/esbuild').default({
-      /* options */
-    }),
-  ],
-})
-```
-
-If you are using a version earlier than `v0.17.0`:
-```ts
-// esbuild.config.js
-import { build } from 'esbuild'
-
-build({
-  /* ... */
-  plugins: [
-    require('unplugin-auto-import/esbuild')({
+    AutoImport({
       /* options */
     }),
   ],
