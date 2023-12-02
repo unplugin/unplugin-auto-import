@@ -122,7 +122,7 @@ From version `v0.17.0+` you need to use `default` export:
 module.exports = {
   /* ... */
   plugins: [
-    require('unplugin-auto-import/webpack').default({ /* options */ }),
+    require('unplugin-auto-import/rspack').default({ /* options */ }),
   ],
 }
 ```
