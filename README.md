@@ -94,7 +94,7 @@ export default {
 module.exports = {
   /* ... */
   plugins: [
-    require('unplugin-auto-import/webpack')({ /* options */ }),
+    require('unplugin-auto-import/webpack').default({ /* options */ }),
   ],
 }
 ```
@@ -109,7 +109,7 @@ module.exports = {
 module.exports = {
   /* ... */
   plugins: [
-    require('unplugin-auto-import/rspack')({ /* options */ }),
+    require('unplugin-auto-import/rspack').default({ /* options */ }),
   ],
 }
 ```
@@ -129,9 +129,22 @@ module.exports = {
 ```ts
 // vue.config.js
 module.exports = {
+  /* ... */
+  plugins: [
+    require('unplugin-auto-import/webpack').default({ /* options */ }),
+  ],
+}
+```
+
+You can also rename the Vue configuration file to `vue.config.mjs` and use static import syntax (you should use latest `@vue/cli-service ^5.0.8`):
+```ts
+// vue.config.mjs
+import AutoImport from 'unplugin-auto-import/webpack'
+
+export default {
   configureWebpack: {
     plugins: [
-      require('unplugin-auto-import/webpack')({ /* options */ }),
+      AutoImport({ /* options */ }),
     ],
   },
 }
@@ -143,17 +156,20 @@ module.exports = {
 <summary>Quasar</summary><br>
 
 ```ts
-// quasar.conf.js [Vite]
-module.exports = {
-  vitePlugins: [
-    ['unplugin-auto-import/vite', { /* options */ }],
-  ],
-}
+// vite.config.js [Vite]
+import { defineConfig } from 'vite'
+import AutoImport from 'unplugin-auto-import/vite'
+
+export default defineConfig({
+  plugins: [
+    AutoImport({ /* options */ })
+  ]
+})
 ```
 
 ```ts
 // quasar.conf.js [Webpack]
-const AutoImportPlugin = require('unplugin-auto-import/webpack')
+const AutoImportPlugin = require('unplugin-auto-import/webpack').default
 
 module.exports = {
   build: {
@@ -175,11 +191,12 @@ module.exports = {
 ```ts
 // esbuild.config.js
 import { build } from 'esbuild'
+import AutoImport from 'unplugin-auto-import/esbuild'
 
 build({
   /* ... */
   plugins: [
-    require('unplugin-auto-import/esbuild')({
+    AutoImport({
       /* options */
     }),
   ],
