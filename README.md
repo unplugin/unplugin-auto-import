@@ -89,7 +89,6 @@ export default {
 <details>
 <summary>Webpack</summary><br>
 
-From version `v0.17.0+` you need to use `default` export:
 ```ts
 // webpack.config.js
 module.exports = {
@@ -100,40 +99,17 @@ module.exports = {
 }
 ```
 
-If you are using a version earlier than `v0.17.0`:
-```ts
-// webpack.config.js
-module.exports = {
-  /* ... */
-  plugins: [
-    require('unplugin-auto-import/webpack')({ /* options */ }),
-  ],
-}
-```
-
 <br></details>
 
 <details>
 <summary>Rspack</summary><br>
 
-From version `v0.17.0+` you need to use `default` export:
 ```ts
 // rspack.config.js
 module.exports = {
   /* ... */
   plugins: [
     require('unplugin-auto-import/rspack').default({ /* options */ }),
-  ],
-}
-```
-
-If you are using a version earlier than `v0.17.0`:
-```ts
-// rspack.config.js
-module.exports = {
-  /* ... */
-  plugins: [
-    require('unplugin-auto-import/rspack')({ /* options */ }),
   ],
 }
 ```
@@ -150,7 +126,6 @@ module.exports = {
 <details>
 <summary>Vue CLI</summary><br>
 
-From version `v0.17.0+` you need to use `default` export:
 ```ts
 // vue.config.js
 module.exports = {
@@ -161,7 +136,7 @@ module.exports = {
 }
 ```
 
-or you can rename the Vue configuration file to `vue.config.mjs` and use static import syntax (you should use latest `@vue/cli-service ^5.0.8`):
+You can also rename the Vue configuration file to `vue.config.mjs` and use static import syntax (you should use latest `@vue/cli-service ^5.0.8`):
 ```ts
 // vue.config.mjs
 import AutoImport from 'unplugin-auto-import/webpack'
@@ -170,18 +145,6 @@ export default {
   configureWebpack: {
     plugins: [
       AutoImport({ /* options */ }),
-    ],
-  },
-}
-```
-
-If you are using a version earlier than `v0.17.0`:
-```ts
-// vue.config.js
-module.exports = {
-  configureWebpack: {
-    plugins: [
-      require('unplugin-auto-import/webpack')({ /* options */ }),
     ],
   },
 }
@@ -204,26 +167,9 @@ export default defineConfig({
 })
 ```
 
-From version `v0.17.0+` you need to use `default` export:
 ```ts
 // quasar.conf.js [Webpack]
 const AutoImportPlugin = require('unplugin-auto-import/webpack').default
-
-module.exports = {
-  build: {
-    chainWebpack(chain) {
-      chain.plugin('unplugin-auto-import').use(
-        AutoImportPlugin({ /* options */ }),
-      )
-    },
-  },
-}
-```
-
-If you are using a version earlier than `v0.17.0`:
-```ts
-// quasar.conf.js [Webpack]
-const AutoImportPlugin = require('unplugin-auto-import/webpack')
 
 module.exports = {
   build: {
