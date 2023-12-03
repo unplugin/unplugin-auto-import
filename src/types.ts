@@ -1,6 +1,6 @@
 import type { Arrayable, Awaitable } from '@antfu/utils'
 import type { FilterPattern } from '@rollup/pluginutils'
-import type { Import, InlinePreset } from 'unimport'
+import type { Import, InlinePreset, PackagePreset } from 'unimport'
 import { PresetName } from './presets'
 
 export interface ImportLegacy {
@@ -77,6 +77,16 @@ export interface Options {
    * @default []
    */
   imports?: Arrayable<ImportsMap | PresetName | InlinePreset>
+
+  /**
+   * Local package presets.
+   *
+   * Register local installed packages as a preset.
+   *
+   * @default []
+   * @see https://github.com/unplugin/unplugin-auto-import#package-presets
+   */
+  packagePresets?: (PackagePreset | string)[]
 
   /**
    * Identifiers to be ignored

@@ -6,6 +6,8 @@
   onMount(function() {
       console.log('onMount called')
   })
+
+  $:browser = detect()
 </script>
 
 <main>
@@ -25,5 +27,7 @@
   <br />
 
   <Counter />
+
+  <pre>Browser: { browser?.name }</pre>
 </main>
 

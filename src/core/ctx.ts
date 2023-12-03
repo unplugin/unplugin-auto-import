@@ -53,7 +53,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
   const unimport = createUnimport({
     imports: [],
-    presets: [],
+    presets: options.packagePresets?.map(p => typeof p === 'string' ? { package: p } : p) ?? [],
     injectAtEnd,
     addons: [
       ...(options.vueTemplate ? [vueTemplateAddon()] : []),
