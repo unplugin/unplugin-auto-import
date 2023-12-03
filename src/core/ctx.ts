@@ -34,6 +34,8 @@ async function scanDirExports(dirs: string[], root: string) {
 }
 
 export function createContext(options: Options = {}, root = process.cwd()) {
+  root = slash(root)
+
   const {
     dts: preferDTS = isPackageExists('typescript'),
   } = options
