@@ -57,6 +57,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     imports: [],
     presets: options.packagePresets?.map(p => typeof p === 'string' ? { package: p } : p) ?? [],
     injectAtEnd,
+    parser: options.parser,
     addons: [
       ...(options.vueTemplate ? [vueTemplateAddon()] : []),
       resolversAddon(resolvers),

@@ -1,6 +1,6 @@
 import type { Arrayable, Awaitable } from '@antfu/utils'
 import type { FilterPattern } from '@rollup/pluginutils'
-import type { Import, InlinePreset, PackagePreset } from 'unimport'
+import type { Import, InlinePreset, PackagePreset, UnimportOptions } from 'unimport'
 import { PresetName } from './presets'
 
 export interface ImportLegacy {
@@ -111,6 +111,14 @@ export interface Options {
    * The component names are always in PascalCase
    */
   resolvers?: Arrayable<Arrayable<Resolver>>
+
+  /**
+   * Parser to be used for parsing the source code.
+   * 
+   * @see https://github.com/unjs/unimport#acorn-parser
+   * @default 'regex'
+   */
+  parser?: UnimportOptions['parser']
 
   /**
    * Filepath to generate corresponding .d.ts file.
