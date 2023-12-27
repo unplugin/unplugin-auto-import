@@ -6,15 +6,15 @@ exports[`transform > comments.ts 1`] = `
 // import { computed } from 'vue'
 
 const a = {
-  rel: \\"noreferrer\\",
-  href: \\"https://github.com/antfu/vitesse\\",
-  target: \\"_blank\\"
+  rel: "noreferrer",
+  href: "https://github.com/antfu/vitesse",
+  target: "_blank"
 }
 
 const foo = ref(0)
 const bar = computed(() => {})
 
-const b = { class: \\"text-sm opacity-75\\" };
+const b = { class: "text-sm opacity-75" };
 // reactive
 "
 `;
@@ -93,14 +93,14 @@ const d = watch3(0)
 
 exports[`transform > existing6.jsx 1`] = `
 "import { computed } from 'vue';
-const a = computed(() => /^(https?:\\\\/\\\\/|\\\\/\\\\/)/.test(props.to))
+const a = computed(() => /^(https?:\\/\\/|\\/\\/)/.test(props.to))
 "
 `;
 
 exports[`transform > glob.ts 1`] = `
 "import { ref } from 'vue';
-const modules = import.meta.glob(\\"/src/nested/*.vue\\");
-const msg = ref(\\"Global Imports\\");
+const modules = import.meta.glob("/src/nested/*.vue");
+const msg = ref("Global Imports");
 "
 `;
 
@@ -192,9 +192,9 @@ ElMessage.warning('Test')
 `;
 
 exports[`transform > strings.ts 1`] = `
-"console.log(\\"ref(0)\\")
+"console.log("ref(0)")
 console.log(\`ref(\${a})\`)
-console.log('ref(\\\\'z\\\\')')
+console.log('ref(\\'z\\')')
 console.log(\`
 ref('z')
 \`)
@@ -236,7 +236,7 @@ const z = \`bar-\${ref()}\`
 exports[`transform > template-ref.vue 1`] = `
 "import { ref } from 'vue';
 <template>
-  <div ref=\\"divRef\\"></div>
+  <div ref="divRef"></div>
 </template>
 
 <script setup>
@@ -268,6 +268,6 @@ exports[`transform-vue-macro > notexisting.ts 1`] = `
 const test2 = /[;$]/
 const test3 = /($)/gim.test('a')
 const test4 = /[$]/gim
-const test5 = /[\\\\/$]/gim
+const test5 = /[\\/$]/gim
 "
 `;

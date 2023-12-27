@@ -85,7 +85,6 @@ export default {
 
 <br></details>
 
-
 <details>
 <summary>Webpack</summary><br>
 
@@ -184,7 +183,6 @@ module.exports = {
 
 <br></details>
 
-
 <details>
 <summary>esbuild</summary><br>
 
@@ -204,7 +202,6 @@ build({
 ```
 
 <br></details>
-
 
 <details>
 <summary>Astro</summary><br>

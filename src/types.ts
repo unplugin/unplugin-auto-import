@@ -114,7 +114,7 @@ export interface Options {
 
   /**
    * Parser to be used for parsing the source code.
-   * 
+   *
    * @see https://github.com/unjs/unimport#acorn-parser
    * @default 'regex'
    */

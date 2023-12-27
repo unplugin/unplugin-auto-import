@@ -154,10 +154,10 @@
     "@vueuse/core": "*"
   },
   "peerDependenciesMeta": {
-    "@vueuse/core": {
+    "@nuxt/kit": {
       "optional": true
     },
-    "@nuxt/kit": {
+    "@vueuse/core": {
       "optional": true
     }
   },
