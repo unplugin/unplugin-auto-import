@@ -263,6 +263,13 @@ AutoImport({
       type: true,
     },
   ],
+
+  // Array of strings of regexes that contains imports meant to be filtered out.
+  ignore: [
+    'useMouse',
+    'useFetch'
+  ],
+
   // Enable auto import by filename for default module exports under directories
   defaultExportByFilename: false,
 
@@ -279,6 +286,14 @@ AutoImport({
   // Defaults to './auto-imports.d.ts' when `typescript` is installed locally.
   // Set `false` to disable.
   dts: './auto-imports.d.ts',
+
+  // Array of strings of regexes that contains imports meant to be ignored during
+  // the declaration file generation. You may find this useful when you need to provide
+  // a custom signature for a function.
+  ignoreDts: [
+    'ignoredFunction',
+    /^ignore_/
+  ],
 
   // Auto import inside Vue template
   // see https://github.com/unjs/unimport/pull/15 and https://github.com/unjs/unimport/pull/72
