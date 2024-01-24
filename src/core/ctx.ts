@@ -80,7 +80,7 @@ ${dts}`.trim()}\n`
       if (!imports.length && !resolvers.length && !dirs?.length)
         console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
 
-      const compare = (left: string|undefined, right: NonNullable<(Options['ignore'] | Options['ignoreDts'])>[number]) => {
+      const compare = (left: string | undefined, right: NonNullable<(Options['ignore'] | Options['ignoreDts'])>[number]) => {
         return right instanceof RegExp
           ? right.test(left!)
           : right === left
@@ -88,12 +88,14 @@ ${dts}`.trim()}\n`
 
       options.ignore?.forEach((name) => {
         const i = imports.find(i => compare(i.as, name))
-        if (i) i.disabled = true
+        if (i)
+          i.disabled = true
       })
 
       options.ignoreDts?.forEach((name) => {
         const i = imports.find(i => compare(i.as, name))
-        if (i) i.dtsDisabled = true
+        if (i)
+          i.dtsDisabled = true
       })
 
       return unimport.getInternalContext().replaceImports(imports)

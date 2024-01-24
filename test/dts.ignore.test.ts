@@ -10,13 +10,13 @@ it('dts ignore', async () => {
         'shouldBePresent',
         'shouldAlsoBePresent',
         'shouldBeIgnored',
-        'ignoreme_shoudAlsoBeIgnored'
-      ]
+        'ignoreme_shoudAlsoBeIgnored',
+      ],
     }],
     ignoreDts: [
       'shouldBeIgnored',
-      /^ignoreme_/
-    ]
+      /^ignoreme_/,
+    ],
   })
 
   const dtsContent = await ctx.generateDTS(join(cwd, 'index.d.ts'))
