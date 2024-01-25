@@ -114,6 +114,7 @@ ${dts}`.trim()}\n`
   const multilineCommentsRE = /\/\*.*?\*\//gms
   const singlelineCommentsRE = /\/\/.*$/gm
   const dtsReg = /declare\s+global\s*{(.*?)[\n\r]}/s
+  const componentCustomPropertiesReg = /interface\s+ComponentCustomProperties\s*{(.*?)[\n\r]}/gs
   function parseDTS(dts: string) {
     dts = dts
       .replace(multilineCommentsRE, '')
@@ -131,7 +132,7 @@ ${dts}`.trim()}\n`
     const dir = dirname(file)
     const originalContent = existsSync(file) ? await fs.readFile(file, 'utf-8') : ''
     const originalDTS = parseDTS(originalContent)
-    const currentContent = await unimport.generateTypeDeclarations({
+    let currentContent = await unimport.generateTypeDeclarations({
       resolvePath: (i) => {
         if (i.from.startsWith('.') || isAbsolute(i.from)) {
           const related = slash(relative(dir, i.from).replace(/\.ts(x)?$/, ''))
@@ -143,6 +144,12 @@ ${dts}`.trim()}\n`
       },
     })
     const currentDTS = parseDTS(currentContent)!
+    if (options.vueTemplate) {
+      currentContent = currentContent.replace(
+        componentCustomPropertiesReg,
+        $1 => `interface GlobalComponents {}\n  ${$1}`,
+      )
+    }
     if (originalDTS) {
       Object.keys(currentDTS).forEach((key) => {
         originalDTS[key] = currentDTS[key]
