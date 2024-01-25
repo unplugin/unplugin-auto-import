@@ -19,6 +19,6 @@
     "typescript": "^5.3.3",
     "unplugin-auto-import": "workspace:*",
     "vite": "^5.0.12",
-    "vite-plugin-inspect": "^0.8.2"
+    "vite-plugin-inspect": "^0.8.3"
   }
 }
