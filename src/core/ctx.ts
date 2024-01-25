@@ -148,7 +148,7 @@ ${dts}`.trim()}\n`
     if (options.vueTemplate) {
       currentContent = currentContent.replace(
         componentCustomPropertiesReg,
-        ($1) => `export interface GlobalComponents {}\n  ${$1}`,
+        ($1) => `interface GlobalComponents {}\n  ${$1}`,
       );
     }
     if (originalDTS) {
