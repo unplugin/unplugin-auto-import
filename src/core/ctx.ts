@@ -114,8 +114,7 @@ ${dts}`.trim()}\n`
   const multilineCommentsRE = /\/\*.*?\*\//gms
   const singlelineCommentsRE = /\/\/.*$/gm
   const dtsReg = /declare\s+global\s*{(.*?)[\n\r]}/s
-  const componentCustomPropertiesReg
-    = /interface\s+ComponentCustomProperties\s*{(.*?)[\n\r]}/gs
+  const componentCustomPropertiesReg = /interface\s+ComponentCustomProperties\s*{(.*?)[\n\r]}/gs
   function parseDTS(dts: string) {
     dts = dts
       .replace(multilineCommentsRE, '')
