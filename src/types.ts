@@ -53,7 +53,6 @@ export type ImportsMap = Record<string, (string | ImportNameAlias)[]>
 
 export type ESLintGlobalsPropValue = boolean | 'readonly' | 'readable' | 'writable' | 'writeable'
 
-
 export interface ESLintrc {
   /**
    * @default false

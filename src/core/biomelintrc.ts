@@ -3,8 +3,8 @@ import type { Import } from 'unimport'
 export function generateBiomeLintConfigs(
   imports: Import[],
 ) {
-  const names =
-    imports
+  const names
+    = imports
       .map(i => i.as ?? i.name)
       .filter(Boolean)
       .sort()
