@@ -53,6 +53,7 @@ export type ImportsMap = Record<string, (string | ImportNameAlias)[]>
 
 export type ESLintGlobalsPropValue = boolean | 'readonly' | 'readable' | 'writable' | 'writeable'
 
+
 export interface ESLintrc {
   /**
    * @default false
@@ -68,6 +69,19 @@ export interface ESLintrc {
    * @default true
    */
   globalsPropValue?: ESLintGlobalsPropValue
+}
+
+export interface BiomeLintrc {
+  /**
+   * @default false
+   */
+  enabled?: boolean
+  /**
+   * Filepath to save the generated eslint config
+   *
+   * @default './.eslintrc-auto-import.json'
+   */
+  filepath?: string
 }
 
 export interface Options {

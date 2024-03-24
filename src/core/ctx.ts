@@ -12,8 +12,9 @@ import fg from 'fast-glob'
 import { vueTemplateAddon } from 'unimport/addons'
 import MagicString from 'magic-string'
 import { presets } from '../presets'
-import type { ESLintGlobalsPropValue, ESLintrc, ImportExtended, Options } from '../types'
+import type { ESLintGlobalsPropValue, ESLintrc, BiomeLintrc, ImportExtended, Options } from '../types'
 import { generateESLintConfigs } from './eslintrc'
+import { generateBiomeLintConfigs } from './biomelintrc'
 import { resolversAddon } from './resolvers'
 
 function resolveGlobsExclude(root: string, glob: string) {
@@ -47,6 +48,10 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   eslintrc.enabled = eslintrc.enabled === undefined ? false : eslintrc.enabled
   eslintrc.filepath = eslintrc.filepath || './.eslintrc-auto-import.json'
   eslintrc.globalsPropValue = eslintrc.globalsPropValue === undefined ? true : eslintrc.globalsPropValue
+
+  const biomelintrc: BiomeLintrc = options.biomelintrc || {}
+  biomelintrc.enabled = biomelintrc.enabled === undefined ? false : true
+  biomelintrc.filepath = biomelintrc.filepath || './.biomelintrc-auto-import.json'
 
   const resolvers = options.resolvers ? [options.resolvers].flat(2) : []
 
@@ -167,8 +172,13 @@ ${dts}`.trim()}\n`
     return config.globals as Record<string, ESLintGlobalsPropValue>
   }
 
+
   async function generateESLint() {
     return generateESLintConfigs(await unimport.getImports(), eslintrc, await parseESLint())
+  }
+
+  async function generateBiomeLint() {
+    return generateBiomeLintConfigs(await unimport.getImports())
   }
 
   const writeConfigFilesThrottled = throttle(500, writeConfigFiles, { noLeading: false })
@@ -180,6 +190,8 @@ ${dts}`.trim()}\n`
 
   let lastDTS: string | undefined
   let lastESLint: string | undefined
+  let lastBiomeLint: string | undefined
+
   async function writeConfigFiles() {
     const promises: any[] = []
     if (dts) {
@@ -203,6 +215,18 @@ ${dts}`.trim()}\n`
         }),
       )
     }
+
+    if (biomelintrc.enabled) {
+      promises.push(
+        generateBiomeLint().then((content) => {
+          if (content !== lastBiomeLint) {
+            lastBiomeLint = content
+            return writeFile(biomelintrc.filepath!, content)
+          }
+        })
+      )
+    }
+
     return Promise.all(promises)
   }
 
