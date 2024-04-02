@@ -6,7 +6,7 @@ Auto import APIs on-demand for Vite, Webpack, Rspack, Rollup and esbuild. With T
 
 ---
 
-without
+with
 
 ```ts
 import { computed, ref } from 'vue'
@@ -15,7 +15,7 @@ const count = ref(0)
 const doubled = computed(() => count.value * 2)
 ```
 
-with
+without
 
 ```ts
 const count = ref(0)
@@ -24,7 +24,7 @@ const doubled = computed(() => count.value * 2)
 
 ---
 
-without
+with
 
 ```tsx
 import { useState } from 'react'
@@ -35,7 +35,7 @@ export function Counter() {
 }
 ```
 
-with
+without
 
 ```tsx
 export function Counter() {
