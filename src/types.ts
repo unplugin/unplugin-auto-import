@@ -153,14 +153,14 @@ export interface Options {
   /**
    * Rules to include transforming target.
    *
-   * @default [/\.[jt]sx?$/, /\.vue\??/]
+   * @default [/\.[jt]sx?$/, /\.astro$/, /\.vue$/, /\.vue\?vue/, /\.svelte$/]
    */
   include?: FilterPattern
 
   /**
    * Rules to exclude transforming target.
    *
-   * @default [/node_modules/, /\.git/]
+   * @default [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/]
    */
   exclude?: FilterPattern
 

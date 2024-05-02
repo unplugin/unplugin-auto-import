@@ -3,6 +3,7 @@
 
   onMount(() => {
     console.log('Test unplugin-auto-import ')
+    console.log(one)
   })
 
   function add() {
