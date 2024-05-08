@@ -20,6 +20,7 @@ export default defineConfig({
         'svelte/store',
         'react',
       ],
+      dirs: ['src/utils/*.ts'],
       dts: './src/auto-imports.d.ts',
     }),
   ],
