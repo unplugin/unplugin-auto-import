@@ -312,6 +312,7 @@ AutoImport({
   // eslint globals Docs - https://eslint.org/docs/user-guide/configuring/language-options#specifying-globals
   eslintrc: {
     enabled: false, // Default `false`
+    // provide path ending with `.mjs` or `.cjs` to generate the file with the respective format
     filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
     globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
   },

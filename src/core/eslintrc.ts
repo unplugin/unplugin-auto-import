@@ -6,7 +6,7 @@ export function generateESLintConfigs(
   eslintrc: ESLintrc,
   globals: Record<string, ESLintGlobalsPropValue> = {},
 ) {
-  const eslintConfigs = { globals }
+  const eslintConfigs: any = { globals }
 
   imports
     .map(i => i.as ?? i.name)
