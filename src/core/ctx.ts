@@ -196,12 +196,11 @@ ${dts}`.trim()}\n`
       const filepath = eslintrc.filepath
       promises.push(
         generateESLint().then(async (content) => {
-          if (filepath.endsWith('.cjs')) {
+          if (filepath.endsWith('.cjs'))
             content = `module.exports = ${content}`
-          }
-          else if (filepath.endsWith('.mjs') || filepath.endsWith('.js')) {
+          else if (filepath.endsWith('.mjs') || filepath.endsWith('.js'))
             content = `export default ${content}`
-          }
+
           content = `${content}\n`
           if (content.trim() !== lastESLint?.trim()) {
             lastESLint = content
