@@ -178,6 +178,12 @@ ${dts}`.trim()}\n`
     return await fs.writeFile(filePath, content, 'utf-8')
   }
 
+  async function hasJSExtension(filePath?: string) {
+    if (!filePath) return false
+    const fileName = filePath.split(/\\|\//).pop() // 提取路径中的文件名
+    return fileName?.toLowerCase().endsWith('.js')
+  }
+
   let lastDTS: string | undefined
   let lastESLint: string | undefined
   async function writeConfigFiles() {
@@ -194,7 +200,10 @@ ${dts}`.trim()}\n`
     }
     if (eslintrc.enabled && eslintrc.filepath) {
       promises.push(
-        generateESLint().then((content) => {
+        generateESLint().then(async (content) => {
+          if (await hasJSExtension(eslintrc.filepath)) {
+            content = `exports.default = ${content}`
+          }
           content = `${content}\n`
           if (content.trim() !== lastESLint?.trim()) {
             lastESLint = content
