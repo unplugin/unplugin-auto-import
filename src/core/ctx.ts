@@ -1,16 +1,16 @@
+import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
+import { existsSync, promises as fs } from 'node:fs'
+import process from 'node:process'
 import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
-import fg from 'fast-glob'
 import { isPackageExists } from 'local-pkg'
-import { existsSync, promises as fs } from 'node:fs'
-import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
-import process from 'node:process'
 import type { Import, InlinePreset } from 'unimport'
 import { createUnimport, resolvePreset, scanExports } from 'unimport'
+import fg from 'fast-glob'
 
 // @ts-expect-error types
-import MagicString from 'magic-string'
 import { vueTemplateAddon } from 'unimport/addons'
+import MagicString from 'magic-string'
 import { presets } from '../presets'
 import type { ESLintGlobalsPropValue, ESLintrc, ImportExtended, Options } from '../types'
 import { generateESLintConfigs } from './eslintrc'
@@ -30,17 +30,18 @@ async function scanDirExports(dirs: string[], root: string) {
   })
 
   const files = Array.from(new Set(result.flat())).map(slash)
-  return (await Promise.all(files.map((i) => scanExports(i, false)))).flat()
+  return (await Promise.all(files.map(i => scanExports(i, false)))).flat()
 }
 
 export function createContext(options: Options = {}, root = process.cwd()) {
   root = slash(root)
 
-  const { dts: preferDTS = isPackageExists('typescript') } = options
+  const {
+    dts: preferDTS = isPackageExists('typescript'),
+  } = options
 
-  const dirs = options.dirs
-    ?.concat(options.dirs.map((dir) => join(dir, '*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}')))
-    .map((dir) => slash(resolveGlobsExclude(root, dir)))
+  const dirs = options.dirs?.concat(options.dirs.map(dir => join(dir, '*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}')))
+    .map(dir => slash(resolveGlobsExclude(root, dir)))
 
   const eslintrc: ESLintrc = options.eslintrc || {}
   eslintrc.enabled = eslintrc.enabled === undefined ? false : eslintrc.enabled
@@ -54,7 +55,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
   const unimport = createUnimport({
     imports: [],
-    presets: options.packagePresets?.map((p) => (typeof p === 'string' ? { package: p } : p)) ?? [],
+    presets: options.packagePresets?.map(p => typeof p === 'string' ? { package: p } : p) ?? [],
     injectAtEnd,
     parser: options.parser,
     addons: [
@@ -74,52 +75,56 @@ ${dts}`.trim()}\n`
     ],
   })
 
-  const importsPromise = flattenImports(options.imports).then((imports) => {
-    if (!imports.length && !resolvers.length && !dirs?.length)
-      console.warn(
-        '[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations'
-      )
+  const importsPromise = flattenImports(options.imports)
+    .then((imports) => {
+      if (!imports.length && !resolvers.length && !dirs?.length)
+        console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
 
-    const compare = (
-      left: string | undefined,
-      right: NonNullable<Options['ignore'] | Options['ignoreDts']>[number]
-    ) => {
-      return right instanceof RegExp ? right.test(left!) : right === left
-    }
+      const compare = (left: string | undefined, right: NonNullable<(Options['ignore'] | Options['ignoreDts'])>[number]) => {
+        return right instanceof RegExp
+          ? right.test(left!)
+          : right === left
+      }
 
-    options.ignore?.forEach((name) => {
-      const i = imports.find((i) => compare(i.as, name))
-      if (i) i.disabled = true
+      options.ignore?.forEach((name) => {
+        const i = imports.find(i => compare(i.as, name))
+        if (i)
+          i.disabled = true
+      })
+
+      options.ignoreDts?.forEach((name) => {
+        const i = imports.find(i => compare(i.as, name))
+        if (i)
+          i.dtsDisabled = true
+      })
+
+      return unimport.getInternalContext().replaceImports(imports)
     })
-
-    options.ignoreDts?.forEach((name) => {
-      const i = imports.find((i) => compare(i.as, name))
-      if (i) i.dtsDisabled = true
-    })
-
-    return unimport.getInternalContext().replaceImports(imports)
-  })
 
   const filter = createFilter(
     options.include || [/\.[jt]sx?$/, /\.vue$/, /\.vue\?vue/, /\.svelte$/],
-    options.exclude || [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/]
+    options.exclude || [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/],
   )
-  const dts =
-    preferDTS === false ? false : preferDTS === true ? resolve(root, 'auto-imports.d.ts') : resolve(root, preferDTS)
+  const dts = preferDTS === false
+    ? false
+    : preferDTS === true
+      ? resolve(root, 'auto-imports.d.ts')
+      : resolve(root, preferDTS)
 
   const multilineCommentsRE = /\/\*.*?\*\//gms
   const singlelineCommentsRE = /\/\/.*$/gm
   const dtsReg = /declare\s+global\s*{(.*?)[\n\r]}/s
   const componentCustomPropertiesReg = /interface\s+ComponentCustomProperties\s*{(.*?)[\n\r]}/gs
   function parseDTS(dts: string) {
-    dts = dts.replace(multilineCommentsRE, '').replace(singlelineCommentsRE, '')
+    dts = dts
+      .replace(multilineCommentsRE, '')
+      .replace(singlelineCommentsRE, '')
 
     const code = dts.match(dtsReg)?.[0]
-    if (!code) return
+    if (!code)
+      return
 
-    return Object.fromEntries(
-      Array.from(code.matchAll(/['"]?(const\s*[^\s'"]+)['"]?\s*:\s*(.+?)[,;\r\n]/g)).map((i) => [i[1], i[2]])
-    )
+    return Object.fromEntries(Array.from(code.matchAll(/['"]?(const\s*[^\s'"]+)['"]?\s*:\s*(.+?)[,;\r\n]/g)).map(i => [i[1], i[2]]))
   }
 
   async function generateDTS(file: string) {
@@ -131,7 +136,9 @@ ${dts}`.trim()}\n`
       resolvePath: (i) => {
         if (i.from.startsWith('.') || isAbsolute(i.from)) {
           const related = slash(relative(dir, i.from).replace(/\.ts(x)?$/, ''))
-          return !related.startsWith('.') ? `./${related}` : related
+          return !related.startsWith('.')
+            ? `./${related}`
+            : related
         }
         return i.from
       },
@@ -140,16 +147,14 @@ ${dts}`.trim()}\n`
     if (options.vueTemplate) {
       currentContent = currentContent.replace(
         componentCustomPropertiesReg,
-        ($1) => `interface GlobalComponents {}\n  ${$1}`
+        $1 => `interface GlobalComponents {}\n  ${$1}`,
       )
     }
     if (originalDTS) {
       Object.keys(currentDTS).forEach((key) => {
         originalDTS[key] = currentDTS[key]
       })
-      const dtsList = Object.keys(originalDTS)
-        .sort()
-        .map((k) => `  ${k}: ${originalDTS[k]}`)
+      const dtsList = Object.keys(originalDTS).sort().map(k => `  ${k}: ${originalDTS[k]}`)
       return currentContent.replace(dtsReg, () => `declare global {\n${dtsList.join('\n')}\n}`)
     }
 
@@ -172,11 +177,6 @@ ${dts}`.trim()}\n`
     await fs.mkdir(dirname(filePath), { recursive: true })
     return await fs.writeFile(filePath, content, 'utf-8')
   }
-  async function hasJSExtension(filePath?: string) {
-    if (!filePath) return false
-    const fileName = filePath.split(/\\|\//).pop() // 提取路径中的文件名
-    return fileName?.toLowerCase().endsWith('.js')
-  }
 
   let lastDTS: string | undefined
   let lastESLint: string | undefined
@@ -189,21 +189,18 @@ ${dts}`.trim()}\n`
             lastDTS = content
             return writeFile(dts, content)
           }
-        })
+        }),
       )
     }
     if (eslintrc.enabled && eslintrc.filepath) {
       promises.push(
-        generateESLint().then(async (content) => {
+        generateESLint().then((content) => {
           content = `${content}\n`
-          if (await hasJSExtension(eslintrc.filepath)) {
-            content = `exports.default = ${content}`
-          }
           if (content.trim() !== lastESLint?.trim()) {
             lastESLint = content
             return writeFile(eslintrc.filepath!, content)
           }
-        })
+        }),
       )
     }
     return Promise.all(promises)
@@ -212,12 +209,12 @@ ${dts}`.trim()}\n`
   async function scanDirs() {
     if (dirs?.length) {
       await unimport.modifyDynamicImports(async (imports) => {
-        const exports_ = (await scanDirExports(dirs, root)) as ImportExtended[]
-        exports_.forEach((i) => (i.__source = 'dir'))
-        return modifyDefaultExportsAlias(
-          [...imports.filter((i: ImportExtended) => i.__source !== 'dir'), ...exports_],
-          options
-        )
+        const exports_ = await scanDirExports(dirs, root) as ImportExtended[]
+        exports_.forEach(i => i.__source = 'dir')
+        return modifyDefaultExportsAlias([
+          ...imports.filter((i: ImportExtended) => i.__source !== 'dir'),
+          ...exports_,
+        ], options)
       })
     }
     writeConfigFilesThrottled()
@@ -230,7 +227,8 @@ ${dts}`.trim()}\n`
 
     await unimport.injectImports(s, id)
 
-    if (!s.hasChanged()) return
+    if (!s.hasChanged())
+      return
 
     writeConfigFilesThrottled()
 
@@ -254,17 +252,19 @@ ${dts}`.trim()}\n`
 }
 
 export async function flattenImports(map: Options['imports']): Promise<Import[]> {
-  const promises = await Promise.all(
-    toArray(map).map(async (definition) => {
+  const promises = await Promise.all(toArray(map)
+    .map(async (definition) => {
       if (typeof definition === 'string') {
-        if (!presets[definition]) throw new Error(`[auto-import] preset ${definition} not found`)
+        if (!presets[definition])
+          throw new Error(`[auto-import] preset ${definition} not found`)
         const preset = presets[definition]
         definition = typeof preset === 'function' ? preset() : preset
       }
 
       if ('from' in definition && 'imports' in definition) {
         return await resolvePreset(definition as InlinePreset)
-      } else {
+      }
+      else {
         const resolved: Import[] = []
         for (const mod of Object.keys(definition)) {
           for (const id of definition[mod]) {
@@ -274,7 +274,8 @@ export async function flattenImports(map: Options['imports']): Promise<Import[]>
             if (Array.isArray(id)) {
               meta.name = id[0]
               meta.as = id[1]
-            } else {
+            }
+            else {
               meta.name = id
               meta.as = id
             }
@@ -283,8 +284,7 @@ export async function flattenImports(map: Options['imports']): Promise<Import[]>
         }
         return resolved
       }
-    })
-  )
+    }))
 
   return promises.flat()
 }
@@ -292,7 +292,8 @@ export async function flattenImports(map: Options['imports']): Promise<Import[]>
 function modifyDefaultExportsAlias(imports: ImportExtended[], options: Options): Import[] {
   if (options.defaultExportByFilename) {
     imports.forEach((i) => {
-      if (i.name === 'default') i.as = i.from.split('/').pop()?.split('.')?.shift() ?? i.as
+      if (i.name === 'default')
+        i.as = i.from.split('/').pop()?.split('.')?.shift() ?? i.as
     })
   }
 
