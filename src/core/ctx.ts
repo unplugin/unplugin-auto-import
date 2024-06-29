@@ -162,6 +162,8 @@ ${dts}`.trim()}\n`
   }
 
   async function parseESLint() {
+    if (eslintrc.filepath!.endsWith('js'))
+      return {} as Record<string, ESLintGlobalsPropValue>
     const configStr = existsSync(eslintrc.filepath!) ? await fs.readFile(eslintrc.filepath!, 'utf-8') : ''
     const config = JSON.parse(configStr || '{ "globals": {} }')
     return config.globals as Record<string, ESLintGlobalsPropValue>
