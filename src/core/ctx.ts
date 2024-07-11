@@ -161,12 +161,16 @@ ${dts}`.trim()}\n`
     return currentContent
   }
 
-  async function parseESLint() {
-    if (eslintrc.filepath!.endsWith('js'))
-      return {} as Record<string, ESLintGlobalsPropValue>
-    const configStr = existsSync(eslintrc.filepath!) ? await fs.readFile(eslintrc.filepath!, 'utf-8') : ''
+  async function parseESLint(): Promise<Record<string, ESLintGlobalsPropValue>> {
+    if (!eslintrc.filepath)
+      return {}
+    if (eslintrc.filepath.match(/\.[cm]?[jt]sx?$/)) // Skip JavaScript-like files
+      return {}
+    const configStr = existsSync(eslintrc.filepath!)
+      ? await fs.readFile(eslintrc.filepath!, 'utf-8')
+      : ''
     const config = JSON.parse(configStr || '{ "globals": {} }')
-    return config.globals as Record<string, ESLintGlobalsPropValue>
+    return config.globals
   }
 
   async function generateESLint() {
