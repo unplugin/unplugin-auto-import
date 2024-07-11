@@ -116,10 +116,10 @@ ${dts}`.trim()}\n`
       ? resolve(root, 'auto-imports.d.ts')
       : resolve(root, preferDTS)
 
-  const multilineCommentsRE = /\/\*.*?\*\//gms
+  const multilineCommentsRE = /\/\*.*?\*\//gs
   const singlelineCommentsRE = /\/\/.*$/gm
-  const dtsReg = /declare\s+global\s*{(.*?)[\n\r]}/s
-  const componentCustomPropertiesReg = /interface\s+ComponentCustomProperties\s*{(.*?)[\n\r]}/gs
+  const dtsReg = /declare\s+global\s*\{(.*?)[\n\r]\}/s
+  const componentCustomPropertiesReg = /interface\s+ComponentCustomProperties\s*\{(.*?)[\n\r]\}/gs
   function parseDTS(dts: string) {
     dts = dts
       .replace(multilineCommentsRE, '')
@@ -129,6 +129,7 @@ ${dts}`.trim()}\n`
     if (!code)
       return
 
+    // eslint-disable-next-line regexp/no-super-linear-backtracking, regexp/no-misleading-capturing-group
     return Object.fromEntries(Array.from(code.matchAll(/['"]?(const\s*[^\s'"]+)['"]?\s*:\s*(.+?)[,;\r\n]/g)).map(i => [i[1], i[2]]))
   }
 

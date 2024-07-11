@@ -7,9 +7,4 @@ export default antfu(
       'test/fixtures*',
     ],
   },
-  {
-    rules: {
-      // overrides
-    },
-  },
 )

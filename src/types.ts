@@ -183,6 +183,11 @@ export interface Options {
   eslintrc?: ESLintrc
 
   /**
+   * Generate corresponding .biomelintrc.json file.
+   */
+  biomelintrc?: BiomeLintrc
+
+  /**
    * Include auto-imported packages in Vite's `optimizeDeps` option
    *
    * @default false
