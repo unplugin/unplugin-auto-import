@@ -23,7 +23,7 @@ export default createUnplugin<Options>((options) => {
     },
     vite: {
       async config(config) {
-        if (!options.viteOptimizeDeps)
+        if (options.viteOptimizeDeps === false)
           return
 
         const exclude = config.optimizeDeps?.exclude || []

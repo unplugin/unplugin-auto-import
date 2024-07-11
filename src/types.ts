@@ -190,7 +190,7 @@ export interface Options {
   /**
    * Include auto-imported packages in Vite's `optimizeDeps` option
    *
-   * @default false
+   * @default true
    */
   viteOptimizeDeps?: boolean
 }
