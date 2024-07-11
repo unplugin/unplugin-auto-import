@@ -320,6 +320,13 @@ AutoImport({
     filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
     globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
   },
+
+  // Generate corresponding .biomelintrc-auto-import.json file.
+  // biomejs extends Docs - https://biomejs.dev/guides/how-biome-works/#the-extends-option
+  biomelintrc: {
+    enabled: false, // Default `false`
+    filepath: './.biomelintrc-auto-import.json', // Default `./.biomelintrc-auto-import.json`
+  },
 })
 ```
 
