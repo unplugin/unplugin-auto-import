@@ -305,6 +305,10 @@ AutoImport({
     /* ... */
   ],
 
+  // Include auto-imported packages in Vite's `optimizeDeps` options
+  // Recommend to enable
+  viteOptimizeDeps: false,
+
   // Inject the imports at the end of other imports
   injectAtEnd: true,
 

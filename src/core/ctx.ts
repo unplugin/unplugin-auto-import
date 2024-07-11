@@ -254,6 +254,7 @@ ${dts}`.trim()}\n`
     transform,
     generateDTS,
     generateESLint,
+    unimport,
   }
 }
 

@@ -22,6 +22,24 @@ export default createUnplugin<Options>((options) => {
       await ctx.writeConfigFiles()
     },
     vite: {
+      async config(config) {
+        if (!options.viteOptimizeDeps)
+          return
+
+        const exclude = config.optimizeDeps?.exclude || []
+
+        const imports = new Set((await ctx.unimport.getImports()).map(i => i.from)
+          .filter(i => i.match(/^[a-z@]/) && !exclude.includes(i)))
+
+        if (!imports.size)
+          return
+
+        return {
+          optimizeDeps: {
+            include: [...imports],
+          },
+        }
+      },
       async handleHotUpdate({ file }) {
         if (ctx.dirs?.some(glob => minimatch(slash(file), slash(glob))))
           await ctx.scanDirs()

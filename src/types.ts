@@ -168,6 +168,13 @@ export interface Options {
    * Generate corresponding .eslintrc-auto-import.json file.
    */
   eslintrc?: ESLintrc
+
+  /**
+   * Include auto-imported packages in Vite's `optimizeDeps` option
+   *
+   * @default false
+   */
+  viteOptimizeDeps?: boolean
 }
 
 export { PresetName }
