@@ -8,6 +8,15 @@
     "resolveJsonModule": true,
     "strict": true,
     "strictNullChecks": true,
-    "esModuleInterop": true
-  }
+    "noEmit": true,
+    "esModuleInterop": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "test/fixtures",
+    "test/fixtures-*",
+    "examples",
+    "playground"
+  ]
 }

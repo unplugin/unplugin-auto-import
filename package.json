@@ -142,6 +142,7 @@
     "dev": "tsup src/*.ts --watch src",
     "lint": "eslint .",
     "lint:fix": "nr lint --fix",
+    "typecheck": "tsc",
     "play": "npm -C playground run dev",
     "prepublishOnly": "nr build",
     "release": "bumpp && pnpm publish",
