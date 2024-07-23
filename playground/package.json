@@ -10,10 +10,10 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
-    "@vue/compiler-sfc": "^3.4.31",
-    "element-plus": "^2.7.6",
-    "unplugin-vue-components": "^0.27.2",
-    "vite": "^5.3.3",
-    "vite-plugin-inspect": "^0.8.4"
+    "@vue/compiler-sfc": "^3.4.33",
+    "element-plus": "^2.7.7",
+    "unplugin-vue-components": "^0.27.3",
+    "vite": "^5.3.4",
+    "vite-plugin-inspect": "^0.8.5"
   }
 }
