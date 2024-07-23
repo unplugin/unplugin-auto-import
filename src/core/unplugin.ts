@@ -30,7 +30,7 @@ export default createUnplugin<Options>((options) => {
         const exclude = config.optimizeDeps?.exclude || []
 
         const imports = new Set((await ctx.unimport.getImports()).map(i => i.from)
-          .filter(i => isPackageExists(i) && !exclude.includes(i)))
+          .filter(i => i.match(/^[a-z@]/) && !exclude.includes(i) && isPackageExists(i)))
 
         if (!imports.size)
           return
