@@ -168,7 +168,7 @@
     "fast-glob": "^3.3.2",
     "local-pkg": "^0.5.0",
     "magic-string": "^0.30.10",
-    "minimatch": "^10.0.1",
+    "minimatch": "^9.0.5",
     "unimport": "^3.9.0",
     "unplugin": "^1.11.0"
   },
