@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
 import { svelte as Svelte } from '@sveltejs/vite-plugin-svelte'
+import { defineConfig } from 'vite'
 import Inspect from 'vite-plugin-inspect'
 import AutoImport from '../../src/vite'
 

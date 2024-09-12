@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
 import React from '@vitejs/plugin-react-refresh'
-import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
+import Icons from 'unplugin-icons/vite'
+import { defineConfig } from 'vite'
 import AutoImport from '../../src/vite'
 
 // https://vitejs.dev/config/

@@ -1,20 +1,20 @@
-import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
+import type { Import, InlinePreset } from 'unimport'
+import type { BiomeLintrc, ESLintGlobalsPropValue, ESLintrc, ImportExtended, Options } from '../types'
 import { existsSync, promises as fs } from 'node:fs'
+import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
 import process from 'node:process'
 import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
-import { isPackageExists } from 'local-pkg'
-import type { Import, InlinePreset } from 'unimport'
-import { createUnimport, resolvePreset, scanExports } from 'unimport'
 import fg from 'fast-glob'
+import { isPackageExists } from 'local-pkg'
 
+import MagicString from 'magic-string'
+import { createUnimport, resolvePreset, scanExports } from 'unimport'
 // @ts-expect-error types
 import { vueTemplateAddon } from 'unimport/addons'
-import MagicString from 'magic-string'
 import { presets } from '../presets'
-import type { BiomeLintrc, ESLintGlobalsPropValue, ESLintrc, ImportExtended, Options } from '../types'
-import { generateESLintConfigs } from './eslintrc'
 import { generateBiomeLintConfigs } from './biomelintrc'
+import { generateESLintConfigs } from './eslintrc'
 import { resolversAddon } from './resolvers'
 
 function resolveGlobsExclude(root: string, glob: string) {

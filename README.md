@@ -156,8 +156,8 @@ export default {
 
 ```ts
 // vite.config.js [Vite]
-import { defineConfig } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [

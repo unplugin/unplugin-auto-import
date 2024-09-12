@@ -1,6 +1,6 @@
-import { toArray } from '@antfu/utils'
 import type { Addon, Import } from 'unimport'
 import type { ImportExtended, ImportLegacy, Resolver, ResolverResult } from '../types'
+import { toArray } from '@antfu/utils'
 
 export function normalizeImport(info: Import | ResolverResult | ImportExtended | ImportLegacy | string, name: string): ImportExtended {
   if (typeof info === 'string') {

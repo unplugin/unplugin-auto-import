@@ -1,13 +1,18 @@
 import { builtinPresets } from 'unimport'
 import ahooks from './ahooks'
+import { jotai, jotaiUtils } from './jotai'
 import mobx from './mobx'
 import mobxReactLite from './mobx-react-lite'
 import preact from './preact'
 import quasar from './quasar'
 import react from './react'
+import reactI18next from './react-i18next'
 import reactRouter from './react-router'
 import reactRouterDom from './react-router-dom'
-import reactI18next from './react-i18next'
+import recoil from './recoil'
+import solid from './solid'
+import solidAppRouter from './solid-app-router'
+import solidRouter from './solid-router'
 import {
   svelte,
   svelteAnimate,
@@ -16,20 +21,15 @@ import {
   svelteStore,
   svelteTransition,
 } from './svelte'
+import uniApp from './uni-app'
 import veeValidate from './vee-validate'
 import vitepress from './vitepress'
 import vueRouter from './vue-router'
 import vueRouterComposables from './vue-router-composables'
 import vueuseCore from './vueuse-core'
 import vueuseHead from './vueuse-head'
-import vuex from './vuex'
-import uniApp from './uni-app'
-import solid from './solid'
-import solidRouter from './solid-router'
-import solidAppRouter from './solid-app-router'
-import { jotai, jotaiUtils } from './jotai'
 import vueuseMath from './vueuse-math'
-import recoil from './recoil'
+import vuex from './vuex'
 
 export const presets = {
   ...builtinPresets,
