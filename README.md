@@ -299,6 +299,10 @@ AutoImport({
   // see https://github.com/unjs/unimport/pull/15 and https://github.com/unjs/unimport/pull/72
   vueTemplate: false,
 
+  // Auto import directives inside Vue template
+  // see https://github.com/unjs/unimport/pull/374
+  vueDirectives: undefined,
+
   // Custom resolvers, compatible with `unplugin-vue-components`
   // see https://github.com/antfu/unplugin-auto-import/pull/23/
   resolvers: [
