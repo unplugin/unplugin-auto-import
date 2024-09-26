@@ -163,6 +163,8 @@ export interface Options {
    *
    * When using a local directives folder, provide the `isDirective`
    * callback to check if the import is a Vue directive.
+   *
+   * @see https://github.com/unjs/unimport?tab=readme-ov-file#vue-directives-auto-import-and-typescript-declaration-generation
    */
   vueDirectives?: true | AddonVueDirectivesOptions
 
