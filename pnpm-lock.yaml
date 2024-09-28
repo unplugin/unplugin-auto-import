@@ -30,8 +30,8 @@ importers:
         specifier: ^9.0.5
         version: 9.0.5
       unimport:
-        specifier: ^3.13.0
-        version: 3.13.0(rollup@4.21.3)(webpack-sources@3.2.3)
+        specifier: ^3.13.1
+        version: 3.13.1(rollup@4.21.3)(webpack-sources@3.2.3)
       unplugin:
         specifier: ^1.14.1
         version: 1.14.1(webpack-sources@3.2.3)
@@ -4325,8 +4325,8 @@ packages:
   unified@11.0.5:
     resolution: {integrity: sha512-xKvGhPWw3k84Qjh8bI3ZeJjqnyadK+GEFtazSfZv/rKeTkTjOJho6mFqh2SM96iIcZokxiOpg78GazTSg8+KHA==}
 
-  unimport@3.13.0:
-    resolution: {integrity: sha512-0WkKsLy8jkcnB38VQdAGvF0N2trJyDbUuHsfXcyrspwgwWTIThiMpvnDNZMVsuNc11SwT2GYzcQ2RnI1TY/xcw==}
+  unimport@3.13.1:
+    resolution: {integrity: sha512-nNrVzcs93yrZQOW77qnyOVHtb68LegvhYFwxFMfuuWScmwQmyVCG/NBuN8tYsaGzgQUVYv34E/af+Cc9u4og4A==}
 
   unist-util-find-after@5.0.0:
     resolution: {integrity: sha512-amQa0Ep2m6hE2g72AugUItjbuM8X8cGQnFoHk0pGfrFeT9GZhzN5SW8nRsiGKK7Aif4CrACPENkA6P/Lw6fHGQ==}
@@ -5559,7 +5559,7 @@ snapshots:
       semver: 7.6.3
       ufo: 1.5.4
       unctx: 2.3.1(webpack-sources@3.2.3)
-      unimport: 3.13.0(rollup@4.21.3)(webpack-sources@3.2.3)
+      unimport: 3.13.1(rollup@4.21.3)(webpack-sources@3.2.3)
       untyped: 1.4.2
     transitivePeerDependencies:
       - magicast
@@ -5579,7 +5579,7 @@ snapshots:
       std-env: 3.7.0
       ufo: 1.5.4
       uncrypto: 0.1.3
-      unimport: 3.13.0(rollup@4.21.3)(webpack-sources@3.2.3)
+      unimport: 3.13.1(rollup@4.21.3)(webpack-sources@3.2.3)
       untyped: 1.4.2
     transitivePeerDependencies:
       - rollup
@@ -9257,7 +9257,7 @@ snapshots:
       trough: 2.1.0
       vfile: 6.0.3
 
-  unimport@3.13.0(rollup@4.21.3)(webpack-sources@3.2.3):
+  unimport@3.13.1(rollup@4.21.3)(webpack-sources@3.2.3):
     dependencies:
       '@rollup/pluginutils': 5.1.2(rollup@4.21.3)
       acorn: 8.12.1
