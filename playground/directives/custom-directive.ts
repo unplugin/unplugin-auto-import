@@ -1,5 +1,3 @@
-import type { DirectiveBinding } from 'vue'
-
 function mounted(el: HTMLElement, binding: DirectiveBinding) {
   // eslint-disable-next-line no-console
   console.log('mounted', el, binding)
