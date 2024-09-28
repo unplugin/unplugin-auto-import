@@ -15,8 +15,14 @@ export default defineConfig({
       ],
       dirs: [
         './composables/**',
+        './directives/**',
       ],
       vueTemplate: true,
+      vueDirectives: {
+        isDirective(normalizeImportFrom, _importEntry) {
+          return normalizeImportFrom.includes('/directives/')
+        },
+      },
     }),
   ],
 })

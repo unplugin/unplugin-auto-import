@@ -42,6 +42,7 @@ export async function firstMatchedResolver(resolvers: Resolver[], fullname: stri
 
 export function resolversAddon(resolvers: Resolver[]): Addon {
   return {
+    name: 'unplugin-auto-import:resolvers',
     async matchImports(names, matched) {
       if (!resolvers.length)
         return

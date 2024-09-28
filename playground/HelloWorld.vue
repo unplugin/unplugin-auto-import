@@ -23,6 +23,6 @@ watch(count, value => emit('update', value))
       Inc
     </button>
     <div>{{ doubled / 2 }} x 2 = {{ doubled }}</div>
-    <button @click="dec()" v-html="decText" />
+    <button v-custom-directive @click="dec()" v-html="decText" />
   </div>
 </template>
