@@ -118,7 +118,7 @@ module.exports = {
 <details>
 <summary>Nuxt</summary><br>
 
-> You **don't need** this plugin for Nuxt, it's already builtin.
+> You **don't need** this plugin for Nuxt, it's already built-in.
 
 <br></details>
 
