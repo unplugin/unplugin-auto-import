@@ -1,6 +1,6 @@
 import type { Arrayable, Awaitable } from '@antfu/utils'
 import type { FilterPattern } from '@rollup/pluginutils'
-import type { Import, InlinePreset, PackagePreset, UnimportOptions } from 'unimport'
+import type { AddonVueDirectivesOptions, Import, InlinePreset, PackagePreset, UnimportOptions } from 'unimport'
 import { PresetName } from './presets'
 
 export interface ImportLegacy {
@@ -155,6 +155,18 @@ export interface Options {
    * @default false
    */
   vueTemplate?: boolean
+
+  /**
+   * Enable auto import directives for Vue's SFC.
+   *
+   * Library authors should include `meta.vueDirective: true` in the import metadata.
+   *
+   * When using a local directives folder, provide the `isDirective`
+   * callback to check if the import is a Vue directive.
+   *
+   * @see https://github.com/unjs/unimport?tab=readme-ov-file#vue-directives-auto-import-and-typescript-declaration-generation
+   */
+  vueDirectives?: true | AddonVueDirectivesOptions
 
   /**
    * Set default export alias by file name
