@@ -41,7 +41,7 @@ export default createUnplugin<Options>((options) => {
         }
       },
       async handleHotUpdate({ file }) {
-        if (ctx.dirs?.some(glob => minimatch(slash(file), slash(glob))))
+        if (ctx.dirs.some(dir => minimatch(slash(file), slash(dir.glob))))
           await ctx.scanDirs()
       },
       async configResolved(config) {

@@ -276,10 +276,15 @@ AutoImport({
   // Auto import for module exports under directories
   // by default it only scan one level of modules under the directory
   dirs: [
-    // './hooks',
-    // './composables' // only root modules
-    // './composables/**', // all nested modules
+    './hooks',
+    './composables', // only root modules
+    './composables/**', // all nested modules
     // ...
+
+    {
+      glob: './hooks',
+      includeTypes: true, // And export the types
+    }
   ],
 
   // Filepath to generate corresponding .d.ts file.

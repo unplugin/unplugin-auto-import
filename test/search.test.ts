@@ -1,5 +1,5 @@
 import { resolve } from 'node:path'
-import { describe, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { createContext } from '../src/core/ctx'
 
 const root = resolve(__dirname, '../examples/vite-react')
@@ -19,7 +19,7 @@ describe('search', () => {
     expect(data).toContain('PageB')
   })
 
-  it('should dir excude work', async () => {
+  it('should dir exclude work', async () => {
     const ctx = createContext({
       dts: false,
       dirs: [
@@ -32,5 +32,23 @@ describe('search', () => {
     const data = await ctx.generateDTS('')
     expect(data).not.toContain('PageA')
     expect(data).not.toContain('PageB')
+  })
+})
+
+describe('import the types from the dirs', () => {
+  it('should import types work', async () => {
+    const ctx = createContext({
+      dts: false,
+      dirs: [
+        {
+          glob: 'src/views',
+          includeTypes: true,
+        },
+      ],
+    }, root)
+
+    await ctx.scanDirs()
+    const data = await ctx.generateDTS('')
+    expect(data).toContain('TypeA')
   })
 })

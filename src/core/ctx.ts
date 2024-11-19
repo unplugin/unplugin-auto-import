@@ -1,5 +1,5 @@
 import type { Import, InlinePreset } from 'unimport'
-import type { BiomeLintrc, ESLintGlobalsPropValue, ESLintrc, ImportExtended, Options } from '../types'
+import type { BiomeLintrc, ESLintGlobalsPropValue, ESLintrc, ImportDir, ImportExtended, NormalizedImportDir, Options } from '../types'
 import { existsSync, promises as fs } from 'node:fs'
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
 import process from 'node:process'
@@ -8,27 +8,44 @@ import { createFilter } from '@rollup/pluginutils'
 import fg from 'fast-glob'
 import { isPackageExists } from 'local-pkg'
 import MagicString from 'magic-string'
+import { minimatch } from 'minimatch'
 import { createUnimport, resolvePreset, scanExports } from 'unimport'
 import { presets } from '../presets'
 import { generateBiomeLintConfigs } from './biomelintrc'
 import { generateESLintConfigs } from './eslintrc'
 import { resolversAddon } from './resolvers'
 
+const excludeReg = /^!/
 function resolveGlobsExclude(root: string, glob: string) {
-  const excludeReg = /^!/
   return `${excludeReg.test(glob) ? '!' : ''}${resolve(root, glob.replace(excludeReg, ''))}`
 }
 
-async function scanDirExports(dirs: string[], root: string) {
-  const result = await fg(dirs, {
+export function normalizeImportDirs(dirs: (string | ImportDir)[], root = process.cwd()): NormalizedImportDir[] {
+  return dirs.map((dir) => {
+    const isString = typeof dir === 'string'
+    const glob = slash(resolveGlobsExclude(root, join(isString ? dir : dir.glob, '*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}')))
+    const includeTypes = isString ? false : (dir.includeTypes ?? false)
+    return {
+      glob,
+      includeTypes,
+    }
+  })
+}
+
+async function scanDirExports(dirs: NormalizedImportDir[], root: string) {
+  const dirPatterns = dirs.map(dir => dir.glob)
+  const result = await fg(dirPatterns, {
     absolute: true,
     cwd: root,
     onlyFiles: true,
     followSymbolicLinks: true,
   })
 
+  const includeTypesDirs = dirs.filter(dir => !excludeReg.test(dir.glob) && dir.includeTypes)
+  const isIncludeTypes = (file: string) => includeTypesDirs.some(dir => minimatch(slash(file), slash(dir.glob)))
+
   const files = Array.from(new Set(result.flat())).map(slash)
-  return (await Promise.all(files.map(i => scanExports(i, false)))).flat()
+  return (await Promise.all(files.map(i => scanExports(i, isIncludeTypes(i))))).flat()
 }
 
 export function createContext(options: Options = {}, root = process.cwd()) {
@@ -40,8 +57,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
     vueTemplate,
   } = options
 
-  const dirs = options.dirs?.concat(options.dirs.map(dir => join(dir, '*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}')))
-    .map(dir => slash(resolveGlobsExclude(root, dir)))
+  const dirs = normalizeImportDirs(options.dirs || [], root)
 
   const eslintrc: ESLintrc = options.eslintrc || {}
   eslintrc.enabled = eslintrc.enabled === undefined ? false : eslintrc.enabled
@@ -90,7 +106,7 @@ ${dts}`.trim()}\n`
 
   const importsPromise = flattenImports(options.imports)
     .then((imports) => {
-      if (!imports.length && !resolvers.length && !dirs?.length)
+      if (!imports.length && !resolvers.length && !dirs.length)
         console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
 
       const compare = (left: string | undefined, right: NonNullable<(Options['ignore'] | Options['ignoreDts'])>[number]) => {
@@ -266,7 +282,7 @@ ${dts}`.trim()}\n`
   }
 
   async function scanDirs() {
-    if (dirs?.length) {
+    if (dirs.length) {
       await unimport.modifyDynamicImports(async (imports) => {
         const exports_ = await scanDirExports(dirs, root) as ImportExtended[]
         exports_.forEach(i => i.__source = 'dir')
