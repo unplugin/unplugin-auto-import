@@ -200,6 +200,16 @@ export interface Options {
   biomelintrc?: BiomeLintrc
 
   /**
+   * Save unimport items into a JSON file for other tools to consume.
+   * Provide a filepath to save the JSON file.
+   *
+   * When set to `true`, it will save to `./.unimport-items.json`
+   *
+   * @default false
+   */
+  dumpUnimportItems?: boolean | string
+
+  /**
    * Include auto-imported packages in Vite's `optimizeDeps` option
    *
    * @default true

@@ -23,6 +23,7 @@ export default defineConfig({
           return normalizeImportFrom.includes('/directives/')
         },
       },
+      dumpUnimportItems: true,
     }),
   ],
 })

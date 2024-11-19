@@ -52,6 +52,10 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   biomelintrc.enabled = biomelintrc.enabled !== undefined
   biomelintrc.filepath = biomelintrc.filepath || './.biomelintrc-auto-import.json'
 
+  const dumpUnimportItems = options.dumpUnimportItems === true
+    ? './.unimport-items.json'
+    : options.dumpUnimportItems ?? false
+
   const resolvers = options.resolvers ? [options.resolvers].flat(2) : []
 
   // When "options.injectAtEnd" is undefined or true, it's true.
@@ -201,6 +205,7 @@ ${dts}`.trim()}\n`
   let lastDTS: string | undefined
   let lastESLint: string | undefined
   let lastBiomeLint: string | undefined
+  let lastUnimportItems: string | undefined
 
   async function writeConfigFiles() {
     const promises: any[] = []
@@ -238,6 +243,20 @@ ${dts}`.trim()}\n`
           if (content !== lastBiomeLint) {
             lastBiomeLint = content
             return writeFile(biomelintrc.filepath!, content)
+          }
+        }),
+      )
+    }
+
+    if (dumpUnimportItems) {
+      promises.push(
+        unimport.getImports().then((items) => {
+          if (!dumpUnimportItems)
+            return
+          const content = JSON.stringify(items, null, 2)
+          if (content !== lastUnimportItems) {
+            lastUnimportItems = content
+            return writeFile(dumpUnimportItems, content)
           }
         }),
       )

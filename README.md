@@ -331,6 +331,9 @@ AutoImport({
     enabled: false, // Default `false`
     filepath: './.biomelintrc-auto-import.json', // Default `./.biomelintrc-auto-import.json`
   },
+
+  // Save unimport items into a JSON file for other tools to consume
+  dumpUnimportItems: './auto-imports.json', // Default `false`
 })
 ```
 
