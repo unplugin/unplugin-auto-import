@@ -36,13 +36,28 @@ describe('search', () => {
 })
 
 describe('import the types from the dirs', () => {
-  it('should import types work', async () => {
+  it('should top level types enable work', async () => {
     const ctx = createContext({
       dts: false,
+      types: true,
+      dirs: ['src/**'],
+    }, root)
+
+    await ctx.scanDirs()
+    const data = await ctx.generateDTS('')
+    expect(data).toContain('TypeA')
+    expect(data).toContain('TypeB')
+    expect(data).toContain('SpecialType')
+  })
+
+  it('should specific dirs types enable work', async () => {
+    const ctx = createContext({
+      dts: false,
+      types: false,
       dirs: [
         {
           glob: 'src/views',
-          includeTypes: true,
+          types: true,
         },
       ],
     }, root)
@@ -50,5 +65,27 @@ describe('import the types from the dirs', () => {
     await ctx.scanDirs()
     const data = await ctx.generateDTS('')
     expect(data).toContain('TypeA')
+    expect(data).toContain('TypeB')
+    expect(data).not.toContain('SpecialType')
+  })
+
+  it('should specific dirs types disable work', async () => {
+    const ctx = createContext({
+      dts: false,
+      types: true,
+      dirs: [
+        'src/**',
+        {
+          glob: '!src/views',
+          types: false,
+        },
+      ],
+    }, root)
+
+    await ctx.scanDirs()
+    const data = await ctx.generateDTS('')
+    expect(data).not.toContain('TypeA')
+    expect(data).not.toContain('TypeB')
+    expect(data).toContain('SpecialType')
   })
 })

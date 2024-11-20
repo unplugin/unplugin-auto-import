@@ -56,7 +56,7 @@ export type ImportsMap = Record<string, (string | ImportNameAlias)[]>
  */
 export interface ImportDir {
   glob: string
-  includeTypes?: boolean
+  types?: boolean
 }
 
 export type NormalizedImportDir = Required<ImportDir>
@@ -127,6 +127,13 @@ export interface Options {
    * @default true
    */
   injectAtEnd?: boolean
+
+  /**
+   * Auto import the types
+   * 
+   * @default false
+   */
+  types?: boolean
 
   /**
    * Path for directories to be auto imported

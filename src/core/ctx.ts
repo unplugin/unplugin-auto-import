@@ -20,14 +20,14 @@ function resolveGlobsExclude(root: string, glob: string) {
   return `${excludeReg.test(glob) ? '!' : ''}${resolve(root, glob.replace(excludeReg, ''))}`
 }
 
-export function normalizeImportDirs(dirs: (string | ImportDir)[], root = process.cwd()): NormalizedImportDir[] {
+export function normalizeImportDirs(dirs: (string | ImportDir)[], topLevelTypes = false, root = process.cwd()): NormalizedImportDir[] {
   return dirs.map((dir) => {
     const isString = typeof dir === 'string'
     const glob = slash(resolveGlobsExclude(root, join(isString ? dir : dir.glob, '*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}')))
-    const includeTypes = isString ? false : (dir.includeTypes ?? false)
+    const types = isString ? topLevelTypes : (dir.types ?? false)
     return {
       glob,
-      includeTypes,
+      types,
     }
   })
 }
@@ -41,7 +41,7 @@ async function scanDirExports(dirs: NormalizedImportDir[], root: string) {
     followSymbolicLinks: true,
   })
 
-  const includeTypesDirs = dirs.filter(dir => !excludeReg.test(dir.glob) && dir.includeTypes)
+  const includeTypesDirs = dirs.filter(dir => !excludeReg.test(dir.glob) && dir.types)
   const isIncludeTypes = (file: string) => includeTypesDirs.some(dir => minimatch(slash(file), slash(dir.glob)))
 
   const files = Array.from(new Set(result.flat())).map(slash)
@@ -53,11 +53,12 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
   const {
     dts: preferDTS = isPackageExists('typescript'),
+    types: topLevelTypes = false,
     vueDirectives,
     vueTemplate,
   } = options
 
-  const dirs = normalizeImportDirs(options.dirs || [], root)
+  const dirs = normalizeImportDirs(options.dirs || [], topLevelTypes, root)
 
   const eslintrc: ESLintrc = options.eslintrc || {}
   eslintrc.enabled = eslintrc.enabled === undefined ? false : eslintrc.enabled

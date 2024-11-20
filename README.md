@@ -273,6 +273,9 @@ AutoImport({
   // Enable auto import by filename for default module exports under directories
   defaultExportByFilename: false,
 
+  // Enable auto import the types under the directories
+  types: true,
+
   // Auto import for module exports under directories
   // by default it only scan one level of modules under the directory
   dirs: [
@@ -283,8 +286,13 @@ AutoImport({
 
     {
       glob: './hooks',
-      includeTypes: true, // And export the types
+      types: true, // enable import the types
+    },
+    {
+      glob: './composables',
+      types: false, // If top level types importing enabled, just only disable this directory
     }
+    // ...
   ],
 
   // Filepath to generate corresponding .d.ts file.
