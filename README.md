@@ -273,8 +273,10 @@ AutoImport({
   // Enable auto import by filename for default module exports under directories
   defaultExportByFilename: false,
 
-  // Enable auto import the types under the directories
-  types: true,
+  // Options for scanning directories for auto import
+  dirsScanOptions: {
+    types: true // Enable auto import the types under the directories
+  },
 
   // Auto import for module exports under directories
   // by default it only scan one level of modules under the directory
@@ -286,11 +288,11 @@ AutoImport({
 
     {
       glob: './hooks',
-      types: true, // enable import the types
+      types: true // enable import the types
     },
     {
       glob: './composables',
-      types: false, // If top level types importing enabled, just only disable this directory
+      types: false // If top level dirsScanOptions.types importing enabled, just only disable this directory
     }
     // ...
   ],

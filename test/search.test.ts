@@ -39,7 +39,7 @@ describe('import the types from the dirs', () => {
   it('should top level types enable work', async () => {
     const ctx = createContext({
       dts: false,
-      types: true,
+      dirsScanOptions: { types: true },
       dirs: ['src/**'],
     }, root)
 
@@ -53,7 +53,7 @@ describe('import the types from the dirs', () => {
   it('should specific dirs types enable work', async () => {
     const ctx = createContext({
       dts: false,
-      types: false,
+      dirsScanOptions: { types: true },
       dirs: [
         {
           glob: 'src/views',
@@ -72,11 +72,11 @@ describe('import the types from the dirs', () => {
   it('should specific dirs types disable work', async () => {
     const ctx = createContext({
       dts: false,
-      types: true,
+      dirsScanOptions: { types: true },
       dirs: [
-        'src/**',
+        'src/types',
         {
-          glob: '!src/views',
+          glob: 'src/views',
           types: false,
         },
       ],

@@ -1,5 +1,5 @@
 import type { Import, InlinePreset } from 'unimport'
-import type { BiomeLintrc, ESLintGlobalsPropValue, ESLintrc, ImportDir, ImportExtended, NormalizedImportDir, Options } from '../types'
+import type { BiomeLintrc, ESLintGlobalsPropValue, ESLintrc, ImportExtended, NormalizedScanDir, Options, ScanDir } from '../types'
 import { existsSync, promises as fs } from 'node:fs'
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
 import process from 'node:process'
@@ -20,11 +20,11 @@ function resolveGlobsExclude(root: string, glob: string) {
   return `${excludeReg.test(glob) ? '!' : ''}${resolve(root, glob.replace(excludeReg, ''))}`
 }
 
-export function normalizeImportDirs(dirs: (string | ImportDir)[], topLevelTypes = false, root = process.cwd()): NormalizedImportDir[] {
+export function normalizeImportDirs(dirs: (string | ScanDir)[], topLevelTypes = false, root = process.cwd()): NormalizedScanDir[] {
   return dirs.map((dir) => {
     const isString = typeof dir === 'string'
     const glob = slash(resolveGlobsExclude(root, join(isString ? dir : dir.glob, '*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}')))
-    const types = isString ? topLevelTypes : (dir.types ?? false)
+    const types = isString ? topLevelTypes : (dir.types ?? topLevelTypes)
     return {
       glob,
       types,
@@ -32,7 +32,7 @@ export function normalizeImportDirs(dirs: (string | ImportDir)[], topLevelTypes 
   })
 }
 
-async function scanDirExports(dirs: NormalizedImportDir[], root: string) {
+async function scanDirExports(dirs: NormalizedScanDir[], root: string) {
   const dirPatterns = dirs.map(dir => dir.glob)
   const result = await fg(dirPatterns, {
     absolute: true,
@@ -53,10 +53,12 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
   const {
     dts: preferDTS = isPackageExists('typescript'),
-    types: topLevelTypes = false,
+    dirsScanOptions,
     vueDirectives,
     vueTemplate,
   } = options
+
+  const topLevelTypes = dirsScanOptions?.types ?? false
 
   const dirs = normalizeImportDirs(options.dirs || [], topLevelTypes, root)
 

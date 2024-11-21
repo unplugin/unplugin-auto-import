@@ -51,15 +51,25 @@ export type Resolver = ResolverFunction | ResolverResultObject
  */
 export type ImportsMap = Record<string, (string | ImportNameAlias)[]>
 
+
+export interface ScanDirExportsOptions {
+  /**
+   * Register type exports
+   *
+   * @default true
+   */
+  types?: boolean
+}
+
 /**
  * Directory to search for import
  */
-export interface ImportDir {
+export interface ScanDir {
   glob: string
   types?: boolean
 }
 
-export type NormalizedImportDir = Required<ImportDir>
+export type NormalizedScanDir = Required<ScanDir>
 
 export type ESLintGlobalsPropValue = boolean | 'readonly' | 'readable' | 'writable' | 'writeable'
 
@@ -129,16 +139,14 @@ export interface Options {
   injectAtEnd?: boolean
 
   /**
-   * Auto import the types
-   * 
-   * @default false
+   * Options for scanning directories for auto import
    */
-  types?: boolean
+  dirsScanOptions?: ScanDirExportsOptions
 
   /**
    * Path for directories to be auto imported
    */
-  dirs?: (string | ImportDir)[]
+  dirs?: (string | ScanDir)[]
 
   /**
    * Pass a custom function to resolve the component importing path from the component name.
