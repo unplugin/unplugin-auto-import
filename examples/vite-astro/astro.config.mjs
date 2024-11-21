@@ -1,8 +1,8 @@
-import { defineConfig } from 'astro/config'
-import vue from '@astrojs/vue'
-import AutoImport from 'unplugin-auto-import/astro'
-import svelte from '@astrojs/svelte'
 import react from '@astrojs/react'
+import svelte from '@astrojs/svelte'
+import vue from '@astrojs/vue'
+import { defineConfig } from 'astro/config'
+import AutoImport from 'unplugin-auto-import/astro'
 
 // https://astro.build/config
 export default defineConfig({

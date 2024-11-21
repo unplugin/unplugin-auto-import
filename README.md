@@ -118,7 +118,7 @@ module.exports = {
 <details>
 <summary>Nuxt</summary><br>
 
-> You **don't need** this plugin for Nuxt, it's already builtin.
+> You **don't need** this plugin for Nuxt, it's already built-in.
 
 <br></details>
 
@@ -156,8 +156,8 @@ export default {
 
 ```ts
 // vite.config.js [Vite]
-import { defineConfig } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
@@ -299,6 +299,10 @@ AutoImport({
   // see https://github.com/unjs/unimport/pull/15 and https://github.com/unjs/unimport/pull/72
   vueTemplate: false,
 
+  // Auto import directives inside Vue template
+  // see https://github.com/unjs/unimport/pull/374
+  vueDirectives: undefined,
+
   // Custom resolvers, compatible with `unplugin-vue-components`
   // see https://github.com/antfu/unplugin-auto-import/pull/23/
   resolvers: [
@@ -327,6 +331,9 @@ AutoImport({
     enabled: false, // Default `false`
     filepath: './.biomelintrc-auto-import.json', // Default `./.biomelintrc-auto-import.json`
   },
+
+  // Save unimport items into a JSON file for other tools to consume
+  dumpUnimportItems: './auto-imports.json', // Default `false`
 })
 ```
 

@@ -1,7 +1,8 @@
-import { readFileSync } from 'node:fs'
-import { resolveModule } from 'local-pkg'
 import type { PackageIndexes } from '@vueuse/metadata'
 import type { ImportsMap } from '../types'
+
+import { readFileSync } from 'node:fs'
+import { resolveModule } from 'local-pkg'
 
 let _cache: ImportsMap | undefined
 

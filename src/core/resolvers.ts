@@ -1,6 +1,6 @@
-import { toArray } from '@antfu/utils'
 import type { Addon, Import } from 'unimport'
 import type { ImportExtended, ImportLegacy, Resolver, ResolverResult } from '../types'
+import { toArray } from '@antfu/utils'
 
 export function normalizeImport(info: Import | ResolverResult | ImportExtended | ImportLegacy | string, name: string): ImportExtended {
   if (typeof info === 'string') {
@@ -42,6 +42,7 @@ export async function firstMatchedResolver(resolvers: Resolver[], fullname: stri
 
 export function resolversAddon(resolvers: Resolver[]): Addon {
   return {
+    name: 'unplugin-auto-import:resolvers',
     async matchImports(names, matched) {
       if (!resolvers.length)
         return

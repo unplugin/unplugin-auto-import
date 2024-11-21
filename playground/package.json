@@ -5,15 +5,15 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@vueuse/core": "^10.11.0",
+    "@vueuse/core": "^11.2.0",
     "vue": "3.3.4"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.5",
-    "@vue/compiler-sfc": "^3.4.33",
-    "element-plus": "^2.7.7",
-    "unplugin-vue-components": "^0.27.3",
-    "vite": "^5.3.4",
-    "vite-plugin-inspect": "^0.8.5"
+    "@vitejs/plugin-vue": "^5.2.0",
+    "@vue/compiler-sfc": "^3.5.13",
+    "element-plus": "^2.8.8",
+    "unplugin-vue-components": "^0.27.4",
+    "vite": "^5.4.11",
+    "vite-plugin-inspect": "^0.8.7"
   }
 }

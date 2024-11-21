@@ -1,8 +1,8 @@
+import type { Options } from '../types'
+import { slash } from '@antfu/utils'
 import { isPackageExists } from 'local-pkg'
 import { minimatch } from 'minimatch'
-import { slash } from '@antfu/utils'
 import { createUnplugin } from 'unplugin'
-import type { Options } from '../types'
 import { createContext } from './ctx'
 
 export default createUnplugin<Options>((options) => {
@@ -29,8 +29,7 @@ export default createUnplugin<Options>((options) => {
 
         const exclude = config.optimizeDeps?.exclude || []
 
-        const imports = new Set((await ctx.unimport.getImports()).map(i => i.from)
-          .filter(i => i.match(/^[a-z@]/) && !exclude.includes(i) && isPackageExists(i)))
+        const imports = new Set((await ctx.unimport.getImports()).map(i => i.from).filter(i => i.match(/^[a-z@]/) && !exclude.includes(i) && isPackageExists(i)))
 
         if (!imports.size)
           return

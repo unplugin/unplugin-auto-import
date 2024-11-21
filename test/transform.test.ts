@@ -1,5 +1,5 @@
-import { resolve } from 'node:path'
 import { promises as fs } from 'node:fs'
+import { resolve } from 'node:path'
 import fg from 'fast-glob'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { describe, expect, it } from 'vitest'
@@ -38,6 +38,7 @@ describe('transform', async () => {
     ],
     ignore: [
       'ignored',
+      'useId', // Duplicate in both Vue and React
     ],
     resolvers: [
       (name) => {

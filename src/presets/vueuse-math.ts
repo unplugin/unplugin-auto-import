@@ -1,8 +1,8 @@
+import type { PackageIndexes } from '@vueuse/metadata'
+import type { ImportsMap } from '../types'
 import { readFileSync } from 'node:fs'
 import process from 'node:process'
 import { resolveModule } from 'local-pkg'
-import type { PackageIndexes } from '@vueuse/metadata'
-import type { ImportsMap } from '../types'
 
 let _cache: ImportsMap | undefined
 
