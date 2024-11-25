@@ -183,7 +183,14 @@ ${dts}`.trim()}\n`
     const configStr = existsSync(eslintrc.filepath!)
       ? await fs.readFile(eslintrc.filepath!, 'utf-8')
       : ''
-    const config = JSON.parse(configStr || '{ "globals": {} }')
+    let config
+    try {
+      config = JSON.parse(configStr || '{ "globals": {} }')
+    }
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    catch (e) {
+      config = { globals: {} }
+    }
     return config.globals
   }
 
