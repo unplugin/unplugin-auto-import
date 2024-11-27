@@ -32,6 +32,6 @@ function PageB() {
   )
 }
 
-export type TypeB = number;
+export type TypeB = number
 
 export default PageB

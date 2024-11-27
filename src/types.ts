@@ -51,7 +51,6 @@ export type Resolver = ResolverFunction | ResolverResultObject
  */
 export type ImportsMap = Record<string, (string | ImportNameAlias)[]>
 
-
 export interface ScanDirExportsOptions {
   /**
    * Register type exports

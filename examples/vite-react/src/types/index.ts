@@ -1,1 +1,1 @@
-export type SpecialType = string;
+export type SpecialType = string

@@ -23,6 +23,6 @@ function PageA() {
   )
 }
 
-export type TypeA = number;
+export type TypeA = number
 
 export default PageA
