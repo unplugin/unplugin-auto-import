@@ -1,52 +1,17 @@
 import type { Import, InlinePreset } from 'unimport'
 import type { BiomeLintrc, ESLintGlobalsPropValue, ESLintrc, ImportExtended, NormalizedScanDir, Options, ScanDir } from '../types'
 import { existsSync, promises as fs } from 'node:fs'
-import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
+import { dirname, isAbsolute, relative, resolve } from 'node:path'
 import process from 'node:process'
 import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
-import fg from 'fast-glob'
 import { isPackageExists } from 'local-pkg'
 import MagicString from 'magic-string'
-import { minimatch } from 'minimatch'
 import { createUnimport, resolvePreset, scanExports } from 'unimport'
 import { presets } from '../presets'
 import { generateBiomeLintConfigs } from './biomelintrc'
 import { generateESLintConfigs } from './eslintrc'
 import { resolversAddon } from './resolvers'
-
-const excludeReg = /^!/
-function resolveGlobsExclude(root: string, glob: string) {
-  return `${excludeReg.test(glob) ? '!' : ''}${resolve(root, glob.replace(excludeReg, ''))}`
-}
-
-export function normalizeImportDirs(dirs: (string | ScanDir)[], topLevelTypes = false, root = process.cwd()): NormalizedScanDir[] {
-  return dirs.map((dir) => {
-    const isString = typeof dir === 'string'
-    const glob = slash(resolveGlobsExclude(root, join(isString ? dir : dir.glob, '*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}')))
-    const types = isString ? topLevelTypes : (dir.types ?? topLevelTypes)
-    return {
-      glob,
-      types,
-    }
-  })
-}
-
-async function scanDirExports(dirs: NormalizedScanDir[], root: string) {
-  const dirPatterns = dirs.map(dir => dir.glob)
-  const result = await fg(dirPatterns, {
-    absolute: true,
-    cwd: root,
-    onlyFiles: true,
-    followSymbolicLinks: true,
-  })
-
-  const includeTypesDirs = dirs.filter(dir => !excludeReg.test(dir.glob) && dir.types)
-  const isIncludeTypes = (file: string) => includeTypesDirs.some(dir => minimatch(slash(file), slash(dir.glob)))
-
-  const files = Array.from(new Set(result.flat())).map(slash)
-  return (await Promise.all(files.map(i => scanExports(i, isIncludeTypes(i))))).flat()
-}
 
 export function createContext(options: Options = {}, root = process.cwd()) {
   root = slash(root)
@@ -54,13 +19,10 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   const {
     dts: preferDTS = isPackageExists('typescript'),
     dirsScanOptions,
+    dirs,
     vueDirectives,
     vueTemplate,
   } = options
-
-  const topLevelTypes = dirsScanOptions?.types ?? false
-
-  const dirs = normalizeImportDirs(options.dirs || [], topLevelTypes, root)
 
   const eslintrc: ESLintrc = options.eslintrc || {}
   eslintrc.enabled = eslintrc.enabled === undefined ? false : eslintrc.enabled
@@ -83,6 +45,11 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   const unimport = createUnimport({
     imports: [],
     presets: options.packagePresets?.map(p => typeof p === 'string' ? { package: p } : p) ?? [],
+    dirsScanOptions: {
+      ...dirsScanOptions,
+      cwd: root,
+    },
+    dirs,
     injectAtEnd,
     parser: options.parser,
     addons: {
@@ -109,7 +76,7 @@ ${dts}`.trim()}\n`
 
   const importsPromise = flattenImports(options.imports)
     .then((imports) => {
-      if (!imports.length && !resolvers.length && !dirs.length)
+      if (!imports.length && !resolvers.length && !dirs?.length)
         console.warn('[auto-import] plugin installed but no imports has defined, see https://github.com/antfu/unplugin-auto-import#configurations for configurations')
 
       const compare = (left: string | undefined, right: NonNullable<(Options['ignore'] | Options['ignoreDts'])>[number]) => {
@@ -285,16 +252,15 @@ ${dts}`.trim()}\n`
   }
 
   async function scanDirs() {
-    if (dirs.length) {
-      await unimport.modifyDynamicImports(async (imports) => {
-        const exports_ = await scanDirExports(dirs, root) as ImportExtended[]
-        exports_.forEach(i => i.__source = 'dir')
-        return modifyDefaultExportsAlias([
-          ...imports.filter((i: ImportExtended) => i.__source !== 'dir'),
-          ...exports_,
-        ], options)
-      })
-    }
+    await unimport.modifyDynamicImports(async (imports) => {
+      const exports_ = await unimport.scanImportsFromDir() as ImportExtended[]
+      exports_.forEach(i => i.__source = 'dir')
+      return modifyDefaultExportsAlias([
+        ...imports.filter((i: ImportExtended) => i.__source !== 'dir'),
+        ...exports_,
+      ], options)
+    })
+
     writeConfigFilesThrottled()
   }
 

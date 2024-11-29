@@ -1,7 +1,7 @@
 import type { Options } from '../types'
 import { slash } from '@antfu/utils'
 import { isPackageExists } from 'local-pkg'
-import { minimatch } from 'minimatch'
+import pm from 'picomatch'
 import { createUnplugin } from 'unplugin'
 import { createContext } from './ctx'
 
@@ -41,7 +41,7 @@ export default createUnplugin<Options>((options) => {
         }
       },
       async handleHotUpdate({ file }) {
-        if (ctx.dirs.some(dir => minimatch(slash(file), slash(dir.glob))))
+        if (ctx.dirs?.some(dir => pm.isMatch(slash(file), slash(typeof dir === 'string' ? dir : dir.glob))))
           await ctx.scanDirs()
       },
       async configResolved(config) {
