@@ -1,47 +1,28 @@
 import type { Import, InlinePreset } from 'unimport'
 import type { BiomeLintrc, ESLintGlobalsPropValue, ESLintrc, ImportExtended, Options } from '../types'
 import { existsSync, promises as fs } from 'node:fs'
-import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
+import { dirname, isAbsolute, relative, resolve } from 'node:path'
 import process from 'node:process'
 import { slash, throttle, toArray } from '@antfu/utils'
 import { createFilter } from '@rollup/pluginutils'
-import fg from 'fast-glob'
 import { isPackageExists } from 'local-pkg'
 import MagicString from 'magic-string'
-import { createUnimport, resolvePreset, scanExports } from 'unimport'
+import { createUnimport, resolvePreset } from 'unimport'
 import { presets } from '../presets'
 import { generateBiomeLintConfigs } from './biomelintrc'
 import { generateESLintConfigs } from './eslintrc'
 import { resolversAddon } from './resolvers'
-
-function resolveGlobsExclude(root: string, glob: string) {
-  const excludeReg = /^!/
-  return `${excludeReg.test(glob) ? '!' : ''}${resolve(root, glob.replace(excludeReg, ''))}`
-}
-
-async function scanDirExports(dirs: string[], root: string) {
-  const result = await fg(dirs, {
-    absolute: true,
-    cwd: root,
-    onlyFiles: true,
-    followSymbolicLinks: true,
-  })
-
-  const files = Array.from(new Set(result.flat())).map(slash)
-  return (await Promise.all(files.map(i => scanExports(i, false)))).flat()
-}
 
 export function createContext(options: Options = {}, root = process.cwd()) {
   root = slash(root)
 
   const {
     dts: preferDTS = isPackageExists('typescript'),
+    dirsScanOptions,
+    dirs,
     vueDirectives,
     vueTemplate,
   } = options
-
-  const dirs = options.dirs?.concat(options.dirs.map(dir => join(dir, '*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}')))
-    .map(dir => slash(resolveGlobsExclude(root, dir)))
 
   const eslintrc: ESLintrc = options.eslintrc || {}
   eslintrc.enabled = eslintrc.enabled === undefined ? false : eslintrc.enabled
@@ -64,6 +45,11 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   const unimport = createUnimport({
     imports: [],
     presets: options.packagePresets?.map(p => typeof p === 'string' ? { package: p } : p) ?? [],
+    dirsScanOptions: {
+      ...dirsScanOptions,
+      cwd: root,
+    },
+    dirs,
     injectAtEnd,
     parser: options.parser,
     addons: {
@@ -266,16 +252,15 @@ ${dts}`.trim()}\n`
   }
 
   async function scanDirs() {
-    if (dirs?.length) {
-      await unimport.modifyDynamicImports(async (imports) => {
-        const exports_ = await scanDirExports(dirs, root) as ImportExtended[]
-        exports_.forEach(i => i.__source = 'dir')
-        return modifyDefaultExportsAlias([
-          ...imports.filter((i: ImportExtended) => i.__source !== 'dir'),
-          ...exports_,
-        ], options)
-      })
-    }
+    await unimport.modifyDynamicImports(async (imports) => {
+      const exports_ = await unimport.scanImportsFromDir() as ImportExtended[]
+      exports_.forEach(i => i.__source = 'dir')
+      return modifyDefaultExportsAlias([
+        ...imports.filter((i: ImportExtended) => i.__source !== 'dir'),
+        ...exports_,
+      ], options)
+    })
+
     writeConfigFilesThrottled()
   }
 

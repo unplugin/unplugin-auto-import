@@ -1,6 +1,6 @@
 import { promises as fs } from 'node:fs'
 import { resolve } from 'node:path'
-import fg from 'fast-glob'
+import glob from 'fast-glob'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { describe, expect, it } from 'vitest'
 import { createContext } from '../src/core/ctx'
@@ -61,7 +61,7 @@ describe('transform', async () => {
   })
 
   const root = resolve(__dirname, 'fixtures')
-  const files = await fg('*', {
+  const files = await glob('*', {
     cwd: root,
     onlyFiles: true,
   })
@@ -85,7 +85,7 @@ describe('transform-vue-macro', async () => {
   })
 
   const root = resolve(__dirname, 'fixtures-vue-macro')
-  const files = await fg('*', {
+  const files = await glob('*', {
     cwd: root,
     onlyFiles: true,
   })
