@@ -1,6 +1,6 @@
 import { promises as fs } from 'node:fs'
 import { resolve } from 'node:path'
-import { glob } from 'tinyglobby'
+import glob from 'fast-glob'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { describe, expect, it } from 'vitest'
 import { createContext } from '../src/core/ctx'
