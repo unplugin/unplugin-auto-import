@@ -1,6 +1,6 @@
 import type { Arrayable, Awaitable } from '@antfu/utils'
-import type { FilterPattern } from '@rollup/pluginutils'
 import type { AddonVueDirectivesOptions, Import, InlinePreset, PackagePreset, UnimportOptions } from 'unimport'
+import type { FilterPattern } from 'unplugin-utils'
 import { PresetName } from './presets'
 
 export interface ImportLegacy {

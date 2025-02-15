@@ -4,10 +4,10 @@ import { existsSync, promises as fs } from 'node:fs'
 import { dirname, isAbsolute, relative, resolve } from 'node:path'
 import process from 'node:process'
 import { slash, throttle, toArray } from '@antfu/utils'
-import { createFilter } from '@rollup/pluginutils'
 import { isPackageExists } from 'local-pkg'
 import MagicString from 'magic-string'
 import { createUnimport, resolvePreset } from 'unimport'
+import { createFilter } from 'unplugin-utils'
 import { presets } from '../presets'
 import { generateBiomeLintConfigs } from './biomelintrc'
 import { generateESLintConfigs } from './eslintrc'
@@ -288,7 +288,7 @@ ${dts}`.trim()}\n`
     filter,
     scanDirs,
     writeConfigFiles,
-    writeConfigFilesThrottled,
+    writeConfigFilesThrottled: writeConfigFilesThrottled as () => void,
     transform,
     generateDTS,
     generateESLint,

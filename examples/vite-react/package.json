@@ -8,23 +8,23 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "ahooks": "^3.8.1",
-    "i18next": "^24.0.2",
+    "ahooks": "^3.8.4",
+    "i18next": "^24.2.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-i18next": "^15.1.2",
-    "react-router": "^7.0.1",
-    "react-router-dom": "^7.0.1"
+    "react-i18next": "^15.4.0",
+    "react-router": "^7.1.5",
+    "react-router-dom": "^7.1.5"
   },
   "devDependencies": {
     "@iconify-json/logos": "*",
     "@svgr/core": "^8.1.0",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react-refresh": "^1.3.6",
-    "typescript": "^5.7.2",
+    "typescript": "^5.7.3",
     "unplugin-auto-import": "workspace:*",
-    "unplugin-icons": "^0.20.1",
-    "vite": "^6.0.1"
+    "unplugin-icons": "^22.0.0",
+    "vite": "^6.1.0"
   }
 }
