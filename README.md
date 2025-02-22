@@ -229,7 +229,7 @@ AutoImport({
   include: [
     /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
     /\.vue$/,
-    /\.vue(\.[t|j]sx?)?\?vue/, // .vue
+    /\.vue(\.[tj]sx?)?\?vue/, // .vue
     /\.md$/, // .md
   ],
 

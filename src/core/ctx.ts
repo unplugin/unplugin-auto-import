@@ -101,7 +101,7 @@ ${dts}`.trim()}\n`
     })
 
   const filter = createFilter(
-    options.include || [/\.[jt]sx?$/, /\.astro$/, /\.vue$/, /\.vue(\.[t|j]sx?)?\?vue/, /\.svelte$/],
+    options.include || [/\.[jt]sx?$/, /\.astro$/, /\.vue$/, /\.vue(\.[tj]sx?)?\?vue/, /\.svelte$/],
     options.exclude || [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/],
   )
   const dts = preferDTS === false
