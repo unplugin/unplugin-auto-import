@@ -202,7 +202,7 @@ export interface Options {
   /**
    * Rules to include transforming target.
    *
-   * @default [/\.[jt]sx?$/, /\.astro$/, /\.vue$/, /\.vue(\.[tj]sx?)?\?vue/, /\.svelte$/]
+   * @default [/\.[jt]sx?$/, /\.astro$/, /\.vue$/, /\.vue\?vue/, /\.vue\.[tj]sx?\?vue/, /\.svelte$/]
    */
   include?: FilterPattern
 
