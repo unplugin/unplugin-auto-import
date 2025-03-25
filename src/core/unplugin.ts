@@ -1,4 +1,5 @@
 import type { Options } from '../types'
+import path from 'node:path'
 import { slash } from '@antfu/utils'
 import { isPackageExists } from 'local-pkg'
 import pm from 'picomatch'
@@ -41,7 +42,8 @@ export default createUnplugin<Options>((options) => {
         }
       },
       async handleHotUpdate({ file }) {
-        if (ctx.dirs?.some(dir => pm.isMatch(slash(file), slash(typeof dir === 'string' ? dir : dir.glob))))
+        const relativeFile = path.relative(ctx.root, slash(file))
+        if (ctx.dirs?.some(dir => pm.isMatch(slash(relativeFile), slash(typeof dir === 'string' ? dir : dir.glob))))
           await ctx.scanDirs()
       },
       async configResolved(config) {
