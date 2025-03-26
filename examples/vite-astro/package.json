@@ -11,13 +11,13 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "@astrojs/react": "^4.2.0",
-    "@astrojs/svelte": "^7.0.4",
+    "@astrojs/react": "^4.2.1",
+    "@astrojs/svelte": "^7.0.7",
     "@astrojs/vue": "^5.0.7",
-    "astro": "^5.3.1",
+    "astro": "^5.5.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "svelte": "^5.20.4",
+    "svelte": "^5.25.3",
     "unplugin-auto-import": "workspace:*",
     "vue": "^3.5.13"
   }
