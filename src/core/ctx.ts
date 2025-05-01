@@ -13,6 +13,9 @@ import { generateBiomeLintConfigs } from './biomelintrc'
 import { generateESLintConfigs } from './eslintrc'
 import { resolversAddon } from './resolvers'
 
+export const INCLUDE_RE_LIST = [/\.[jt]sx?$/, /\.astro$/, /\.vue$/, /\.vue\?vue/, /\.vue\.[tj]sx?\?vue/, /\.svelte$/]
+export const EXCLUDE_RE_LIST = [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/]
+
 export function createContext(options: Options = {}, root = process.cwd()) {
   root = slash(root)
 
@@ -101,8 +104,8 @@ ${dts}`.trim()}\n`
     })
 
   const filter = createFilter(
-    options.include || [/\.[jt]sx?$/, /\.astro$/, /\.vue$/, /\.vue\?vue/, /\.vue\.[tj]sx?\?vue/, /\.svelte$/],
-    options.exclude || [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/],
+    options.include || INCLUDE_RE_LIST,
+    options.exclude || EXCLUDE_RE_LIST,
   )
   const dts = preferDTS === false
     ? false

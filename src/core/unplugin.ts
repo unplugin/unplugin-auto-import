@@ -3,8 +3,8 @@ import path from 'node:path'
 import { slash } from '@antfu/utils'
 import { isPackageExists } from 'local-pkg'
 import pm from 'picomatch'
-import { createUnplugin } from 'unplugin'
-import { createContext } from './ctx'
+import { createUnplugin, type FilterPattern } from 'unplugin'
+import { createContext, EXCLUDE_RE_LIST, INCLUDE_RE_LIST } from './ctx'
 
 export default createUnplugin<Options>((options) => {
   let ctx = createContext(options)
@@ -14,8 +14,16 @@ export default createUnplugin<Options>((options) => {
     transformInclude(id) {
       return ctx.filter(id)
     },
-    async transform(code, id) {
-      return ctx.transform(code, id)
+    transform: {
+      filter: {
+        id: {
+          include: options.include as FilterPattern || INCLUDE_RE_LIST,
+          exclude: options.exclude as FilterPattern || EXCLUDE_RE_LIST,
+        },
+      },
+      async handler(code, id) {
+        return ctx.transform(code, id)
+      },
     },
     async buildStart() {
       await ctx.scanDirs()
