@@ -5,4 +5,5 @@ onlyBuiltDependencies:
   - esbuild
   - sharp
   - svelte-preprocess
+  - unrs-resolver
   - vue-demi

@@ -1,9 +1,10 @@
+import type { FilterPattern } from 'unplugin'
 import type { Options } from '../types'
 import path from 'node:path'
 import { slash } from '@antfu/utils'
 import { isPackageExists } from 'local-pkg'
 import pm from 'picomatch'
-import { createUnplugin, type FilterPattern } from 'unplugin'
+import { createUnplugin } from 'unplugin'
 import { createContext, EXCLUDE_RE_LIST, INCLUDE_RE_LIST } from './ctx'
 
 export default createUnplugin<Options>((options) => {
