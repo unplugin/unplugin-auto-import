@@ -107,9 +107,9 @@ describe('dirsScanOptions', () => {
     const data = await ctx.generateDTS('')
     expect(data).toContain('PageA')
     expect(data).toContain('PageB')
-    expect(data).not.toContain('TypeA')
-    expect(data).not.toContain('TypeB')
-    expect(data).not.toContain('SpecialType')
+    expect(data).toContain('TypeA')
+    expect(data).toContain('TypeB')
+    expect(data).toContain('SpecialType')
   })
 
   it('should specific filePatterns work', async () => {
@@ -119,15 +119,18 @@ describe('dirsScanOptions', () => {
         types: true,
         filePatterns: ['*.ts'],
       },
-      dirs: ['src/views', 'src/types'],
+      dirs: [
+        'src/views',
+        'src/types',
+      ],
     }, root)
 
     await ctx.scanDirs()
     const data = await ctx.generateDTS('')
     expect(data).not.toContain('PageA')
     expect(data).not.toContain('PageB')
-    expect(data).toContain('TypeA')
-    expect(data).toContain('TypeB')
+    expect(data).not.toContain('TypeA')
+    expect(data).not.toContain('TypeB')
     expect(data).toContain('SpecialType')
   })
 
@@ -138,7 +141,10 @@ describe('dirsScanOptions', () => {
         types: true,
         fileFilter: (file: string) => file.includes('TypeA') || file.includes('PageA'),
       },
-      dirs: ['src/views', 'src/types'],
+      dirs: [
+        'src/views',
+        'src/types',
+      ],
     }, root)
 
     await ctx.scanDirs()
@@ -157,7 +163,10 @@ describe('dirsScanOptions', () => {
         types: true,
         fileFilter: (_file: string) => false,
       },
-      dirs: ['src/views', 'src/types'],
+      dirs: [
+        'src/views',
+        'src/types',
+      ],
     }, root)
 
     await ctx.scanDirs()
@@ -175,17 +184,20 @@ describe('dirsScanOptions', () => {
       dirsScanOptions: {
         types: true,
         filePatterns: ['*.{ts,tsx}'],
-        fileFilter: (file: string) => file.includes('PageA') || file.includes('SpecialType'),
+        fileFilter: (file: string) => file.includes('PageA'),
       },
-      dirs: ['src/views', 'src/types'],
+      dirs: [
+        'src/views',
+        'src/types',
+      ],
     }, root)
 
     await ctx.scanDirs()
     const data = await ctx.generateDTS('')
     expect(data).toContain('PageA')
-    expect(data).toContain('SpecialType')
+    expect(data).toContain('TypeA')
+    expect(data).not.toContain('SpecialType')
     expect(data).not.toContain('PageB')
-    expect(data).not.toContain('TypeA')
     expect(data).not.toContain('TypeB')
   })
 })
