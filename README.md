@@ -276,6 +276,8 @@ AutoImport({
 
   // Options for scanning directories for auto import
   dirsScanOptions: {
+    filePatterns: ['*.ts'], // Glob patterns for matching files
+    fileFilter: file => file.endsWith('.ts'), // Filter files
     types: true // Enable auto import the types under the directories
   },
 
