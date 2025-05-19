@@ -35,7 +35,7 @@ describe('search', () => {
   })
 })
 
-describe('import the types from the dirs', () => {
+describe('dirsScanOptions', () => {
   it('should top level types enable work', async () => {
     const ctx = createContext({
       dts: false,
@@ -88,9 +88,7 @@ describe('import the types from the dirs', () => {
     expect(data).not.toContain('TypeB')
     expect(data).toContain('SpecialType')
   })
-})
 
-describe('dirsScanOptions', () => {
   it('should filePatterns work', async () => {
     const ctx = createContext({
       dts: false,
