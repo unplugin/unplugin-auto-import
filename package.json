@@ -119,9 +119,9 @@
     },
     "./*": "./*"
   },
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
       "*": [
@@ -138,8 +138,8 @@
     "node": ">=14"
   },
   "scripts": {
-    "build": "tsup src/*.ts --format cjs,esm --dts --splitting --clean",
-    "dev": "tsup src/*.ts --watch src",
+    "build": "tsdown",
+    "dev": "tsdown -w",
     "lint": "eslint .",
     "lint:fix": "nr lint --fix",
     "typecheck": "tsc",
@@ -187,7 +187,7 @@
     "fast-glob": "^3.3.3",
     "publint": "^0.3.12",
     "rollup": "^4.40.2",
-    "tsup": "^8.4.0",
+    "tsdown": "^0.12.3",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
     "vitest": "^3.1.3",
