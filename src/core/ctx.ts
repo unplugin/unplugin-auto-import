@@ -1,5 +1,5 @@
 import type { Import, InlinePreset } from 'unimport'
-import type { BiomeLintrc, ESLintGlobalsPropValue, ESLintrc, ImportExtended, Options } from '../types'
+import type { BiomeLintrc, ESLintrc, ImportExtended, Options } from '../types'
 import { existsSync, promises as fs } from 'node:fs'
 import { dirname, isAbsolute, relative, resolve } from 'node:path'
 import process from 'node:process'

@@ -1,5 +1,5 @@
 import type { Import } from 'unimport'
-import type { ESLintGlobalsPropValue, ESLintrc } from '../types'
+import type { ESLintrc } from '../types'
 
 export function generateESLintConfigs(
   imports: Import[],
