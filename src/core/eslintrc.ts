@@ -4,9 +4,8 @@ import type { ESLintGlobalsPropValue, ESLintrc } from '../types'
 export function generateESLintConfigs(
   imports: Import[],
   eslintrc: ESLintrc,
-  globals: Record<string, ESLintGlobalsPropValue> = {},
 ) {
-  const eslintConfigs: any = { globals }
+  const eslintConfigs: any = { globals: {} }
 
   imports
     .map(i => i.as ?? i.name)
