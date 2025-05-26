@@ -1,5 +1,5 @@
 import type { Arrayable, Awaitable } from '@antfu/utils'
-import type { AddonVueDirectivesOptions, Import, InlinePreset, PackagePreset, UnimportOptions } from 'unimport'
+import type { AddonVueDirectivesOptions, Import, InlinePreset, PackagePreset, ScanDirExportsOptions, UnimportOptions } from 'unimport'
 import type { FilterPattern } from 'unplugin-utils'
 import type { PresetName } from './presets'
 
@@ -50,15 +50,6 @@ export type Resolver = ResolverFunction | ResolverResultObject
  * module, name, alias
  */
 export type ImportsMap = Record<string, (string | ImportNameAlias)[]>
-
-export interface ScanDirExportsOptions {
-  /**
-   * Register type exports
-   *
-   * @default true
-   */
-  types?: boolean
-}
 
 /**
  * Directory to search for import
@@ -140,7 +131,7 @@ export interface Options {
   /**
    * Options for scanning directories for auto import
    */
-  dirsScanOptions?: ScanDirExportsOptions
+  dirsScanOptions?: Omit<ScanDirExportsOptions, 'cwd'>
 
   /**
    * Path for directories to be auto imported
