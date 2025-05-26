@@ -1,5 +1,5 @@
 import type { Import, InlinePreset } from 'unimport'
-import type { BiomeLintrc, ESLintGlobalsPropValue, ESLintrc, ImportExtended, Options } from '../types'
+import type { BiomeLintrc, ESLintrc, ImportExtended, Options } from '../types'
 import { existsSync, promises as fs } from 'node:fs'
 import { dirname, isAbsolute, relative, resolve } from 'node:path'
 import process from 'node:process'
@@ -164,20 +164,8 @@ ${dts}`.trim()}\n`
     return currentContent
   }
 
-  async function parseESLint(): Promise<Record<string, ESLintGlobalsPropValue>> {
-    if (!eslintrc.filepath)
-      return {}
-    if (eslintrc.filepath.match(/\.[cm]?[jt]sx?$/)) // Skip JavaScript-like files
-      return {}
-    const configStr = existsSync(eslintrc.filepath!)
-      ? await fs.readFile(eslintrc.filepath!, 'utf-8')
-      : ''
-    const config = JSON.parse(configStr || '{ "globals": {} }')
-    return config.globals
-  }
-
   async function generateESLint() {
-    return generateESLintConfigs(await unimport.getImports(), eslintrc, await parseESLint())
+    return generateESLintConfigs(await unimport.getImports(), eslintrc)
   }
 
   async function generateBiomeLint() {

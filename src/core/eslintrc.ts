@@ -1,12 +1,11 @@
 import type { Import } from 'unimport'
-import type { ESLintGlobalsPropValue, ESLintrc } from '../types'
+import type { ESLintrc } from '../types'
 
 export function generateESLintConfigs(
   imports: Import[],
   eslintrc: ESLintrc,
-  globals: Record<string, ESLintGlobalsPropValue> = {},
 ) {
-  const eslintConfigs: any = { globals }
+  const eslintConfigs: any = { globals: {} }
 
   imports
     .map(i => i.as ?? i.name)
