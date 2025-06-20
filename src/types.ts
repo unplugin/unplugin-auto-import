@@ -122,6 +122,11 @@ export interface Options {
   ignoreDts?: (string | RegExp)[]
 
   /**
+   * All identifiers from module won't be put on the DTS file
+   */
+  ignoreModuleDts?: (string | RegExp)[]
+
+  /**
    * Inject the imports at the end of other imports
    *
    * @default true
