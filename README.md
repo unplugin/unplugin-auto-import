@@ -93,7 +93,7 @@ export default {
 module.exports = {
   /* ... */
   plugins: [
-    require('unplugin-auto-import/webpack').default({ /* options */ }),
+    require('unplugin-auto-import/webpack')({ /* options */ }),
   ],
 }
 ```
@@ -108,7 +108,7 @@ module.exports = {
 module.exports = {
   /* ... */
   plugins: [
-    require('unplugin-auto-import/rspack').default({ /* options */ }),
+    require('unplugin-auto-import/rspack')({ /* options */ }),
   ],
 }
 ```
@@ -130,7 +130,7 @@ module.exports = {
 module.exports = {
   /* ... */
   plugins: [
-    require('unplugin-auto-import/webpack').default({ /* options */ }),
+    require('unplugin-auto-import/webpack')({ /* options */ }),
   ],
 }
 ```
@@ -167,18 +167,16 @@ export default defineConfig({
 ```
 
 ```ts
-// quasar.conf.js [Webpack]
-const AutoImportPlugin = require('unplugin-auto-import/webpack').default
-
-module.exports = {
-  build: {
-    chainWebpack(chain) {
-      chain.plugin('unplugin-auto-import').use(
-        AutoImportPlugin({ /* options */ }),
-      )
+// quasar.config.js
+export default defineConfig(() => {
+  return {
+    build: {
+      vitePlugins: [
+        ['unplugin-auto-import/vite', { /* options */ }],
+      ]
     },
-  },
-}
+  }
+})
 ```
 
 <br></details>
