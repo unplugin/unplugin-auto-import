@@ -72,6 +72,7 @@ declare global {
   const isReactive: typeof import('vue-demi')['isReactive']
   const isReadonly: typeof import('vue-demi')['isReadonly']
   const isRef: typeof import('vue-demi')['isRef']
+  const isShallow: typeof import('vue-demi')['isShallow']
   const lazy: typeof import('react')['lazy']
   const linear: typeof import('svelte/easing')['linear']
   const markRaw: typeof import('vue-demi')['markRaw']
@@ -150,7 +151,7 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
-  export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue-demi'
+  export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue-demi'
   import('vue-demi')
 }
 "
