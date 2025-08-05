@@ -80,17 +80,13 @@ export interface ESLintrc {
   globalsPropValue?: ESLintGlobalsPropValue
 }
 
-export interface BiomeLintrc {
+export interface BiomeJS {
   /**
+   * Update the project's biome.json/biome.jsonc to ignore the generated d.ts file
+   *
    * @default false
    */
   enabled?: boolean
-  /**
-   * Filepath to save the generated eslint config
-   *
-   * @default './.eslintrc-auto-import.json'
-   */
-  filepath?: string
 }
 
 export interface Options {
@@ -210,9 +206,9 @@ export interface Options {
   eslintrc?: ESLintrc
 
   /**
-   * Generate corresponding .biomelintrc.json file.
+   * Configure Biome.js integration
    */
-  biomelintrc?: BiomeLintrc
+  biomejs?: BiomeJS
 
   /**
    * Save unimport items into a JSON file for other tools to consume.

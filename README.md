@@ -341,11 +341,9 @@ AutoImport({
     globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
   },
 
-  // Generate corresponding .biomelintrc-auto-import.json file.
-  // biomejs extends Docs - https://biomejs.dev/guides/how-biome-works/#the-extends-option
-  biomelintrc: {
+  // Automatically update biome.json/biome.jsonc to ignore the generated d.ts file
+  biomejs: {
     enabled: false, // Default `false`
-    filepath: './.biomelintrc-auto-import.json', // Default `./.biomelintrc-auto-import.json`
   },
 
   // Save unimport items into a JSON file for other tools to consume
