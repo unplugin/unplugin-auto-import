@@ -2,7 +2,7 @@
   "name": "unplugin-auto-import",
   "type": "module",
   "version": "19.3.0",
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.14.0",
   "description": "Register global imports on demand for Vite and Webpack",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -151,7 +151,7 @@
     "test:run": "vitest run"
   },
   "peerDependencies": {
-    "@nuxt/kit": "^3.2.2",
+    "@nuxt/kit": "^4.0.0",
     "@vueuse/core": "*"
   },
   "peerDependenciesMeta": {
@@ -174,7 +174,7 @@
     "@antfu/eslint-config": "^4.13.2",
     "@antfu/ni": "^24.4.0",
     "@antfu/utils": "^9.2.0",
-    "@nuxt/kit": "^3.17.4",
+    "@nuxt/kit": "^4.0.2",
     "@nuxt/schema": "^3.17.4",
     "@svgr/plugin-jsx": "^8.1.0",
     "@types/node": "^22.15.21",
