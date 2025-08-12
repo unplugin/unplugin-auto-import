@@ -75,6 +75,9 @@ importers:
       publint:
         specifier: ^0.3.12
         version: 0.3.12
+      rolldown:
+        specifier: ^1.0.0-beta.32
+        version: 1.0.0-beta.9-commit.d91dfb5
       rollup:
         specifier: ^4.46.2
         version: 4.46.2

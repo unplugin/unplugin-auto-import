@@ -86,6 +86,23 @@ export default {
 <br></details>
 
 <details>
+<summary>Rolldown</summary><br>
+
+```ts
+// rolldown.config.js
+import AutoImport from 'unplugin-auto-import/rolldown'
+
+export default {
+  plugins: [
+    AutoImport({ /* options */ }),
+    // other plugins
+  ],
+}
+```
+
+<br></details>
+
+<details>
 <summary>Webpack</summary><br>
 
 ```ts
