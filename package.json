@@ -20,6 +20,7 @@
     "vite",
     "astro",
     "webpack",
+    "rolldown",
     "rollup",
     "rspack",
     "auto-import",
@@ -65,6 +66,16 @@
       "require": {
         "types": "./dist/rollup.d.cts",
         "default": "./dist/rollup.cjs"
+      }
+    },
+    "./rolldown": {
+      "import": {
+        "types": "./dist/rolldown.d.ts",
+        "default": "./dist/rolldown.js"
+      },
+      "require": {
+        "types": "./dist/rolldown.d.cts",
+        "default": "./dist/rolldown.cjs"
       }
     },
     "./types": {
@@ -186,6 +197,7 @@
     "esno": "^4.8.0",
     "fast-glob": "^3.3.3",
     "publint": "^0.3.12",
+    "rolldown": "^1.0.0-beta.32",
     "rollup": "^4.46.2",
     "tsdown": "^0.13.3",
     "typescript": "~5.8.3",
