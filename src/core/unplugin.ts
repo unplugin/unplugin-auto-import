@@ -1,9 +1,9 @@
 import type { FilterPattern } from 'unplugin'
 import type { Options } from '../types'
-import path from 'node:path'
 import { slash } from '@antfu/utils'
 import { isPackageExists } from 'local-pkg'
 import pm from 'picomatch'
+import { normalizeScanDirs } from 'unimport'
 import { createUnplugin } from 'unplugin'
 import { createContext, EXCLUDE_RE_LIST, INCLUDE_RE_LIST } from './ctx'
 
@@ -51,8 +51,20 @@ export default createUnplugin<Options>((options) => {
         }
       },
       async handleHotUpdate({ file }) {
-        const relativeFile = path.relative(ctx.root, slash(file))
-        if (ctx.dirs?.some(dir => pm.isMatch(slash(relativeFile), slash(typeof dir === 'string' ? dir : dir.glob))))
+        if (!ctx.dirs?.length)
+          return
+
+        const normalizedFilePath = slash(file)
+
+        const shouldRescan = ctx.dirs.some((dir) => {
+          const normalizedDirPaths = normalizeScanDirs([dir], {
+            ...options.dirsScanOptions,
+            cwd: ctx.root,
+          })
+          return normalizedDirPaths.some(dirPath => pm.isMatch(normalizedFilePath, dirPath.glob))
+        })
+
+        if (shouldRescan)
           await ctx.scanDirs()
       },
       async configResolved(config) {
