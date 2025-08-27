@@ -54,6 +54,9 @@ export default createUnplugin<Options>((options) => {
         if (!ctx.dirs?.length)
           return
 
+        if (ctx.configFilePaths.includes(file))
+          return
+
         const normalizedFilePath = slash(file)
 
         const shouldRescan = ctx.dirs.some((dir) => {

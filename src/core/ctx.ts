@@ -3,7 +3,7 @@ import type { BiomeLintrc, ESLintrc, ImportExtended, Options } from '../types'
 import { existsSync, promises as fs } from 'node:fs'
 import { dirname, isAbsolute, relative, resolve } from 'node:path'
 import process from 'node:process'
-import { slash, throttle, toArray } from '@antfu/utils'
+import { isString, slash, throttle, toArray } from '@antfu/utils'
 import { isPackageExists } from 'local-pkg'
 import MagicString from 'magic-string'
 import { createUnimport, resolvePreset } from 'unimport'
@@ -276,6 +276,15 @@ ${dts}`.trim()}\n`
     }
   }
 
+  const configFilePaths = [
+    dts,
+    eslintrc.filepath,
+    biomelintrc.filepath,
+    dumpUnimportItems,
+  ]
+    .filter(isString)
+    .map(path => resolve(root, path))
+
   return {
     root,
     dirs,
@@ -287,6 +296,7 @@ ${dts}`.trim()}\n`
     generateDTS,
     generateESLint,
     unimport,
+    configFilePaths,
   }
 }
 
