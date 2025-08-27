@@ -6,7 +6,7 @@ import process from 'node:process'
 import { isString, slash, throttle, toArray } from '@antfu/utils'
 import { isPackageExists } from 'local-pkg'
 import MagicString from 'magic-string'
-import { createUnimport, resolvePreset } from 'unimport'
+import { createUnimport, normalizeScanDirs, resolvePreset } from 'unimport'
 import { createFilter } from 'unplugin-utils'
 import { presets } from '../presets'
 import { generateBiomeLintConfigs } from './biomelintrc'
@@ -285,6 +285,13 @@ ${dts}`.trim()}\n`
     .filter(isString)
     .map(path => resolve(root, path))
 
+  const normalizedDirPaths = dirs?.length
+    ? dirs.flatMap(dir => normalizeScanDirs([dir], {
+        ...dirsScanOptions,
+        cwd: root,
+      }))
+    : []
+
   return {
     root,
     dirs,
@@ -297,6 +304,7 @@ ${dts}`.trim()}\n`
     generateESLint,
     unimport,
     configFilePaths,
+    normalizedDirPaths,
   }
 }
 
