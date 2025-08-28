@@ -14,11 +14,11 @@
     "@astrojs/react": "^4.3.0",
     "@astrojs/svelte": "^7.1.0",
     "@astrojs/vue": "^5.1.0",
-    "astro": "^5.12.8",
+    "astro": "^5.13.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "svelte": "^5.37.3",
+    "svelte": "^5.38.6",
     "unplugin-auto-import": "workspace:*",
-    "vue": "^3.5.18"
+    "vue": "^3.5.20"
   }
 }
