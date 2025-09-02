@@ -2,28 +2,38 @@ import type { ImportsMap } from '../types'
 
 export default <ImportsMap>({
   '@solidjs/router': [
-    'Link',
-    'NavLink',
+    // Components
+    'A',
+    'HashRouter',
+    'MemoryRouter',
     'Navigate',
-    'Outlet',
     'Route',
     'Router',
-    'Routes',
-    '_mergeSearchString',
-    'createIntegration',
-    'hashIntegration',
-    'normalizeIntegration',
-    'pathIntegration',
-    'staticIntegration',
-    'useHref',
+
+    // Data APIs
+    'action',
+    'createAsync',
+    'createAsyncStore',
+    'query',
+    'revalidate',
+    'useAction',
+    'useSubmission',
+    'useSubmissions',
+
+    // Primitives
+    'useBeforeLeave',
+    'useCurrentMatches',
     'useIsRouting',
     'useLocation',
     'useMatch',
     'useNavigate',
     'useParams',
-    'useResolvedPath',
-    'useRouteData',
-    'useRoutes',
+    'usePreloadRoute',
     'useSearchParams',
+
+    // Response helpers
+    'json',
+    'redirect',
+    'reload',
   ],
 })
