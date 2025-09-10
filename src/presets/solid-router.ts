@@ -30,10 +30,5 @@ export default <ImportsMap>({
     'useParams',
     'usePreloadRoute',
     'useSearchParams',
-
-    // Response helpers
-    'json',
-    'redirect',
-    'reload',
   ],
 })
