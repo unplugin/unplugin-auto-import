@@ -10,12 +10,12 @@ const PageA: Component = () => {
           {item => (
             <li>
               <nav>
-                <NavLink
+                <A
                   href={`/detail/${new Date().getTime()}?q=${new Date().getTime() % item}`}
                 >
                   Detail-
                   {item}
-                </NavLink>
+                </A>
               </nav>
             </li>
           )}

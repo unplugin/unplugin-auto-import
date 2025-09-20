@@ -22,7 +22,7 @@ const PageB: Component = () => {
         </p>
       </main>
       <nav>
-        <NavLink href="/">Home</NavLink>
+        <A href="/">Home</A>
       </nav>
     </div>
   )
