@@ -1,6 +1,11 @@
 packages:
   - playground
   - examples/*
+
+ignoreWorkspaceRootCheck: true
+shamefullyHoist: true
+strictPeerDependencies: false
+
 onlyBuiltDependencies:
   - esbuild
   - sharp
