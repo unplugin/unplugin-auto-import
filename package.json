@@ -34,11 +34,11 @@
     },
     "./nuxt": {
       "import": "./dist/nuxt.js",
-      "require":"./dist/nuxt.cjs"
+      "require": "./dist/nuxt.cjs"
     },
     "./astro": {
       "import": "./dist/astro.js",
-      "require":"./dist/astro.cjs"
+      "require": "./dist/astro.cjs"
     },
     "./rollup": {
       "import": "./dist/rollup.js",
@@ -49,7 +49,7 @@
       "require": "./dist/rolldown.cjs"
     },
     "./types": {
-      "import":"./dist/types.js",
+      "import" :"./dist/types.js",
       "require": "./dist/types.cjs"
     },
     "./vite": {
