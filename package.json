@@ -49,7 +49,7 @@
       "require": "./dist/rolldown.cjs"
     },
     "./types": {
-      "import" :"./dist/types.js",
+      "import": "./dist/types.js",
       "require": "./dist/types.cjs"
     },
     "./vite": {
