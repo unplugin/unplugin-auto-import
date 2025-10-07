@@ -169,6 +169,13 @@ export interface Options {
   dtsMode?: 'overwrite' | 'append'
 
   /**
+   * Preserve the original file extensions in the generated .d.ts file.
+   * Set to `true` to keep the extensions for .ts and .tsx files.
+   * @default false
+   */
+  preserveExtsInDts?: boolean
+
+  /**
    * Auto import inside Vue templates
    *
    * @see https://github.com/unjs/unimport/pull/15
