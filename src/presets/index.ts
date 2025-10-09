@@ -6,6 +6,7 @@ import mobxReactLite from './mobx-react-lite'
 import preact from './preact'
 import quasar from './quasar'
 import react from './react'
+import reactDom from './react-dom'
 import reactI18next from './react-i18next'
 import reactRouter from './react-router'
 import reactRouterDom from './react-router-dom'
@@ -42,6 +43,7 @@ export const presets = {
   'preact': preact,
   'quasar': quasar,
   'react': react,
+  'react-dom': reactDom,
   'react-router': reactRouter,
   'react-router-dom': reactRouterDom,
   'react-i18next': reactI18next,
