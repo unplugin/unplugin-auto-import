@@ -58,6 +58,7 @@ declare global {
   const expoOut: typeof import('svelte/easing')['expoOut']
   const fade: typeof import('svelte/transition')['fade']
   const flip: typeof import('svelte/animate')['flip']
+  const flushSync: typeof import('react-dom')['flushSync']
   const fly: typeof import('svelte/transition')['fly']
   const foo: typeof import('./foo')['foo']
   const forwardRef: typeof import('react')['forwardRef']

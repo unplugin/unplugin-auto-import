@@ -4,6 +4,7 @@ export default <ImportsMap>({
   'react-dom': [
     'useFormStatus',
     'createPortal',
+    'flushSync',
     'preconnect',
     'prefetchDNS',
     'preinit',
