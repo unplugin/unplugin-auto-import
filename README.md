@@ -422,7 +422,7 @@ AutoImport({
 </tr>
 </table>
 
-For better navigation support when working with auto-imported variables, consider using the [`@dxup/unimport`](https://github.com/KazariEX/dxup/tree/main/packages/unimport) package.
+For better navigation support when working with auto-imported APIs, consider using the [`@dxup/unimport`](https://github.com/KazariEX/dxup/tree/main/packages/unimport) package.
 
 ## ESLint
 
