@@ -24,5 +24,17 @@ export const CommonReactAPI = [
 ]
 
 export default <ImportsMap>({
-  react: CommonReactAPI,
+  react: [
+    ...CommonReactAPI,
+    'cache',
+    'cacheSignal',
+    'createContext',
+    'use',
+    'useOptimistic',
+    'useEffectEvent',
+    'useActionState',
+    'Fragment',
+    'Suspense',
+    'Activity',
+  ],
 })
