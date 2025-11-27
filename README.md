@@ -405,7 +405,7 @@ Please refer to the [unimport PackagePresets jsdocs](https://github.com/unjs/uni
 
 ## TypeScript
 
-In order to properly hint types for auto-imported APIs
+In order to properly hint types for auto-imported APIs:
 
 <table>
 <tr>
@@ -426,6 +426,8 @@ AutoImport({
 </td>
 </tr>
 </table>
+
+For better navigation support when working with auto-imported APIs, consider using the [`@dxup/unimport`](https://github.com/KazariEX/dxup/tree/main/packages/unimport) package.
 
 ## ESLint
 
