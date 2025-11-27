@@ -329,7 +329,7 @@ AutoImport({
   // Preserve the original file extensions in the generated .d.ts file.
   // Set to `true` to keep the extensions for .ts and .tsx files.
   // Default to false
-  preserveExtsInDts: false,
+  dtsPreserveExts: false,
 
   // Array of strings of regexes that contains imports meant to be ignored during
   // the declaration file generation. You may find this useful when you need to provide

@@ -173,7 +173,7 @@ export interface Options {
    * Set to `true` to keep the extensions for .ts and .tsx files.
    * @default false
    */
-  preserveExtsInDts?: boolean
+  dtsPreserveExts?: boolean
 
   /**
    * Auto import inside Vue templates

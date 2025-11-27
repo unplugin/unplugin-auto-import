@@ -22,7 +22,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   const {
     dts: preferDTS = isPackageExists('typescript'),
     dtsMode = 'append',
-    preserveExtsInDts = false,
+    dtsPreserveExts = false,
     dirsScanOptions,
     dirs,
     vueDirectives,
@@ -141,7 +141,7 @@ ${dts}`.trim()}\n`
       resolvePath: (i) => {
         if (i.from.startsWith('.') || isAbsolute(i.from)) {
           const related = slash(
-            preserveExtsInDts
+            dtsPreserveExts
               ? relative(dir, i.from)
               : relative(dir, i.from).replace(/\.ts(x)?$/, ''),
           )
