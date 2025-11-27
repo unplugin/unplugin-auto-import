@@ -22,6 +22,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   const {
     dts: preferDTS = isPackageExists('typescript'),
     dtsMode = 'append',
+    dtsPreserveExts = false,
     dirsScanOptions,
     dirs,
     vueDirectives,
@@ -139,7 +140,11 @@ ${dts}`.trim()}\n`
     let currentContent = await unimport.generateTypeDeclarations({
       resolvePath: (i) => {
         if (i.from.startsWith('.') || isAbsolute(i.from)) {
-          const related = slash(relative(dir, i.from).replace(/\.ts(x)?$/, ''))
+          const related = slash(
+            dtsPreserveExts
+              ? relative(dir, i.from)
+              : relative(dir, i.from).replace(/\.ts(x)?$/, ''),
+          )
           return !related.startsWith('.')
             ? `./${related}`
             : related
