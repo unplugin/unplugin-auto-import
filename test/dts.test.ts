@@ -11,6 +11,7 @@ describe('dts', () => {
       imports: [
         'vue-demi',
         'react',
+        'react-dom',
         'svelte',
         'svelte/animate',
         'svelte/easing',

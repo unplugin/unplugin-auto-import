@@ -40,6 +40,7 @@ declare global {
   const createApp: typeof import('vue-demi').createApp
   const createContext: typeof import('react').createContext
   const createEventDispatcher: typeof import('svelte').createEventDispatcher
+  const createPortal: typeof import('react-dom').createPortal
   const createRef: typeof import('react').createRef
   const crossfade: typeof import('svelte/transition').crossfade
   const cubicIn: typeof import('svelte/easing').cubicIn
@@ -63,6 +64,7 @@ declare global {
   const expoOut: typeof import('svelte/easing').expoOut
   const fade: typeof import('svelte/transition').fade
   const flip: typeof import('svelte/animate').flip
+  const flushSync: typeof import('react-dom').flushSync
   const fly: typeof import('svelte/transition').fly
   const foo: typeof import('./foo').foo
   const forwardRef: typeof import('react').forwardRef
@@ -97,6 +99,12 @@ declare global {
   const onServerPrefetch: typeof import('vue-demi').onServerPrefetch
   const onUnmounted: typeof import('vue-demi').onUnmounted
   const onUpdated: typeof import('vue-demi').onUpdated
+  const preconnect: typeof import('react-dom').preconnect
+  const prefetchDNS: typeof import('react-dom').prefetchDNS
+  const preinit: typeof import('react-dom').preinit
+  const preinitModule: typeof import('react-dom').preinitModule
+  const preload: typeof import('react-dom').preload
+  const preloadModule: typeof import('react-dom').preloadModule
   const provide: typeof import('vue-demi').provide
   const quadIn: typeof import('svelte/easing').quadIn
   const quadInOut: typeof import('svelte/easing').quadInOut
@@ -140,6 +148,7 @@ declare global {
   const useDeferredValue: typeof import('react').useDeferredValue
   const useEffect: typeof import('react').useEffect
   const useEffectEvent: typeof import('react').useEffectEvent
+  const useFormStatus: typeof import('react-dom').useFormStatus
   const useId: typeof import('react').useId
   const useImperativeHandle: typeof import('react').useImperativeHandle
   const useInsertionEffect: typeof import('react').useInsertionEffect
