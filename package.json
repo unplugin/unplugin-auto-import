@@ -40,7 +40,7 @@
     "./webpack": "./dist/webpack.mjs",
     "./package.json": "./package.json"
   },
-  "types": "./dist/index.d.cts",
+  "types": "./dist/index.d.mts",
   "typesVersions": {
     "*": {
       "*": [
@@ -97,18 +97,18 @@
     "@svgr/plugin-jsx": "^8.1.0",
     "@types/node": "^25.0.8",
     "@types/picomatch": "^4.0.2",
-    "@types/resolve": "^1.20.6",
     "@typescript/native-preview": "7.0.0-dev.20260114.1",
     "@vueuse/metadata": "^14.1.0",
     "bumpp": "^10.4.0",
     "eslint": "^9.39.2",
-    "fast-glob": "^3.3.3",
     "publint": "^0.3.16",
     "rolldown": "^1.0.0-beta.60",
     "rollup": "^4.55.1",
+    "tinyglobby": "^0.2.15",
     "tsdown": "^0.20.0-beta.3",
     "tsx": "^4.21.0",
     "typescript": "~5.9.3",
+    "unplugin-vue-components": "^31.0.0",
     "vite": "^7.3.1",
     "vitest": "^4.0.17",
     "webpack": "^5.104.1"

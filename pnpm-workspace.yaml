@@ -1,14 +1,19 @@
+ignoreWorkspaceRootCheck: true
+shellEmulator: true
+strictPeerDependencies: false
+
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - vite@6.4.1
+  - chokidar@4.0.3
+  - semver@6.3.1
+
 packages:
   - playground
   - examples/*
 
-ignoreWorkspaceRootCheck: true
-shamefullyHoist: true
-strictPeerDependencies: false
-
-onlyBuiltDependencies:
-  - esbuild
-  - sharp
-  - svelte-preprocess
-  - unrs-resolver
-  - vue-demi
+allowBuilds:
+  esbuild: false
+  sharp: false
+  svelte-preprocess: false
+  vue-demi: false

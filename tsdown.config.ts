@@ -14,4 +14,5 @@ export default defineConfig({
     'esbuild',
     '@nuxt/schema',
   ],
+  publint: 'ci-only',
 })
