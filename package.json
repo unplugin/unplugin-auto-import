@@ -44,7 +44,7 @@
   "typesVersions": {
     "*": {
       "*": [
-        "./dist/*",
+        "./dist/*.d.mts",
         "./*"
       ]
     }
@@ -53,7 +53,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=14"
+    "node": ">=20.19.0"
   },
   "scripts": {
     "build": "tsdown",
