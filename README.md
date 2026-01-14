@@ -140,35 +140,6 @@ module.exports = {
 <br></details>
 
 <details>
-<summary>Vue CLI</summary><br>
-
-```ts
-// vue.config.js
-module.exports = {
-  /* ... */
-  plugins: [
-    require('unplugin-auto-import/webpack')({ /* options */ }),
-  ],
-}
-```
-
-You can also rename the Vue configuration file to `vue.config.mjs` and use static import syntax (you should use latest `@vue/cli-service ^5.0.8`):
-```ts
-// vue.config.mjs
-import AutoImport from 'unplugin-auto-import/webpack'
-
-export default {
-  configureWebpack: {
-    plugins: [
-      AutoImport({ /* options */ }),
-    ],
-  },
-}
-```
-
-<br></details>
-
-<details>
 <summary>Quasar</summary><br>
 
 ```ts
