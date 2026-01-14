@@ -2,9 +2,16 @@ import { defineConfig } from 'tsdown'
 
 export default defineConfig({
   entry: ['src/*.ts'],
-  format: ['esm', 'cjs'],
+  dts: true,
   exports: true,
-  dts: {
-    resolve: ['@antfu/utils'],
-  },
+  inlineOnly: ['@antfu/utils'],
+  external: [
+    // dts
+    'vite',
+    'rollup',
+    'rolldown',
+    'webpack',
+    'esbuild',
+    '@nuxt/schema',
+  ],
 })
