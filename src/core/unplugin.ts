@@ -2,7 +2,6 @@ import type { FilterPattern } from 'unplugin'
 import type { Options } from '../types'
 import { slash } from '@antfu/utils'
 import { isPackageExists } from 'local-pkg'
-import pm from 'picomatch'
 import { createUnplugin } from 'unplugin'
 import { createContext, EXCLUDE_RE_LIST, INCLUDE_RE_LIST } from './ctx'
 
@@ -58,9 +57,7 @@ export default createUnplugin<Options>((options) => {
 
         const normalizedFilePath = slash(file)
 
-        const shouldRescan = ctx.normalizedDirPaths.some(dirPath =>
-          pm.isMatch(normalizedFilePath, dirPath.glob),
-        )
+        const shouldRescan = ctx.normalizedDirMatchers.some(match => match(normalizedFilePath))
 
         if (shouldRescan)
           await ctx.scanDirs()
