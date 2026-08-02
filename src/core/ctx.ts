@@ -35,7 +35,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   eslintrc.globalsPropValue = eslintrc.globalsPropValue === undefined ? true : eslintrc.globalsPropValue
 
   const biomelintrc: BiomeLintrc = options.biomelintrc || {}
-  biomelintrc.enabled = biomelintrc.enabled !== undefined
+  biomelintrc.enabled = biomelintrc.enabled === undefined ? false : biomelintrc.enabled
   biomelintrc.filepath = biomelintrc.filepath || './.biomelintrc-auto-import.json'
 
   const dumpUnimportItems = options.dumpUnimportItems === true
