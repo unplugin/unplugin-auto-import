@@ -6,6 +6,7 @@ import process from 'node:process'
 import { isString, slash, throttle, toArray } from '@antfu/utils'
 import { isPackageExists } from 'local-pkg'
 import MagicString from 'magic-string'
+import pm from 'picomatch'
 import { createUnimport, normalizeScanDirs, resolvePreset } from 'unimport'
 import { createFilter } from 'unplugin-utils'
 import { presets } from '../presets'
@@ -297,6 +298,8 @@ ${dts}`.trim()}\n`
       }))
     : []
 
+  const normalizedDirMatchers = normalizedDirPaths.map(dir => pm(dir.glob))
+
   return {
     root,
     dirs,
@@ -309,7 +312,7 @@ ${dts}`.trim()}\n`
     generateESLint,
     unimport,
     configFilePaths,
-    normalizedDirPaths,
+    normalizedDirMatchers,
   }
 }
 
