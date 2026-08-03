@@ -11,7 +11,7 @@ const PageA: Component = () => {
             <li>
               <nav>
                 <NavLink
-                  href={`/detail/${new Date().getTime()}?q=${new Date().getTime() % item}`}
+                  href={`/detail/${Date.now()}?q=${Date.now() % item}`}
                 >
                   Detail-
                   {item}

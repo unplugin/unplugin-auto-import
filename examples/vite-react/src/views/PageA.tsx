@@ -11,7 +11,7 @@ function PageA() {
         {[13, 14, 15].map(n => (
           <li key={n}>
             <nav>
-              <Link to={`/detail/${new Date().getTime()}?q=${new Date().getTime() % n}`}>
+              <Link to={`/detail/${Date.now()}?q=${Date.now() % n}`}>
                 Detail-
                 {n}
               </Link>

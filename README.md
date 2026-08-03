@@ -455,13 +455,13 @@ From v0.8.0, `unplugin-auto-import` **uses** `unimport` underneath. `unimport` i
 
 You can think of this plugin as a successor to `vue-global-api`, but offering much more flexibility and bindings with libraries other than Vue (e.g. React).
 
-###### Pros
+#### Pros
 
 - Flexible and customizable
 - Tree-shakable (on-demand transforming)
 - No global population
 
-###### Cons
+#### Cons
 
 - Relying on build tools integrations (while `vue-global-api` is pure runtime) - but hey, we have supported quite a few of them already!
 
@@ -469,7 +469,7 @@ You can think of this plugin as a successor to `vue-global-api`, but offering mu
 
 <p align="center">
   <a href="https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg">
-    <img src='https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg'/>
+    <img src='https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg' alt="Sponsors"/>
   </a>
 </p>
 

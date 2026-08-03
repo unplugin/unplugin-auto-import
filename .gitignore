@@ -68,6 +68,9 @@ typings/
 # nuxt.js build output
 .nuxt
 
+# astro build output
+.astro
+
 # Nuxt generate
 dist
 
