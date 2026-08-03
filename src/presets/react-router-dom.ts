@@ -1,29 +1,13 @@
 import type { ImportsMap } from '../types'
-import { ReactRouterHooks } from './react-router'
+import { ReactRouterDomExports, ReactRouterHooks } from './react-router'
 
 /**
- * Only compatible with React Router Dom v6.
+ * Only compatible with React Router Dom v6 and v7.
+ * The package was removed in v8 — use the `react-router` preset instead.
  */
 export default <ImportsMap>({
   'react-router-dom': [
     ...ReactRouterHooks,
-
-    // react-router-dom only hooks
-    'useLinkClickHandler',
-    'useSearchParams',
-
-    // react-router-dom Component
-
-    // call once in general
-    // 'BrowserRouter',
-    // 'HashRouter',
-    // 'MemoryRouter',
-
-    'Link',
-    'NavLink',
-    'Navigate',
-    'Outlet',
-    'Route',
-    'Routes',
+    ...ReactRouterDomExports,
   ],
 })
