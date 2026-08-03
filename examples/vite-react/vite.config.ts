@@ -13,7 +13,7 @@ export default defineConfig({
       jsx: 'react',
     }),
     AutoImport({
-      imports: ['react', 'react-router-dom', 'react-i18next', 'ahooks'],
+      imports: ['react', 'react-router', 'react-i18next', 'ahooks'],
       dts: './src/auto-imports.d.ts',
       dirs: ['src/layouts', 'src/views'],
       eslintrc: {
