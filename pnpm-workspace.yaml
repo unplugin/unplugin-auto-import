@@ -1,4 +1,6 @@
 ignoreWorkspaceRootCheck: true
+minimumReleaseAgeExclude:
+  - tsx@4.23.5
 shellEmulator: true
 strictPeerDependencies: false
 

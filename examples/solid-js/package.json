@@ -12,12 +12,14 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@solidjs/router": "^0.15.4",
-    "solid-js": "^1.9.10"
+    "@solidjs/router": "^1.0.0",
+    "solid-js": "^1.9.14"
   },
   "devDependencies": {
+    "@iconify-json/logos": "*",
     "typescript": "^5.9.3",
-    "vite": "^7.3.1",
-    "vite-plugin-solid": "^2.11.10"
+    "unplugin-icons": "^23.0.1",
+    "vite": "^8.2.0",
+    "vite-plugin-solid": "^2.11.14"
   }
 }
