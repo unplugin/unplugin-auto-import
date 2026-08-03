@@ -22,6 +22,7 @@ declare global {
   const Bundle: typeof import('magic-string').Bundle
   const EffectScope: typeof import('vue-demi').EffectScope
   const Fragment: typeof import('react').Fragment
+  const MagicString: typeof import('magic-string').MagicString
   const SourceMap: typeof import('magic-string').SourceMap
   const Suspense: typeof import('react').Suspense
   const afterUpdate: typeof import('svelte').afterUpdate
