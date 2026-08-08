@@ -1,6 +1,7 @@
 import { builtinPresets } from 'unimport'
 import ahooks from './ahooks'
 import { jotai, jotaiUtils } from './jotai'
+import lynxReact from './lynx-react'
 import mobx from './mobx'
 import mobxReactLite from './mobx-react-lite'
 import preact from './preact'
@@ -40,6 +41,7 @@ export const presets = {
   '@vueuse/head': vueuseHead,
   'mobx': mobx,
   'mobx-react-lite': mobxReactLite,
+  '@lynx-js/react': lynxReact,
   'preact': preact,
   'quasar': quasar,
   'react': react,
