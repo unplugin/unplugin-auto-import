@@ -7,7 +7,7 @@ import { isString, slash, throttle, toArray } from '@antfu/utils'
 import { isPackageExists } from 'local-pkg'
 import { MagicString } from 'magic-string'
 import pm from 'picomatch'
-import { createUnimport, normalizeScanDirs, resolvePreset } from 'unimport'
+import { createUnimport, dedupeDtsExports, normalizeScanDirs, resolvePreset, scanExports, scanFilesFromDir } from 'unimport'
 import { createFilter } from 'unplugin-utils'
 import { presets } from '../presets'
 import { generateBiomeLintConfigs } from './biomelintrc'
@@ -16,6 +16,18 @@ import { resolversAddon } from './resolvers'
 
 export const INCLUDE_RE_LIST = [/\.[jt]sx?$/, /\.astro$/, /\.vue$/, /\.vue\?vue/, /\.vue\.[tj]sx?\?vue/, /\.svelte$/]
 export const EXCLUDE_RE_LIST = [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/]
+
+/**
+ * Escape `()` and `[]` in resolved filesystem paths that are later used as globs.
+ *
+ * picomatch / tinyglobby treat those as extglob groups and character classes, so a
+ * project directory like `Code(Template)` otherwise matches nothing.
+ */
+export function escapeGlobPathChars(glob: string): string {
+  const negated = glob.startsWith('!')
+  const body = negated ? glob.slice(1) : glob
+  return `${negated ? '!' : ''}${body.replace(/[()[\]]/g, '\\$&')}`
+}
 
 export function createContext(options: Options = {}, root = process.cwd()) {
   root = slash(root)
@@ -253,9 +265,27 @@ ${dts}`.trim()}\n`
     return Promise.all(promises)
   }
 
+  const normalizedDirPaths = dirs?.length
+    ? dirs.flatMap(dir => normalizeScanDirs([dir], {
+        ...dirsScanOptions,
+        cwd: root,
+      })).map(dir => ({ ...dir, glob: escapeGlobPathChars(dir.glob) }))
+    : []
+
+  const normalizedDirMatchers = normalizedDirPaths.map(dir => pm(dir.glob))
+
   async function scanDirs() {
     await unimport.modifyDynamicImports(async (imports) => {
-      const exports_ = await unimport.scanImportsFromDir() as ImportExtended[]
+      const files = await scanFilesFromDir(normalizedDirPaths, {
+        ...dirsScanOptions,
+        cwd: root,
+      })
+      const includeTypesDirs = normalizedDirPaths.filter(dir => !dir.glob.startsWith('!') && dir.types)
+      const includeTypesMatchers = includeTypesDirs.map(dir => pm(dir.glob))
+      const isIncludeTypes = (file: string) => includeTypesMatchers.some(match => match(file))
+      const exports_ = dedupeDtsExports(
+        (await Promise.all(files.map(file => scanExports(file, isIncludeTypes(file))))).flat(),
+      ) as ImportExtended[]
       exports_.forEach(i => i.__source = 'dir')
       return modifyDefaultExportsAlias([
         ...imports.filter((i: ImportExtended) => i.__source !== 'dir'),
@@ -292,15 +322,6 @@ ${dts}`.trim()}\n`
   ]
     .filter(isString)
     .map(path => resolve(root, path))
-
-  const normalizedDirPaths = dirs?.length
-    ? dirs.flatMap(dir => normalizeScanDirs([dir], {
-        ...dirsScanOptions,
-        cwd: root,
-      }))
-    : []
-
-  const normalizedDirMatchers = normalizedDirPaths.map(dir => pm(dir.glob))
 
   return {
     root,

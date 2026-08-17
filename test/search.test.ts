@@ -1,5 +1,8 @@
-import { resolve } from 'node:path'
-import { describe, expect, it } from 'vitest'
+import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { join, resolve } from 'node:path'
+import { slash } from '@antfu/utils'
+import { afterEach, describe, expect, it } from 'vitest'
 import { createContext } from '../src/core/ctx'
 
 const root = resolve(__dirname, '../examples/vite-react')
@@ -197,5 +200,60 @@ describe('dirsScanOptions', () => {
     expect(data).not.toContain('SpecialType')
     expect(data).not.toContain('PageB')
     expect(data).not.toContain('TypeB')
+  })
+})
+
+describe('scan dirs with special characters in the project path', () => {
+  const temps: string[] = []
+
+  afterEach(async () => {
+    await Promise.all(temps.splice(0).map(dir => rm(dir, { recursive: true, force: true })))
+  })
+
+  async function setupProject(folderName: string) {
+    const parent = await mkdtemp(join(tmpdir(), 'uai-special-'))
+    temps.push(parent)
+    const root = join(parent, folderName)
+    await mkdir(join(root, 'src', 'composables'), { recursive: true })
+    await writeFile(
+      join(root, 'src', 'composables', 'useSpecial.ts'),
+      'export const useSpecial = () => 1\n',
+    )
+    return root
+  }
+
+  it('should scan dirs when the project path contains parentheses', async () => {
+    const root = await setupProject('Code(Template)')
+    const ctx = createContext({
+      dts: false,
+      dirs: ['src/composables'],
+    }, root)
+
+    await ctx.scanDirs()
+    const data = await ctx.generateDTS('')
+    expect(data).toContain('useSpecial')
+  })
+
+  it('should match watched files when the project path contains parentheses', async () => {
+    const root = await setupProject('Code(Template)')
+    const ctx = createContext({
+      dts: false,
+      dirs: ['src/composables'],
+    }, root)
+    const file = slash(join(root, 'src', 'composables', 'useSpecial.ts'))
+
+    expect(ctx.normalizedDirMatchers.some(match => match(file))).toBe(true)
+  })
+
+  it('should scan dirs when the project path contains brackets', async () => {
+    const root = await setupProject('Code[Template]')
+    const ctx = createContext({
+      dts: false,
+      dirs: ['src/composables'],
+    }, root)
+
+    await ctx.scanDirs()
+    const data = await ctx.generateDTS('')
+    expect(data).toContain('useSpecial')
   })
 })
