@@ -256,4 +256,39 @@ describe('scan dirs with special characters in the project path', () => {
     const data = await ctx.generateDTS('')
     expect(data).toContain('useSpecial')
   })
+
+  it('should keep character classes in a user-supplied dirs pattern working', async () => {
+    // Only the resolved root prefix is escaped, so glob syntax the user wrote
+    // themselves must still behave as a glob.
+    const root = await setupProject('plain')
+    await mkdir(join(root, 'src', 'b'), { recursive: true })
+    await writeFile(join(root, 'src', 'b', 'useB.ts'), 'export const useB = () => 2\n')
+    await mkdir(join(root, 'src', 'z'), { recursive: true })
+    await writeFile(join(root, 'src', 'z', 'useZ.ts'), 'export const useZ = () => 3\n')
+
+    const ctx = createContext({
+      dts: false,
+      dirs: ['src/[bz]'],
+    }, root)
+
+    await ctx.scanDirs()
+    const data = await ctx.generateDTS('')
+    expect(data).toContain('useB')
+    expect(data).toContain('useZ')
+  })
+
+  it('should keep a user-supplied pattern working under a path with parentheses', async () => {
+    const root = await setupProject('Code(Template)')
+    await mkdir(join(root, 'src', 'b'), { recursive: true })
+    await writeFile(join(root, 'src', 'b', 'useB.ts'), 'export const useB = () => 2\n')
+
+    const ctx = createContext({
+      dts: false,
+      dirs: ['src/[b]'],
+    }, root)
+
+    await ctx.scanDirs()
+    const data = await ctx.generateDTS('')
+    expect(data).toContain('useB')
+  })
 })

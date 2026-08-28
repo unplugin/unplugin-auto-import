@@ -18,15 +18,21 @@ export const INCLUDE_RE_LIST = [/\.[jt]sx?$/, /\.astro$/, /\.vue$/, /\.vue\?vue/
 export const EXCLUDE_RE_LIST = [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/]
 
 /**
- * Escape `()` and `[]` in resolved filesystem paths that are later used as globs.
+ * Escape `()` and `[]` in the resolved root prefix of a scan glob.
  *
  * picomatch / tinyglobby treat those as extglob groups and character classes, so a
- * project directory like `Code(Template)` otherwise matches nothing.
+ * project directory like `Code(Template)` otherwise matches nothing. Only the root
+ * prefix is escaped: it is a real filesystem path, whereas everything after it
+ * comes from the user's own `dirs` entry and may be deliberate glob syntax such as
+ * `dirs: ['src/[ab]']`, which must keep working.
  */
-export function escapeGlobPathChars(glob: string): string {
+export function escapeGlobRootPrefix(glob: string, root: string): string {
   const negated = glob.startsWith('!')
   const body = negated ? glob.slice(1) : glob
-  return `${negated ? '!' : ''}${body.replace(/[()[\]]/g, '\\$&')}`
+  if (!body.startsWith(root))
+    return glob
+  const escapedRoot = root.replace(/[()[\]]/g, '\\$&')
+  return `${negated ? '!' : ''}${escapedRoot}${body.slice(root.length)}`
 }
 
 export function createContext(options: Options = {}, root = process.cwd()) {
@@ -269,7 +275,7 @@ ${dts}`.trim()}\n`
     ? dirs.flatMap(dir => normalizeScanDirs([dir], {
         ...dirsScanOptions,
         cwd: root,
-      })).map(dir => ({ ...dir, glob: escapeGlobPathChars(dir.glob) }))
+      })).map(dir => ({ ...dir, glob: escapeGlobRootPrefix(dir.glob, root) }))
     : []
 
   const normalizedDirMatchers = normalizedDirPaths.map(dir => pm(dir.glob))
