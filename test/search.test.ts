@@ -1,5 +1,8 @@
-import { resolve } from 'node:path'
-import { describe, expect, it } from 'vitest'
+import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { join, resolve } from 'node:path'
+import { slash } from '@antfu/utils'
+import { afterEach, describe, expect, it } from 'vitest'
 import { createContext } from '../src/core/ctx'
 
 const root = resolve(__dirname, '../examples/vite-react')
@@ -197,5 +200,95 @@ describe('dirsScanOptions', () => {
     expect(data).not.toContain('SpecialType')
     expect(data).not.toContain('PageB')
     expect(data).not.toContain('TypeB')
+  })
+})
+
+describe('scan dirs with special characters in the project path', () => {
+  const temps: string[] = []
+
+  afterEach(async () => {
+    await Promise.all(temps.splice(0).map(dir => rm(dir, { recursive: true, force: true })))
+  })
+
+  async function setupProject(folderName: string) {
+    const parent = await mkdtemp(join(tmpdir(), 'uai-special-'))
+    temps.push(parent)
+    const root = join(parent, folderName)
+    await mkdir(join(root, 'src', 'composables'), { recursive: true })
+    await writeFile(
+      join(root, 'src', 'composables', 'useSpecial.ts'),
+      'export const useSpecial = () => 1\n',
+    )
+    return root
+  }
+
+  it('should scan dirs when the project path contains parentheses', async () => {
+    const root = await setupProject('Code(Template)')
+    const ctx = createContext({
+      dts: false,
+      dirs: ['src/composables'],
+    }, root)
+
+    await ctx.scanDirs()
+    const data = await ctx.generateDTS('')
+    expect(data).toContain('useSpecial')
+  })
+
+  it('should match watched files when the project path contains parentheses', async () => {
+    const root = await setupProject('Code(Template)')
+    const ctx = createContext({
+      dts: false,
+      dirs: ['src/composables'],
+    }, root)
+    const file = slash(join(root, 'src', 'composables', 'useSpecial.ts'))
+
+    expect(ctx.normalizedDirMatchers.some(match => match(file))).toBe(true)
+  })
+
+  it('should scan dirs when the project path contains brackets', async () => {
+    const root = await setupProject('Code[Template]')
+    const ctx = createContext({
+      dts: false,
+      dirs: ['src/composables'],
+    }, root)
+
+    await ctx.scanDirs()
+    const data = await ctx.generateDTS('')
+    expect(data).toContain('useSpecial')
+  })
+
+  it('should keep character classes in a user-supplied dirs pattern working', async () => {
+    // Only the resolved root prefix is escaped, so glob syntax the user wrote
+    // themselves must still behave as a glob.
+    const root = await setupProject('plain')
+    await mkdir(join(root, 'src', 'b'), { recursive: true })
+    await writeFile(join(root, 'src', 'b', 'useB.ts'), 'export const useB = () => 2\n')
+    await mkdir(join(root, 'src', 'z'), { recursive: true })
+    await writeFile(join(root, 'src', 'z', 'useZ.ts'), 'export const useZ = () => 3\n')
+
+    const ctx = createContext({
+      dts: false,
+      dirs: ['src/[bz]'],
+    }, root)
+
+    await ctx.scanDirs()
+    const data = await ctx.generateDTS('')
+    expect(data).toContain('useB')
+    expect(data).toContain('useZ')
+  })
+
+  it('should keep a user-supplied pattern working under a path with parentheses', async () => {
+    const root = await setupProject('Code(Template)')
+    await mkdir(join(root, 'src', 'b'), { recursive: true })
+    await writeFile(join(root, 'src', 'b', 'useB.ts'), 'export const useB = () => 2\n')
+
+    const ctx = createContext({
+      dts: false,
+      dirs: ['src/[b]'],
+    }, root)
+
+    await ctx.scanDirs()
+    const data = await ctx.generateDTS('')
+    expect(data).toContain('useB')
   })
 })
