@@ -1,6 +1,6 @@
 import { join } from 'node:path'
 import process from 'node:process'
-import { expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { createContext } from '../src/core/ctx'
 
 describe('dts', () => {
