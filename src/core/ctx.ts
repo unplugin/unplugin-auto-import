@@ -194,8 +194,12 @@ ${dts}`.trim()}\n`
   let lastESLint: string | undefined
   let lastBiomeLint: string | undefined
   let lastUnimportItems: string | undefined
+  let hasScannedDirs = false
 
   async function writeConfigFiles() {
+    if (!hasScannedDirs)
+      await scanDirs({ writeConfigs: false })
+
     const promises: any[] = []
     if (dts) {
       promises.push(
@@ -253,7 +257,7 @@ ${dts}`.trim()}\n`
     return Promise.all(promises)
   }
 
-  async function scanDirs() {
+  async function scanDirs({ writeConfigs = true }: { writeConfigs?: boolean } = {}) {
     await unimport.modifyDynamicImports(async (imports) => {
       const exports_ = await unimport.scanImportsFromDir() as ImportExtended[]
       exports_.forEach(i => i.__source = 'dir')
@@ -263,7 +267,10 @@ ${dts}`.trim()}\n`
       ], options)
     })
 
-    writeConfigFilesThrottled()
+    hasScannedDirs = true
+
+    if (writeConfigs)
+      writeConfigFilesThrottled()
   }
 
   async function transform(code: string, id: string) {
