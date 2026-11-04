@@ -14,7 +14,7 @@ import { generateBiomeLintConfigs } from './biomelintrc'
 import { generateESLintConfigs } from './eslintrc'
 import { resolversAddon } from './resolvers'
 
-export const INCLUDE_RE_LIST = [/\.[jt]sx?$/, /\.astro$/, /\.vue$/, /\.vue\?vue/, /\.vue\.[tj]sx?\?vue/, /\.svelte$/]
+export const INCLUDE_RE_LIST = [/\.[jt]sx?(?:\?.*)?$/, /\.astro$/, /\.vue$/, /\.vue\?vue/, /\.vue\.[tj]sx?\?vue/, /\.svelte$/]
 export const EXCLUDE_RE_LIST = [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/]
 
 export function createContext(options: Options = {}, root = process.cwd()) {
